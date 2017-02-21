@@ -1,0 +1,255 @@
+/********************************************************************
+*   Author:         DDH Producciones                                *
+*   Programado por: Ing. Silma Natera                               *
+    Correo:         silma.natera@gmail.com                          *
+*   Teléfono:       +58 424 251 98 02                               *
+*   Fecha:          07/07/2015                                      *
+*   Página:         nombre pagina                                   *
+*   Descripción:    Estilos Personalidados                          *
+*********************************************************************/
+
+
+/****************************************************
+*           Cambios css de Bootstrap                *
+*****************************************************/
+
+.input-group{
+    z-index: 0 !important;
+}
+
+.panel-primary{
+    border-color: #fff !important;
+}
+
+.panel-heading{
+    border-top-left-radius:0px;
+    border-top-right-radius:0px;
+}
+
+.panel{
+    border-radius:0px;
+}
+
+.jumbotron{
+    text-align:center;
+}
+
+/********************
+*   MENU PRINCIPAL
+*********************/
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+/****************************************************
+*           Estilos Personales                       *
+*****************************************************/
+.pointer{
+    cursor: pointer;
+    color: #23527C;
+}
+
+.iconspace{
+    width: 16px;
+    float: left;
+}
+
+#scrolltable{
+     overflow: auto;
+}
+
+.space{
+    margin-top: 30px;
+}
+
+.newwidth{
+    display: block;
+    text-align: center;
+    width: 160px;
+}
+
+.alterwidth{
+    display: block;
+    text-align: center;
+    width: 100px;
+}
+
+.modalpay{
+    margin-left: -214px;
+    padding: 5px 44px 15px;
+    width: 262px;
+}
+
+.bs-callout-info {
+    border-left-color: #1b809e;
+}
+
+.bs-callout-warning{
+    border-left-color: #aa6708;
+}
+
+.bs-callout-success{
+    border-left-color: #468862;
+}
+
+.bs-callout {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-image: none;
+    border-style: solid;
+    border-width: 0px 0px 0px 5px;
+    padding: 20px;
+    margin-bottom: 5px;
+    background: #EEEEEE;
+}
+
+.arrowreturn{
+    float: right;
+    position: relative;
+    margin-top: -26px;
+}
+
+#optdinero, #optafiliado, #numeric, #tablenumeric{
+    display: none;
+}
+
+.nickname-admin{
+    margin-left: 160px;
+    margin-top: 15px;
+    color:  white;
+}
+
+.logout-admin{
+    margin-left: 40px;
+    margin-top: 14px;
+}
+
+.nickname-affiliate{
+    margin-left: 660px;
+    margin-top: 15px;
+    color:  white;
+}
+
+.logout-affiliate{
+    margin-left: 40px;
+    margin-top: 14px;
+}
+
+.nickname-bettor{
+    margin-left: 660px;
+    margin-top: 15px;
+    color:  white;
+}
+
+.logout-bettor{
+    margin-left: 40px;
+    margin-top: -2px;
+}
+
+.radio-type{
+    color: #EBEBEB;
+    text-decoration: none;
+}
+
+.radio-type:hover{
+    color: #EBEBEB;
+    text-decoration: none;
+}
+
+.radio-type:visited, .radio-type:link{
+    color: #EBEBEB;
+    text-decoration: none;
+}
+
+.affi{
+    text-align: center;
+}
+
+/*      OLARK  STYLES   */
+
+.olrk-fixed-bottom #olark-callout-bubble{
+  background: transparent url(images/Logo_Menu.png) center top no-repeat !important;
+
+}
+
+.olrk-fixed-bottom #olark-callout-bubble-offline{
+   background-size: 139px 53px !important;
+}
+
+#habla_window_div #olark-callout-bubble-offline {
+  height: 53px !important;
+  width: 211px !important;
+}
+
+#habla_compressed_div{
+    display: none !important;
+}
+
+#habla_both_div{
+    height: 36px !important;
+}
+
+#habla_sizebutton_a{
+    margin-top: 11px !important;
+}
+
+a.habla_oplink_a_normal, a.habla_oplink_a_hover, a.habla_oplink_a_hover:hover{
+    margin-top: 16px !important;
+}
+
+@media screen and (min-width: 300px) and (orientation : portrait){
+    #habla_window_div{
+        width: 324px !important;
+        right: 0 !important;
+    }
+
+    #habla_window_div textarea{
+        width: 95% !important;
+    }
+
+    #habla_middle_div{
+        width: 290px !important;
+    }
+
+    #habla_both_div{
+        height: 36px !important;
+    }
+}
