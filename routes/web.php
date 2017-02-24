@@ -15,8 +15,6 @@ Route::get('/', function () {
     return view('home.landing');
 });
 
-//Route::get('/landing', 'HomeController@landing');
-
 Auth::routes();
 
 Route::get('/landing', 'HomeController@landing');
@@ -24,3 +22,4 @@ Route::get('/landing', 'HomeController@landing');
 Route::get('/logout', 'UserController@logout');
 
 Route::get('/home', 'HomeController@lobby');
+
