@@ -82,6 +82,7 @@
 </div>
 
 {!! Form::open(array('url' => 'register-short', 'method' => 'post')) !!}
+
 <a id="anchor"></a>
 <div class="container-fluid fondoregistro">
   <div class="container registry fadeInUp wow" data-wow-duration="300ms" data-wow-delay="800ms" style="text-align: -webkit-center;text-align: -moz-center;">
@@ -89,7 +90,7 @@
 
     <div class="regisinput2" style="margin-top: 26px;">
       <p>Correo Electrónico</p>
-      <input type="text" placeholder="Correo electrónico" name="email" value="{{Input::old('email')}}">
+      <input type="text" placeholder="Correo electrónico" name="email" value="{{ Input::old('email') }}">
       @if($errors->has('email'))
         <span class="incompleto">×</span>
         @foreach($errors->get('email') as $error)
