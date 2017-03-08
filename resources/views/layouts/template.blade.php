@@ -126,7 +126,9 @@
                 @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()->status==1)
                   <li class="dropdown dropdown-hover">
                     <a href="#blog" class="dropdown-toggle" data-toggle="dropdown">
+
                       <span id="userbar"><?php echo Auth::user()->username?>
+
                         {{ HTML::image('images/arrowd.png','flecha', array('class'=>'icon-arrow-down')) }}
                       </span>
                       <span ></span>
@@ -196,6 +198,7 @@
                 @else
                 <!-- Secciones sin Inicio de Sesion -->
                   <li class="scroll" id="Registrese" onclick="document.getElementById('bloquea').style.display='block'"><a href="register">Regístrese</a></li>
+
                   <li class="scroll navnohide" id="Ingrese2"><a href=".login" data-toggle="modal">Ingrese</a></li>
 
                 <!-- ./FIN Secciones sin Inicio de Sesion -->
@@ -228,7 +231,7 @@
       @yield('content')
 
       <!-- -------------------------------- MODALES -------------------------------- -->
-@include('modal/login')
+      @include('modal/login')
 
       <!-- -------------------------------- LOADING -------------------------------- -->
       @include('includes/cargando')

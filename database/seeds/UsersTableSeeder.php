@@ -24,6 +24,7 @@ class UsersTableSeeder extends Seeder
             'date_last_connect' => '2017-03-07 12:00:00',
             'ip'                => '192.168.0.1',
             'password'          => bcrypt('123456'),
+
         ));
       }
     }

@@ -46,6 +46,7 @@ class RegisterController extends Controller
   */
   protected function validator(array $data){
     return Validator::make($data, [
+
       'name'                  => 'required|max:255',
       'last_name'             => 'required|max:255',
       'dni'                   => 'required|max:255',
@@ -75,4 +76,3 @@ class RegisterController extends Controller
       'password'     => bcrypt($data['password']),
     ]);
   }
-}
