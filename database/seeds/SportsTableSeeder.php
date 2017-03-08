@@ -12,11 +12,11 @@ class SportsTableSeeder extends Seeder
 
         \DB::table('sports')->insert(array(
              array(
-            'name'         => 'beisbol',
+            'name'         => 'baseball',
             'description'  => 'Deporte de equipo jugado entre dos conjuntos de nueve jugadores cada uno.'
             ),
             array(
-            'name'         => 'futbol',
+            'name'         => 'football',
             'description'  => 'Deporte de equipo jugado entre dos conjuntos de once jugadores cada uno y algunos árbitros que se ocupan de que las normas se cumplan correctamente.'
         )));
     }

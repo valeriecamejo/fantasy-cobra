@@ -51,7 +51,7 @@
                 <div class="container">
                     <div class="navbar-right">
                         <ul class="nav navbar-nav navhome">
-                            <li class="scroll" onclick="document.getElementById('bloquea').style.display='block'">{!! Html::link('usuario','Lobby') !!}</li>
+                            <li class="scroll" onclick="document.getElementById('bloquea').style.display='block'">{!! Html::link('home','Lobby') !!}</li>
                             <li class="scroll" id="Crearcuenta"><a href="#anchor">Crear cuenta</a></li>
                             <li class="scroll navnohide" id="Ingrese2"><a href=".login" data-toggle="modal">Ingrese</a></li>
                             <li class="scroll navhide" id="Ingrese2"><a href=".login" data-toggle="modal">Ingrese</a></li>

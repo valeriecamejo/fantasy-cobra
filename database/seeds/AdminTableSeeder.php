@@ -11,15 +11,17 @@ class AdminTableSeeder extends Seeder
         $faker = Faker::create();
 
         \DB::table('users')->insert(array (
-            'name'         => 'Admin',
-            'last_name'    => 'Admin',
-            'username'     => 'admin',
-            'phone'        => $faker->phoneNumber,
-            'email'        => 'admin@gmail.com',
-            'status'       => '1',
-            'dni'          => $faker->randomnumber,
-            'password'     => bcrypt('123456'),
-            'user_type_id' => '1'
+            'user_type_id'      => '1',
+            'name'              => 'Admin',
+            'last_name'         => 'Admin',
+            'username'          => 'admin',
+            'phone'             => $faker->phoneNumber,
+            'email'             => 'admin@gmail.com',
+            'status'            => '1',
+            'dni'               => $faker->randomnumber,
+            'date_last_connect' => '2017-03-07 12:00:00',
+            'ip'                => '192.168.0.1',
+            'password'          => bcrypt('123456'),
         ));
     }
 }

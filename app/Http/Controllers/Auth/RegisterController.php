@@ -46,12 +46,14 @@ class RegisterController extends Controller
   */
   protected function validator(array $data){
     return Validator::make($data, [
-      'name'      => 'required|max:255',
-      'last_name' => 'required|max:255',
-      'username'  => 'required|max:255',
-      'phone'     => 'required|max:255',
-      'email'     => 'required|email|max:255|unique:users',
-      'password'  => 'required|min:6|confirmed',
+      'name'                  => 'required|max:255',
+      'last_name'             => 'required|max:255',
+      'dni'                   => 'required|max:255',
+      'email'                 => 'required|email|max:255|unique:users',
+      'username'              => 'required|max:255',
+      'phone'                 => 'required|max:255',
+      'password'              => 'required|min:6|confirmed',
+
     ]);
   }
 
@@ -63,14 +65,14 @@ class RegisterController extends Controller
   */
   protected function create(array $data){
     return User::create([
-      'name'      => $data['name'],
-      'last_name' => $data['last_name'],
-      'username'  => $data['username'],
-      'phone'     => $data['phone'],
-      'email'     => $data['email'],
-      'dni'       => $data['dni'],
-      'password'  => bcrypt($data['password']),
+      'user_type_id' => '3',
+      'name'         => $data['name'],
+      'last_name'    => $data['last_name'],
+      'dni'          => $data['dni'],
+      'email'        => $data['email'],
+      'username'     => $data['username'],
+      'phone'        => $data['phone'],
+      'password'     => bcrypt($data['password']),
     ]);
   }
-
 }

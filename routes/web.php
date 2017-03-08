@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('home.landing');
+    return view('home.home');
 });
 
 Auth::routes();
@@ -23,3 +23,11 @@ Route::get('/logout', 'UserController@logout');
 
 Route::get('/home', 'HomeController@lobby');
 
+Route::get('home/{id}', 'BettorController@home');
+
+//Route::post('register', 'Auth\RegisterController@showRegistrationForm');
+
+//Route::get('registration', 'Auth\RegisterController@showRegistrationForm');
+
+
+//Route::get('register_successfully', 'UserController@register_successfully');

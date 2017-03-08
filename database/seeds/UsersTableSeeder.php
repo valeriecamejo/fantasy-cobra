@@ -13,15 +13,17 @@ class UsersTableSeeder extends Seeder
 
       for($i = 0; $i < 20; $i ++){
         \DB::table('users')->insert(array (
-            'name'         => $faker->firstName,
-            'last_name'    => $faker->lastName,
-            'username'     => $faker->userName,
-            'phone'        => $faker->phoneNumber,
-            'email'        => $faker->unique()->email,
-            'status'       => '1',
-            'dni'          => $faker->randomnumber,
-            'password'     => bcrypt('123456'),
-            'user_type_id' => '3'
+            'user_type_id'      => '3',
+            'name'              => $faker->firstName,
+            'last_name'         => $faker->lastName,
+            'username'          => $faker->userName,
+            'phone'             => $faker->phoneNumber,
+            'email'             => $faker->unique()->email,
+            'status'            => '1',
+            'dni'               => $faker->randomnumber,
+            'date_last_connect' => '2017-03-07 12:00:00',
+            'ip'                => '192.168.0.1',
+            'password'          => bcrypt('123456'),
         ));
       }
     }
