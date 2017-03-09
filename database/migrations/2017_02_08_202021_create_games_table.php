@@ -25,7 +25,7 @@ class CreateGamesTable extends Migration
             $table->dateTime('end_date');
             $table->integer('score_home');
             $table->integer('score_away');
-            $table->integer('status');
+            $table->string('status');
             $table->string('schema_team_home');
             $table->string('schema_team_away');
             $table->string('mvp');
