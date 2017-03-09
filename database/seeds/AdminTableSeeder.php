@@ -18,7 +18,7 @@ class AdminTableSeeder extends Seeder
             'username'          => 'admin',
             'phone'             => $faker->phoneNumber,
             'email'             => 'admin@gmail.com',
-            'status'            => '1',
+            'status'            => 'ACTIVE',
             'dni'               => $faker->randomnumber,
             'date_last_connect' => '2017-03-07 12:00:00',
             'ip'                => '192.168.0.1',

@@ -29,7 +29,7 @@ class CreateCompetitionsTable extends Migration
             $table->integer('user_max');
             $table->integer('user_min');
             $table->integer('prize_guaranteed');
-            $table->integer('status');
+            $table->string('status');
             $table->integer('entry_cost');
             $table->string('password');
             $table->integer('entry');
@@ -40,7 +40,7 @@ class CreateCompetitionsTable extends Migration
             $table->dateTime('end_date');
             $table->integer('pot');
             $table->integer('free');
-            $table->integer('outstanding');
+            $table->boolean('is_important');
             $table->integer('enrolled');
             $table->timestamps();
         });

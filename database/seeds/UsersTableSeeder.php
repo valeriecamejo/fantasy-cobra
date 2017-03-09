@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
             'username'          => $faker->userName,
             'phone'             => $faker->phoneNumber,
             'email'             => $faker->unique()->email,
-            'status'            => '1',
+            'status'            => 'ACTIVE',
             'dni'               => $faker->randomnumber,
             'date_last_connect' => '2017-03-07 12:00:00',
             'ip'                => '192.168.0.1',

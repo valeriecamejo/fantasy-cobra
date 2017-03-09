@@ -24,7 +24,7 @@ class CreatePlayersTable extends Migration
             $table->string('position');
             $table->integer('salary');
             $table->integer('points');
-            $table->integer('status');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -36,6 +36,9 @@ class CreatePlayersTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('team_user_players');
+        Schema::dropIfExists('team_user_player_histories');
+        Schema::dropIfExists('team_players');
         Schema::dropIfExists('players');
     }
 }

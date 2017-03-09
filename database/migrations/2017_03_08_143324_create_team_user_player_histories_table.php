@@ -39,6 +39,6 @@ class CreateTeamUserPlayerHistoriesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('team_user_player_histories');
     }
 }

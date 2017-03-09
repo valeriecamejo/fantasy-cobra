@@ -81,7 +81,7 @@
   <div class="container-fluid BlokBoton">
   <!-- Botones -->
     <div class="Boton1">
-      @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()->status==1)
+      @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()->status == Auth::user()::STATUS_ACTIVE)
         <a onclick="action(1,0)">
         @else
           <a onclick="action(1,1)">
@@ -93,7 +93,7 @@
     </div>
 
     <div class="Boton1">
-      @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()->status==1)
+      @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()->status == Auth::user()::STATUS_ACTIVE)
             <a onclick="action(2,0)">
         @else
             <a onclick="action(2,1)">

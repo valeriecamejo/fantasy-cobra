@@ -49,7 +49,7 @@
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
   </head>
 
-  @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()->status==1)
+  @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
     <body id="home" class="homepage" onmousemove="inactivity()" onkeypress="inactivity()">
     @else
     <body id="home" class="homepage">
@@ -85,13 +85,13 @@
             </div>
             <div class="collapse navbar-collapse navbar-right">
               <ul class="nav navbar-nav">
-                @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==1 && Auth::user()->status==1)
+                @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==1 && Auth::user()::STATUS_ACTIVE)
                   <li id="lobby" class="scroll" onclick="document.getElementById('bloquea').style.display='block'">{!! Html::link('usuario','Lobby') !!}</li>
                   <li id="teams" class="scroll"><a onclick="action(3,0)">Equipos</a></li>
                   <li id="competitions" class="scroll" onclick="document.getElementById('bloquea').style.display='block'">{!! Html::link('usuario/ver-mis-competiciones','Competiciones') !!}</li>
                   <li id="promotions" class="scroll" onclick="document.getElementById('bloquea').style.display='block'">{!! Html::link('usuario/ver-promociones', 'Promociones') !!}</li>
 
-                @elseif(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==1 && Auth::user()->status==1)
+                @elseif(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==1 && Auth::user()::STATUS_ACTIVE)
                   <li class="scroll" onclick="document.getElementById('bloquea').style.display='block'">{!! Html::link('afiliado','Home') !!}</li>
                 @else
                   <li class="scroll" onclick="document.getElementById('bloquea').style.display='block'">{!! Html::link('/','Lobby') !!}</li>
@@ -104,13 +104,13 @@
                 <li class="scroll" style="display:none;" onclick="document.getElementById('bloquea').style.display='block'"><a href="#meet-team">Consejos</a></li>
                 <li class="scroll" id="Contactomenu"><a href=".contacto" data-toggle="modal">Contáctanos</a></li>
 
-                @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()->status==1)
+                @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
                   <li class="scroll" id="Cajero2">
                     <a href=".cajero" data-toggle="modal">Cajero</a></li>
                   <li class="scroll" id="Cajero">
                     <a href=".cajero" data-toggle="modal">{!! Html::image('images/Cajero.png','cajero') !!}</a>
                   </li>
-                @elseif(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==2 && Auth::user()->status==1)
+                @elseif(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==2 && Auth::user()::STATUS_ACTIVE)
                   <li class="scroll">
                     <a href="#" >{!! Html::image('images/Cajero.png','cajero') !!}</a>
                   </li>
@@ -123,7 +123,7 @@
                 @endif
 
                 <!-- Secciones con Inicio de Sesion -->
-                @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()->status==1)
+                @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
                   <li class="dropdown dropdown-hover">
                     <a href="#blog" class="dropdown-toggle" data-toggle="dropdown">
 
@@ -165,7 +165,7 @@
                   </li>
                   <!-- ./FIN Secciones con Inicio de Sesion -->
 
-                @elseif(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==2 && Auth::user()->status==1)
+                @elseif(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==2 && Auth::user()::STATUS_ACTIVE)
                   <li class="dropdown dropdown-hover">
                     <a href="#blog" class="dropdown-toggle" data-toggle="dropdown">
                       <span id="userbar"><?php echo Auth::user()->username?>
@@ -254,7 +254,7 @@
                 </div>
                 <div class="col-sm-2">
                   <ul class="social-icons">
-                    @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()->status==1)
+                    @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
                       <li onclick="document.getElementById('bloquea').style.display='block'">
                         {!! Html::link('usuario','Lobby') !!}</li>
                       <li onclick="document.getElementById('bloquea').style.display='block'">
@@ -273,7 +273,7 @@
                 </div>
                 <div class="col-sm-2">
                   <ul class="social-icons">
-                     @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()->status==1)
+                     @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
                       <li onclick="document.getElementById('bloquea').style.display='block'">
                         {!! Html::link('usuario/como-jugar','¿Cómo jugar?') !!}</li>
                       <li onclick="document.getElementById('bloquea').style.display='block'">

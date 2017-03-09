@@ -2,21 +2,21 @@
   <!-- Nav tabs -->
   <ul class="nav nav-tabs nav-tabsnull" role="tablist">
       <li role="presentation" class="active BtnLineup10">
-        @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()->status==1)
+        @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
           <a href="#all-no-mobile" onclick="lobby(0,0)" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Todos</a>
         @else
           <a href="#all-no-mobile" onclick="lobby(0,1)" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Todos</a>
         @endif
       </li>
       <li role="presentation">
-        @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()->status==1)
+        @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
           <a href="#baseball-no-mobile" onclick="lobby(1,0)" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Béisbol</a>
         @else
           <a href="#baseball-no-mobile" onclick="lobby(1,1)" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Béisbol</a>
         @endif
       </li>
       <li role="presentation">
-        @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()->status==1)
+        @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
           <a href="#football-no-mobile" onclick="lobby(2,0)" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Fútbol</a>
         @else
           <a href="#football-no-mobile" onclick="lobby(2,1)" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Fútbol</a>
@@ -24,6 +24,7 @@
       </li>
   </ul>
 
+  <!-- Tab panes -->
   <div class="tab-content tab-contentnull tab-contenthome">
     <div role="tabpanel" class="tab-pane fade in active bordyel" id="all-no-mobile">
       <table class="table table-hover table-responsive" id="tabledesk">
