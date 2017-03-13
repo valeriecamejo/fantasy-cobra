@@ -6,7 +6,7 @@
 <div id="wrapper">
 
   <div class="container-fluid Ingresoprin" id="page-content-wrapper">
-    <form role="form" method="POST" action="{{ route('register') }}">
+    <form role="form" method="POST" action="register">
       {{ csrf_field() }}
 
       @if(Session::get('danger'))
@@ -98,8 +98,8 @@
               <p>Teléfono</p>
             </div>
             <div class="input-group InicioSes3">
-              <input type="text" style="width: 20%;" class="form-control" placeholder="Cod. País" aria-describedby="sizing-addon2" name="cod_country" maxlength="5" value="">
-              <input type="text" style="width: 60%;" class="form-control" placeholder="Nro. Teléfono" aria-describedby="sizing-addon2" name="phone" maxlength="15" value="">
+              <input type="text" style="width: 20%;" class="form-control" placeholder="Cod. País" aria-describedby="sizing-addon2" name="cod_country" maxlength="5" value="{{Input::old('cod_country')}}">
+              <input type="text" style="width: 60%;" class="form-control" placeholder="Nro. Teléfono" aria-describedby="sizing-addon2" name="phone" maxlength="15" value="{{Input::old('phone')}}">
               @if($errors->has('phone'))
                 <span class="incompleto">×</span>
                 @foreach($errors->get('phone') as $error)

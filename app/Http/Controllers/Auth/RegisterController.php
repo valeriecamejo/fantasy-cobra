@@ -27,7 +27,7 @@ class RegisterController extends Controller
   *
   * @var string
   */
-  protected $redirectTo = '/landing';
+  protected $redirectTo = '/lobby';
 
   /**
   * Create a new controller instance.
@@ -52,9 +52,9 @@ class RegisterController extends Controller
       'dni'                   => 'required|max:255',
       'email'                 => 'required|email|max:255|unique:users',
       'username'              => 'required|max:255',
+      'cod_country'           => 'required|max:5',
       'phone'                 => 'required|max:255',
-      'password'              => 'required|min:6|confirmed',
-
+      'password'              => 'required|min:6|confirmed'
     ]);
   }
 
@@ -66,13 +66,17 @@ class RegisterController extends Controller
   */
   protected function create(array $data){
     return User::create([
-      'user_type_id' => '3',
-      'name'         => $data['name'],
-      'last_name'    => $data['last_name'],
-      'dni'          => $data['dni'],
-      'email'        => $data['email'],
-      'username'     => $data['username'],
-      'phone'        => $data['phone'],
-      'password'     => bcrypt($data['password']),
+      'user_type_id'        => '3',
+      'name'                => $data['name'],
+      'last_name'           => $data['last_name'],
+      'dni'                 => $data['dni'],
+      'email'               => $data['email'],
+      'username'            => $data['username'],
+      'phone'               => $data['cod_country'].'-'.$data['phone'],
+      'password'            => bcrypt($data['password']),
+      'status'              => User::STATUS_ACTIVE,
+      'ip'                  => '192.168.0.1',
+      'date_last_connect'   => '2017-02-01 08:00:00',
     ]);
   }
+}

@@ -11,14 +11,24 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home.home');
-});
+Route::get('/', 'HomeController@lobby');
 
-Auth::routes();
+// Authenticate routes
+Route::get('login','UserController@login');
+Route::post('login','Auth\LoginController@login');
+Route::get('logout','Auth\LoginController@logout');
+
+//Register routes
+Route::get('registro',[
+    'uses'  =>'Auth\RegisterController@showRegistrationForm',
+    'as'    =>'register'
+]);
+Route::post('register','Auth\RegisterController@register');
+
 
 Route::get('/landing', 'HomeController@landing');
 
 Route::get('/logout', 'UserController@logout');
 
+Route::get('/lobby', 'HomeController@lobby');
 Route::get('/home', 'HomeController@lobby');

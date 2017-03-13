@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
@@ -30,7 +31,12 @@ class HomeController extends Controller
 
     public function lobby()
     {
-        return view('home.home');
+        if(isset($_COOKIE['landing'])){
+            return view('home.home');
+        }else{
+            setcookie("landing", 1, time() + 259200);
+            return Redirect::to('/landing');
+        }
     }
 
 
