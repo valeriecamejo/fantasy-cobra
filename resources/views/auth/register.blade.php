@@ -38,10 +38,10 @@
               <p>Apellido</p>
             </div>
             <div class="input-group InicioSes3">
-              <input type="text" class="form-control" placeholder="Escriba su apellido" aria-describedby="sizing-addon2" name="lastname" value="{{Input::old('lastname')}}">
-              @if($errors->has('lastname'))
+              <input type="text" class="form-control" placeholder="Escriba su apellido" aria-describedby="sizing-addon2" name="last_name" value="{{Input::old('last_name')}}">
+              @if($errors->has('last_name'))
                 <span class="incompleto">×</span>
-                @foreach($errors->get('lastname') as $error)
+                @foreach($errors->get('last_name') as $error)
                   <span class="messageerror2">{{ $error }}</span>
                 @endforeach
               @endif
