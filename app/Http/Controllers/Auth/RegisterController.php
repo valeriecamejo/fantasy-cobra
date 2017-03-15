@@ -67,6 +67,6 @@ class RegisterController extends Controller
    * @return \Illuminate\Http\Response
    */
   protected function register_successfully(){
-      return View::make('users.register_successfully');
+      return view('users.register_successfully');
   }
 }

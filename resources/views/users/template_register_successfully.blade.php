@@ -161,7 +161,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="{{ URL::action('BettorBaseballController@home') }}" onclick="document.getElementById('bloquea').style.display='block'">
+                        <a class="navbar-brand" href="" onclick="document.getElementById('bloquea').style.display='block'">
                           {!! Html::image('images/logo.png','logo', array('class'=>'mg-responsive')) !!}
                         </a>
                     </div>
