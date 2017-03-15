@@ -18,11 +18,11 @@ class CreatePrizeTypesTable extends Migration
             $table->integer('prize_id')->unsigned();
             $table->foreign('prize_id')->references('id')->on('prizes')->onDelete('cascade');
             $table->string('range');
-            $table->integer('rate');
-            $table->integer('winning');
-            $table->integer('rate_win');
-            $table->float('rate_range');
-            $table->tinyInteger('equitable');
+            $table->integer('rate')->default(0);
+            $table->integer('winning')->default(0);
+            $table->integer('rate_win')->default(0);
+            $table->float('rate_range')->default(0);
+            $table->tinyInteger('equitable')->default(0);
             $table->timestamps();
         });
     }

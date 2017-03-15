@@ -25,10 +25,14 @@ Route::get('registro',[
 ]);
 Route::post('register','Auth\RegisterController@register');
 Route::get('usuario/registro-exitoso', 'Auth\RegisterController@register_successfully');
-
+//revisar
+Route::get('/', 'HomeController@home');
+//
 Route::get('/landing', 'HomeController@landing');
 
 Route::get('/logout', 'UserController@logout');
-
-Route::get('/lobby', 'HomeController@lobby');
+//revisar si el metodo es home o lobby
+Route::get('/lobby', 'HomeController@home');
 Route::get('/home', 'HomeController@lobby');
+
+Route::get('usuario/ver-mis-competiciones', 'CompetitionController@bettor_competitions');

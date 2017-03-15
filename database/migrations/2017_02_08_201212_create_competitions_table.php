@@ -28,20 +28,18 @@ class CreateCompetitionsTable extends Migration
             $table->dateTime('date');
             $table->integer('user_max');
             $table->integer('user_min');
-            $table->integer('prize_guaranteed');
+            $table->integer('prize_guaranteed')->nullable();
             $table->string('status');
-            $table->integer('entry_cost');
-            $table->string('password');
+            $table->integer('entry_cost')->default(0);
+            $table->string('password')->nullable();
             $table->integer('entry');
-            $table->integer('cost_guaranteed');
-            $table->string('description');
+            $table->integer('cost_guaranteed')->default(0);
+            $table->string('description')->nullable();
             $table->integer('duration');
-            $table->dateTime('start_date');
-            $table->dateTime('end_date');
             $table->integer('pot');
             $table->integer('free');
             $table->boolean('is_important');
-            $table->integer('enrolled');
+            $table->integer('enrolled')->default(0);
             $table->timestamps();
         });
     }

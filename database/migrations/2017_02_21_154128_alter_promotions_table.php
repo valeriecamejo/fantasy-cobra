@@ -14,7 +14,7 @@ class AlterPromotionsTable extends Migration
     public function up()
     {
         Schema::table('promotions', function (Blueprint $table) {
-          $table->renameColumn('orde', 'order');
+          $table->renameColumn('orde', 'order')->default(0);
         });
     }
 

@@ -17,7 +17,7 @@ class AlterCompetitionsTable extends Migration
             $table->renameColumn('user_id', 'tournament_id');
             $table->dropColumn('entry');
             $table->dropColumn('duration');
-            $table->string('permanent')->nullable();
+            $table->integer('permanent')->default(0);
 
         });
     }
