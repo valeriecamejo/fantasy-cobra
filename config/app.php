@@ -240,8 +240,7 @@ return [
 
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
-
-        'UtilityDate' => 'Illuminate\Support\Facades\UtilityDate',
+        'UtilityDate' => 'App\Lib\Ddh\UtilityDate',
     ],
 
 ];

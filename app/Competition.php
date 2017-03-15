@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\UtilityDate;
+use App\Lib\Ddh\UtilityDate;
 
 class Competition extends Model
 {

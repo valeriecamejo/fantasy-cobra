@@ -89,6 +89,7 @@
 
                         {{ UtilityDate::dateAbbrevSpanish(getdate($date)) }}
                         {{ date("d-m", $date) }}
+
                     </td>
                     <td class="tdhora2 notdpad">
                         {{ date("h:i a", $date) }}
