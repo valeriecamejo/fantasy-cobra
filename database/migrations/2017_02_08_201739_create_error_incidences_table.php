@@ -19,7 +19,7 @@ class CreateErrorIncidencesTable extends Migration
             $table->string('function');
             $table->integer('code');
             $table->integer('line');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

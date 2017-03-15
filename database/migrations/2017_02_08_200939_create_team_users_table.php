@@ -25,7 +25,7 @@ class CreateTeamUsersTable extends Migration
             $table->float('remaining_salary');
 
             $table->string('name');
-            
+
             $table->timestamps();
         });
     }

@@ -11,14 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home.home');
-});
 
 Auth::routes();
+
+Route::get('/', 'HomeController@home');
 
 Route::get('/landing', 'HomeController@landing');
 
 Route::get('/logout', 'UserController@logout');
 
-Route::get('/home', 'HomeController@lobby');
+Route::get('/lobby', 'HomeController@home');
+
+Route::get('usuario/ver-mis-competiciones', 'CompetitionController@bettor_competitions');

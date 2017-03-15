@@ -23,12 +23,12 @@ class CreateGamesTable extends Migration
             $table->integer('team_id_away');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
-            $table->integer('score_home');
-            $table->integer('score_away');
+            $table->integer('score_home')->default(0);
+            $table->integer('score_away')->default(0);
             $table->string('status');
             $table->string('schema_team_home');
             $table->string('schema_team_away');
-            $table->string('mvp');
+            $table->string('mvp')->nullable();
             $table->timestamps();
         });
     }

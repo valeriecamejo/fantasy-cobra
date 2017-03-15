@@ -23,7 +23,7 @@ class CreatePlayersTable extends Migration
             $table->string('last_name');
             $table->string('position');
             $table->integer('salary');
-            $table->integer('points');
+            $table->integer('points')->default(0);
             $table->string('status');
             $table->timestamps();
         });

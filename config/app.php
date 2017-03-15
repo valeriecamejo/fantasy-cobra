@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Caracas',
 
     /*
     |--------------------------------------------------------------------------
@@ -182,6 +182,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
 
+
     ],
 
     /*
@@ -231,13 +232,16 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Input' => Illuminate\Support\Facades\Input::class,
+
+
         /*
         * Vendor ALiases
         */
 
         'Form' => 'Collective\Html\FormFacade',
-        'Html' => 'Collective\Html\HtmlFacade'
+        'Html' => 'Collective\Html\HtmlFacade',
 
+        'UtilityDate' => 'Illuminate\Support\Facades\UtilityDate',
     ],
 
 ];

@@ -4,21 +4,21 @@
 
     <ul class="nav nav-tabs nav-tabsnull" role="tablist">
         <li role="presentation" class="active BtnLineup10 respli">
-            @if(isset(Auth::user()->id_tipousuario) && Auth::user()->id_tipousuario==3 && Auth::user()->active==1)
+            if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
                 <a href="#all-mobile" onclick="lobby_mobile(0,0)" aria-controls="home" role="tab" data-toggle="tab">Todos</a>
             @else
                 <a href="#all-mobile" onclick="lobby_mobile(0,1)" aria-controls="home" role="tab" data-toggle="tab">Todos</a>
             @endif
         </li>
         <li role="presentation" class="respli">
-            @if(isset(Auth::user()->id_tipousuario) && Auth::user()->id_tipousuario==3 && Auth::user()->active==1)
+            if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
                 <a href="#baseball-mobile" onclick="lobby_mobile(1,0)" aria-controls="home" role="tab" data-toggle="tab">Béisbol</a>
             @else
                 <a href="#baseball-mobile" onclick="lobby_mobile(1,1)" aria-controls="home" role="tab" data-toggle="tab">Béisbol</a>
             @endif
         </li>
         <li role="presentation" class="respli">
-            @if(isset(Auth::user()->id_tipousuario) && Auth::user()->id_tipousuario==3 && Auth::user()->active==1)
+            if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
                 <a href="#football-mobile" onclick="lobby_mobile(2,0)" aria-controls="home" role="tab" data-toggle="tab">Fútbol</a>
             @else
                 <a href="#football-mobile" onclick="lobby_mobile(2,1)" aria-controls="home" role="tab" data-toggle="tab">Fútbol</a>
@@ -34,7 +34,7 @@
                 <ul id="ul-all-mobile">
                     <!-- -------------------------------- DESTACADAS DE HOY -------------------------------- -->
                     @foreach($featured_competitions as $competition)
-                        @if(isset(Auth::user()->id_tipousuario) && Auth::user()->id_tipousuario==3 && Auth::user()->active==1)
+                        if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
                             @if($competition->season_format == 11)
                                 <a onclick="modal_competition(1,11,{{$competition->id}}, 0)">
                             @elseif($competition->season_format == 12)
@@ -147,7 +147,7 @@
 
                     <!-- -------------------------------- NO DESTACADAS -------------------------------- -->
                     @foreach($no_featured_competitions as $competition)
-                        @if(isset(Auth::user()->id_tipousuario) && Auth::user()->id_tipousuario==3 && Auth::user()->active==1)
+                        if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
                             @if($competition->season_format == 11)
                                 <a onclick="modal_competition(1,11,{{$competition->id}}, 0)">
                             @elseif($competition->season_format == 12)

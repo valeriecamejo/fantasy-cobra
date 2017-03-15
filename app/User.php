@@ -11,7 +11,7 @@ class User extends Authenticatable
 
 
     protected $fillable = [
-    'user_type_id', 'name', 'last_name', 'username', 'password', 'phone', 'status', 'email', 'sex', 'dni', 'remember_token'
+    'user_type_id', 'name', 'last_name', 'username', 'password', 'phone', 'status', 'email', 'sex', 'dni', 'date_last_connect', 'ip', 'remember_token'
     ];
 
     const STATUS_ACTIVE   = 'ACTIVE';

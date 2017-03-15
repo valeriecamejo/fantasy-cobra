@@ -79,7 +79,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="{{URL::action('HomeController@lobby')}}" onclick="document.getElementById('bloquea').style.display='block'">
+              <a class="navbar-brand" href="{{URL::action('HomeController@home')}}" onclick="document.getElementById('bloquea').style.display='block'">
                {!! Html::image('images/logo.png','logo', array('class'=>'mg-responsive')) !!}
               </a>
             </div>
@@ -129,7 +129,7 @@
 
                       <span id="userbar"><?php echo Auth::user()->username?>
 
-                        {{ HTML::image('images/arrowd.png','flecha', array('class'=>'icon-arrow-down')) }}
+                        {!! Html::image('images/arrowd.png','flecha', array('class'=>'icon-arrow-down')) !!}
                       </span>
                       <span ></span>
                       <span id="userbalance">
