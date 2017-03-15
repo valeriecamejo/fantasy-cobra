@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use App\Competition;
 
 class HomeController extends Controller
 {
@@ -23,14 +25,18 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function landing()
-    {
+    public function landing(){
+
         return view('home.landing');
     }
 
-    public function lobby()
-    {
-        return view('home.home');
+    public function home(){
+
+        $list_competitions = Competition::list_competitions();
+
+        Log::info("count list_competitions = " . count($list_competitions));
+
+        return view('home.home', array('list_competitions' => $list_competitions));
     }
 
 

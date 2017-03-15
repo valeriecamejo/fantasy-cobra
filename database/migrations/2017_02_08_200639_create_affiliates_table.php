@@ -21,10 +21,10 @@ class CreateAffiliatesTable extends Migration
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
             $table->string('promotional_cod');
             $table->string('promotional_url');
-            $table->float('balance');
-            $table->integer('rate');
-            $table->integer('referred_friends');
-            $table->integer('referred_friends_pay');
+            $table->float('balance')->nullable();
+            $table->integer('rate')->default(0);
+            $table->integer('referred_friends')->nullable();
+            $table->integer('referred_friends_pay')->nullable();
             $table->timestamps();
         });
     }

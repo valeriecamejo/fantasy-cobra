@@ -1,11 +1,11 @@
 <div id="sidebar-wrapper" style="top:85px;">
   <ul class="sidebar-nav">
-    @if(isset(Auth::user()->id_tipousuario) && Auth::user()->id_tipousuario==3 && Auth::user()->active==1)
+    @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
       @if(!isset($_SESSION['username']) || $_SESSION['username']=='' || $_SESSION['username']==null)
         <script type="text/javascript">
-           window.location = "{{ url('/logout') }}";  
+           window.location = "{{ url('/logout') }}";
         </script>
-    
+
       @endif
       <li class="sidebar-brand">
           <ul>
@@ -19,20 +19,20 @@
           </ul>
       </li>
       <li id="lobbyM" class="active" onclick="document.getElementById('bloquea').style.display='block'">
-        {{ HTML::link('usuario', 'Lobby'); }}
+        {!! Html::link('usuario', 'Lobby') !!}
       </li>
       <li id="teamsM" onclick="action(3,0)">
           <a>Equipos</a>
       </li>
       <li id="competitionsM" onclick="document.getElementById('bloquea').style.display='block'">
-        {{ HTML::link('usuario/ver-mis-competiciones', 'Competiciones'); }}
+        {!! Html::link('usuario/ver-mis-competiciones', 'Competiciones') !!}
       </li>
-      @elseif(isset(Auth::user()->id_tipousuario) && Auth::user()->id_tipousuario==2 && Auth::user()->active==1)
+      @elseif(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==2 && Auth::user()::STATUS_ACTIVE)
           @if(!isset($_SESSION['username']) || $_SESSION['username']=='' || $_SESSION['username']==null)
             <script type="text/javascript">
-               window.location = "{{ url('/logout') }}";  
+               window.location = "{{ url('/logout') }}";
             </script>
-        
+
           @endif
         <li class="sidebar-brand">
           <ul>
@@ -45,7 +45,7 @@
           </ul>
         </li>
         <li id="lobbyM" class="active" onclick="document.getElementById('bloquea').style.display='block'">
-          {{ HTML::link('afiliado', 'Home'); }}
+          {!! Html::link('afiliado', 'Home') !!}
         </li>
       @else
       <li id="userbalance2">
@@ -55,7 +55,7 @@
         <a href=".login" data-toggle="modal"><p>Ingrese</p></a>
       </li>
       <li onclick="document.getElementById('bloquea').style.display='block'">
-        {{ HTML::link('/', 'Lobby'); }}
+        {!! Html::link('/', 'Lobby') !!}
       </li>
       <li onclick="action(3,1)">
         <a>Equipos</a>
@@ -68,20 +68,20 @@
     <li id="promotionsM" onclick="document.getElementById('bloquea').style.display='block'">
       <a href="{{ URL::action('PromotionController@list_promotions') }}">Promociones</a>
     </li>
-    @if(isset(Auth::user()->id_tipousuario) && Auth::user()->id_tipousuario==3 && Auth::user()->active==1)
+    @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
         @if(!isset($_SESSION['username']) || $_SESSION['username']=='' || $_SESSION['username']==null)
           <script type="text/javascript">
-             window.location = "{{ url('/logout') }}";  
+             window.location = "{{ url('/logout') }}";
           </script>
-      
+
         @endif
       <li id="menuside"><a href="#">Cajero</a>
         <ul>
           <li onclick="document.getElementById('bloquea').style.display='block'">
-            {{ HTML::link('usuario/transferencia', 'Transferencia'); }}
+            {!! Html::link('usuario/transferencia', 'Transferencia') !!}
           </li>
           <!--<li onclick="document.getElementById('bloquea').style.display='block'">
-            {{ HTML::link('usuario/cajero', 'Tarjeta de Crédito'); }}
+            {!! Html::link('usuario/cajero', 'Tarjeta de Crédito') !!}
           </li>-->
           <li onclick="document.getElementById('bloquea').style.display='block'">
             <a href="{{URL::action('PaymentController@getmoney_bettor')}}">Cobra</a>
@@ -92,21 +92,21 @@
     <li id="contactoM">
       <a href=".contacto" data-toggle="modal">Contáctanos</a>
     </li>
-    @if(isset(Auth::user()->id_tipousuario) && Auth::user()->id_tipousuario==3 && Auth::user()->active==1)
+    @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
       @if(!isset($_SESSION['username']) || $_SESSION['username']=='' || $_SESSION['username']==null)
         <script type="text/javascript">
-           window.location = "{{ url('/logout') }}";  
+           window.location = "{{ url('/logout') }}";
         </script>
-    
+
       @endif
       <li id="referirM" onclick="document.getElementById('bloquea').style.display='block'">
-        {{ HTML::link('usuario/referir-amigo', 'Referir Amigo'); }}
+        {!! Html::link('usuario/referir-amigo', 'Referir Amigo') !!}
       </li>
         <li id="historialM" onclick="document.getElementById('bloquea').style.display='block'">
           <a href="{{URL::action('HistoryController@history')}}">Historial</a>
         </li>
       <li style="margin-bottom: 150px;" onclick="document.getElementById('bloquea').style.display='block'">
-        {{ HTML::link('logout', 'Cerrar Sesión', array('id'=>'Cerrarmenu')); }}
+        {!! Html::link('logout', 'Cerrar Sesión', array('id'=>'Cerrarmenu')) !!}
       </li>
     @endif
     @if(empty(Auth::user()->id_tipousuario) && !Auth::check())

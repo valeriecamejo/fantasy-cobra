@@ -14,22 +14,26 @@ class ChampionshipsTableSeeder extends Seeder
             array(
             'sport_id'     => '1',
             'name'         => 'MLB',
-            'description'  => 'Ligas de béisbol profesional'
+            'description'  => 'Ligas de béisbol profesional',
+            'avatar'       => 'images/BolaMLB.png'
             ),
             array(
             'sport_id'     => '1',
             'name'         => 'LVBP',
-            'description'  => 'Liga Venezolana de Béisbol Profesional'
+            'description'  => 'Liga Venezolana de Béisbol Profesional',
+            'avatar'       => 'images/BolaLVBP.png'
             ),
             array(
             'sport_id'     => '2',
-            'name'         => 'LaLiga',
-            'description'  => 'Liga Española'
+            'name'         => 'LALIGA',
+            'description'  => 'Liga Española',
+            'avatar'       => 'images/BolaLIGA.png'
             ),
             array(
             'sport_id'     => '2',
             'name'         => 'UCL',
-            'description'  => 'Liga de Campeones de la UEFA'
+            'description'  => 'Liga de Campeones de la UEFA',
+            'avatar'       => 'images/BolaUCL.png'
             )
         ));
     }
