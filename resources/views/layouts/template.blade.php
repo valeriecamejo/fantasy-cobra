@@ -79,16 +79,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="{{URL::action('HomeController@home')}}" onclick="document.getElementById('bloquea').style.display='block'">
+              <a class="navbar-brand" href="{{ URL::action('HomeController@home') }}" onclick="document.getElementById('bloquea').style.display='block'">
                {!! Html::image('images/logo.png','logo', array('class'=>'mg-responsive')) !!}
               </a>
             </div>
             <div class="collapse navbar-collapse navbar-right">
               <ul class="nav navbar-nav">
-                @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==1 && Auth::user()::STATUS_ACTIVE)
-                  <li id="lobby" class="scroll" onclick="document.getElementById('bloquea').style.display='block'">{!! Html::link('usuario','Lobby') !!}</li>
+                @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
+                  <li id="lobby" class="scroll" onclick="document.getElementById('bloquea').style.display='block'">{!! Html::link('lobby','Lobby') !!}</li>
                   <li id="teams" class="scroll"><a onclick="action(3,0)">Equipos</a></li>
-                  <li id="competitions" class="scroll" onclick="document.getElementById('bloquea').style.display='block'">{!! Html::link('usuario/ver-mis-competiciones','Competiciones') !!}</li>
+                  <li id="competitions" class="scroll" onclick="document.getElementById('bloquea').style.display='block'">{!! Html::link('usuario/mis-competiciones','Competiciones') !!}</li>
                   <li id="promotions" class="scroll" onclick="document.getElementById('bloquea').style.display='block'">{!! Html::link('usuario/ver-promociones', 'Promociones') !!}</li>
 
                 @elseif(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==1 && Auth::user()::STATUS_ACTIVE)
@@ -159,7 +159,7 @@
                         <a href="#">Perfil Usuario</a>
                       </li>
                       <li onclick="document.getElementById('bloquea').style.display='block'">
-                        <a href="{{ URL::action('UserController@logout') }}">Cerrar Sesión</a>
+                        <a href="{{ URL::action('Auth\LoginController@logout') }}">Cerrar Sesión</a>
                       </li>
                     </ul>
                   </li>
