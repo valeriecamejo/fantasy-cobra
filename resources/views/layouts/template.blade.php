@@ -133,7 +133,7 @@
                       </span>
                       <span ></span>
                       <span id="userbalance">
-                        Balance:
+                        Balance: {{ Auth::user()->bettor->balance }}
                         Bs.
                       </span>
                     </a>
@@ -159,7 +159,7 @@
                         <a href="#">Perfil Usuario</a>
                       </li>
                       <li onclick="document.getElementById('bloquea').style.display='block'">
-                        <a href="{{ URL::action('UserController@logout') }}">Cerrar Sesión</a>
+                        <a href="{{ URL::action('Auth\LoginController@logout') }}">Cerrar Sesión</a>
                       </li>
                     </ul>
                   </li>
@@ -191,7 +191,7 @@
                           <a href="#">Perfil Usuario</a>
                         </li>
                         <li onclick="document.getElementById('bloquea').style.display='block'">
-                          <a href="{{ URL::action('UserController@logout') }}">Cerrar Sesión</a>
+                          <a href="{{ URL::action('Auth\LoginController@logout') }}">Cerrar Sesión</a>
                         </li>
                       </ul>
                   </li>
