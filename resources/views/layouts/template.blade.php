@@ -197,7 +197,7 @@
                   </li>
                 @else
                 <!-- Secciones sin Inicio de Sesion -->
-                  <li class="scroll" id="Registrese" onclick="document.getElementById('bloquea').style.display='block'"><a href="register">Regístrese</a></li>
+                  <li class="scroll" id="Registrese" onclick="document.getElementById('bloquea').style.display='block'"><a href="/registro">Regístrese</a></li>
 
                   <li class="scroll navnohide" id="Ingrese2"><a href=".login" data-toggle="modal">Ingrese</a></li>
 

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Requests\UserRequest;
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -27,7 +31,7 @@ class RegisterController extends Controller
   *
   * @var string
   */
-  protected $redirectTo = '/landing';
+  protected $redirectTo = '/lobby';
 
   /**
   * Create a new controller instance.
@@ -39,40 +43,30 @@ class RegisterController extends Controller
   }
 
   /**
-  * Get a validator for an incoming registration request.
-  *
-  * @param  array  $data
-  * @return \Illuminate\Contracts\Validation\Validator
-  */
-  protected function validator(array $data){
-    return Validator::make($data, [
-
-      'name'                  => 'required|max:255',
-      'last_name'             => 'required|max:255',
-      'dni'                   => 'required|max:255',
-      'email'                 => 'required|email|max:255|unique:users',
-      'username'              => 'required|max:255',
-      'phone'                 => 'required|max:255',
-      'password'              => 'required|min:6|confirmed',
-
-    ]);
+   * Register Post with Request from validation
+   *
+   * @param $request
+   * @return \Illuminate\Http\Response
+   */
+  protected function register(UserRequest $request){
+      $data     = $request->all();
+      $user     = User::register($data);
+      if ($user){
+          $this->guard()->login($user);
+          return redirect($this->redirectPath());
+      }elseif ($user == false){
+          Session::flash('danger', 'Error al registrar los datos.');
+          Session::flash('class', 'danger');
+          return redirect()->back();
+      }
   }
 
   /**
-  * Create a new user instance after a valid registration.
-  *
-  * @param  array  $data
-  * @return User
-  */
-  protected function create(array $data){
-    return User::create([
-      'user_type_id' => '3',
-      'name'         => $data['name'],
-      'last_name'    => $data['last_name'],
-      'dni'          => $data['dni'],
-      'email'        => $data['email'],
-      'username'     => $data['username'],
-      'phone'        => $data['phone'],
-      'password'     => bcrypt($data['password']),
-    ]);
+   * register_successfully
+   *
+   * @return \Illuminate\Http\Response
+   */
+  protected function register_successfully(){
+      return view('users.register_successfully');
   }
+}

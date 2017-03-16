@@ -44,4 +44,14 @@ class Promotion extends Model
       return Redirect::to('usuario/error');
         }
     }
+
+    public static function find_promotion_code($code_ref){
+      $promotional_cod	= Promotion::where('code_promotional','=',$code_ref)
+          ->get();
+      if ($promotional_cod){
+          return true;
+      }else{
+          return false;
+      }
+    }
 }

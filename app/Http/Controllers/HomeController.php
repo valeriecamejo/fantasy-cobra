@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Log;
 use App\Competition;
 
@@ -32,11 +33,16 @@ class HomeController extends Controller
 
     public function home(){
 
-        $list_competitions = Competition::list_competitions();
+        if(isset($_COOKIE['landing'])) {
+            $list_competitions = Competition::list_competitions();
 
-        Log::info("count list_competitions = " . count($list_competitions));
+            Log::info("count list_competitions = " . count($list_competitions));
 
-        return view('home.home', array('list_competitions' => $list_competitions));
+            return view('home.home', array('list_competitions' => $list_competitions));
+        }else{
+            setcookie("landing", 1, time() + 259200);
+            return Redirect::to('/landing');
+        }
     }
 
 

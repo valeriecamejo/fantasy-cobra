@@ -133,3 +133,4 @@
       <p class="Legend">Competición Privada</p>
     </div>
   </div>
+</div>

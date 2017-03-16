@@ -11,15 +11,26 @@
 |
 */
 
-
-Auth::routes();
-
 Route::get('/', 'HomeController@home');
 
-Route::get('/landing', 'HomeController@landing');
-
+// Authenticate routes
+Route::get('login','UserController@login');
+Route::post('login','Auth\LoginController@login');
+Route::get('logout','Auth\LoginController@logout');
 Route::get('/logout', 'UserController@logout');
 
-Route::get('/lobby', 'HomeController@home');
+//Register routes
+Route::get('/registro',[
+    'uses'  =>'Auth\RegisterController@showRegistrationForm',
+    'as'    =>'register'
+]);
+Route::post('register','Auth\RegisterController@register');
+Route::get('usuario/registro-exitoso','Auth\RegisterController@register_successfully');
 
+//Home and landing routes
+Route::get('/landing', 'HomeController@landing');
+Route::get('/lobby', 'HomeController@home');
+Route::get('/home', 'HomeController@home');
+
+//General routes
 Route::get('usuario/ver-mis-competiciones', 'CompetitionController@bettor_competitions');
