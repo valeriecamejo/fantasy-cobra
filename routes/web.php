@@ -17,7 +17,7 @@ Route::get('/', 'HomeController@home');
 Route::get('login','UserController@login');
 Route::post('login','Auth\LoginController@login');
 Route::get('logout','Auth\LoginController@logout');
-Route::get('/logout', 'UserController@logout');
+//Route::get('/logout', 'UserController@logout');
 
 //Register routes
 Route::get('/registro',[
@@ -33,4 +33,5 @@ Route::get('/lobby', 'HomeController@home');
 Route::get('/home', 'HomeController@home');
 
 //General routes
-Route::get('usuario/ver-mis-competiciones', 'CompetitionController@bettor_competitions');
+Route::get('usuario/mis-competiciones', 'CompetitionController@bettor_competitions');
+
