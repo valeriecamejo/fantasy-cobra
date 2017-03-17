@@ -25,4 +25,12 @@ class Bettor extends Model
         'bono',
         'not_removable'
   ];
+
+    /**
+     * user the relationship with User
+     *
+     */
+	public function user() {
+        return $this->belongsTo('App\User');
+    }
 }

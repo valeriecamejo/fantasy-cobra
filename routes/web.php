@@ -14,10 +14,9 @@
 Route::get('/', 'HomeController@home');
 
 // Authenticate routes
-Route::get('login','UserController@login');
+Route::get('login','HomeController@home');
 Route::post('login','Auth\LoginController@login');
 Route::get('logout','Auth\LoginController@logout');
-//Route::get('/logout', 'UserController@logout');
 
 //Register routes
 Route::get('/registro',[

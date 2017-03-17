@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
@@ -34,6 +35,14 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * bettor the relationship with Bettor
+     *
+     */
+    public function bettor(){
+
+        return $this->hasOne('App\Bettor');
+    }
     /**
      * Register Post save User
      *
@@ -79,7 +88,14 @@ class User extends Authenticatable
             return false;
         }
     }
-
+    /**
+     * is_referred_code_ref verify if code exist
+     * in promotions or affiliate
+     *
+     * @param $code_ref
+     * @return string $code_ref
+     * @return boolean
+     */
     private static function is_referred_code_ref($code_ref){
 
         $code_ref = strtolower($code_ref);
