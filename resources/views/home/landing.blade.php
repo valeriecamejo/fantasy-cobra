@@ -1,4 +1,4 @@
-@extends ('home.template-landing')
+@extends ('layouts.template-landing')
 
 @section ('content')
 

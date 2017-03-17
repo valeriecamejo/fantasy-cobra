@@ -34,4 +34,5 @@ Route::get('/home', 'HomeController@home');
 
 //General routes
 Route::get('usuario/mis-competiciones', 'CompetitionController@bettor_competitions');
+Route::get('usuario/mis-equipos', 'TeamController@bettor_teams');
 

@@ -87,7 +87,7 @@
               <ul class="nav navbar-nav">
                 @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
                   <li id="lobby" class="scroll" onclick="document.getElementById('bloquea').style.display='block'">{!! Html::link('lobby','Lobby') !!}</li>
-                  <li id="teams" class="scroll"><a onclick="action(3,0)">Equipos</a></li>
+                  <li id="teams" class="scroll">{!! Html::link('usuario/mis-equipos','Equipos') !!}</li>
                   <li id="competitions" class="scroll" onclick="document.getElementById('bloquea').style.display='block'">{!! Html::link('usuario/mis-competiciones','Competiciones') !!}</li>
                   <li id="promotions" class="scroll" onclick="document.getElementById('bloquea').style.display='block'">{!! Html::link('usuario/ver-promociones', 'Promociones') !!}</li>
 
