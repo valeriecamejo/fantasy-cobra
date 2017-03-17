@@ -9,7 +9,7 @@
       @endif
       <li class="sidebar-brand">
           <ul>
-            <a href="{{ URL::action('BettorController@edit_bettor') }}" onclick="document.getElementById('bloquea').style.display='block'">
+            <a href="#" onclick="document.getElementById('bloquea').style.display='block'">
               <li id="userbar"><img src="{{ URL::asset('images/ico/usericonmenu.png') }}" alt="">{{$_SESSION['username']}}</li>
             </a>
             <a href=".cajero" data-toggle="modal">
