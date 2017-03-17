@@ -21,13 +21,13 @@ class Competition extends Model
     const STATUS_CANCELED = 'CANCELED';
 
 
-    /*********************************************
-     * list_competitions: List active competitions
-     * @param void
-     * @return $list_competitions
-     ********************************************/
+/*********************************************
+* list_competitions: List active competitions
+* @param void
+* @return $list_competitions
+*********************************************/
 
-    public static function list_competitions(){
+    public static function list_competitions() {
 
         $today                = date('Y-m-d');
 
@@ -42,14 +42,14 @@ class Competition extends Model
         return $list_competitions;
     }
 
-    /*********************************************
-     * bettor_competitions: List a user's active
-                            competitions
-     * @param void
-     * @return $list_competitions
-     ********************************************/
+/*********************************************
+* bettor_competitions: List a user's active
+                       competitions
+* @param void
+* @return $list_competitions
+*********************************************/
 
-    public static function bettor_competitions(){
+    public static function bettor_competitions() {
 
         $today                = date('Y-m-d');
 
