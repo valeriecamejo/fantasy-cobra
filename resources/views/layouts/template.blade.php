@@ -232,8 +232,24 @@
 
       <!-- -------------------------------- MODALES -------------------------------- -->
       @include('modal/login')
+      @include('modal/awards')
+      @include('modal/cashier')
+      @include('modal/competition')
+      @include('modal/contact')
+      @include('modal/forgot-password')
+      @include('modal/opponent')
+      @include('modal/team')
+      @include('modal/awards')
+      @include('modal/cashier')
+      @include('modal/competition')
+      @include('modal/contact')
+      @include('modal/forgot-password')
+      @include('modal/login')
+      @include('modal/opponent')
+      @include('modal/team')
 
-      <!-- -------------------------------- LOADING -------------------------------- -->
+
+  <!-- -------------------------------- LOADING -------------------------------- -->
       @include('includes/cargando')
 
       <!-- -------------------------------- FOOTER DESKTOP -------------------------------- -->
