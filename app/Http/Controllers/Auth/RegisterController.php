@@ -6,7 +6,6 @@ use App\Http\Requests\UserRequest;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -31,7 +30,7 @@ class RegisterController extends Controller
   *
   * @var string
   */
-  protected $redirectTo = 'usuario/registro-exitoso';
+  protected $redirectTo = '/usuario/registro-exitoso';
 
   /**
   * Create a new controller instance.

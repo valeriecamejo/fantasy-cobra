@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
@@ -52,6 +53,7 @@ class User extends Authenticatable
      */
     public static function register($input)
     {
+        $date = Carbon::now();
         $user = new User;
         $user->name = $input['name'];
         $user->last_name = $input['last_name'];
@@ -62,8 +64,8 @@ class User extends Authenticatable
         $user->phone = $input['cod_country'] . '-' . $input['phone'];
         $user->password = bcrypt($input['password']);
         $user->status = User::STATUS_ACTIVE;
-        $user->ip = '192.168.0.1';
-        $user->date_last_connect = '2017-02-01 08:00:00';
+        $user->ip = request()->getClientIp();
+        $user->date_last_connect = $date->toDateTimeString();
 
         if ($user->save()) {
 
