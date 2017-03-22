@@ -25,24 +25,30 @@ class TeamController extends Controller
           $previous_teams
           $futures_today
 ***********************************/
-    protected function bettor_teams() {
+    public function bettor_teams() {
 
         $today_teams    = Team::today_teams();
         $previous_teams = Team::previous_teams();
-        $futures_teams  = Team::futures_teams();
+        $future_teams  = Team::future_teams();
 
         $today_competitions    = Team::today_competitions();
         $previous_competitions = Team::previous_competitions();
-        $futures_competitions  = Team::futures_competitions();
+        $future_competitions  = Team::future_competitions();
 
         return view('users.teams', array(
                     'today_teams'           => $today_teams,
                     'previous_teams'        => $previous_teams,
-                    'futures_teams'         => $futures_teams,
+                    'future_teams'          => $future_teams,
                     'today_competitions'    => $today_competitions,
                     'previous_competitions' => $previous_competitions,
-                    'futures_competitions'  => $futures_competitions
+                    'future_competitions'   => $future_competitions
                     ));
 
+    }
+
+    public function enroll_team() {
+
+
+        return view();
     }
 }

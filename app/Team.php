@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Lib\Ddh\UtilityDate;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+
 
 class Team extends Model
 {
@@ -24,13 +26,14 @@ class Team extends Model
         $today       = date('Y-m-d');
 
         $today_teams = DB::table('team_users')
-                     ->select('team_users.id', 'team_users.user_id', 'team_users.remaining_salary', 'championships.avatar', 'team_users.championship_id')
-                     ->join('team_subscribers', 'team_users.user_id', '=', 'team_subscribers.team_user_id')
-                     ->join('championships', 'team_users.championship_id', '=', 'championships.id')
-                     ->where('team_users.date_inscription', '=' , $today)
+                     ->select('team_users.id', 'team_users.user_id', 'championships.avatar', 'competitions.date', 'team_users.remaining_salary')
+                     ->join('team_subscribers', 'team_subscribers.team_user_id', '=', 'team_users.id')
+                     ->join('competitions', 'competitions.id', '=', 'team_subscribers.competition_id')
+                     ->join('championships', 'championships.id', '=', 'team_users.championship_id')
+                     ->where(DB::raw('DATE_FORMAT(competitions.date, "%Y-%m-%d")'), "=", $today)
                      ->where('team_users.user_id', '=', Auth::user()->id)
                      ->get();
-
+        //var_dump($today_teams);exit();
         return $today_teams;
     }
 
@@ -41,37 +44,39 @@ class Team extends Model
 *********************************************/
   public static function previous_teams(){
 
-        $today          = date('Y-m-d');
+        $today       = date('Y-m-d');
 
         $previous_teams = DB::table('team_users')
-                        ->select('team_users.id', 'team_users.user_id', 'team_users.remaining_salary', 'championships.avatar', 'team_users.championship_id')
-                        ->join('team_subscribers', 'team_users.user_id', '=', 'team_subscribers.team_user_id')
-                        ->join('championships', 'team_users.championship_id', '=', 'championships.id')
-                        ->where('team_users.date_inscription', '<' , $today)
-                        ->where('team_users.user_id', '=', Auth::user()->id)
-                        ->get();
-
+                     ->select('team_users.id', 'team_users.user_id', 'championships.avatar', 'competitions.date', 'team_users.remaining_salary')
+                     ->join('team_subscribers', 'team_subscribers.team_user_id', '=', 'team_users.id')
+                     ->join('competitions', 'competitions.id', '=', 'team_subscribers.competition_id')
+                     ->join('championships', 'championships.id', '=', 'team_users.championship_id')
+                     ->where(DB::raw('DATE_FORMAT(competitions.date, "%Y-%m-%d")'), "<", $today)
+                     ->where('team_users.user_id', '=', Auth::user()->id)
+                     ->get();
+        //var_dump($previous_teams);exit();
         return $previous_teams;
     }
 
 /*********************************************
-* futures_teams: List future teams
+* future_teams: List future teams
 * @param void
-* @return $futures_teams
+* @return $future_teams
 *********************************************/
-    public static function futures_teams(){
+    public static function future_teams(){
 
-        $today          = date('Y-m-d');
+        $today       = date('Y-m-d');
 
-        $futures_teams = DB::table('team_users')
-                       ->select('team_users.id', 'team_users.user_id', 'team_users.remaining_salary', 'championships.avatar', 'team_users.championship_id')
-                       ->join('team_subscribers', 'team_users.user_id', '=', 'team_subscribers.team_user_id')
-                       ->join('championships', 'team_users.championship_id', '=', 'championships.id')
-                       ->where('team_users.date_inscription', '<' , $today)
-                       ->where('team_users.user_id', '=', Auth::user()->id)
-                       ->get();
-
-        return $futures_teams;
+        $future_teams = DB::table('team_users')
+                     ->select('team_users.id', 'team_users.user_id', 'championships.avatar', 'competitions.date', 'team_users.remaining_salary', 'team_subscribers.points', 'team_subscribers.competition_id')
+                     ->join('team_subscribers', 'team_subscribers.team_user_id', '=', 'team_users.id')
+                     ->join('competitions', 'competitions.id', '=', 'team_subscribers.competition_id')
+                     ->join('championships', 'championships.id', '=', 'team_users.championship_id')
+                     ->where(DB::raw('DATE_FORMAT(competitions.date, "%Y-%m-%d")'), ">", $today)
+                     ->where('team_users.user_id', '=', Auth::user()->id)
+                     ->get();
+        //var_dump($future_teams);exit();
+        return $future_teams;
     }
 
 /*********************************************
@@ -84,13 +89,14 @@ class Team extends Model
         $today          = date('Y-m-d');
 
         $today_competitions = DB::table('team_users')
-                        ->select(DB::raw('count(team_users.id) as cant', 'team_users.id', 'team_users.name', 'championships.avatar', 'team_users.championship_id', 'team_subscribers.date', 'team_subscribers.points'))
-                        ->join('team_subscribers', 'team_users.user_id', '=', 'team_subscribers.team_user_id')
-                        ->join('championships', 'championships.id', '=', 'team_users.championship_id')
-                        ->where('team_users.date_inscription', '=', $today)
-                        ->where('team_users.user_id', '=', Auth::user()->id)
-                        ->get();
-
+                            ->select('team_users.id', 'team_subscribers.points', 'team_users.id', 'team_users.name', 'championships.avatar', 'team_users.championship_id', 'team_subscribers.date', 'competitions.date')
+                            ->join('team_subscribers', 'team_subscribers.team_user_id', '=', 'team_users.id')
+                            ->join('competitions', 'competitions.id', '=', 'team_subscribers.competition_id')
+                            ->join('championships', 'championships.id', '=', 'team_users.championship_id')
+                            ->where(DB::raw('DATE_FORMAT(competitions.date, "%Y-%m-%d")'), "=", $today)
+                            ->where('team_users.user_id', '=', Auth::user()->id)
+                            ->get();
+//var_dump($today_competitions);exit();
         return $today_competitions;
     }
 
@@ -104,13 +110,14 @@ class Team extends Model
         $today          = date('Y-m-d');
 
         $previous_competitions = DB::table('team_users')
-                               ->select('team_users.id', 'team_users.user_id', 'team_users.name', 'championships.avatar', 'team_users.championship_id', 'team_subscribers.date', 'team_subscribers.points')
-                               ->join('team_subscribers', 'team_users.user_id', '=', 'team_subscribers.team_user_id')
-                               ->join('championships', 'championships.id', '=', 'team_users.championship_id')
-                               ->where('team_users.date_inscription', '<', $today)
-                               ->where('team_users.user_id', '=', Auth::user()->id)
-                               ->get();
-
+                            ->select('team_users.id', 'team_subscribers.points', 'team_users.id', 'team_users.name', 'championships.avatar', 'team_users.championship_id', 'team_subscribers.date', 'competitions.date')
+                            ->join('team_subscribers', 'team_subscribers.team_user_id', '=', 'team_users.id')
+                            ->join('competitions', 'competitions.id', '=', 'team_subscribers.competition_id')
+                            ->join('championships', 'championships.id', '=', 'team_users.championship_id')
+                            ->where(DB::raw('DATE_FORMAT(competitions.date, "%Y-%m-%d")'), "<", $today)
+                            ->where('team_users.user_id', '=', Auth::user()->id)
+                            ->get();
+//var_dump($previous_competitions);exit();
         return $previous_competitions;
     }
 
@@ -119,18 +126,19 @@ class Team extends Model
 * @param void
 * @return $futures_competitions
 ***********************************************/
-    public static function futures_competitions(){
+    public static function future_competitions(){
 
         $today          = date('Y-m-d');
 
-        $futures_competitions = DB::table('team_users')
-                               ->select('team_users.id', 'team_users.name', 'championships.avatar', 'team_users.championship_id', 'team_subscribers.date', 'team_subscribers.points')
-                               ->join('team_subscribers', 'team_users.user_id', '=', 'team_subscribers.team_user_id')
-                               ->join('championships', 'championships.id', '=', 'team_users.championship_id')
-                               ->where('team_users.date_inscription', '>' , $today)
-                               ->where('team_users.user_id', '=', Auth::user()->id)
-                               ->get();
-
-        return $futures_competitions;
+        $future_competitions = DB::table('team_users')
+                            ->select('team_users.id', 'team_subscribers.points', 'team_users.id', 'team_users.name', 'championships.avatar', 'team_users.championship_id', 'team_subscribers.date', 'competitions.date')
+                            ->join('team_subscribers', 'team_subscribers.team_user_id', '=', 'team_users.id')
+                            ->join('competitions', 'competitions.id', '=', 'team_subscribers.competition_id')
+                            ->join('championships', 'championships.id', '=', 'team_users.championship_id')
+                            ->where(DB::raw('DATE_FORMAT(competitions.date, "%Y-%m-%d")'), ">", $today)
+                            ->where('team_users.user_id', '=', Auth::user()->id)
+                            ->get();
+//var_dump($futures_competitions);exit();
+        return $future_competitions;
     }
 }

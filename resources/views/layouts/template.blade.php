@@ -127,7 +127,7 @@
                   <li class="dropdown dropdown-hover">
                     <a href="#blog" class="dropdown-toggle" data-toggle="dropdown">
 
-                      <span id="userbar"><?php echo Auth::user()->username?>
+                      <span id="userbar">{{Auth::user()->username}}
 
                         {!! Html::image('images/arrowd.png','flecha', array('class'=>'icon-arrow-down')) !!}
                       </span>
