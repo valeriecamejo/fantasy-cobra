@@ -81,7 +81,7 @@
   </div><!--/.container-->
 </div>
 
-{!! Form::open(array('url' => 'register-short', 'method' => 'post')) !!}
+{!! Form::open(array('url' => 'register-landing', 'method' => 'post')) !!}
 
 <a id="anchor"></a>
 <div class="container-fluid fondoregistro">
@@ -112,7 +112,7 @@
 
     <div class="regisinput2" style="margin-bottom: 20px;">
       <p>Contraseña</p>
-      <input type="password" placeholder="Ingresa contraseña" name="password" value="{{Input::old('username')}}">
+      <input type="password" placeholder="Ingresa contraseña" name="password">
       @if($errors->has('password'))
         <span class="incompleto">×</span>
         @foreach($errors->get('password') as $error)
@@ -123,10 +123,10 @@
 
     <div class="regisinput2" style="margin-bottom: 20px;">
       <p>Confirmar Contraseña</p>
-      <input type="password" placeholder="Confirma contraseña" name="password_repeat">
-      @if($errors->has('password_repeat'))
+      <input type="password" placeholder="Confirma contraseña" name="password_confirmation">
+      @if($errors->has('password_confirmation'))
         <span class="incompleto">×</span>
-        @foreach($errors->get('password_repeat') as $error)
+        @foreach($errors->get('password_confirmation') as $error)
           <span class="messageerror3">{!! $error !!}</span>
         @endforeach
       @endif
@@ -161,9 +161,9 @@
     </p>
 
   </div>
-  @include('includes/footer-mobile')
+    {!! Form::close() !!}
+    @include('includes/footer-mobile')
 </div>
-{!! Form::close() !!}
 
 <script>
   $(function(){
