@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Team;
+use App\Team_user;
 
 class TeamController extends Controller
 {
@@ -27,13 +27,13 @@ class TeamController extends Controller
 ***********************************/
     public function bettor_teams() {
 
-        $today_teams    = Team::today_teams();
-        $previous_teams = Team::previous_teams();
-        $future_teams  = Team::future_teams();
+        $today_teams    = Team_user::today_teams();
+        $previous_teams = Team_user::previous_teams();
+        $future_teams   = Team_user::future_teams();
 
-        $today_competitions    = Team::today_competitions();
-        $previous_competitions = Team::previous_competitions();
-        $future_competitions  = Team::future_competitions();
+        $today_competitions    = Team_user::today_competitions();
+        $previous_competitions = Team_user::previous_competitions();
+        $future_competitions  = Team_user::future_competitions();
 
         return view('users.teams', array(
                     'today_teams'           => $today_teams,
@@ -43,7 +43,6 @@ class TeamController extends Controller
                     'previous_competitions' => $previous_competitions,
                     'future_competitions'   => $future_competitions
                     ));
-
     }
 
     public function enroll_team() {

@@ -17,9 +17,9 @@ class Team_SubscribersTableSeeder extends Seeder
         \DB::table('team_subscribers')->insert(array(
             array(
                 'sport_id'       => '1',
-                'competition_id' => '1',
+                'competition_id' => '2',
                 'team_id'        => '1',
-                'team_user_id'   => '1',
+                'team_user_id'   => '2',
                 'amount'         => '1000',
                 'points'         => '0',
                 'date'           => '2017-03-14 12:30:00',
@@ -29,7 +29,7 @@ class Team_SubscribersTableSeeder extends Seeder
             ),
             array(
                 'sport_id'       => '2',
-                'competition_id' => '5',
+                'competition_id' => '3',
                 'team_id'        => '2',
                 'team_user_id'   => '2',
                 'amount'         => '1000',
