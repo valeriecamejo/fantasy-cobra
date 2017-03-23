@@ -150,7 +150,7 @@
                         </li>
                       </a>
                       <li onclick="document.getElementById('bloquea').style.display='block'">
-                        <a href="#">Historial</a>
+                        <a href="{{ URL::action('HistoryController@history') }}">Historial</a>
                       </li>
                       <li onclick="document.getElementById('bloquea').style.display='block'">
                         {!! Html::link('usuario/referir-amigo', 'Referir Amigo') !!}
@@ -232,14 +232,12 @@
 
       <!-- -------------------------------- MODALES -------------------------------- -->
       @include('modal/login')
-      @include('modal/awards')
       @include('modal/cashier')
       @include('modal/competition')
       @include('modal/contact')
       @include('modal/forgot-password')
       @include('modal/opponent')
       @include('modal/team')
-      @include('modal/awards')
       @include('modal/cashier')
       @include('modal/competition')
       @include('modal/contact')

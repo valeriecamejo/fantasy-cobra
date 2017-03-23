@@ -34,6 +34,6 @@ Route::get('/home', 'HomeController@home');
 
 //General routes
 Route::get('usuario/mis-competiciones', 'CompetitionController@bettor_competitions');
-Route::get('usuario/mis-equipos', 'TeamController@bettor_teams');
-Route::get('usuario/inscribir-equipo', 'TeamController@enroll_team');
+Route::get('usuario/mis-equipos', 'TeamUserController@bettor_teams');
+Route::get('usuario/historial', 'HistoryController@history');
 

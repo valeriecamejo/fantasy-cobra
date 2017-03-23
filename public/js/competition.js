@@ -12,7 +12,7 @@ var url_ajax = "http://localhost/cobraverepotenciado/fantasy-cobra-venezuela-rep
 *                           +auth: Valor para saber si el usuario está  *
 *                                  o no logueado.                       *
 ************************************************************************/
-function lobby(folder_tabs, auth){ 
+function lobby(folder_tabs, auth){
 
     /******************************************************
     * folder_tabs: Todas => 0, Beisbol => 1, Futbol => 2. *
@@ -24,7 +24,7 @@ function lobby(folder_tabs, auth){
     var get_position_loader =   '';
     //alert(folder_tabs);
 
-    if(folder_tabs == 0){ 
+    if(folder_tabs == 0){
 
         get_position_loader = 'all-no-mobile';
 
@@ -35,7 +35,7 @@ function lobby(folder_tabs, auth){
         }else{
 
             url = url_ajax + "/usuario/todas-las-competiciones";
-            
+
         }
 
         $("#table-all-no-mobile").html("");
@@ -48,11 +48,11 @@ function lobby(folder_tabs, auth){
         get_position_loader = 'baseball-no-mobile';
 
         if(auth == 1){
-            
+
             url = url_ajax + "/competiciones-de-beisbol";
 
         }else{
-            
+
             url = url_ajax + "/usuario/competiciones-de-beisbol";
         }
 
@@ -66,11 +66,11 @@ function lobby(folder_tabs, auth){
         get_position_loader = 'football-no-mobile';
 
         if(auth == 1){
-            
+
             url = url_ajax + "/competiciones-de-futbol";
-            
+
         }else{
-            
+
             url = url_ajax + "/usuario/competiciones-de-futbol";
         }
 
@@ -118,13 +118,13 @@ function lobby_mobile(folder_tabs, auth){
         get_position_loader = 'all-mobile';
 
         if(auth == 1){
-           
+
            url = url_ajax + "/todas-las-competiciones";
-           
+
         }else{
-            
+
             url = url_ajax + "/usuario/todas-las-competiciones";
-            
+
         }
 
         $("#ul-all-mobile").html("");
@@ -137,13 +137,13 @@ function lobby_mobile(folder_tabs, auth){
         get_position_loader = 'baseball-mobile';
 
         if(auth == 1){
-            
+
              url = url_ajax + "/competiciones-de-beisbol";
 
         }else{
 
             url = url_ajax + "/usuario/competiciones-de-beisbol";
-            
+
         }
 
         $("#ul-all-mobile").html("");
@@ -157,11 +157,11 @@ function lobby_mobile(folder_tabs, auth){
         if(auth == 1){
 
             url = url_ajax + "/competiciones-de-futbol";
-            
+
         }else{
 
             url = url_ajax + "/usuario/competiciones-de-futbol";
-            
+
         }
 
         $("#ul-all-mobile").html("");
@@ -203,13 +203,13 @@ function my_lobby(folder_tabs, auth){
 
     //alert('folder_tabs: '+folder_tabs);
     //alert('auth: '+auth);
-    
+
     if(folder_tabs == 0){
 
         if(auth == 0){
 
             url = url_ajax + "/usuario/ver-mis-competiciones/todas-mis-competiciones";
-           
+
         }
 
         $("#my-table-all-no-mobile").html("");
@@ -222,7 +222,7 @@ function my_lobby(folder_tabs, auth){
         if(auth == 0){
 
             url = url_ajax + "/usuario/ver-mis-competiciones/mis-competiciones-de-beisbol";
-            
+
         }
 
         $("#my-table-all-no-mobile").html("");
@@ -234,7 +234,7 @@ function my_lobby(folder_tabs, auth){
         if(auth == 0){
 
             url = url_ajax + "/usuario/ver-mis-competiciones/mis-competiciones-de-futbol";
-           
+
         }
 
         $("#my-table-all-no-mobile").html("");
@@ -276,7 +276,7 @@ function my_lobby_mobile(folder_tabs, auth){
         if(auth == 0){
 
             url = url_ajax + "/usuario/ver-mis-competiciones/todas-mis-competiciones";
-            
+
         }
 
         $("#my-ul-all-mobile").html("");
@@ -289,7 +289,7 @@ function my_lobby_mobile(folder_tabs, auth){
         if(auth == 0){
 
             url = url_ajax + "/usuario/ver-mis-competiciones/mis-competiciones-de-beisbol";
-           
+
         }
 
         $("#my-ul-all-mobile").html("");
@@ -301,7 +301,7 @@ function my_lobby_mobile(folder_tabs, auth){
         if(auth == 0){
 
             url = url_ajax + "/usuario/ver-mis-competiciones/mis-competiciones-de-futbol";
-            
+
         }
 
         $("#my-ul-all-mobile").html("");
@@ -2101,7 +2101,7 @@ function add_rows_my_lobby_mobile(folder_tabs, information, auth){
 *                                  o no logueado.                       *
 ************************************************************************/
 function modal_competition(sport, league, id_competition, auth){
-    
+
     var url = "";
 
     if(auth == 1){
@@ -2299,7 +2299,7 @@ function add_info(info, sport, league, id_competition, auth){
                 if(auth == 0){
                     competition_users = competition_users + "<tr>"+
                                                                 "<td>";
-                                                                    if(competition_date == today){ 
+                                                                    if(competition_date == today){
                                                                         if(hour >= first_game){
                                                                             competition_users = competition_users + "<a href='https://www.fantasycobra.com.ve/usuario/lista-de-oponentes/"+id_competition+"/"+users.lineup_id+"'>"+users.username+"</a>";
                                                                             //competition_users = competition_users + "<a href='http://localhost/fantasy-cobra-dominicana/public/usuario/lista-de-oponentes/"+id_competition+"/"+users.lineup_id+"'>"+users.username+"</a>";
@@ -2727,7 +2727,7 @@ $(document).ready(function() {
                                 competition_hour = competition_hour - 12;
                             }
                         }else{
-                            
+
                             competition_hour = competition.hour;
                         }
 
