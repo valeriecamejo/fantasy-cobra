@@ -64,9 +64,9 @@
         </header>
         <!--/header-->
 
-        @if(Session::get('danger'))
+        @if(Session::has('danger') || (count($errors) > 0))
             <div id="danger" class="alert alert-danger">
-              <strong>¡Error! </strong>{{ Session::get('danger') }}
+              <strong>¡Por favor verifica los datos ingresados! </strong>{{ Session::get('danger') }}
             </div>
         @endif
 
@@ -108,16 +108,16 @@
                 <div class="col-sm-2">
                     <ul class="social-icons">
                         <li onclick="document.getElementById('bloquea').style.display='block'">
-                            {!! Html::link('como-jugar','¿Cómo jugar?'); !!}
+                            {!! Html::link('como-jugar','¿Cómo jugar?') !!}
                         </li>
                         <li onclick="document.getElementById('bloquea').style.display='block'">
-                            {!! Html::link('reglas','Reglas'); !!}
+                            {!! Html::link('reglas','Reglas') !!}
                         </li>
                         <li>
                             <a href=".contacto" data-toggle="modal">Contáctanos</a>
                         </li>
                         <li onclick="document.getElementById('bloquea').style.display='block'">
-                            {!! Html::link('puntos','Puntos'); !!}
+                            {!! Html::link('puntos','Puntos') !!}
                         </li>
                     </ul>
                 </div>

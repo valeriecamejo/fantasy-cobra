@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Requests\RegisterLandingRequest;
 use App\Http\Requests\UserRequest;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -50,6 +51,24 @@ class RegisterController extends Controller
   protected function register(UserRequest $request){
       $data     = $request->all();
       $user     = User::register($data);
+      if ($user){
+          $this->guard()->login($user);
+          return redirect($this->redirectPath());
+      }elseif ($user == false){
+          Session::flash('danger', 'Error al registrar los datos.');
+          Session::flash('class', 'danger');
+          return redirect()->back();
+      }
+  }
+  /**
+   * register_landing Post with Request from validation
+   *
+   * @param $request
+   * @return \Illuminate\Http\Response
+   */
+  protected function register_landing(RegisterLandingRequest $request){
+      $data     = $request->all();
+      $user     = User::register_landing($data);
       if ($user){
           $this->guard()->login($user);
           return redirect($this->redirectPath());

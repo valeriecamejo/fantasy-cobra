@@ -24,6 +24,7 @@ Route::get('/registro',[
     'as'    =>'register'
 ]);
 Route::post('register','Auth\RegisterController@register');
+Route::post('register-landing','Auth\RegisterController@register_landing');
 Route::get('usuario/registro-exitoso','Auth\RegisterController@register_successfully');
 
 //Home and landing routes
