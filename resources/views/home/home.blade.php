@@ -1,10 +1,6 @@
 @extends ('layouts.template')
 
 @section ('content')
-
-<!-- Abre Wrapper -->
-<div id="wrapper">
-
   <div id="page-content-wrapper">
     <!--  /Content-wrapper -->
     <div class="container-fluid">
@@ -110,6 +106,4 @@
     @include('includes.competitions-no-mobile')
     @include('includes/footer-mobile')
   </div>
-  <!--  /Content-wrapper -->
-</div>
 @stop
