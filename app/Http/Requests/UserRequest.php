@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Routing\Route;
 
+
 class UserRequest extends FormRequest
 {
   /**
@@ -35,27 +36,27 @@ class UserRequest extends FormRequest
   {
     if($this->route->parameterNames() == 'edit') {
       return [
-        'name' => 'required|max:255',
-        'last_name' => 'required|max:255',
-        'dni' => 'required|max:255|unique:users,dni,' . $this->route->getParameter('id'),
-        'email' => 'required|email|max:255|unique:users,email,' . $this->route->getParameter('id'),
-        'username' => 'required|max:255|unique:users,username,' . $this->route->getParameter('id'),
+        'name'        => 'required|max:255',
+        'last_name'   => 'required|max:255',
+        'dni'         => 'required|max:255|unique:users,dni,' . $this->route->getParameter('id'),
+        'email'       => 'required|email|max:255|unique:users,email,' . $this->route->getParameter('id'),
+        'username'    => 'required|max:255|unique:users,username,' . $this->route->getParameter('id'),
         'cod_country' => 'required|max:5',
-        'phone' => 'required|max:255',
-        'password' => 'confirmed|min:6'
+        'phone'       => 'required|max:255',
+        'password'    => 'confirmed|min:6'
       ];
     }else{
       return [
-        'name' => 'required|max:255',
-        'last_name' => 'required|max:255',
-        'dni' => 'required|max:255|unique:users,dni',
-        'email' => 'required|email|max:255|unique:users,email',
-        'username' => 'required|max:255|unique:users,username',
-        'cod_country' => 'required|max:5',
-        'phone' => 'required|max:255',
-        'password' => 'required|min:6|confirmed',
+        'name'           => 'required|max:255',
+        'last_name'      => 'required|max:255',
+        'dni'            => 'required|max:255|unique:users,dni',
+        'email'          => 'required|email|max:255|unique:users,email',
+        'username'       => 'required|max:255|unique:users,username',
+        'cod_country'    => 'required|max:5',
+        'phone'          => 'required|max:255',
+        'password'       => 'required|min:6|confirmed',
         'terms_politics' => 'required',
-        'adult' => 'required'
+        'adult'          => 'required'
       ];
     }
   }

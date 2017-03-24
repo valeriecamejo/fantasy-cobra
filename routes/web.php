@@ -36,4 +36,6 @@ Route::get('/home', 'HomeController@home');
 Route::get('usuario/mis-competiciones', 'CompetitionController@bettor_competitions');
 Route::get('usuario/mis-equipos', 'TeamUserController@bettor_teams');
 Route::get('usuario/historial', 'HistoryController@history');
+Route::get('usuario/perfil-usuario', 'UserController@show_user_profile');
+Route::post('usuario/perfil-usuario', 'UserController@update_user_profile');
 

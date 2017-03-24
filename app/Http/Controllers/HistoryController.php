@@ -24,7 +24,7 @@ class HistoryController extends Controller {
         $previous_teams
         $futures_today
   ***********************************/
-  public function history() {
+  public static function history() {
 
     $all_competitions = History::all_competitions();
     $won_competitions = History::won_competitions();

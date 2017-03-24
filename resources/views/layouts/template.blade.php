@@ -156,7 +156,7 @@
                         {!! Html::link('usuario/referir-amigo', 'Referir Amigo') !!}
                       </li>
                       <li onclick="document.getElementById('bloquea').style.display='block'">
-                        <a href="#">Perfil Usuario</a>
+                        <a href="{{ URL::action('UserController@show_user_profile') }}">Perfil Usuario</a>
                       </li>
                       <li onclick="document.getElementById('bloquea').style.display='block'">
                         <a href="{{ URL::action('Auth\LoginController@logout') }}">Cerrar Sesión</a>

@@ -53,31 +53,31 @@ class User extends Authenticatable
    */
   public static function register($input)
   {
-    $date = Carbon::now();
-    $user = new User;
-    $user->name = $input['name'];
-    $user->last_name = $input['last_name'];
-    $user->user_type_id = '3';
-    $user->dni = $input['dni'];
-    $user->email = $input['email'];
-    $user->username = $input['username'];
-    $user->phone = $input['cod_country'] . '-' . $input['phone'];
-    $user->password = bcrypt($input['password']);
-    $user->status = User::STATUS_ACTIVE;
-    $user->ip = request()->getClientIp();
+    $date                    = Carbon::now();
+    $user                    = new User;
+    $user->name              = $input['name'];
+    $user->last_name         = $input['last_name'];
+    $user->user_type_id      = '3';
+    $user->dni               = $input['dni'];
+    $user->email             = $input['email'];
+    $user->username          = $input['username'];
+    $user->phone             = $input['cod_country'] . '-' . $input['phone'];
+    $user->password          = bcrypt($input['password']);
+    $user->status            = User::STATUS_ACTIVE;
+    $user->ip                = request()->getClientIp();
     $user->date_last_connect = $date->toDateTimeString();
 
     if ($user->save()) {
-      $bettor = new Bettor();
+      $bettor          = new Bettor();
       $bettor->url_own = "www.fantasycobra.com/referido/".$input['username'];
       $bettor->user_id = $user->id;
-      $bettor->photo = "user_male.png";
+      $bettor->photo   = "user_male.png";
       $bettor->city_id = 1;
 
       if (empty($input['code_ref'])) {
         $bettor->code_referred = false;
       } else {
-        $is_referred_code_ref = User::is_referred_code_ref($input['code_ref']);
+        $is_referred_code_ref  = User::is_referred_code_ref($input['code_ref']);
         $bettor->code_referred = $is_referred_code_ref;
       }
       if ($bettor->save()) {
@@ -98,23 +98,23 @@ class User extends Authenticatable
    * @return boolean
    */
   public static function register_landing($input){
-    $date = Carbon::now();
-    $user = new User;
-    $user->user_type_id = '3';
-    $user->email = $input['email'];
-    $user->username = $input['username'];
-    $user->password = bcrypt($input['password']);
-    $user->status = User::STATUS_ACTIVE;
-    $user->ip = request()->getClientIp();
+    $date                    = Carbon::now();
+    $user                    = new User;
+    $user->user_type_id      = '3';
+    $user->email             = $input['email'];
+    $user->username          = $input['username'];
+    $user->password          = bcrypt($input['password']);
+    $user->status            = User::STATUS_ACTIVE;
+    $user->ip                = request()->getClientIp();
     $user->date_last_connect = $date->toDateTimeString();
 
     if ($user->save()) {
 
-      $bettor = new Bettor();
-      $bettor->url_own = "www.fantasycobra.com/referido/".$input['username'];
-      $bettor->user_id = $user->id;
-      $bettor->photo = "user_male.png";
-      $bettor->city_id = 1;
+      $bettor                = new Bettor();
+      $bettor->url_own       = "www.fantasycobra.com/referido/".$input['username'];
+      $bettor->user_id       = $user->id;
+      $bettor->photo         = "user_male.png";
+      $bettor->city_id       = 1;
       $bettor->code_referred = false;
 
       if ($bettor->save()) {
@@ -137,7 +137,7 @@ class User extends Authenticatable
    */
   private static function is_referred_code_ref($code_ref){
 
-    $code_ref = strtolower($code_ref);
+    $code_ref  = strtolower($code_ref);
 
     $promotion = Promotion::find_promotion_code($code_ref);
 
@@ -150,5 +150,20 @@ class User extends Authenticatable
     }else{
       return false;
     }
+  }
+
+  protected static function update_user_profile($input) {
+
+    $password = $input['password'];
+    $user = User::find(Auth::user()->id);
+
+    if($password != ""){
+                $user->password = Hash::make($input['password']);
+            }
+            $user->phone  = $input['phone'];
+            $user->dni    = $input['dni'];
+            $user->save();
+
+    return $user;
   }
 }

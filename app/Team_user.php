@@ -90,13 +90,13 @@ private static function team_by_times($time) {
   $today         = date('Y-m-d');
 
   $team_by_times = DB::table('team_users')
-                ->select('team_users.id', 'team_subscribers.points', 'team_users.name', 'team_users.user_id', 'championships.avatar', 'team_users.championship_id', 'competitions.date', 'team_users.remaining_salary', 'team_subscribers.competition_id')
-                ->join('team_subscribers', 'team_subscribers.team_user_id', '=', 'team_users.id')
-                ->join('competitions', 'competitions.id', '=', 'team_subscribers.competition_id')
-                ->join('championships', 'championships.id', '=', 'team_users.championship_id')
-                ->where(DB::raw('DATE_FORMAT(competitions.date, "%Y-%m-%d")'), $time, $today)
-                ->where('team_users.user_id', '=', Auth::user()->id)
-                ->get();
+  ->select('team_users.id', 'team_subscribers.points', 'team_users.name', 'team_users.user_id', 'championships.avatar', 'team_users.championship_id', 'competitions.date', 'team_users.remaining_salary', 'team_subscribers.competition_id')
+  ->join('team_subscribers', 'team_subscribers.team_user_id', '=', 'team_users.id')
+  ->join('competitions', 'competitions.id', '=', 'team_subscribers.competition_id')
+  ->join('championships', 'championships.id', '=', 'team_users.championship_id')
+  ->where(DB::raw('DATE_FORMAT(competitions.date, "%Y-%m-%d")'), $time, $today)
+  ->where('team_users.user_id', '=', Auth::user()->id)
+  ->get();
   return $team_by_times;
 }
 }
