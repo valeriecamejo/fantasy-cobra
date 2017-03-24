@@ -30,7 +30,6 @@ date_default_timezone_set('Etc/GMT+4');
 <!--JS-->
   {!! Html::script('js/jquery.js') !!}
   {!! Html::script('js/deposit.js') !!}
-  {!! Html::script('js/competition.js') !!}
   {!! Html::script('js/jquery-ui.min.js') !!}
   {!! Html::script('js/date.js') !!}
   {!! Html::script('js/messageanimate.js') !!}
@@ -108,8 +107,16 @@ date_default_timezone_set('Etc/GMT+4');
         </div>
       </nav>
     </header>
-    @yield('content')
-
+    <!-- Abre Wrapper -->
+    <div id="wrapper">
+      @if(Session::get('message'))
+        <div id="danger" class="alert alert-{{Session::get('class')}}" style="margin-top: 10px;">
+          {{ Session::get('message') }}
+        </div>
+      @endif
+      @yield('content')
+    </div>
+    <!--  /Content-wrapper -->
     <!-- -------------------------------- MODALES -------------------------------- -->
     @include('modal/login')
     @include('modal/awards')
@@ -117,14 +124,6 @@ date_default_timezone_set('Etc/GMT+4');
     @include('modal/competition')
     @include('modal/contact')
     @include('modal/forgot-password')
-    @include('modal/opponent')
-    @include('modal/team')
-    @include('modal/awards')
-    @include('modal/cashier')
-    @include('modal/competition')
-    @include('modal/contact')
-    @include('modal/forgot-password')
-    @include('modal/login')
     @include('modal/opponent')
     @include('modal/team')
 

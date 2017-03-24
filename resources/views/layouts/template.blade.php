@@ -110,6 +110,12 @@ date_default_timezone_set('Etc/GMT+4');
     </header>
     <!-- Abre Wrapper -->
     <div id="wrapper">
+      @if(Session::get('message'))
+        <div id="danger" class="alert alert-{{Session::get('class')}}" style="margin-top: 10px;">
+          {{ Session::get('message') }}
+        </div>
+      @endif
+
       @include('includes.menu-mobile')
 
       @yield('content')

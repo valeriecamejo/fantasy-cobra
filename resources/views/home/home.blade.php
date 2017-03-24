@@ -4,24 +4,6 @@
   <div id="page-content-wrapper">
     <!--  /Content-wrapper -->
     <div class="container-fluid">
-      @if (Session::has('enviarmail'))
-            <div id="enviarmail" class="alert alert-success">
-                {{ Session::get('enviarmail') }}
-            </div>
-      @endif
-
-      @if(Session::get('danger'))
-          <div id="danger" class="alert alert-danger">
-            <strong>¡Error! </strong>{{ Session::get('danger') }}
-          </div>
-      @endif
-
-      @if(Session::get('message_success'))
-          <div id="success" class="alert alert-success">
-            {!! Session::get('message_success') !!}<strong> Éxito</strong>
-          </div>
-      @endif
-
       @if(isset($promotion_list) && count($promotion_list)!= "null")
         <div class="container contaslide nopadrightres" style="margin-bottom:50px">
           <div id="myCarousel" class="carousel slide hidden-xs" data-ride="carousel">
