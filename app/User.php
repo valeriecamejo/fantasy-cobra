@@ -166,4 +166,24 @@ class User extends Authenticatable
 
     return $user;
   }
+
+  protected function refer_friends() {
+
+    $from  = date('Y-m-01');
+    $to = date('Y-m-31');
+
+    if (Auth::user()->bettor->referred_friends > 0) {
+
+    $refer_friends = DB::table('bettors')
+                   ->join('refer_friends', 'refer_friends.refer_id', '=', Auth::user()->id)
+                   ->where('bettors.user_id', '=', Auth::user()->id)
+                   ->where('created_at','>=',$from)
+                   ->where('created_at','<=',$to)
+                   ->get();
+    } else {
+      $refer_friends = '';
+    }
+
+    return $refer_friends;
+  }
 }

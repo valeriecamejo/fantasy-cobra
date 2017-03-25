@@ -26,7 +26,7 @@ class CreateBettorsTable extends Migration
             $table->string('photo')->nullable();
             $table->string('url_own');
             $table->string('url_promotional')->nullable();
-            $table->integer('referred_friends')->nullable();
+            $table->integer('referred_friends')->nullable()->default(0);
             $table->integer('referred_friends_pay')->default(0);
             $table->float('amount_deposited')->default(0);
             $table->float('amount_won')->default(0);
