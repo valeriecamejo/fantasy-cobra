@@ -23,12 +23,13 @@ class CreateTeamSubscribersTable extends Migration
             $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
             $table->integer('team_user_id')->unsigned();
             $table->foreign('team_user_id')->references('id')->on('team_users')->onDelete('cascade');
-            $table->float('amount')->nullable();
+            $table->float('amount')->default(0);
             $table->float('points')->default(0);
             $table->dateTime('date');
             $table->float('balance_before');
             $table->float('bonus')->nullable();
             $table->string('balance');
+            $table->boolean('is_winner');
             $table->timestamps();
         });
     }

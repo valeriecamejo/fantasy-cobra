@@ -31,7 +31,7 @@ class CreatePaymentsTable extends Migration
             $table->string('status')->nullable();
             $table->string('code_error')->nullable();
             $table->integer('nai');
-            $table->integer('approved_pay');
+            $table->boolean('approved_pay');
             $table->float('total_currency')->nullable();
             $table->string('paypal_email');
             $table->string('country')->nullable();
