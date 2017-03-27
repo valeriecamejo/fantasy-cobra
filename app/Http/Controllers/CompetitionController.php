@@ -7,11 +7,11 @@ use App\Competition;
 
 class CompetitionController extends Controller {
 
-/**
+/**********************************
 * Create a new controller instance.
-*
+* @param void
 * @return void
-*/
+***********************************/
     public function __construct()
     {
         $this->middleware('auth');
@@ -23,7 +23,7 @@ class CompetitionController extends Controller {
 * @param void
 * @return $list_competitions
 **************************************************/
-    public function bettor_competitions(){
+    public function bettor_competitions() {
 
         $list_competitions = Competition::bettor_competitions();
 

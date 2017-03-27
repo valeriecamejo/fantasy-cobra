@@ -23,11 +23,11 @@ class RegisterLandingRequest extends FormRequest
    */
   public function rules() {
     return [
-      'email' => 'required|email|max:255|unique:users,email',
-      'username' => 'required|max:255|unique:users,username',
-      'password' => 'required|min:6|confirmed',
+      'email'          => 'required|email|max:255|unique:users,email',
+      'username'       => 'required|max:255|unique:users,username',
+      'password'       => 'required|min:6|confirmed',
       'terms_politics' => 'required',
-      'adult' => 'required'
+      'adult'          => 'required'
     ];
   }
 }

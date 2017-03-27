@@ -19,7 +19,6 @@ class CreateBettorsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('city_id')->unsigned();
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
-            $table->dateTime('date_last_connect');
             $table->float('balance')->default(0);
             $table->string('question')->nullable();
             $table->string('answer')->nullable();
@@ -27,7 +26,7 @@ class CreateBettorsTable extends Migration
             $table->string('photo')->nullable();
             $table->string('url_own');
             $table->string('url_promotional')->nullable();
-            $table->integer('referred_friends')->nullable();
+            $table->integer('referred_friends')->nullable()->default(0);
             $table->integer('referred_friends_pay')->default(0);
             $table->float('amount_deposited')->default(0);
             $table->float('amount_won')->default(0);

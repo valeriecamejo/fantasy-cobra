@@ -1,6 +1,6 @@
 <div class="modal fade" id="Premios" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="text-align: -webkit-center;text-align: -moz-center;">
     <div class="modal-dialog2 DialogWidth" role="document" style="margin-top:10%;">
-    
+
         <div class="modal-content" style="text-align: -webkit-center;text-align: -moz-center;">
             <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -23,7 +23,7 @@
                                 <td>{{$cont}}°</td>
                                 {{-- */ $amount   = $cost_garanteed * ($award->range_pocental/100); /* --}}
                                 {{-- */ $amount_2 = explode(",",number_format($amount,2,",",".")); /* --}}
-                                
+
                                 @if($amount_2[1] == 00)
                                   <td>{{ number_format($amount,0,"",".") }} Bs.</td>
                                 @else

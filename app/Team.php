@@ -8,6 +8,8 @@ class Team extends Model
 {
 	protected $table = 'teams';
 	protected $fillable = [
-  'stadium_id', 'name', 'nickname', 'logo', 'president', 'coach', 'history'
+  'stadium_id', 'name', 'nickname', 'short_nickname', 'logo', 'president', 'coach', 'history'
   ];
+
+
 }

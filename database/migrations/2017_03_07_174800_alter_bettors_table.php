@@ -14,7 +14,6 @@ class AlterBettorsTable extends Migration
     public function up()
     {
         Schema::table('bettors', function (Blueprint $table) {
-            $table->dropColumn('date_last_connect');
             $table->dateTime('birthday')->after('balance')->nullable();
         });
     }
@@ -27,7 +26,6 @@ class AlterBettorsTable extends Migration
     public function down()
     {
         Schema::table('bettors', function (Blueprint $table) {
-            $table->dateTime('date_last_connect');
             $table->dropColumn('birthday')->after('balance');
         });
     }
