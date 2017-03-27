@@ -6,9 +6,8 @@
         {!! Html::link('lobby','Lobby') !!}
       </li>
       <li id="teams" class="scroll">
-        <a onclick="action(3,0)">
-          Equipos
-        </a>
+        {!! Html::link('usuario/mis-equipos','Equipos') !!}
+        <!--<a onclick="action(3,0)"> Equipos </a> -->
       </li>
       <li id="competitions" class="scroll">
         {!! Html::link('usuario/mis-competiciones','Competiciones') !!}
@@ -57,13 +56,13 @@
             </li>
           </a>
           <li>
-            <a href="#">Historial</a>
+            <a href="{{ URL::action('HistoryController@history') }}">Historial</a>
           </li>
           <li>
             {!! Html::link('usuario/referir-amigo', 'Referir Amigo') !!}
           </li>
           <li>
-            <a href="#">Perfil Usuario</a>
+            <a href="{{ URL::action('UserController@show_user_profile') }}">Perfil Usuario</a>
           </li>
           <li>
             <a href="{{ URL::action('Auth\LoginController@logout') }}">Cerrar Sesión</a>
@@ -98,7 +97,7 @@
             </li>
           </a>
           <li>
-            <a href="#">Perfil Usuario</a>
+            <a href="{{ URL::action('UserController@show_user_profile') }}">Perfil Usuario</a>
           </li>
           <li>
             <a href="{{ URL::action('Auth\LoginController@logout') }}">Cerrar Sesión</a>
