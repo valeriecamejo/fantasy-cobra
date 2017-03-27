@@ -52,12 +52,14 @@ class RegisterController extends Controller
       $data     = $request->all();
       $user     = User::register($data);
       if ($user){
-          $this->guard()->login($user);
-          return redirect($this->redirectPath());
+        $this->guard()->login($user);
+        Session::flash('message', 'Registro exitoso.');
+        Session::flash('class', 'success');
+        return redirect($this->redirectPath());
       }elseif ($user == false){
-          Session::flash('danger', 'Error al registrar los datos.');
-          Session::flash('class', 'danger');
-          return redirect()->back();
+        Session::flash('message', 'Error al registrar los datos.');
+        Session::flash('class', 'danger');
+        return redirect()->back();
       }
   }
   /**
@@ -70,12 +72,14 @@ class RegisterController extends Controller
       $data     = $request->all();
       $user     = User::register_landing($data);
       if ($user){
-          $this->guard()->login($user);
-          return redirect($this->redirectPath());
+        $this->guard()->login($user);
+        Session::flash('message', 'Registro exitoso.');
+        Session::flash('class', 'success');
+        return redirect($this->redirectPath());
       }elseif ($user == false){
-          Session::flash('danger', 'Error al registrar los datos.');
-          Session::flash('class', 'danger');
-          return redirect()->back();
+        Session::flash('message', 'Error al registrar los datos.');
+        Session::flash('class', 'danger');
+        return redirect()->back();
       }
   }
 
