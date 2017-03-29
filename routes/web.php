@@ -39,3 +39,4 @@ Route::get('usuario/historial', 'HistoryController@history');
 Route::get('usuario/perfil-usuario', 'UserController@show_user_profile');
 Route::post('usuario/perfil-usuario', 'UserController@update_user_profile');
 Route::get('usuario/referir-amigo', 'UserController@refer_friends');
+Route::post('usuario/invite_friends', 'UserController@invite_friends');
