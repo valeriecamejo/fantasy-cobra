@@ -7,6 +7,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use App\Referred_friend;
+use Mail;
+
+
 
 class User extends Authenticatable
 {
@@ -172,18 +177,48 @@ class User extends Authenticatable
     $from  = date('Y-m-01');
     $to = date('Y-m-31');
 
-    if (Auth::user()->bettor->referred_friends > 0) {
-
-    $refer_friends = DB::table('bettors')
-                   ->join('refer_friends', 'refer_friends.refer_id', '=', Auth::user()->id)
+    $refer_friends = DB::table('referred_friends')
+                   ->join('bettors', 'bettors.user_id', '=', 'referred_friends.user_id')
                    ->where('bettors.user_id', '=', Auth::user()->id)
-                   ->where('created_at','>=',$from)
-                   ->where('created_at','<=',$to)
+                   ->where('referred_friends.date','>=',$from)
+                   ->where('referred_friends.date','<=',$to)
                    ->get();
-    } else {
-      $refer_friends = '';
-    }
 
     return $refer_friends;
   }
-}
+
+  protected function invite_friends($input) {
+
+    $email = $input['email'];
+    $date  = date('Y-m-d H:i:s');
+
+        $invite_friends = DB::table('referred_friends')
+        ->where('referred_friends.email', '=', $email)
+        ->count();
+
+        if ($invite_friends == 0) {
+
+          $referred          = new Referred_friend;
+          $referred->user_id = Auth::user()->id;
+          $referred->email   = $email;
+          $referred->status  = 0;
+          $referred->bonus   = 0;
+          $referred->date    = $date;
+          $referred->save();
+
+
+      Mail::send('email.invite_friend', array('user' => Auth::user()), function ($message) use($email)
+        {
+            $message->to($email)
+                    ->subject(Auth::user()->name." " .Auth::user()->surname." te invita a Fantasy Cobra");
+        });
+
+          return true;
+
+        } else {
+
+          return false;
+        }
+      }
+
+    }
