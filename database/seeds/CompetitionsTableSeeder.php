@@ -100,7 +100,7 @@ class CompetitionsTableSeeder extends Seeder
             'prize_id'         => '1',
             'sport_id'         => '1',
             'championship_id'  => '1',
-            'name'             => 'Competition #1',
+            'name'             => 'Competition #2',
             'type'             => 'PUBLIC',
             'date'             => '2017-05-02',
             'user_max'         => '3',
@@ -113,7 +113,7 @@ class CompetitionsTableSeeder extends Seeder
             'description'      => 'Competición de Prueba 3',
             'pot'              => '0',
             'free'             => '0',
-            'is_important'     => true,
+            'is_important'     => false,
             'enrolled'         => '0',
             ),
         ));

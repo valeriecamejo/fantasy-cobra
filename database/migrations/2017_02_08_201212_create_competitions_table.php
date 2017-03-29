@@ -40,6 +40,7 @@ class CreateCompetitionsTable extends Migration
             $table->integer('free');
             $table->boolean('is_important');
             $table->integer('enrolled')->default(0);
+            $table->integer('permanent')->default(0);
             $table->timestamps();
         });
     }
