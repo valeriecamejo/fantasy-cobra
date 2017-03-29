@@ -51,42 +51,45 @@ class User extends Authenticatable
    * @return object $user
    * @return boolean
    */
-  public static function register($input)
-  {
-    $date                    = Carbon::now();
-    $user                    = new User;
-    $user->name              = $input['name'];
-    $user->last_name         = $input['last_name'];
-    $user->user_type_id      = '3';
-    $user->dni               = $input['dni'];
-    $user->email             = $input['email'];
-    $user->username          = $input['username'];
-    $user->phone             = $input['cod_country'] . '-' . $input['phone'];
-    $user->password          = bcrypt($input['password']);
-    $user->status            = User::STATUS_ACTIVE;
-    $user->ip                = request()->getClientIp();
-    $user->date_last_connect = $date->toDateTimeString();
+  public static function register($input) {
+    $user                       = new User;
+    $user->name                 = $input['name'];
+    $user->last_name            = $input['last_name'];
+    $user->user_type_id         = '3';
+    $user->dni                  = $input['dni'];
+    $user->email                = $input['email'];
+    $user->username             = $input['username'];
+    $user->phone                = $input['cod_country'] . '-' . $input['phone'];
+    $user->password             = bcrypt($input['password']);
+    $user->status               = User::STATUS_ACTIVE;
+    $user->ip                   = request()->getClientIp();
+    $user->date_last_connect    = Carbon::now()->toDateTimeString();
 
     if ($user->save()) {
-      $bettor          = new Bettor();
-      $bettor->url_own = "www.fantasycobra.com/referido/".$input['username'];
-      $bettor->user_id = $user->id;
-      $bettor->photo   = "user_male.png";
-      $bettor->city_id = 1;
+      $bettor                   = new Bettor();
+      $bettor->url_own          = "www.fantasycobra.com/referido/".$input['username'];
+      $bettor->user_id          = $user->id;
+      $bettor->photo            = "user_male.png";
+      $bettor->city_id          = 1;
 
-      if (empty($input['code_ref'])) {
-        $bettor->code_referred = false;
-      } else {
-        $is_referred_code_ref  = User::is_referred_code_ref($input['code_ref']);
-        $bettor->code_referred = $is_referred_code_ref;
+      $verify_referred_email    = User::verify_referred_email($input['email']);
+      if ($verify_referred_email) {
+        $bettor->refer_id = $verify_referred_email;
       }
+
+      if (isset($input['username_referred'])) {
+        $referred_url           = User::referred_url($input['username_referred']);
+        $bettor->refer_id       = $referred_url;
+      }
+
+      if (isset($input['code_ref'])) {
+        $is_referred_code_ref   = User::is_referred_code_ref($input['code_ref']);
+        $bettor->code_referred  = $is_referred_code_ref;
+      }
+
       if ($bettor->save()) {
         return $user;
-      } else {
-        return false;
       }
-    }else{
-      return false;
     }
   }
 
@@ -115,15 +118,15 @@ class User extends Authenticatable
       $bettor->user_id       = $user->id;
       $bettor->photo         = "user_male.png";
       $bettor->city_id       = 1;
-      $bettor->code_referred = false;
+
+      $verify_referred_email    = User::verify_referred_email($input['email']);
+      if ($verify_referred_email) {
+        $bettor->refer_id = $verify_referred_email;
+      }
 
       if ($bettor->save()) {
         return $user;
-      } else {
-        return false;
       }
-    }else{
-      return false;
     }
   }
 
@@ -185,5 +188,73 @@ class User extends Authenticatable
     }
 
     return $refer_friends;
+  }
+
+  /**
+   * verify_referred_email Verify if the user is
+   * referred from the email
+   * @param $email
+   * @return integer $refer_id
+   */
+  private static function verify_referred_email($email) {
+    $is_referred_email              = Referred_friend::where('email', '=', $email)
+                                      ->first();
+    if($is_referred_email) {
+
+      $is_referred_email->status    = 2;
+      $is_referred_email->save();
+
+      $bettor_or_affiliate_referred = User::bettor_or_affiliate_referred ($is_referred_email->id);
+      if($bettor_or_affiliate_referred){
+        return $is_referred_email->id;
+      }
+    }
+  }
+
+  /**
+   * verify_referred_email Verify if the user is
+   * referred from the url
+   * @param $username_referred
+   * @return integer $refer_id
+   */
+  private static function referred_url($username_referred) {
+
+    $id_owner_username              = User::where('username', '=', $username_referred)
+                                      ->get();
+
+    if($id_owner_username) {
+
+      $bettor_or_affiliate_referred = User::bettor_or_affiliate_referred ($id_owner_username->id);
+
+      if($bettor_or_affiliate_referred){
+        return $id_owner_username->id;
+      }
+    }
+
+  }
+
+  /**
+   * bettor_or_affiliate_referred Verify if bettor or affiliate
+   * exist
+   * @param $id
+   * @return object $bettor_referred or $affiliate_referred
+   */
+  public static function bettor_or_affiliate_referred($id){
+    $bettor_referred                    = Bettor::where('user_id', '=', $id)
+      ->first();
+    $affiliate_referred                 = Affiliate::where('user_id', '=', $id)
+      ->first();
+
+    if ($bettor_referred) {
+      $bettor_referred->referred_friends = $bettor_referred->referred_friends + 1;
+      $bettor_referred->save();
+
+      return $bettor_referred;
+    }elseif ($affiliate_referred){
+      $affiliate_referred->referred_friends = $bettor_referred->referred_friends + 1;
+      $affiliate_referred->save();
+
+      return $affiliate_referred;
+    }
   }
 }

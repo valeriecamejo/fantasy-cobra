@@ -10,6 +10,7 @@ class Bettor extends Model
 	protected $fillable = [
 	    'user_id',
         'city_id',
+        'refer_id',
         'date_last_connect',
         'balance',
         'question',
