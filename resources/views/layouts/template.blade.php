@@ -102,7 +102,7 @@ date_default_timezone_set('Etc/GMT+4');
               <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#">
-              {!! Html::image('images/logo.png','logo', array('class'=>'img-responsive')) !!}
+              {!! Html::image('images/logo.png','logo', array('class'=>'mg-responsive')) !!}
             </a>
           </div>
         </div>
