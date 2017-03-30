@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Input;
 use App\User;
+use Mail;
 
 class UserController extends Controller {
 
@@ -60,7 +62,32 @@ class UserController extends Controller {
 **********************************************/
   protected function refer_friends() {
 
-    $refer_friends = User::refer_friends();
-    return view('users.refer');
+    $refer_friends  = User::refer_friends();
+
+    return view('users.refer', array('refer_friends'  => $refer_friends));
+  }
+
+  /**********************************************
+* invite_friends.
+* @param void
+* @return
+**********************************************/
+  protected function invite_friends() {
+
+    $invite_friends = User::invite_friends(Input::all());
+
+    if ($invite_friends == true) {
+
+      Session::flash('message', 'Invitacion enviada correctamente.');
+      Session::flash('class', 'success');
+      } else {
+
+      Session::flash('message', 'Este usuario ya se encuentra en nuestra plataforma.');
+      Session::flash('class', 'danger');
+      }
+
+
+    return redirect()->to('usuario/referir-amigo');
+
   }
 }

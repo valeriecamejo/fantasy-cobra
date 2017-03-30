@@ -9,7 +9,7 @@
 
         <div class="blockreferir BordAma">
           <div class="Ingresodatosreferir">
-            <form action="{{ url('bettor/invite_friend') }}" method="POST" class='form-signin' files='true'>
+            <form action="{{ url('usuario/invite_friends') }}" method="POST" class='form-signin' files='true'>
               {{ csrf_field() }}
               <h3>Invitar por email</h3>
               <h4 id="Subtitulo1">Correo Electrónico</h4>
@@ -51,7 +51,7 @@
 
           <div class="blockreferir3 BordAma">
             <div class="Ingresodatosreferir3">
-              <form action="{{ url('bettor/invite_friend') }}" method="POST" class='form-signin'>
+              <form action="{{ url('usuario/invite_friends') }}" method="POST" class='form-signin'>
                 {{ csrf_field() }}
                 <h3>Invitar por email</h3>
                 <h4 id="Subtitulo1">Correo Electrónico</h4>
@@ -135,11 +135,117 @@
                 </tr>
               </thead>
               <tbody>
-
+                @foreach($refer_friends as $refer_friend)
+                <tr>
+                  <td id="tdcomp">{{$refer_friend->email}}</td>
+                  <td>
+                    @if($refer_friend->status == 0)
+                    <span style="color: #ff0000">No Registrado</span>
+                    @elseif($data->status == 1)
+                    <span style="color: #0c5ee7"> Registrado</span>
+                    @else
+                    <span style="color: #00ff00"> Depositó</span>
+                    @endif
+                  </td>
+                  <td>{{ date("d-m-Y", strtotime($refer_friend->date)) }}</td>
+                  <td>
+                    @if($refer_friend->status == 0)
+                    0,00
+                    @elseif($refer_friend->status == 1)
+                    0,00
+                    @else
+                    {{$refer_friend->bonos}}
+                    @endif
+                    Bs.
+                  </td>
+                </tr>
+                @endforeach
               </tbody>
             </table>
           </div>
         </div>
       </div>
 
-      @stop
+      <div class="afirestab col11 visible-xs">
+        <div class="titafi">
+          <p>REFERIDOS</p>
+        </div>
+        <div class="tab-content tab-contentnull tab-contentafi">
+          <div role="tabpanel" class="tab-pane fade in active bordyel" id="deporetis">
+            <div class="tablemovil">
+              <ul>
+                @foreach($refer_friends as $refer_friend)
+                <li class="tmovliafi">
+                  <div class="divicoafi">
+                    @if($refer_friend->status == 0)
+                    {!! Html::image('images/ico/retiroico2.png') !!}
+                    @elseif($refer_friend->status == 1)
+                    {!! Html::image('images/ico/registroico2.png') !!}
+                    @else
+                    {!! Html::image('images/ico/depositoico2.png') !!}
+                    @endif
+                  </div>
+                  <h4 class="h4tmovafi">{{$refer_friend->email}}</h4>
+                  <div class="divicoafi">
+                    {!! Html::image('images/ico/noesp.png') !!}
+                  </div>
+                  <div class="tmovdatosafi">
+                    <p>
+                      <span>Fecha</span>{{ date("d-m-Y", strtotime($refer_friend->date)) }}
+                    </p>
+                    <p>
+                      <span>Bono</span>
+                      @if($refer_friend->status == 0)
+                      0,00
+                      @elseif($refer_friend->status == 1)
+                      0,00
+                      @else
+                      {{$refer_friend->bonos}}
+                      @endif
+                      Bs.
+                    </p>
+                  </div>
+                </li>
+                @endforeach
+              </ul>
+            </div>
+          </div>
+          <div class="divtabfoot">
+            <div class="divtabfooty">
+            {!! Html::image('images/ico/retiroico2.png','', array('class'=>'Aumenico')) !!}
+              <p class="Legend">No Registrado</p>
+              {!! Html::image('images/ico/depositoico2.png','', array('class'=>'Aumenico')) !!}
+              <p class="Legend">Depositó</p>
+              {!! Html::image('images/ico/registroico2.png','', array('class'=>'Aumenico')) !!}
+              <p class="Legend">Registrado</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row col11 visible-xs">
+          <div class="blockreferir2 BordBlan" style="margin-top:30px;">
+            <div class="Ingresodatosreferir2">
+              <h3 style="color: #e9e9e9;">Balance por Referido</h3>
+              <div class="fondotabref">
+                <table class="Tablaref">
+                  <tr>
+                    <td><h5>Ganado este Mes</h5></td>
+                    <td><h5>Amigos Referidos</h5></td>
+                    <td><h5>Bono por Referidos</h5></td>
+                  </tr>
+                  <tr>
+                    <td><p>{{Auth::user()->bettor->referred_friends_pay}}</p></td>
+                    <td><p> {{Auth::user()->bettor->referred_friends}} Bs.</p></td>
+                    <td class="Bonoref"><p>500 Bs.</p></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><br>
+      @include('includes/footer-mobile')
+    </div>
+  </div>
+</div>
+@stop
