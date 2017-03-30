@@ -19,6 +19,7 @@ class CreateBettorsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('city_id')->unsigned();
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
+            $table->integer('refer_id')->nullable();
             $table->float('balance')->default(0);
             $table->string('question')->nullable();
             $table->string('answer')->nullable();
