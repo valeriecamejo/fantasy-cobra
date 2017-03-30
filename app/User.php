@@ -232,15 +232,13 @@ class User extends Authenticatable
    */
   private static function verify_referred_email($email) {
     $is_referred_email              = Referred_friend::where('email', '=', $email)
-      ->first();
+                                      ->first();
     if($is_referred_email) {
-
-      $is_referred_email->status    = 2;
+      $is_referred_email->status    = 1;
       $is_referred_email->save();
-
-      $bettor_or_affiliate_referred = User::bettor_or_affiliate_referred ($is_referred_email->id);
+      $bettor_or_affiliate_referred = User::bettor_or_affiliate_referred ($is_referred_email->user_id);
       if($bettor_or_affiliate_referred){
-        return $is_referred_email->id;
+        return $is_referred_email->user_id;
       }
     }
   }
@@ -254,7 +252,7 @@ class User extends Authenticatable
   private static function referred_url($username_referred) {
 
     $id_owner_username              = User::where('username', '=', $username_referred)
-      ->get();
+                                            ->get();
 
     if($id_owner_username) {
 
@@ -291,5 +289,4 @@ class User extends Authenticatable
       return $affiliate_referred;
     }
   }
-
 }

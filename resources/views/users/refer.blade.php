@@ -141,7 +141,7 @@
                   <td>
                     @if($refer_friend->status == 0)
                     <span style="color: #ff0000">No Registrado</span>
-                    @elseif($data->status == 1)
+                    @elseif($refer_friend->status == 1)
                     <span style="color: #0c5ee7"> Registrado</span>
                     @else
                     <span style="color: #00ff00"> Depositó</span>
