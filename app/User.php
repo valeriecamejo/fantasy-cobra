@@ -19,6 +19,7 @@ class User extends Authenticatable
 
 
   protected $fillable = [
+    'id',
     'user_type_id',
     'name',
     'last_name',
@@ -252,10 +253,8 @@ class User extends Authenticatable
   private static function referred_url($username_referred) {
 
     $id_owner_username              = User::where('username', '=', $username_referred)
-                                            ->get();
-
+                                            ->first();
     if($id_owner_username) {
-
       $bettor_or_affiliate_referred = User::bettor_or_affiliate_referred ($id_owner_username->id);
 
       if($bettor_or_affiliate_referred){
