@@ -2,18 +2,13 @@
 
 @section ('content')
 
-<!-- Abre Wrapper -->
-<div id="wrapper">
-
   <div class="container-fluid Ingresoprin" id="page-content-wrapper">
-    <form role="form" method="POST" action="register">
+    <form role="form" method="POST" action="{{ URL::action('Auth\RegisterController@register') }}">
       {{ csrf_field() }}
-
-      @if(Session::get('danger'))
-        <div id="danger" class="alert alert-danger">
-          <strong>¡Error! </strong>{{Session::get('danger')}}
-        </div>
+      @if(isset($username))
+        <input type="hidden" name="username_referred" value="{{$username}}">
       @endif
+
       <div class="container" style="padding-right:0;">
         <div class="row blockingresoregis" style="margin-left:0;">
           <h3 class="Titregis">REGÍSTRESE</h3>
@@ -172,20 +167,4 @@
       </div>
     </form>
   </div>
-</div>
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    setTimeout(function(){
-      $("#success").fadeOut(1500);
-    },10000);
-  });
-
-  $(document).ready(function(){
-    setTimeout(function(){
-      $("#danger").fadeOut(1500);
-    },10000);
-  });
-</script>
-
 @endsection

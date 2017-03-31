@@ -80,6 +80,14 @@ class RegisterController extends Controller
         return redirect()->back();
       }
   }
+  /**
+   * show_registration_url the application registration url
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function show_registration_url($username) {
+    return view('auth.register')->with('username', $username);
+  }
 
   /**
    * register_successfully

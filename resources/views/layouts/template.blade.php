@@ -129,7 +129,6 @@ date_default_timezone_set('Etc/GMT+4');
     @include('modal/competition')
     @include('modal/contact')
     @include('modal/forgot-password')
-    @include('modal/opponent')
     @include('modal/team')
 
     <!-- -------------------------------- LOADING -------------------------------- -->
