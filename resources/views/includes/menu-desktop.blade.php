@@ -70,10 +70,10 @@
         </ul>
       </li>
       <!-- ./FIN Secciones con Inicio de Sesion -->
-    @elseif(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==1 && Auth::user()::STATUS_ACTIVE)
+    @elseif(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==2 && Auth::user()::STATUS_ACTIVE)
     <!-- Secciones con Inicio de Sesion Afiliado-->
       <li class="scroll">
-        {!! Html::link('afiliado','Home') !!}
+        {!! Html::link('/','Home') !!}
       </li>
       <li class="scroll">
         <a href="#">{!! Html::image('images/Cajero.png','cajero') !!}</a>
@@ -86,13 +86,13 @@
                     </span>
           <span></span>
           <span id="userbalance">
-            Balance: {{ Auth::user()->bettor->balance }} Bs.
+            Balance: {{ Auth::user()->affiliate->balance }} Bs.
           </span>
         </a>
         <ul class="dropdown-menu" role="menu">
           <a href="#">
             <li class="hide-show">
-              <b>Balance:</b> {{ Auth::user()->bettor->balance }} Bs.
+              <b>Balance:</b> {{ Auth::user()->affiliate->balance }} Bs.
               <br>
             </li>
           </a>
