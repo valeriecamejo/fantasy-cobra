@@ -17,6 +17,14 @@ class Affiliate extends Model
     'referred_friends_pay'
   ];
 
+  /**
+   * user the relationship with User
+   *
+   */
+  public function user() {
+    return $this->belongsTo('App\User');
+  }
+
   public static function find_affiliate_code($code_ref){
     $promotional_cod	= Affiliate::where('promotional_cod','=',$code_ref)
     ->get();

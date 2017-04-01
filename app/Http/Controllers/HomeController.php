@@ -10,30 +10,30 @@ use App\Competition;
 
 class HomeController extends Controller
 {
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
+  /**
+   * Show the application dashboard.
+   *
+   * @return \Illuminate\Http\Response
+   */
 
-    public function landing(){
+  public function landing() {
 
-        return view('home.landing');
+    return view('home.landing');
+  }
+
+  public function home() {
+
+    if(isset($_COOKIE['landing'])) {
+      if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id == 2){
+        return Redirect::to('afiliado');
+      } else {
+        $list_competitions = Competition::list_competitions();
+        return view('home.home', array('list_competitions' => $list_competitions));
+      }
+    } else {
+      setcookie("landing", 1, time() + 259200);
+      return Redirect::to('/landing');
     }
-
-    public function home(){
-
-        if(isset($_COOKIE['landing'])) {
-            $list_competitions = Competition::list_competitions();
-
-            Log::info("count list_competitions = " . count($list_competitions));
-
-            return view('home.home', array('list_competitions' => $list_competitions));
-        }else{
-            setcookie("landing", 1, time() + 259200);
-            return Redirect::to('/landing');
-        }
-    }
-
+  }
 
 }

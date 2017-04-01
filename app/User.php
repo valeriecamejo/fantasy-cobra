@@ -51,6 +51,14 @@ class User extends Authenticatable
 
   }
   /**
+   * bettor the relationship with Bettor
+   *
+   */
+  public function affiliate(){
+    return $this->hasOne('App\Affiliate');
+
+  }
+  /**
    * Register Post save User
    *
    * @param $input
