@@ -19,6 +19,8 @@ class Competition extends Model
   const STATUS_PENDING  = 'PENDING';
   const STATUS_FINISHED = 'FINISHED';
   const STATUS_CANCELED = 'CANCELLED';
+  const TYPE_PUBLIC     = 'PUBLIC';
+  const TYPE_PRIVATE    = 'PRIVATE';
 
 
 /*********************************************
@@ -32,8 +34,9 @@ public static function list_competitions() {
   $today                = date('Y-m-d');
 
   $list_competitions = DB::table('competitions')
-  ->select('competitions.id', 'competitions.name', 'competitions.cost_guaranteed', 'competitions.pot', 'competitions.free', 'competitions.user_max', 'competitions.enrolled', 'competitions.entry_cost', 'competitions.prize_id', 'competitions.date', 'competitions.championship_id', 'competitions.is_important', 'championships.avatar')
+  ->select('competitions.id', 'competitions.name', 'competitions.cost_guaranteed', 'competitions.type', 'competitions.pot', 'competitions.free', 'competitions.user_max', 'competitions.enrolled', 'competitions.entry_cost', 'competitions.prize_id', 'competitions.date', 'competitions.championship_id', 'competitions.is_important', 'championships.avatar', 'sports.name as name_sport')
   ->join('championships', 'championships.id', '=', 'competitions.championship_id')
+  ->join('sports', 'sports.id', '=', 'competitions.sport_id')
   ->where('competitions.date', '>=' , $today)
   ->orderBy('competitions.is_important', '=', true, 'asc')
   ->orderBy('competitions.date', 'asc')
@@ -54,7 +57,7 @@ public static function bettor_competitions() {
   $today                = date('Y-m-d');
 
   $list_competitions = DB::table('team_subscribers')
-  ->select('competitions.id', 'competitions.name', 'competitions.cost_guaranteed', 'competitions.pot', 'competitions.free', 'competitions.user_max', 'competitions.enrolled', 'competitions.entry_cost', 'competitions.prize_id', 'competitions.date', 'competitions.championship_id', 'competitions.is_important', 'championships.avatar', 'team_subscribers.competition_id')
+  ->select('competitions.id', 'competitions.name', 'competitions.cost_guaranteed', 'competitions.pot', 'competitions.free', 'competitions.user_max', 'competitions.enrolled', 'competitions.entry_cost', 'competitions.prize_id', 'competitions.date', 'competitions.championship_id', 'competitions.is_important', 'championships.avatar', 'team_subscribers.competition_id', 'competitions.type')
   ->join('competitions', 'competitions.id', '=', 'team_subscribers.competition_id')
   ->join('championships', 'championships.id', '=', 'competitions.championship_id')
   ->join('team_users', 'team_users.id', '=', 'team_subscribers.team_user_id')

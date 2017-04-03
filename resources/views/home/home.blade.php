@@ -85,7 +85,8 @@
     <!-- -------------------------------- MODALES -------------------------------- -->
     @include('modal/competition')
     <!-- -------------------------------- BOTONES -------------------------------- -->
-    @include('includes.competitions-no-mobile')
+    @include('includes.competitions')
+    @include('includes.competitions-mobile')
     @include('includes/footer-mobile')
   </div>
 @stop
