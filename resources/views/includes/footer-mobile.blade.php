@@ -3,19 +3,19 @@
     <div class="col-sm-2">
       <ul class="social-icons">
         @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
-          <li>
-            {!! Html::link('usuario/terminos-y-servicios','Términos y servicios') !!}
-          </li>
-          <li>
-            {!! Html::link('usuario/politicas-de-privacidad','Políticas de privacidad') !!}
-          </li>
+        <li>
+          {!! Html::link('usuario/terminos-y-servicios','Términos y servicios') !!}
+        </li>
+        <li>
+          {!! Html::link('usuario/politicas-de-privacidad','Políticas de privacidad') !!}
+        </li>
         @else
-          <li>
-            {!! Html::link('terminos-y-servicios','Términos y servicios') !!}
-          </li>
-          <li>
-            {!! Html::link('politicas-de-privacidad','Políticas de privacidad') !!}
-          </li>
+        <li>
+          {!! Html::link('terminos-y-servicios','Términos y servicios') !!}
+        </li>
+        <li>
+          {!! Html::link('politicas-de-privacidad','Políticas de privacidad') !!}
+        </li>
         @endif
       </ul>
     </div>
@@ -40,7 +40,7 @@
         </li>
         <li>
           <a href="skype:contacto_11689?call">
-              {!! Html::image('images/skype-3.png') !!}
+            {!! Html::image('images/skype-3.png') !!}
           </a>
         </li>
       </ul>

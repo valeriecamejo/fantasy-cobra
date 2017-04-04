@@ -186,14 +186,9 @@ class User extends Authenticatable
 
   protected function refer_friends() {
 
-    $from  = date('Y-m-01');
-    $to = date('Y-m-31');
-
     $refer_friends = DB::table('referred_friends')
                    ->join('bettors', 'bettors.user_id', '=', 'referred_friends.user_id')
                    ->where('bettors.user_id', '=', Auth::user()->id)
-                   ->where('referred_friends.date','>=',$from)
-                   ->where('referred_friends.date','<=',$to)
                    ->get();
 
     return $refer_friends;

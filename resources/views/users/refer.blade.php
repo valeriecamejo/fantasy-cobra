@@ -103,7 +103,7 @@
               <div class="fondotabref">
                 <table class="Tablaref">
                   <tr>
-                    <td><h5>Ganado este Mes</h5></td>
+                    <td><h5>Ganado por Referidos</h5></td>
                     <td><h5>Amigos que Depositaron</h5></td>
                     <td><h5>Bono por Referidos</h5></td>
 
@@ -111,9 +111,9 @@
                   <tr>
                     <td>
                       @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==2)
-                        <p>{{Auth::user()->affiliate->referred_friends}} Bs.</p>
+                        <p>{{Auth::user()->affiliate->referred_friends  * 500}} Bs.</p>
                       @elseif(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3)
-                        <p>{{Auth::user()->bettor->referred_friends}} Bs.</p>
+                        <p>{{Auth::user()->bettor->amount_referred_friends}} Bs.</p>
                       @endif
                     </td>
                     <td>
@@ -253,16 +253,16 @@
               <div class="fondotabref">
                 <table class="Tablaref">
                   <tr>
-                    <td><h5>Ganado este Mes</h5></td>
+                    <td><h5>Ganado por Referidos</h5></td>
                     <td><h5>Amigos Referidos</h5></td>
                     <td><h5>Bono por Referidos</h5></td>
                   </tr>
                   <tr>
                     <td>
                       @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==2)
-                        <p>{{Auth::user()->affiliate->referred_friends}} Bs.</p>
+                        <p>{{Auth::user()->affiliate->referred_friends * 500}} Bs.</p>
                       @elseif(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3)
-                        <p>{{Auth::user()->bettor->referred_friends}} Bs.</p>
+                        <p>{{Auth::user()->bettor->amount_referred_friends}} Bs.</p>
                       @endif
                     </td>
                     <td>
