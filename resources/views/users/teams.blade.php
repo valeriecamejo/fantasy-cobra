@@ -9,23 +9,6 @@
     <h3 class="Titulo1">MIS EQUIPOS</h3>
     <input type="hidden" id="first_game"  value="">
     <input type="hidden" id="hour" value="">
-    <!-- Mensajes de Error -->
-    @if(Session::get('message_success'))
-    <div id="success" class="alert alert-success">
-      {{ Session::get('message_success') }} <strong>¡Éxito!</strong>
-    </div>
-    @endif
-    @if(Session::get('danger'))
-    <div id="danger" class="alert alert-danger">
-      <strong>¡Error!</strong> {{ Session::get('danger') }}
-    </div>
-    @endif
-    @if (Session::has('enviarmail'))
-    <div id="enviarmail" class="alert alert-success">
-      {{ Session::get('enviarmail') }}
-    </div>
-    @endif
-    <!-- ./Fin mensajes Error -->
     <div class="container-fluid BlokBoton">
       <!-- Botones -->
       <div class="Boton1 oculto-movil">
@@ -338,7 +321,318 @@
       </div>
     </div> <!-- desktop tab -->
 
-    @include('includes/footer-mobile')
+    <!-- mobile tab -->
+    <div class="restab visible-xs">
+      <div class="linemovbut">
+        <a onclick="action(1,0)" style="color:#eec133">
+          <button type="button" class="btn btn-default btn-primary4">
+            CREAR EQUIPO
+          </button>
+        </a>
+      </div>
+
+      <ul class="nav nav-tabs nav-tabsnull" role="tablist">
+        <li role="presentation" <?php if(isset($_SESSION['date_team']) && $_SESSION['date_team'] == today){ ?> class="active BtnLineup10 respli" <?php }else{ ?> class="BtnLineup10 respli" <?php } ?>><a href="#competiciones" aria-controls="home" role="tab" data-toggle="tab">Hoy</a>
+        </li>
+        <li role="presentation" class="respli"><a href="#ganadas" aria-controls="ganadas" role="tab" data-toggle="tab">Anteriores</a>
+        </li>
+        <li role="presentation" <?php if(isset($_SESSION['date_team']) && $_SESSION['date_team'] > today){ ?> class="active respli" <?php }else{ ?> class="respli" <?php } ?>><a href="#deporeti" aria-controls="deporeti" role="tab" data-toggle="tab">Futuros</a>
+        </li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content tab-contentnull tab-contenthome">
+        <!-------------------------Equipos de hoy ------------------------>
+        <div role="tabpanel" class="tab-pane fade <?php if(isset($_SESSION['date_team']) and $_SESSION['date_team'] == today){ ?> in active <?php } ?> bordyel noscroll" id="competiciones">
+          <div class="tablemovil">
+            <ul>
+              @php
+              $cont_teams=1;
+              @endphp
+              @foreach($today_teams as $today_team)
+              @if(isset($today_teams))
+              <a>
+                @else
+                <a onclick="team_modal({{$today_team->id}}, {{$cont_teams}}, {{Auth::user()->username}})">
+                  @endif
+                  <li class="tmovlineup">
+                    <div class="linemovilimg">
+                      {!! Html::image($today_team->avatar,'',array('class' => 'tabimgtablet')) !!}
+                    </div>
+                    <div class="namelineup">
+                      <p class="NombEquip">
+                        @php
+                        $contador = 0;
+                        @endphp
+                        @if(isset($today_competitions) and count($today_competitions)!=0)
+                        @foreach($today_competitions as $today_competition)
+                        @if($today_team->id = $today_competition->id)
+                        {{Auth::user()->username}}
+                        <span style="color:transparent;">#</span>
+                        {{$cont_teams}}
+                        @php
+                        $contador++;
+                        @endphp
+                        @endif
+                        @endforeach
+                        @if($contador == 0)
+                        {{Auth::user()->username}}
+                        <span style="color:transparent;">#</span>
+                        {{$cont_teams}}
+                        @endif
+                        @endif
+                      </p>
+                    </div>
+                    <div class="fechalineup">
+                      <p>
+                        @php
+                        $date = strtotime($today_team->date)
+                        @endphp
+
+                        {{ UtilityDate::dateAbbrevSpanish(getdate($date)) }}
+                        {{ date("d-m", $date) }}
+                      </p>
+                    </div>
+
+                    @if(isset($today_competition->competition_id))
+                    <div class="btnreslineup">
+                      @else
+                      <div class="btnreslineup">
+                        @endif
+                        @if(isset($today_competition->competition_id))
+                        <div class="BtnEntrarlineres2">
+                          @else
+                          @if(($today_team->date) > ($today=dateTime()))
+                          <div class="BtnEntrarlineres3">
+                            @else
+                            <div class="BtnEntrarlineres2">
+                              @endif
+                              @endif
+                              {!! Html::image('images/ico/edit.png') !!}
+                            </div>
+                          </div>
+                          @if(isset($today_competition->competition_id))
+                          <div class="btnreslineup">
+                            {{ Form::open(array('url' => 'usuario/inscribir-equipo', 'method' => 'post')) }}
+                            {{ csrf_field() }}
+                            <div class="BtnEntrarlineres">
+                              <input type="hidden" class="form-compe2" name="lineup_id" value="{{$today_team->id}}">
+                              <button type='submit' class="BtnEntrarlineres" style="border-style:none;">
+                                {!! Html::image('images/ico/formiconmenu.png') !!}
+                              </button>
+                            </div>
+                            {{ Form::close() }}
+                          </div>
+                          @endif
+
+                          <div class="spancomp">
+                            @if(isset($today_team->id))
+                            <span class="badge">
+                              {{$cant}}
+                            </span>
+                            @else
+                            <span class="badge noinscr">
+                              {{$cant}}
+                            </span>
+                            @endif
+                          </div>
+                        </li>
+                      </a>
+                      @php
+                      $cont_teams++;
+                      @endphp
+                      @endforeach
+                    </ul>
+                  </div>
+                </div>
+
+                <!-------------------------Equipos de ayer ------------------------>
+                <div role="tabpanel" class="tab-pane fade bordyel noscroll" id="ganadas">
+                  <div class="tablemovil">
+                    <ul>
+                      @php
+                      $cont_teams=1;
+                      @endphp
+                      @foreach($previous_teams as $previous_team)
+                      @if(isset($previous_competitions) and count($previous_competitions)!=0)
+                      <a>
+                        @else
+                        <a onclick="team_modal({{$previous_team->id}},{{$cont_teams}},{{Auth::user()->username}})">
+                          @endif
+                          <li class="tmovlineup">
+                            <div class="linemovilimg">
+                              {!! Html::image($previous_team->avatar,'',array('class' => 'tabimgtablet')) !!}
+                            </div>
+                            <div class="namelineup">
+                              <p class="NombEquip">
+                                @php
+                                $contador = 0;
+                                @endphp
+                                @if(isset($previous_competitions) and count($previous_competitions)!=0)
+                                @foreach($previous_competitions as $previous_competition)
+                                @if($previous_team->id = $previous_competition->id)
+                                {{Auth::user()->username}}
+                                <span style="color:transparent;">#</span>
+                                {{$cont_teams}}
+                                @php
+                                $contador++;
+                                @endphp
+                                @endif
+                                @endforeach
+                                @endif
+                                @if($contador == 0)
+                                {{Auth::user()->username}}
+                                <span style="color:transparent;">#</span>
+                                {{$cont_teams}}
+                                @endif
+                              </p>
+                            </div>
+                            <div class="fechalineup">
+                              <p>
+                                @php
+                                $date = strtotime($previous_team->date)
+                                @endphp
+
+                                {{ UtilityDate::dateAbbrevSpanish(getdate($date)) }}
+                                {{ date("d-m", $date) }}
+                              </p>
+                            </div>
+                            <div class="btnreslineup">
+                              <div class="BtnEntrarlineres3">
+                                {!! Html::image('images/ico/edit.png') !!}
+                              </div>
+                            </div>
+                            <div class="spancomp">
+                              @if(isset($previous_team->id))
+                              <span class="badge">
+                                {{$cant}}
+                              </span>
+                              @else
+                              <span class="badge noinscr">
+                                {{$cant}}
+                              </span>
+                              @endif
+                            </div>
+                          </li>
+                        </a>
+                        @php
+                        $cont_teams++;
+                        @endphp
+                        @endforeach
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-------------------------Equipos futuros------------------------>
+                  <div role="tabpanel" class="tab-pane fade <?php if(isset($_SESSION['date_team']) && $_SESSION['date_team'] > today){ ?> in active <?php } ?> bordyel noscroll" id="deporeti">
+                    <div class="tablemovil">
+                      <ul>
+                        @php
+                          $cont_teams=1;
+                        @endphp
+                        @foreach($future_teams as $future_team)
+                          @if(isset($future_teams) and count($future_teams)!=0)
+                            <a>
+                          @else
+                            <a onclick="team_modal({{$future_teams->id}},{{$cont_teams}},{{Auth::user()->username}})">
+                          @endif
+                            <li class="tmovlineup">
+                              <div class="linemovilimg">
+                                {!! Html::image($future_team->avatar,'',array('class' => 'tabimgtablet')) !!}
+                            </div>
+                          <div class="namelineup">
+                          <p class="NombEquip">
+                            @php
+                              $contador = 0;
+                            @endphp
+                              @if(isset($future_competitions) and count($future_competitions)!=0)
+                                @foreach($future_competitions as $future_competition)
+                                  @if($future_team->id = $future_competition->id)
+                                    {{Auth::user()->username}}
+                                    <span style="color:transparent;">#</span>
+                                    {{$cont_teams}}
+                                      @php
+                                        $contador++;
+                                      @endphp
+                                  @endif
+                                @endforeach
+                                @if($contador == 0)
+                                  {{Auth::user()->username}}
+                                  <span style="color:transparent;">#</span>
+                                  {{$cont_teams}}
+                                @endif
+                              @endif
+                              </p>
+                          </div>
+                          <div class="fechalineup">
+                            <p>
+                            @php
+                            $date = strtotime($future_team->date)
+                            @endphp
+
+                            {{ UtilityDate::dateAbbrevSpanish(getdate($date)) }}
+                            {{ date("d-m", $date) }}
+                          </p>
+                          </div>
+
+                          @if(isset($future_team->id))
+                            <div class="btnreslineup">
+                          @endif
+
+                            @if(isset($future_team->id))
+                              <div class="BtnEntrarlineres2">
+                            @endif
+                                {!! Html::image('images/ico/edit.png') !!}
+                            </div>
+
+                          @if(isset($future_competition->competition_id))
+                          <div class="btnreslineup">
+                            {{ Form::open(array('url' => 'usuario/inscribir-equipo', 'method' => 'post')) }}
+                            {{ csrf_field() }}
+                            <div class="BtnEntrarlineres">
+                              <input type="hidden" class="form-compe2" name="lineup_id" value="{{$future_team->id}}">
+                              <button type='submit' class="BtnEntrarlineres" style="border-style:none;">
+                                {!! Html::image('images/ico/formiconmenu.png') !!}
+                              </button>
+                            </div>
+                            {{ Form::close() }}
+                          </div>
+                          @endif
+                          <div class="spancomp">
+                            @if(isset($future_team->id))
+                              <span class="badge">
+                              {{$cant}}
+                              </span>
+                            @else
+                              <span class="badge noinscr">
+                              {{$cant}}
+                              </span>
+                            @endif
+                          </div>
+                        </li>
+                      </a>
+                      @php
+                        $cont_teams++;
+                      @endphp
+                  @endforeach
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- restab cierre -->
+          <!-- restab cierre -->
+          <div class="divtabfoot3">
+            <div class="divtabfooty3">
+              <div class="smallcircle"></div>
+              <p class="Legend">Editar Equipo</p>
+              <div class="smallcircle2"></div>
+              <p class="Legend">Inscribir Equipo</p>
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+      @include('includes/footer-mobile')
+    </div>
   </div>
-</div>
 @stop
