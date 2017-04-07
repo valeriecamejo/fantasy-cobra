@@ -256,28 +256,28 @@
           <div class="boxcompe5">
             <p>Entrada</p>
             <select class="form-control nobord" name="cost_entry">
-              <option value="5" selected="selected">5 $.</option>
-              <option value="6">6 $.</option>
-              <option value="7">7 $.</option>
-              <option value="8">8 $.</option>
-              <option value="9">9 $.</option>
-              <option value="10">10 $.</option>
-              <option value="12">12 $.</option>
-              <option value="15">15 $.</option>
-              <option value="20">20 $.</option>
-              <option value="25">25 $.</option>
-              <option value="30">30 $.</option>
-              <option value="35">35 $.</option>
-              <option value="40">40 $.</option>
-              <option value="45">45 $.</option>
-              <option value="50">50 $.</option>
-              <option value="60">60 $.</option>
-              <option value="70">70 $.</option>
-              <option value="80">80 $.</option>
-              <option value="90">90 $.</option>
-              <option value="100">100 $.</option>
-              <option value="150">150 $.</option>
-              <option value="200">200 $.</option>
+              <option value="500" selected="selected">500 Bs.</option>
+              <option value="600">600 Bs.</option>
+              <option value="700">700 Bs.</option>
+              <option value="800">800 Bs.</option>
+              <option value="900">900 Bs.</option>
+              <option value="1000">1.000 Bs.</option>
+              <option value="1250">1.250 Bs.</option>
+              <option value="1500">1.500 Bs.</option>
+              <option value="2000">2.000 Bs.</option>
+              <option value="2500">2.500 Bs.</option>
+              <option value="3000">3.000 Bs.</option>
+              <option value="3500">3.500 Bs.</option>
+              <option value="4000">4.000 Bs.</option>
+              <option value="4500">4.500 Bs.</option>
+              <option value="5000">5.000 Bs.</option>
+              <option value="6000">6.000 Bs.</option>
+              <option value="7000">7.000 Bs.</option>
+              <option value="8000">8.000 Bs.</option>
+              <option value="9000">9.000 Bs.</option>
+              <option value="10000">10.000 Bs.</option>
+              <option value="15000">15.000 Bs.</option>
+              <option value="20000">20.000 Bs.</option>
             </select>
           </div>
         </div>
@@ -299,4 +299,6 @@
     </div>
   </div>
   {{ Form::close() }}
+  {!! Html::script('js/competitions/max_min_user.js') !!}
+
 @stop
