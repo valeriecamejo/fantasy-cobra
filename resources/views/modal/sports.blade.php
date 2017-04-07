@@ -15,11 +15,7 @@
                     <a onclick="select_sport(1)">
                         <div class="seleccion1">
                             <div class="conticodep">
-                                @if(isset(Auth::user()->id_tipousuario) && Auth::user()->id_tipousuario==3 && Auth::user()->active==1)
-                                    {!! Html::image('images/ico/beisbolico.png','',array('alt' => 'Béisbol')); !!}
-                                @else
-                                    {!! Html::image('images/ico/beisbolico.png','',array('alt' => 'Béisbol')); !!}
-                                @endif
+                                {!! Html::image('images/ico/beisbolico.png','',array('alt' => 'Béisbol')) !!}
                             </div>
                             <div class="conttextdep">
                                 <p>Béisbol</p>
@@ -29,11 +25,7 @@
                     <a onclick="select_sport(2)">
                         <div class="seleccion2">
                             <div class="conticodep">
-                                @if(isset(Auth::user()->id_tipousuario) && Auth::user()->id_tipousuario==3 && Auth::user()->active==1)
-                                    {!! Html::image('images/ico/futbollico.png','',array('alt' => 'Fútbol')); !!}
-                                @else
-                                    {!! Html::image('images/ico/futbollico.png','',array('alt' => 'Fútbol')); !!}
-                                @endif
+                                {!! Html::image('images/ico/futbollico.png','',array('alt' => 'Fútbol')) !!}
                             </div>
                             <div class="conttextdep">
                                 <p>Fútbol</p>
