@@ -56,11 +56,11 @@ class CompetitionsTableSeeder extends Seeder
             array(
             'tournament_id'    => '1',
             'prize_id'         => '1',
-            'sport_id'         => '1',
+            'sport_id'         => '2',
             'championship_id'  => '3',
             'name'             => 'Free Competition',
             'type'             => 'PUBLIC',
-            'date'             => '2017-03-20 19:30:00',
+            'date'             => '2017-04-30 19:30:00',
             'user_max'         => '10',
             'user_min'         => '2',
             'prize_guaranteed' => '1',
