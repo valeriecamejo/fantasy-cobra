@@ -1,4 +1,3 @@
-
 {!! Html::script('js/competitions/competitions.js') !!}
 <div class="btab3 hidden-xs">
   <!-- Nav tabs -->

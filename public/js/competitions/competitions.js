@@ -1,3 +1,4 @@
+moment.locale('es');
 /**********************************
 * competitions_filter.
 * @param list_competitions
@@ -51,6 +52,9 @@ function filter_competitions(sport, competitions) {
 
 function competitions_template(competitions) {
 
+  var date         = '';
+  var today        = '';
+  var hour         = '';
   var protocol     = location.protocol;
   var URLdomain    = window.location.host;
   var url          = protocol + "//" + URLdomain;
@@ -83,7 +87,7 @@ function competitions_template(competitions) {
           tpl = tpl + "<img src='" + url + "/images/ico/multiple.png' class='multiple'></span>";
         }
 
-      tpl = tpl + element.entry_cost + "Bs</td>"
+      tpl = tpl + element.entry_cost + " Bs</td>"
                 + "<td class='RepColor tdpremio2 notdpad'>"
                 + "<span>"
 
@@ -93,23 +97,47 @@ function competitions_template(competitions) {
           tpl = tpl + "<img src='" + url + "/images/ico/garantizado.png' class='tdGaranico'></span>";
         }
 
+        var today             = moment().format('YYYY-MM-DD HH:mm:ss');
+        var date_competition  = moment(element.date);
+        var today_competition = moment(today);
+        var hour = moment(element.date).format('HH:mm');
+        var days_left =   date_competition.diff(today_competition, 'days');
+        var minutes_left = date_competition.diff(today_competition, 'seconds');
+
+        console.info(date_competition);
+        console.info(minutes_left);
+
+        minutes_left = date_competition.startOf('day').seconds(minutes_left).format("HH:mm:ss");
+
+        console.info(minutes_left);
+
+        //var minutes_left = (moment(moment.duration(today_competition.diff(date_competition))).format("HH:mm"));
+
       tpl = tpl + element.cost_guaranteed
-                + "Bs."
+                + " Bs."
                 + "</td>"
                 + "<td class='tdfecha2 notdpad'>"
-                + element.date
+                var date = moment(element.date).format("DD-MM");
                 + "</td>"
-                + "<td class='tdhora2 notdpad'>"
-                + element.date
+                + "<td class='tdhora2 notdpad'>";
+      tpl = tpl + date
+                + "</td>"
+                + "<td class='tdhora2 notdpad'>" + hour
                 + "</td>"
                 + "<td class='notdpad'>"
 
+        if (days_left >= 1) {
+          tpl = tpl + "<span id='element.id' style='font-weight: bold;'>"
+                    + "+"
+                    + days_left
+                    + " días";
 
-                + "<span id='' style='font-weight: bold;''>00:00:00</span>"
+        } else {
+          tpl = tpl + "<span id='element.id' style='font-weight: bold;'>"
+                    + minutes_left;
+        }
 
-                + "<span id='' style='font-weight: bold;'>"
-
-                + "</span>"
+        tpl = tpl        + "</span>"
                 + "</td>"
                 + "<td class='tdentrar2'>"
                 + "<div class='BtnEntrar2'>ENTRAR</div>"
@@ -121,3 +149,4 @@ function competitions_template(competitions) {
   return tpl;
 
 }
+
