@@ -11,7 +11,31 @@ class Competition extends Model
 {
   protected $table = 'competitions';
   protected $fillable = [
-  'tournament_id', 'prize_id', 'sport_id', 'championship_id', 'name', 'type', 'date', 'user_max', 'user_min', 'prize_guaranteed', 'status', 'entry_cost', 'password', 'cost_guaranteed', 'description' , 'start_date', 'end_date', 'pot', 'free', 'is_important', 'enrolled', 'permanent'
+  'tournament_id',
+    'prize_id',
+    'sport_id',
+    'championship_id',
+    'name',
+    'type',
+    'type_journal',
+    'type_play',
+    'type_competition',
+    'date',
+    'user_max',
+    'user_min',
+    'prize_guaranteed',
+    'status',
+    'entry_cost',
+    'password',
+    'cost_guaranteed',
+    'description' ,
+    'start_date',
+    'end_date',
+    'pot',
+    'free',
+    'is_important',
+    'enrolled',
+    'permanent'
   ];
 
 //CONSTANTES-------------------------------------------------
@@ -80,23 +104,43 @@ public static function bettor_competitions() {
     $competition                      = new Competition();
     $competition->name                = $input['name'];
     $competition->id_user             = Auth::user()->id();
+    $competition->date                = $input['date'];
+    $competition->user_max            = $input['max_user'];
+    $competition->user_min            = $input['min_user'];
+    $competition->prize_guaranteed    = 0;
+    $competition->status              = Competition::STATUS_OPEN;
+    $competition->entry_cost          = $input['min_user'];
+    $competition->cost_guaranteed     = 0;
+    $competition->description         = '';
+    $competition->start_date          = '';
+    $competition->pot                 = 1;
+    $competition->free                = 1;
+    $competition->is_important        = 0;
+    $competition->enrolled            = 0;
+    $competition->permanent           = 0;
+    $competition->type_journal        = $input['type_journal'];
+    $competition->type_play           = $input['type_play'];
 
-    $competition->id_user             = Auth::user()->id();
-    $sport                            = Sport::verify_sport($input['sport']);
-    if ($sport){
-      $competition->id_sport          = $sport;
-    } else {
-      return false;
+    if (isset($input['password'])){
+      $competition->password          = $input['password'];
     }
-    $championship                     = Championship::verify_championship($sport,$input['championship']);
+
+    if($input['privacy'] == 0){
+      $competition->type              = Competition::TYPE_PUBLIC;
+    } elseif ($input['privacy'] == 1){
+      $competition->type              = Competition::TYPE_PRIVATE;
+    }
+
+
+    //type_competition
+
+    $championship                     = Championship::verify_championship($input['sport'],$input['championship']);
     if ($championship){
-      $competition->id_championship   = $championship;
+      $competition->sport_id          = $championship->sport_id;
+      $competition->championship_id   = $championship->id;
     } else {
       return false;
     }
-
-
-
 
   }
 }

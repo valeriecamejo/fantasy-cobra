@@ -136,6 +136,28 @@
           </div>
         </div>
 
+        <div class="modal-bodycompe Top5">
+          <div class="boxcompe">
+            <p>Jornada</p>
+            <select class="form-compe2" name="type_journal">
+              <option value="DAILY">Completa</option>
+              <option value="3PM">3PM</option>
+              <option value="7PM">7PM</option>
+              {{--<option value="LONG">Larga</option>--}}
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-bodycompe">
+          <div class="boxcompe">
+            <p>Tipo de juego</p>
+            <select class="form-compe2" name="type_play">
+              <option value="REGULAR">Regular</option>
+              <option value="TURBO">Turbo</option>
+            </select>
+          </div>
+        </div>
+
         <div class="modal-bodycompe Top5" id="Competipos">
           <div class="boxcompe1">
             <input type="radio" name="duration" checked="true" onclick="duration_competition(0)" value="0"><p>Competición Corta</p>

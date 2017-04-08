@@ -12,10 +12,13 @@ class Championship extends Model
   ];
 
   public static function verify_championship($sport, $championship) {
-    $verify_championship   = Championship::where('sport_id', '=', $sport)
+
+    $verify_sport                     = Sport::verify_sport($sport);
+
+    $verify_championship   = Championship::where('sport_id', '=', $verify_sport->id)
       ->where('name', '=', $championship)
       ->get();
 
-    return $verify_championship->id;
+    return $verify_championship;
   }
 }
