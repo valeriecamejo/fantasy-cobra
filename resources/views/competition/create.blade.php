@@ -300,5 +300,6 @@
   </div>
   {{ Form::close() }}
   {!! Html::script('js/competitions/max_min_user.js') !!}
+  {!! Html::script('js/competitions/privacy_competition.js') !!}
 
 @stop
