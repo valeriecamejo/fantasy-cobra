@@ -7,11 +7,11 @@
       @if(isset($promotion_list) && count($promotion_list)!= "null")
         <div class="container contaslide nopadrightres" style="margin-bottom:50px">
           <div id="myCarousel" class="carousel slide hidden-xs" data-ride="carousel">
-          <!-- Wrapper for slides -->
+            <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
               <div class="item active">
                 @foreach ($promotion_list as $promotion)
-                   {!! Html::image('http://admin.fantasycobra.com/venezuela/promotionimg/'.$promotion->photo,'promocion',array('width'=>'100%','class'=>'imgslider')) !!}
+                  {!! Html::image('http://admin.fantasycobra.com/venezuela/promotionimg/'.$promotion->photo,'promocion',array('width'=>'100%','class'=>'imgslider')) !!}
                 @endforeach
               </div>
             </div>
@@ -20,7 +20,7 @@
             <ul class="rslides" id="slider1">
               @foreach ($promotion_list as $promotion)
                 <li>{!! Html::image('http://admin.fantasycobra.com/venezuela/promotionimg/'.$promotion->photo,'promocion',array('width'=>'100%','class'=>'imgslider')) !!} </li>
-                @endforeach
+              @endforeach
             </ul>
           </div>
         </div>
@@ -47,44 +47,28 @@
             </ul>
           </div>
         </div>
-                <!-- Promos -->
-    @endif
-  </div>
-
-  <div class="containerfluid">
-  <!-- Mensaje -->
-    <h4 class="textohome">¡No te pierdas las promociones del día!</h4>
-  </div>
-    <!-- Mensaje -->
-  <div class="container-fluid BlokBoton">
-  <!-- Botones -->
-    <div class="Boton1">
-      @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()->status == Auth::user()::STATUS_ACTIVE)
-        <a onclick="action(1,0)">
-        @else
-          <a onclick="action(1,1)">
+        <!-- Promos -->
       @endif
-          <div class="BotonRe">
-            CREAR EQUIPO
-          </div>
-        </a>
     </div>
 
-    <div class="Boton1">
-      @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()->status == Auth::user()::STATUS_ACTIVE)
-            <a onclick="action(2,0)">
-        @else
-            <a onclick="action(2,1)">
-        @endif
-            <div class="BotonRe">
-              CREAR COMPETICIÓN
-            </div>
-          </a>
+    <div class="containerfluid">
+      <!-- Mensaje -->
+      <h4 class="textohome">¡No te pierdas las promociones del día!</h4>
+    </div>
+    <!-- Mensaje -->
+    <div class="container-fluid BlokBoton">
+      <!-- Botones -->
+      <div class="Boton1">
+        <a onclick="modal_sport()">
+          <div class="BotonRe">
+            CREAR COMPETICIÓN
+          </div>
+        </a>
       </div>
     </div>
     <!-- -------------------------------- MODALES -------------------------------- -->
-    @include('modal/competition')
-    <!-- -------------------------------- BOTONES -------------------------------- -->
+  @include('modal/competition')
+  <!-- -------------------------------- BOTONES -------------------------------- -->
     @include('includes.competitions')
     @include('includes.competitions-mobile')
     @include('includes/footer-mobile')

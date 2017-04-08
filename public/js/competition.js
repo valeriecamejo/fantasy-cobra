@@ -2548,7 +2548,7 @@ function privacy_competition(type){
 }
 
 /************************************************************************
-*   Funcion: action_password                                              *
+*   Funcion: action_password                                            *
 *   Descripcion: Permite visualizar o esconder la contraseña que se le  *
 *                esta colocando a la competicion al momento de crearla. *
 *   Parametros de entrada:                                              *
