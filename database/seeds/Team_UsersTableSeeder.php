@@ -42,6 +42,8 @@ class Team_UsersTableSeeder extends Seeder
         'date_inscription' => '2017-03-14 12:30:00',
         'remaining_salary' => '4500',
         'name'             => 'Prueba 3',
+        'type_journal'     => '3PM',
+        'type_play'        => 'REGULAR',
       ),
     ));
   }
