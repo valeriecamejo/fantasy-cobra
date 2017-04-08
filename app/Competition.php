@@ -69,5 +69,35 @@ public static function bettor_competitions() {
 
   return $list_competitions;
 }
+  /**
+   * save_competition Post save Competition
+   *
+   * @param $input
+   * @return object $competition
+   * @return boolean
+   */
+  public static function save_competition($input) {
+    $competition                      = new Competition();
+    $competition->name                = $input['name'];
+    $competition->id_user             = Auth::user()->id();
+
+    $competition->id_user             = Auth::user()->id();
+    $sport                            = Sport::verify_sport($input['sport']);
+    if ($sport){
+      $competition->id_sport          = $sport;
+    } else {
+      return false;
+    }
+    $championship                     = Championship::verify_championship($sport,$input['championship']);
+    if ($championship){
+      $competition->id_championship   = $championship;
+    } else {
+      return false;
+    }
+
+
+
+
+  }
 }
 

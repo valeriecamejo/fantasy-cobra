@@ -2,11 +2,12 @@
 * 	Función: clousure
 * 	Descripción: Función que muestra el calendario
 * 	Parametros de entrada: NA
-* 	
+*
 ***********************************************************************/
 $(function(){
+	jQuery.noConflict();
 	$.datepicker.setDefaults($.datepicker.regional["es"]);
-	
+
 	$("#datepicker").datepicker({
 	   showAnim: "fold",
 	   firstDay: 1

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CompetitionRequest;
 use Illuminate\Http\Request;
 use App\Competition;
 
@@ -39,5 +40,23 @@ class CompetitionController extends Controller {
     return view('competition.create')
       ->with('sport', $sport)
       ->with('championship',$championship);
+  }
+  /**
+   * save_competition
+   */
+  public function save_competition(CompetitionRequest $request) {
+
+    $competition     = Competition::save_competition($request->all());
+
+    if ($competition){
+      Session::flash('message', 'exitoso.');
+      Session::flash('class', 'success');
+      return redirect($this->redirectPath());
+    } else {
+      Session::flash('message', 'Error.');
+      Session::flash('class', 'danger');
+      return redirect()->back();
+    }
+
   }
 }
