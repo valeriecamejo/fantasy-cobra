@@ -14,7 +14,6 @@ class AlterCompetitionsTable extends Migration
     public function up()
     {
         Schema::table('competitions', function (Blueprint $table) {
-            $table->renameColumn('user_id', 'tournament_id');
             $table->dropColumn('entry');
             $table->dropColumn('duration');
 
@@ -24,7 +23,6 @@ class AlterCompetitionsTable extends Migration
     public function down()
     {
         Schema::table('competitions', function (Blueprint $table) {
-            $table->renameColumn('tournament_id', 'user_id');
             $table->string('entry')->nullable()->after('password');
             $table->string('duration')->nullable()->after('description');
         });

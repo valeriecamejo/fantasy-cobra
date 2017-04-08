@@ -12,7 +12,7 @@ class CompetitionsTableSeeder extends Seeder
 
     \DB::table('competitions')->insert(array(
       array(
-        'tournament_id'    => '1',
+        'user_id'          => '1',
         'prize_id'         => '1',
         'sport_id'         => '1',
         'championship_id'  => '1',
@@ -36,7 +36,7 @@ class CompetitionsTableSeeder extends Seeder
         'enrolled'         => '0',
       ),
       array(
-        'tournament_id'    => '1',
+        'user_id'          => '1',
         'prize_id'         => '1',
         'sport_id'         => '1',
         'championship_id'  => '2',
@@ -60,7 +60,7 @@ class CompetitionsTableSeeder extends Seeder
         'enrolled'         => '0',
       ),
       array(
-        'tournament_id'    => '1',
+        'user_id'          => '1',
         'prize_id'         => '1',
         'sport_id'         => '1',
         'championship_id'  => '3',
@@ -84,7 +84,7 @@ class CompetitionsTableSeeder extends Seeder
         'enrolled'         => '0',
       ),
       array(
-        'tournament_id'    => '1',
+        'user_id'          => '1',
         'prize_id'         => '1',
         'sport_id'         => '1',
         'championship_id'  => '1',
@@ -108,7 +108,7 @@ class CompetitionsTableSeeder extends Seeder
         'enrolled'         => '0',
       ),
       array(
-        'tournament_id'    => '1',
+        'user_id'          => '1',
         'prize_id'         => '1',
         'sport_id'         => '1',
         'championship_id'  => '1',

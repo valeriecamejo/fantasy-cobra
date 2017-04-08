@@ -2,6 +2,7 @@
 
 @section ('content')
   {{ Form::open(array('url' => 'usuario/crear-competicion', 'method' => 'post')) }}
+  {{ csrf_field() }}
   <div class="container-fluid Ingresoprin" id="page-content-wrapper">
     <div class="container" style="padding-right:0;">
       <div class="row blockingresoregis" style="margin-left:0;">
@@ -256,7 +257,8 @@
           <div class="boxcompe5">
             <p>Entrada</p>
             <select class="form-control nobord" name="cost_entry">
-              <option value="500" selected="selected">500 Bs.</option>
+              <option value="0" selected="selected">Gratis</option>
+              <option value="500">500 Bs.</option>
               <option value="600">600 Bs.</option>
               <option value="700">700 Bs.</option>
               <option value="800">800 Bs.</option>
