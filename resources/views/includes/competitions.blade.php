@@ -1,16 +1,15 @@
-
 {!! Html::script('js/competitions/competitions.js') !!}
 <div class="btab3 hidden-xs">
   <!-- Nav tabs -->
   <ul class="nav nav-tabs nav-tabsnull" role="tablist">
     <li role="presentation" class="active BtnLineup10">
-      <a href="#all-no-mobile" onclick="lobby(0,0)" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Todos</a>
+      <a href="#all-no-mobile" onclick="filter_competitions('all', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Todos</a>
     </li>
     <li role="presentation">
-      <a onclick="filter_competitions('baseball', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Béisbol</a>
+      <a href="#baseball-no-mobile" onclick="filter_competitions('baseball', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Béisbol</a>
     </li>
     <li role="presentation">
-      <a onclick="filter_competitions('football', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Fútbol</a>
+      <a href="#football-no-mobile" onclick="filter_competitions('football', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Fútbol</a>
     </li>
   </ul>
 

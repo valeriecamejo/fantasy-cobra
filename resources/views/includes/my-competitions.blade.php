@@ -1,16 +1,15 @@
-
 {!! Html::script('js/competitions/competitions.js') !!}
 <div class="btab3 hidden-xs">
   <!-- Nav tabs -->
   <ul class="nav nav-tabs nav-tabsnull" role="tablist">
     <li role="presentation" class="active BtnLineup10">
-      <a href="#all-no-mobile" onclick="lobby(0,0)" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Todos</a>
+      <a href="#all-no-mobile" onclick="filter_competitions('all', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Todos</a>
     </li>
     <li role="presentation">
-      <a onclick="filter_competitions('baseball', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Béisbol</a>
+      <a href="#baseball-no-mobile" onclick="filter_competitions('baseball', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Béisbol</a>
     </li>
     <li role="presentation">
-      <a onclick="filter_competitions('football', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Fútbol</a>
+      <a href="#football-no-mobile" onclick="filter_competitions('football', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Fútbol</a>
     </li>
   </ul>
 
@@ -107,53 +106,7 @@
     </div>
   </div>
 
-  <!-- -------------------------------- COMPETICIONES BEISBOL -------------------------------- -->
-  <div role="tabpanel" class="tab-pane fade bordyel" id="baseball-no-mobile">
-    <table class="table table-hover table-responsive" id="tabledesk">
-      <!-- Abre tabla -->
-      <thead>
-        <tr>
-          <th class="tabimgspace"></th>
-          <th class="tabimgspace2"></th>
-          <th class="tabcompet">Competición</th>
-          <th class="tabinscr">Inscritos</th>
-          <th class="tabentr">Entrada</th>
-          <th class="tabprem">Premio</th>
-          <th class="tabfech">Fecha</th>
-          <th class="tabhora">Hora</th>
-          <th class="tdrest">Restante</th>
-          <th class="tabentrar"></th>
-        </tr>
-      </thead>
-      <tbody id="list_competitions">
 
-      </tbody>
-    </table>
-  </div>
-
-  <!-- -------------------------------- COMPETICIONES FUTBOL -------------------------------- -->
-  <div role="tabpanel" class="tab-pane fade bordyel" id="football-no-mobile">
-    <table class="table table-hover table-responsive" id="tabledesk">
-      <!-- Abre tabla -->
-      <thead>
-        <tr>
-          <th class="tabimgspace"></th>
-          <th class="tabimgspace2"></th>
-          <th class="tabcompet">Competición</th>
-          <th class="tabinscr">Inscritos</th>
-          <th class="tabentr">Entrada</th>
-          <th class="tabprem">Premio</th>
-          <th class="tabfech">Fecha</th>
-          <th class="tabhora">Hora</th>
-          <th class="tdrest">Restante</th>
-          <th class="tabentrar"></th>
-        </tr>
-      </thead>
-      <tbody id="table-football-no-mobile">
-
-      </tbody>
-    </table>
-  </div>
 
 <!-- -------------------------------- FOOTER -------------------------------- -->
 <div class="divtabfoot">
