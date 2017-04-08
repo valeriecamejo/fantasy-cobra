@@ -29,4 +29,15 @@ class CompetitionController extends Controller {
 
         return view('users.competitions', array('list_competitions' => $list_competitions));
     }
+
+  /**
+   * new_competition .
+   * @param string $sport, $championship
+   * @return \Illuminate\View\View
+   */
+  public function new_competition($sport, $championship) {
+    return view('competition.create')
+      ->with('sport', $sport)
+      ->with('championship',$championship);
+  }
 }

@@ -43,3 +43,5 @@ Route::get('usuario/referir-amigo', 'UserController@refer_friends');
 Route::get('afiliado', 'UserController@refer_friends');
 Route::post('usuario/invite_friends', 'UserController@invite_friends');
 Route::get('/usuario/ver-promociones', 'PromotionController@list_promotions');
+Route::get('/usuario/crear-competicion/{sport}/{championship}', 'CompetitionController@new_competition');
+Route::get('usuario/obtener-premios', 'PrizeController@prize_min_user');

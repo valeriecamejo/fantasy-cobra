@@ -36,8 +36,8 @@ date_default_timezone_set('Etc/GMT+4');
   {!! Html::script('js/team.js') !!}
   {!! Html::script('js/password_perfil.js') !!}
   {!! Html::script('js/menu.js') !!}
-  {!! Html::script('js/sports.js') !!}
   {!! Html::script('js/login.js') !!}
+  {!! Html::script('js/sports.js') !!}
   {!! Html::script('js/responsiveslides.min.js') !!}
 
   <link rel="shortcut icon" href="images/ico/favicon.ico">
@@ -130,6 +130,7 @@ date_default_timezone_set('Etc/GMT+4');
     @include('modal/contact')
     @include('modal/forgot-password')
     @include('modal/team')
+    @include('modal/sports')
 
     <!-- -------------------------------- LOADING -------------------------------- -->
     @include('includes/cargando')
