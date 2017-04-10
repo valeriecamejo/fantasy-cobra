@@ -35,7 +35,7 @@ function add_prize(min_user){
       $("#awards").children().remove();
       var info = jQuery.parseJSON(data);
       $(info).each(function(index, element){
-        var option = "<option value="+element.id_award+">"+element.description+"</option>";
+        var option = "<option value="+element.id+">"+element.description+"</option>";
         $(option).appendTo("#awards");
       });
     }

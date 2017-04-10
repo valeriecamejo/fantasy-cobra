@@ -15,10 +15,9 @@ class Championship extends Model
 
     $verify_sport                     = Sport::verify_sport($sport);
 
-    $verify_championship   = Championship::where('sport_id', '=', $verify_sport->id)
+    $verify_championship   = Championship::where('sport_id', '=', $verify_sport)
       ->where('name', '=', $championship)
-      ->get();
-
+      ->first();
     return $verify_championship;
   }
 }

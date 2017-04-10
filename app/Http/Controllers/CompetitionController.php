@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CompetitionRequest;
 use Illuminate\Http\Request;
 use App\Competition;
+use Illuminate\Support\Facades\Session;
 
 class CompetitionController extends Controller {
 
@@ -49,11 +50,11 @@ class CompetitionController extends Controller {
     $competition     = Competition::save_competition($request->all());
 
     if ($competition){
-      Session::flash('message', 'exitoso.');
+      Session::flash('message', 'Competición creada con exitosamente.');
       Session::flash('class', 'success');
-      return redirect($this->redirectPath());
+      return redirect('lobby');
     } else {
-      Session::flash('message', 'Error.');
+      Session::flash('message', 'Error al intentar crear la competición.');
       Session::flash('class', 'danger');
       return redirect()->back();
     }

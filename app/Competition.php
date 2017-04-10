@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use App\Lib\Ddh\UtilityDate;
 use Illuminate\Support\Facades\DB;
@@ -11,7 +12,6 @@ class Competition extends Model
 {
   protected $table = 'competitions';
   protected $fillable = [
-  'tournament_id',
     'prize_id',
     'sport_id',
     'championship_id',
@@ -29,7 +29,6 @@ class Competition extends Model
     'password',
     'cost_guaranteed',
     'description' ,
-    'start_date',
     'end_date',
     'pot',
     'free',
@@ -101,47 +100,60 @@ public static function bettor_competitions() {
    * @return boolean
    */
   public static function save_competition($input) {
+
     $competition                      = new Competition();
+
+    $championship                     = Championship::verify_championship($input['sport'],$input['championship']);
+    if ($championship){
+      $competition->sport_id          = $championship["sport_id"];
+      $competition->championship_id   = $championship["id"];
+    } else {
+      return false;
+    }
     $competition->name                = $input['name'];
-    $competition->id_user             = Auth::user()->id();
-    $competition->date                = $input['date'];
+    $competition->user_id             = Auth::user()->id;
+    $competition->date                = Carbon::createFromFormat('d-m-Y', $input['start_date'])
+                                        ->toDateTimeString();
     $competition->user_max            = $input['max_user'];
     $competition->user_min            = $input['min_user'];
     $competition->prize_guaranteed    = 0;
     $competition->status              = Competition::STATUS_OPEN;
-    $competition->entry_cost          = $input['min_user'];
+    $competition->entry_cost          = $input['entry_cost'];
     $competition->cost_guaranteed     = 0;
     $competition->description         = '';
-    $competition->start_date          = '';
-    $competition->pot                 = 1;
-    $competition->free                = 1;
     $competition->is_important        = 0;
     $competition->enrolled            = 0;
     $competition->permanent           = 0;
     $competition->type_journal        = $input['type_journal'];
     $competition->type_play           = $input['type_play'];
+    $competition->prize_id            = $input['award'];
 
-    if (isset($input['password'])){
+    if (isset($input['password'])) {
       $competition->password          = $input['password'];
     }
 
-    if($input['privacy'] == 0){
-      $competition->type              = Competition::TYPE_PUBLIC;
+    if($input['privacy'] == 0) {
+      $competition->type                = Competition::TYPE_PUBLIC;
     } elseif ($input['privacy'] == 1){
-      $competition->type              = Competition::TYPE_PRIVATE;
+      $competition->type                = Competition::TYPE_PRIVATE;
     }
 
+    if($input['entry_cost'] == 0) {
+      $competition->pot                 = 0;
+      $competition->free                = 1;
+    } else {
+      $competition->pot                 = 1;
+      $competition->free                = 0;
+    }
 
-    //type_competition
-
-    $championship                     = Championship::verify_championship($input['sport'],$input['championship']);
-    if ($championship){
-      $competition->sport_id          = $championship->sport_id;
-      $competition->championship_id   = $championship->id;
+    if ($input['max_user'] == 2) {
+      $competition->type_competition    = 'H2H';
+    }
+    if ($competition->save()) {
+      return $competition;
     } else {
       return false;
     }
-
   }
 }
 
