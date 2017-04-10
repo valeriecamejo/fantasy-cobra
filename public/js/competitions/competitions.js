@@ -23,7 +23,7 @@ function filter_competitions(sport, competitions) {
     $.each(competitions, function(index, element) {
 
       list_competitions.push(element);
-      console.log(sport, element.name_sport);
+      //console.log(sport, element.name_sport);
     });
 
    // console.log("compewt", list_competitions);
@@ -35,7 +35,7 @@ function filter_competitions(sport, competitions) {
     $.each(competitions, function(index, element) {
 
       if (element.name_sport == sport) {
-        console.log(sport, element.name_sport);
+        //console.log(sport, element.name_sport);
 
         list_competitions.push(element);
 
@@ -171,16 +171,24 @@ jQuery.noConflict();
 
           list_competitions.push(element);
 
-        } else {
-
-          if (element.cost_entry == 0) {
-
-            list_competitions.push(element);
-          }
         }
 
       });
+
+    } else {
+
+        $.each(competitions, function(index, element) {
+
+          if (element.entry_cost == 0) {
+
+            list_competitions.push(element);
+          }
+
+        });
+
     }
+
     tpl = competitions_template(list_competitions);
+
     $("#table-all-no-mobile").append(tpl);
 }
