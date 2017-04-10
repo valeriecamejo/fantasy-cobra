@@ -1,18 +1,18 @@
 moment.locale('es');
 /**********************************
-* competitions_filter.
-* @param list_competitions
+* filter_competitions.
+* @param sport, competitions
 * @return void
 ***********************************/
 
 function filter_competitions(sport, competitions) {
-  console.log("==========", sport, competitions, "==========");
+/*  console.log("==========", sport, competitions, "==========");
 
   console.log("sport/all", sport == 'all');
   console.log("sport/baseball", sport == competitions[0].name_sport);
   console.log("sport/futbol", sport == competitions[0].name_sport);
 
-
+*/
   jQuery.noConflict();
 
   var tpl = '';
@@ -22,11 +22,11 @@ function filter_competitions(sport, competitions) {
 
     $.each(competitions, function(index, element) {
 
-      list_competitions.push(element); // = list_competitions + ;
-
+      list_competitions.push(element);
+      console.log(sport, element.name_sport);
     });
 
-    console.log("compewt", list_competitions);
+   // console.log("compewt", list_competitions);
 
     tpl = competitions_template(list_competitions);
 
@@ -37,7 +37,7 @@ function filter_competitions(sport, competitions) {
       if (element.name_sport == sport) {
         console.log(sport, element.name_sport);
 
-        list_competitions.push(element); //= list_competitions + element;
+        list_competitions.push(element);
 
       }
 
@@ -49,6 +49,11 @@ function filter_competitions(sport, competitions) {
   $("#table-all-no-mobile").append(tpl);
 }
 
+/**********************************
+* competitions_template.
+* @param competitions
+* @return tpl
+***********************************/
 
 function competitions_template(competitions) {
 
@@ -104,14 +109,8 @@ function competitions_template(competitions) {
         var days_left =   date_competition.diff(today_competition, 'days');
         var minutes_left = date_competition.diff(today_competition, 'seconds');
 
-        console.info(date_competition);
-        console.info(minutes_left);
 
         minutes_left = date_competition.startOf('day').seconds(minutes_left).format("HH:mm:ss");
-
-        console.info(minutes_left);
-
-        //var minutes_left = (moment(moment.duration(today_competition.diff(date_competition))).format("HH:mm"));
 
       tpl = tpl + element.cost_guaranteed
                 + " Bs."
@@ -150,3 +149,38 @@ function competitions_template(competitions) {
 
 }
 
+/**********************************
+* filter_type_competitions.
+* @param type, competitions
+* @return tpl
+***********************************/
+
+function filter_type_competitions(type, competitions) {
+
+  var tpl = '';
+  var list_competitions = [];
+//alert(type);
+//alert(competitions);
+
+jQuery.noConflict();
+    if (type == 'H2H') {
+
+      $.each(competitions, function(index, element) {
+
+        if (element.type_competition == 'H2H') {
+
+          list_competitions.push(element);
+
+        } else {
+
+          if (element.cost_entry == 0) {
+
+            list_competitions.push(element);
+          }
+        }
+
+      });
+    }
+    tpl = competitions_template(list_competitions);
+    $("#table-all-no-mobile").append(tpl);
+}

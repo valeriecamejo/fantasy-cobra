@@ -6,10 +6,16 @@
       <a href="#all-no-mobile" onclick="filter_competitions('all', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Todos</a>
     </li>
     <li role="presentation">
-      <a href="#baseball-no-mobile" onclick="filter_competitions('baseball', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Béisbol</a>
+      <a href="#baseball-no-mobile" onclick="filter_competitions('football', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Béisbol</a>
     </li>
     <li role="presentation">
-      <a href="#football-no-mobile" onclick="filter_competitions('football', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Fútbol</a>
+      <a href="#football-no-mobile" onclick="filter_competitions('baseball', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Fútbol</a>
+    </li>
+    <li role="presentation", style="margin-left: 40%">
+      <a href="#H2H-no-mobile" onclick="filter_type_competitions('H2H', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">H 2 H</a>
+    </li>
+    <li role="presentation">
+      <a href="#free-no-mobile" onclick="filter_type_competitions('FREE', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Gratis</a>
     </li>
   </ul>
 
