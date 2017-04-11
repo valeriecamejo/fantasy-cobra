@@ -3,19 +3,25 @@
   <!-- Nav tabs -->
   <ul class="nav nav-tabs nav-tabsnull" role="tablist">
     <li role="presentation" class="active BtnLineup10">
-      <a href="#all-no-mobile" onclick="filter_competitions('all', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Todos</a>
+      <a href="#all-no-mobile" onclick="filter_competitions('all',window.filter_type,{{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Todos</a>
     </li>
     <li role="presentation">
-      <a href="#baseball-no-mobile" onclick="filter_competitions('football', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Béisbol</a>
+      <a href="#baseball-no-mobile" onclick="filter_competitions('football',window.filter_type,{{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Béisbol</a>
     </li>
     <li role="presentation">
-      <a href="#football-no-mobile" onclick="filter_competitions('baseball', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Fútbol</a>
+      <a href="#football-no-mobile" onclick="filter_competitions('baseball',window.filter_type,{{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Fútbol</a>
     </li>
-    <li role="presentation", style="margin-left: 40%">
-      <a href="#H2H-no-mobile" onclick="filter_type_competitions('H2H', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">H 2 H</a>
+    <li role="presentation" class="active BtnLineup10" style="margin-left: 17%">
+      <a href="#all-no-mobile" onclick="filter_competitions(window.sport,'all',{{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Todos</a>
     </li>
     <li role="presentation">
-      <a href="#free-no-mobile" onclick="filter_type_competitions('FREE', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Gratis</a>
+      <a href="#H2H-no-mobile" onclick="filter_competitions(window.sport,'H2H', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">H 2 H</a>
+    </li>
+    <li role="presentation">
+      <a href="#turbo-no-mobile" onclick="filter_competitions(window.sport,'TURBO', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Turbo</a>
+    </li>
+    <li role="presentation">
+      <a href="#free-no-mobile" onclick="filter_competitions(window.sport,'FREE', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Gratis</a>
     </li>
   </ul>
 
@@ -112,8 +118,6 @@
     </div>
   </div>
 
-
-
 <!-- -------------------------------- FOOTER -------------------------------- -->
 <div class="divtabfoot">
   <div class="divtabfooty">
@@ -130,5 +134,3 @@
   </div>
 </div>
 </div>
-
-
