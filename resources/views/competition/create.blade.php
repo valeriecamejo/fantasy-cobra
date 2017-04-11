@@ -136,28 +136,32 @@
           </div>
         </div>
 
-        <div class="modal-bodycompe Top5" id="Competipos">
-          <div class="boxcompe1">
-            <input type="radio" name="duration" checked="true" onclick="duration_competition(0)" value="0"><p>Competición Corta</p>
+        <div class="modal-bodycompe Top5">
+          <div class="boxcompe">
+            <p>Jornada</p>
+            <select class="form-compe2" name="type_journal">
+              <option value="DAILY">Completa</option>
+              <option value="3PM">3PM</option>
+              <option value="7PM">7PM</option>
+              {{--<option value="LONG">Larga</option>--}}
+            </select>
           </div>
-          {{--<div class="boxcompe2">--}}
-          {{--<input type="radio" name="duration" onclick="duration_competition(1)" value="1"><p>Competición Larga</p>--}}
-          {{--</div>--}}
+        </div>
+
+        <div class="modal-bodycompe">
+          <div class="boxcompe">
+            <p>Tipo de juego</p>
+            <select class="form-compe2" name="type_play">
+              <option value="REGULAR">Regular</option>
+              <option value="TURBO">Turbo</option>
+            </select>
+          </div>
         </div>
 
         <div class="modal-bodycompe" id="short_competition">
           <div class="boxcompe" >
             <p>Fecha Inicio</p>
-            @if($sport == 'football')
-              <select class="form-compe2" name="start_date">
-               {{-- @foreach ($dates as $date)
-                  --}}{{-- */ $day_week = array("Dom", "Lun", "Mar", "Mie","Jue","Vie","Sab"); /* --}}{{--
-                  <option  value="{{$date}}">{{ $day_week[date('w', strtotime($date))].' ' }} {{ date("d-m-Y", strtotime($date)) }}</option>
-                @endforeach--}}
-              </select>
-            @else
               <input type="text" name="start_date" id="datepicker" class="form-compe" placeholder="dd-mm-aaaa" value="{{Input::old('start_date')}}">
-            @endif
           </div>
         </div>
 
@@ -256,7 +260,7 @@
 
           <div class="boxcompe5">
             <p>Entrada</p>
-            <select class="form-control nobord" name="cost_entry">
+            <select class="form-control nobord" name="entry_cost">
               <option value="0" selected="selected">Gratis</option>
               <option value="500">500 Bs.</option>
               <option value="600">600 Bs.</option>

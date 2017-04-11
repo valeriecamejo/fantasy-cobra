@@ -13,7 +13,7 @@ class Sport extends Model
 
   public static function verify_sport($sport) {
     $verify_sport   = Sport::where('name', '=', $sport)
-      ->get();
+      ->first();
 
     return $verify_sport->id;
   }

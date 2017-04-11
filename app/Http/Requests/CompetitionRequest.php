@@ -24,16 +24,17 @@ class CompetitionRequest extends FormRequest
     public function rules()
     {
         return [
-          'name' => 'required',
-          'duration' => 'required',
-          'start_date' => 'required',
-          'privacy' => 'required',
-          'min_user' => 'required',
-          'max_user' => 'required',
-          'cost_entry' => 'required',
-          'award' => 'required',
-          'sport' => 'required',
-          'championship' => 'required',
+          'name'            => 'required',
+          'start_date'      => 'required',
+          'privacy'         => 'required',
+          'min_user'        => 'required',
+          'max_user'        => 'required',
+          'entry_cost'      => 'required',
+          'award'           => 'required',
+          'sport'           => 'required',
+          'championship'    => 'required',
+          'type_journal'    => 'required',
+          'type_play'       => 'required',
         ];
     }
 }
