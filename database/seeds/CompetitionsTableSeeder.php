@@ -117,7 +117,7 @@ class CompetitionsTableSeeder extends Seeder
         'type_journal'     => '3PM',
         'type_play'        => 'REGULAR',
         'type_competition' => '',
-        'date'             => '2017-05-02',
+        'date'             => '2017-05-03',
         'user_max'         => '3',
         'user_min'         => '2',
         'prize_guaranteed' => '1',
