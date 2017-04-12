@@ -27,7 +27,7 @@ class CreateCompetitionsTable extends Migration
       $table->string('type');
       $table->string('type_journal');
       $table->string('type_play');
-      $table->string('type_competition')->nullable();
+      $table->string('type_competition')->nullable()->default(null);
       $table->dateTime('date');
       $table->integer('user_max');
       $table->integer('user_min');
