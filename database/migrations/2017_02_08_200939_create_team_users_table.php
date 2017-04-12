@@ -11,8 +11,7 @@ class CreateTeamUsersTable extends Migration
    *
    * @return void
    */
-  public function up()
-  {
+  public function up() {
     Schema::create('team_users', function (Blueprint $table) {
       $table->increments('id');
       $table->integer('user_id')->unsigned();
