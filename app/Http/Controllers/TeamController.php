@@ -50,4 +50,13 @@ class TeamController extends Controller
 
         return view();
     }
+
+
+  public function new_team() {
+    return view('team.create');
+  }
+
+  public function players() {
+    return view('team.create');
+  }
 }

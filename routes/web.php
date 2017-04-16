@@ -46,3 +46,6 @@ Route::get('/usuario/ver-promociones', 'PromotionController@list_promotions');
 Route::get('/usuario/crear-competicion/{sport}/{championship}', 'CompetitionController@new_competition');
 Route::post('/usuario/crear-competicion', 'CompetitionController@save_competition');
 Route::get('usuario/obtener-premios', 'PrizeController@prize_min_user');
+Route::get('/usuario/crear-equipo', 'TeamController@new_team');
+Route::post('/usuario/crear-equipo', 'TeamController@save_team');
+Route::get('usuario/obtener-jugadores', 'TeamController@players');
