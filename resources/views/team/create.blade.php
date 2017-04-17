@@ -41,6 +41,9 @@
               <li role="presentation"><a href="#SSD" id="SS" aria-controls="settings" role="tab" data-toggle="tab">SS</a></li>
               <li role="presentation"><a href="#OFD" id="OF" aria-controls="settings" role="tab" data-toggle="tab">OF</a></li>
               <li role="presentation"><a href="#BATSD" id="BATS" aria-controls="settings" role="tab" data-toggle="tab">BATS</a></li>
+
+              <div id="tabs"></div>
+
             </ul>
             <table class="table table-striped2 table-hover2 tablelineup theadhead">
               <thead>
