@@ -12,7 +12,15 @@
     <input type='hidden' id="salario_players" value="100000">
     <input type='hidden' id="sport" value="1">
     <input type='hidden' id="championship" value="1">
-
+    <div class="modal-bodycompe">
+      <div class="boxcompe">
+        <p>Tipo de juego</p>
+        <select class="form-compe2" name="type_play" id="type_play">
+          <option value="REGULAR" selected>Regular</option>
+          <option value="TURBO">Turbo</option>
+        </select>
+      </div>
+    </div>
     <div class="hidden-xs" style="text-align:left;">
       <!-- abre contcrear -->
       <div class="CuerpoLineup cuerpoheight margrespL1">
