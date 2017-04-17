@@ -109,7 +109,7 @@
                 <p>Contraseña</p>
             </div>
             <div class="input-group InicioSes3">
-              <input type="password" class="form-control" placeholder="Escriba su contraseña" aria-describedby="sizing-addon2" name="password"  value="{{Input::old('password')}}">
+              <input type="password" class="form-control" placeholder="Escriba su contraseña" aria-describedby="sizing-addon2" name="password" value="{{Input::old('password')}}">
               @if($errors->has('password'))
                 <span class="incompleto">×</span>
                 @foreach($errors->get('password') as $error)

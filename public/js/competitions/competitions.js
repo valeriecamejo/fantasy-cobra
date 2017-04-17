@@ -7,14 +7,11 @@ window.sport       = 'all';
 window.filter_type = 'all';
 
 function filter_competitions(sport, filter_type, competitions) {
- console.log("==========", sport, competitions, "==========");
+ /*console.log("==========", sport, competitions, "==========");
   console.log("sport/all", sport == 'all');
   console.log("sport/baseball", sport == competitions[0].name_sport);
   console.log("sport/futbol", sport == competitions[0].name_sport);
-
-alert(sport);
-alert(filter_type);
-
+*/
   jQuery.noConflict();
 
   window.sport = sport;

@@ -1,29 +1,37 @@
 {!! Html::script('js/competitions/competitions.js') !!}
-<div class="btab3 hidden-xs">
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs nav-tabsnull" role="tablist">
-    <li role="presentation" class="active BtnLineup10">
-      <a href="#all-no-mobile" onclick="filter_competitions('all',window.filter_type,{{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Todos</a>
-    </li>
-    <li role="presentation">
-      <a href="#baseball-no-mobile" onclick="filter_competitions('football',window.filter_type,{{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Béisbol</a>
-    </li>
-    <li role="presentation">
-      <a href="#football-no-mobile" onclick="filter_competitions('baseball',window.filter_type,{{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Fútbol</a>
-    </li>
-    <li role="presentation" class="active BtnLineup10" style="margin-left: 17%">
-      <a href="#all-no-mobile" onclick="filter_competitions(window.sport,'all',{{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Todos</a>
-    </li>
-    <li role="presentation">
-      <a href="#H2H-no-mobile" onclick="filter_competitions(window.sport,'H2H', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">H 2 H</a>
-    </li>
-    <li role="presentation">
-      <a href="#turbo-no-mobile" onclick="filter_competitions(window.sport,'TURBO', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Turbo</a>
-    </li>
-    <li role="presentation">
-      <a href="#free-no-mobile" onclick="filter_competitions(window.sport,'FREE', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer;">Gratis</a>
-    </li>
-  </ul>
+  <div class="container-fluid Filtros">
+            <div class="BlockFil col-sm-6">
+                <h4>Elige tu liga</h4>
+                <ul class="ContFil btn-group">
+                    <li role="presentation" class="btn btn-default active">
+                    <a href="#competiciones" onclick="filter_competitions('all',window.filter_type,{{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab">Todos</a>
+                    </li>
+                    <li role="presentation" class="btn btn-default">
+                    <a href="#competiciones" onclick="filter_competitions('baseball',window.filter_type,{{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab">Béisbol</a>
+                    </li>
+                    <li role="presentation" class="btn btn-default">
+                    <a href="#competiciones" onclick="filter_competitions('football',window.filter_type,{{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab">Fútbol</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="BlockFil2 col-sm-6">
+                <h4>Elige tu tipo de competencia</h4>
+                <ul class="ContFil btn-group">
+                    <li role="presentation" class="btn btn-default active">
+                    <a href="#competiciones" onclick="filter_competitions(window.sport,'all',{{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab">Todos</a>
+                    </li>
+                    <li role="presentation" class="btn btn-default">
+                    <a href="#competiciones" onclick="filter_competitions(window.sport,'H2H', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab">H2H</a>
+                    </li>
+                    <li role="presentation" class="btn btn-default">
+                    <a href="#competiciones" onclick="filter_competitions(window.sport,'TURBO', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab">Turbo</a>
+                    </li>
+                    <li role="presentation" class="btn btn-default">
+                    <a href="#competiciones" onclick="filter_competitions(window.sport,'FREE', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab">Gratis</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
   <!-- Tab panes -->
   <div class="tab-content tab-contentnull tab-contenthome">
