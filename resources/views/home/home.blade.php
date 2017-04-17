@@ -58,20 +58,37 @@
     <!-- Mensaje -->
     <div class="container-fluid BlokBoton">
       <!-- Botones -->
-      <div class="Boton1">
-        <a onclick="modal_sport()">
-          <div class="BotonRe">
-            CREAR COMPETICIÓN
-          </div>
-        </a>
-      </div>
-      <div class="Boton1">
-        <a href="{{ URL::action('TeamController@new_team') }}">
-          <div class="BotonRe">
-            CREAR EQUIPO
-          </div>
-        </a>
-      </div>
+      @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3)
+        <div class="Boton1">
+          <a onclick="modal_sport()">
+            <div class="BotonRe">
+              CREAR COMPETICIÓN
+            </div>
+          </a>
+        </div>
+        <div class="Boton1">
+          <a href="{{ URL::action('TeamController@new_team') }}">
+            <div class="BotonRe">
+              CREAR EQUIPO
+            </div>
+          </a>
+        </div>
+      @else
+        <div class="Boton1">
+          <a href=".login" data-toggle="modal">
+            <div class="BotonRe">
+              CREAR COMPETICIÓN
+            </div>
+          </a>
+        </div>
+        <div class="Boton1">
+          <a href=".login" data-toggle="modal">
+            <div class="BotonRe">
+              CREAR EQUIPO
+            </div>
+          </a>
+        </div>
+      @endif
     </div>
     <!-- -------------------------------- MODALES -------------------------------- -->
   @include('modal/competition')
