@@ -22,7 +22,7 @@ class Team_SubscribersTableSeeder extends Seeder
                 'team_user_id'   => '1',
                 'amount'         => '5000',
                 'points'         => '0',
-                'date'           => '2017-03-14 12:30:00',
+                'date'           => '2017-03-14 12:30:01',
                 'balance_before' => '10000',
                 'bonus'          => '1000',
                 'balance'        => '9500',
