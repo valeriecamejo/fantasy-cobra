@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Hash;
 use App\Referred_friend;
 use Mail;
 
@@ -171,17 +172,29 @@ class User extends Authenticatable
 
   protected static function update_user_profile($input) {
 
-    $password = $input['password'];
-    $user = User::find(Auth::user()->id);
+    $password              = $input['password'];
+    $new_password          = $input['new_password'];
+    $user                  = User::find(Auth::user()->id);
+    $save = false;
+    if( ($password != "") && ($new_password != "") ) {
 
-    if($password != ""){
-                $user->password = Hash::make($input['password']);
-            }
-            $user->phone  = $input['phone'];
-            $user->dni    = $input['dni'];
-            $user->save();
+        if (Hash::check($password, Auth::user()->password)) {
+          $user->password = Hash::make($input['new_password']);
+          $user->phone  = $input['phone'];
+          $user->dni    = $input['dni'];
+          $user->save();
+          $save = true;
+        }
+    }
 
-    return $user;
+    if( ($password == "") && ($new_password == "") ) {
+      $user->phone  = $input['phone'];
+      $user->dni    = $input['dni'];
+      $user->save();
+      $save = true;
+    }
+
+      return $save;
   }
 
   protected function refer_friends() {

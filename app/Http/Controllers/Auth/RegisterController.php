@@ -38,7 +38,7 @@ class RegisterController extends Controller
   *
   * @return void
   */
-  public function __construct(){
+  public function __construct() {
     $this->middleware('guest');
   }
 
@@ -48,7 +48,8 @@ class RegisterController extends Controller
    * @param $request
    * @return \Illuminate\Http\Response
    */
-  protected function register(UserRequest $request){
+  protected function register(UserRequest $request) {
+
       $user     = User::register($request->all());
       if ($user){
         $this->guard()->login($user);

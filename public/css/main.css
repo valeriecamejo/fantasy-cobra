@@ -7429,6 +7429,57 @@ button.CountryBtn.dropdown-toggle:hover {
     background-color: #1f1f1f;
 }
 
+.Filtros {
+  width: 95%;
+  padding-left: 5%;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.BlockFil h4, .BlockFil2 h4 {
+  color: #eec133;
+}
+
+.BlockFil2 {
+  text-align: right;
+}
+
+.ContFil {
+  -webkit-padding-start: 0;
+}
+
+.ContFil .btn {
+  border-bottom-width: 0;
+  padding: 0;
+}
+
+.ContFil .btn-default {
+  background-color: #121212 !important;
+  color: #a5a5a5 !important;
+  border: 1px solid black;
+}
+
+.ContFil .btn-default a {
+  color: white;
+  padding: 10px 14px;
+  display: block;
+}
+
+.ContFil .active {
+  background-color: #20d205 !important;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .BlockFil2 {
+    text-align: left;
+  }
+}
+
+.ContFil .btn-default:hover {
+    background: #20d205 !important;
+}
+
 /*-----------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------
 -------------------------------------------- MEDIA QUERYS ------------------------------------------------*/
