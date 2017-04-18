@@ -14,7 +14,7 @@ class PlayersTableSeeder extends Seeder
       \DB::table('players')->insert(array(
         array(
           'team_id'            => '1',
-          'championship_id'           => '1',
+          'championship_id'    => '1',
           'legacy_id'          => '1',
           'name'               => 'Michael',
           'last_name'          => 'Pineda',
@@ -27,7 +27,7 @@ class PlayersTableSeeder extends Seeder
         ),
         array(
           'team_id'            => '1',
-          'championship_id'           => '1',
+          'championship_id'    => '1',
           'legacy_id'          => '1',
           'name'               => 'CC',
           'last_name'          => 'Sabathia',
@@ -40,7 +40,7 @@ class PlayersTableSeeder extends Seeder
         ),
         array(
           'team_id'            => '1',
-          'championship_id'           => '1',
+          'championship_id'    => '1',
           'legacy_id'          => '1',
           'name'               => 'Luis',
           'last_name'          => 'Severino',
@@ -53,7 +53,7 @@ class PlayersTableSeeder extends Seeder
         ),
         array(
           'team_id'            => '1',
-          'championship_id'           => '1',
+          'championship_id'    => '1',
           'legacy_id'          => '1',
           'name'               => 'Masahiro',
           'last_name'          => 'Tanaka',
@@ -66,7 +66,7 @@ class PlayersTableSeeder extends Seeder
         ),
         array(
           'team_id'            => '1',
-          'championship_id'           => '1',
+          'championship_id'    => '1',
           'legacy_id'          => '1',
           'name'               => 'Kyle',
           'last_name'          => 'Higashioka',
@@ -79,7 +79,7 @@ class PlayersTableSeeder extends Seeder
         ),
         array(
           'team_id'            => '1',
-          'championship_id'           => '1',
+          'championship_id'    => '1',
           'legacy_id'          => '1',
           'name'               => 'Austine',
           'last_name'          => 'Romine',
@@ -92,7 +92,7 @@ class PlayersTableSeeder extends Seeder
         ),
         array(
           'team_id'            => '1',
-          'championship_id'           => '1',
+          'championship_id'    => '1',
           'name'               => 'Greg',
           'legacy_id'          => '1',
           'last_name'          => 'Bird',
@@ -105,7 +105,7 @@ class PlayersTableSeeder extends Seeder
         ),
         array(
           'team_id'            => '1',
-          'championship_id'           => '1',
+          'championship_id'    => '1',
           'legacy_id'          => '1',
           'name'               => 'Chris',
           'last_name'          => 'Carter',
@@ -133,6 +133,19 @@ class PlayersTableSeeder extends Seeder
           'team_id'            => '1',
           'championship_id'    => '1',
           'legacy_id'          => '1',
+          'name'               => 'Ronald',
+          'last_name'          => 'Torreyes',
+          'position'           => 'SS',
+          'salary'             => '5000',
+          'points'             => '0',
+          'status'             => '1',
+          'name_team'          => 'NY',
+          'name_opponent'      => 'DET',
+        ),
+        array(
+          'team_id'            => '1',
+          'championship_id'    => '1',
+          'legacy_id'          => '1',
           'name'               => 'Jacoby',
           'last_name'          => 'Ellsbury',
           'position'           => 'OF',
@@ -144,7 +157,7 @@ class PlayersTableSeeder extends Seeder
         ),
         array(
           'team_id'            => '1',
-          'championship_id'           => '1',
+          'championship_id'    => '1',
           'legacy_id'          => '1',
           'name'               => 'Brett',
           'last_name'          => 'Gardner',
@@ -157,7 +170,7 @@ class PlayersTableSeeder extends Seeder
         ),
         array(
           'team_id'            => '1',
-          'championship_id'           => '1',
+          'championship_id'    => '1',
           'legacy_id'          => '1',
           'name'               => 'Aaron',
           'last_name'          => 'Hicks',
@@ -171,7 +184,7 @@ class PlayersTableSeeder extends Seeder
 
         array(
           'team_id'            => '2',
-          'championship_id'           => '1',
+          'championship_id'    => '1',
           'legacy_id'          => '1',
           'name'               => 'Matt',
           'last_name'          => 'Boyd',
@@ -184,7 +197,7 @@ class PlayersTableSeeder extends Seeder
         ),
         array(
           'team_id'            => '2',
-          'championship_id'           => '1',
+          'championship_id'    => '1',
           'legacy_id'          => '1',
           'name'               => 'Michael',
           'last_name'          => 'Fulmer',
@@ -197,7 +210,7 @@ class PlayersTableSeeder extends Seeder
         ),
         array(
           'team_id'            => '2',
-          'championship_id'           => '1',
+          'championship_id'    => '1',
           'legacy_id'          => '1',
           'name'               => 'Daniel',
           'last_name'          => 'Norris',
@@ -210,7 +223,7 @@ class PlayersTableSeeder extends Seeder
         ),
         array(
           'team_id'            => '2',
-          'championship_id'           => '1',
+          'championship_id'    => '1',
           'legacy_id'          => '1',
           'name'               => 'Justin',
           'last_name'          => 'Verlander',
@@ -223,7 +236,7 @@ class PlayersTableSeeder extends Seeder
         ),
         array(
           'team_id'            => '2',
-          'championship_id'           => '1',
+          'championship_id'    => '1',
           'legacy_id'          => '1',
           'name'               => 'Alex',
           'last_name'          => 'Avila',
@@ -236,7 +249,7 @@ class PlayersTableSeeder extends Seeder
         ),
         array(
           'team_id'            => '2',
-          'championship_id'           => '1',
+          'championship_id'    => '1',
           'legacy_id'          => '1',
           'name'               => 'James',
           'last_name'          => 'McCann',
@@ -249,7 +262,7 @@ class PlayersTableSeeder extends Seeder
         ),
         array(
           'team_id'            => '2',
-          'championship_id'           => '1',
+          'championship_id'    => '1',
           'legacy_id'          => '1',
           'name'               => 'Miguel',
           'last_name'          => 'Cabrera',
@@ -262,10 +275,10 @@ class PlayersTableSeeder extends Seeder
         ),
         array(
           'team_id'            => '2',
-          'championship_id'           => '1',
+          'championship_id'    => '1',
           'legacy_id'          => '1',
-          'name'               => 'Nick',
-          'last_name'          => 'Castellanos',
+          'name'               => 'Ian',
+          'last_name'          => 'Kinsler',
           'position'           => '2B',
           'salary'             => '5000',
           'points'             => '0',
@@ -275,10 +288,10 @@ class PlayersTableSeeder extends Seeder
         ),
         array(
           'team_id'            => '2',
-          'championship_id'           => '1',
+          'championship_id'    => '1',
           'legacy_id'          => '1',
-          'name'               => 'José',
-          'last_name'          => 'Iglesias',
+          'name'               => 'Nick',
+          'last_name'          => 'Castellanos',
           'position'           => '3B',
           'salary'             => '5000',
           'points'             => '0',
@@ -288,7 +301,20 @@ class PlayersTableSeeder extends Seeder
         ),
         array(
           'team_id'            => '2',
-          'championship_id'           => '1',
+          'championship_id'    => '1',
+          'legacy_id'          => '1',
+          'name'               => 'José',
+          'last_name'          => 'Iglesias',
+          'position'           => 'SS',
+          'salary'             => '5000',
+          'points'             => '0',
+          'status'             => '1',
+          'name_team'          => 'DET',
+          'name_opponent'      => 'NY',
+        ),
+        array(
+          'team_id'            => '2',
+          'championship_id'    => '1',
           'legacy_id'          => '1',
           'name'               => 'Tyler',
           'last_name'          => 'Collins',
@@ -301,7 +327,7 @@ class PlayersTableSeeder extends Seeder
         ),
         array(
           'team_id'            => '2',
-          'championship_id'           => '1',
+          'championship_id'    => '1',
           'legacy_id'          => '1',
           'name'               => 'JaCoby',
           'last_name'          => 'Jones',
@@ -314,7 +340,7 @@ class PlayersTableSeeder extends Seeder
         ),
         array(
           'team_id'            => '2',
-          'championship_id'           => '1',
+          'championship_id'    => '1',
           'legacy_id'          => '1',
           'name'               => 'Mikie',
           'last_name'          => 'Mahtook',

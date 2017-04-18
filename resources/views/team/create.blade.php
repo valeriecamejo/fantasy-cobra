@@ -32,19 +32,8 @@
           </div> -->
           <div>
             <!-- Nav tabs -->
-            <ul class="nav nav-tabs entirewidth" role="tablist">
-              <li role="presentation" class="active"><a href="#PAD" id="PA" aria-controls="home" role="tab" data-toggle="tab">PA</a></li>
-              <li role="presentation"><a href="#CD" id="C" aria-controls="profile" role="tab" data-toggle="tab">C</a></li>
-              <li role="presentation"><a href="#1BD" id="1B" aria-controls="messages" role="tab" data-toggle="tab">1B</a></li>
-              <li role="presentation"><a href="#2BD" id="2B" aria-controls="settings" role="tab" data-toggle="tab">2B</a></li>
-              <li role="presentation"><a href="#3BD" id="3B" aria-controls="settings" role="tab" data-toggle="tab">3B</a></li>
-              <li role="presentation"><a href="#SSD" id="SS" aria-controls="settings" role="tab" data-toggle="tab">SS</a></li>
-              <li role="presentation"><a href="#OFD" id="OF" aria-controls="settings" role="tab" data-toggle="tab">OF</a></li>
-              <li role="presentation"><a href="#BATSD" id="BATS" aria-controls="settings" role="tab" data-toggle="tab">BATS</a></li>
+            <div id="tabs"></div>
 
-              <div id="tabs"></div>
-
-            </ul>
             <table class="table table-striped2 table-hover2 tablelineup theadhead">
               <thead>
               <tr>
@@ -77,6 +66,12 @@
 
               </div>
               <div role="tabpanel" class="tab-pane fade" id="OFD">
+
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="CID">
+
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="MID">
 
               </div>
               <div role="tabpanel" class="tab-pane fade" id="BATSD">

@@ -67,7 +67,7 @@
           </a>
         </div>
         <div class="Boton1">
-          <a href="{{ URL::action('TeamController@new_team') }}">
+          <a href="{{ URL::action('TeamUserController@new_team') }}">
             <div class="BotonRe">
               CREAR EQUIPO
             </div>
