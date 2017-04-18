@@ -4,7 +4,7 @@
   <div class="container-fluid Ingresoprin" id="page-content-wrapper">
     <div class="Enunciado2">
       <h3 class="Titulo1">CREAR NUEVO EQUIPO</h3>
-      <h4 style="color:#e9e9e9;font-weight: 300;margin-top: -18px;font-size: 13pt;">Equipo para el día: <span style="color:#eec133;"></span></h4>
+      {{--<h4 style="color:#e9e9e9;font-weight: 300;margin-top: -18px;font-size: 13pt;">Equipo para el día: <span style="color:#eec133;"></span></h4>--}}
     </div>
 
     {!!  Form::open(array('url' => 'usuario/crear-equipo', 'method' => 'post')) !!}
@@ -14,11 +14,13 @@
     <input type='hidden' id="championship" value="1">
     <div class="modal-bodycompe">
       <div class="boxcompe">
-        <p>Tipo de juego</p>
-        <select class="form-compe2" name="type_play" id="type_play">
-          <option value="REGULAR" selected>Regular</option>
-          <option value="TURBO">Turbo</option>
+        <p>Tipo de juego:  {{$type}} </p>
+        <input type="hidden" value="{{$type}}" name="type_play" id="type_play">
+        <!--<select class="form-compe2" name="type_play" id="type_play">
+          <option value="REGULAR" >Regular</option>
+          <option value="TURBO" selected> Turbo</option>
         </select>
+        -->
       </div>
     </div>
     <div class="hidden-xs" style="text-align:left;">
@@ -111,83 +113,26 @@
             <table class="table table-striped2 table-hover2 tablelineup tableequipoheight">
               <tbody>
               <tr id="playerPA">
-                <td id="pos">PA</td>
-                <td id="jug"><span id="teamcol">name /</span>name </td>
-                <td id="opo">team vs <span id="teamcol"> oponente</span></td>
-                <td id="salario">1000</td>
-                <td>
-                  <a href="#" onclick="deletePlayer('id');">
-                    {!! Html::image('images/ico/menos.png','menos', array('class'=>'mashov')) !!}
-                  </a>
-                </td>
               </tr>
-
               <tr id="playerC">
-                <td id="pos">C</td>
-                <td id="jug"><span id="teamcol">name</td>
-                <td id="opo">oponente vs <span id="teamcol"> team</span></td>
-                <td id="salario">1000</td>
-                <td>
-                  <a href="#" onclick="deletePlayer('id');">
-                    {!! Html::image('images/ico/menos.png','menos', array('class'=>'mashov')) !!}
-                  </a>
-                </td>
               </tr>
-
               <tr id="player1B">
-
-                <td id="pos">1B</td>
-                <td id="jug"><span id="teamcol"></td>
-                <td id="opo"> vs <span id="teamcol"> </span></td>
-                <td id="salario"></td>
-                <td>
-                  <a href="#" onclick="deletePlayer('id');">
-                    {!! Html::image('images/ico/menos.png','menos', array('class'=>'mashov')) !!}
-                  </a>
-                </td>
+              </tr>
+              <tr id="playerCI">
+              </tr>
+              <tr id="playerMI">
               </tr>
               <tr id="player2B">
-                <td id="pos">2B</td>
-                <td id="jug"></td>
-                <td id="opo"></td>
-                <td id="salario"></td>
-                <td><a href=""></a>
               </tr>
               <tr id="player3B">
-                <td id="pos">3B</td>
-                <td id="jug"></td>
-                <td id="opo"></td>
-                <td id="salario"></td>
-                <td><a href=""></a>
               </tr>
-
               <tr id="playerSS">
-                <td id="pos">SS</td>
-                <td id="jug"></td>
-                <td id="opo"></td>
-                <td id="salario"></td>
-                <td><a href=""></a>
               </tr>
               <tr id="playerOF1">
-                <td id="pos">OF</td>
-                <td id="jug"></td>
-                <td id="opo"></td>
-                <td id="salario"></td>
-                <td><a href=""></a>
               </tr>
               <tr id="playerOF2">
-                <td id="pos">OF</td>
-                <td id="jug"></td>
-                <td id="opo"></td>
-                <td id="salario"></td>
-                <td><a href=""></a>
               </tr>
               <tr id="playerOF3">
-                <td id="pos">OF3</td>
-                <td id="jug"></td>
-                <td id="opo"></td>
-                <td id="salario"></td>
-                <td><a href=""></a>
               </tr>
               </tbody>
             </table>

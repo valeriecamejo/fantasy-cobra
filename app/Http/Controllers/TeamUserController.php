@@ -47,8 +47,8 @@ class TeamUserController extends Controller
     ));
   }
 
-  public function new_team() {
-    return view('team.create');
+  public function new_team($type) {
+    return view('team.create') ->with('type', $type);
   }
 
   public function players() {
