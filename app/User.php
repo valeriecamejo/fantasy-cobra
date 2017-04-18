@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use App\Referred_friend;
 use Mail;
 
@@ -172,22 +173,36 @@ class User extends Authenticatable
 
   protected static function update_user_profile($input) {
 
+    $old_password          = $input['old_password'];
     $password              = $input['password'];
-    $new_password          = $input['new_password'];
-    $user                  = User::find(Auth::user()->id);
-    $save = false;
-    if( ($password != "") && ($new_password != "") ) {
+    $password_confirmation = $input['password_confirmation'];
+    $user           = User::find(Auth::user()->id);
+    $save           = false;
 
-        if (Hash::check($password, Auth::user()->password)) {
-          $user->password = Hash::make($input['new_password']);
-          $user->phone  = $input['phone'];
-          $user->dni    = $input['dni'];
-          $user->save();
-          $save = true;
+    if( ($old_password != "") && ($password != "") ) {
+
+        if (Hash::check($old_password, Auth::user()->password)) {
+
+          $data = Input::all();
+
+          $rules = array(
+            'password'              => 'required|min:6|confirmed',
+            'password_confirmation' => 'required|min:6|same:password'
+          );
+
+          $validator = Validator::make($data, $rules);
+
+          if ($validator->passes()) {
+            $user->password = Hash::make($input['password']);
+            $user->phone  = $input['phone'];
+            $user->dni    = $input['dni'];
+            $user->save();
+            $save = true;
+          }
         }
     }
 
-    if( ($password == "") && ($new_password == "") ) {
+    if( ($old_password == "") && ($password == "") && ($password_confirmation == "")) {
       $user->phone  = $input['phone'];
       $user->dni    = $input['dni'];
       $user->save();
