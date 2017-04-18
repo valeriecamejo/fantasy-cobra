@@ -24,7 +24,7 @@
       <div class="row Bcontainer">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-tabsnull" role="tablist">
-          <li role="presentation" <?php if(isset($_SESSION['date_team']) && $_SESSION['date_team'] == today){ ?> class="active" <?php } ?>><a href="#lineups" aria-controls="home" role="tab" data-toggle="tab">Equipos de hoy</a>
+          <li role="presentation" class="active"><a href="#lineups" aria-controls="home" role="tab" data-toggle="tab">Equipos de hoy</a>
           </li>
           <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Equipos anteriores</a>
           </li>
@@ -35,7 +35,7 @@
         <!-- Tab panes -->
         <!-------------------------Today Teams ------------------------>
         <div class="tab-content tab-contentnull backblack tab-contentmislineups">
-          <div role="tabpanel" class="tab-pane fade <?php if(isset($_SESSION['date_team']) && $_SESSION['date_team'] == today){ ?> in active <?php } ?> bordyel" id="lineups">
+          <div role="tabpanel" class="tab-pane fade in active } ?> bordyel" id="lineups">
             <table class="table table-hover table-responsive tabledep2">
               <thead>
                 <tr>
@@ -264,8 +264,9 @@
               @else
               <tbody>
                 @php
-                $cont_teams=1
+                $cont_teams=1;
                 @endphp
+
                 @foreach($future_teams as $future_team)
                 <tr>
                   <td>
@@ -303,7 +304,7 @@
                       <input type="hidden" class="form-compe2" name="lineup_id" value="{{$future_team->id}}">
                       <button type='submit' class="BtnEntrar3" style="border-style:none;">INSCRIBIR</button>
                       {{ Form::close() }}
-                      <span class="badge">{{count($future_team->competition_id)}}</span>
+                      <span class="badge">{{count($future_team->team_user_id)}}</span>
                     </div>
                   </td>
                   <td>{{$future_team->points}}</td>
@@ -528,6 +529,7 @@
                       <ul>
                         @php
                           $cont_teams=1;
+                          $cant=0;
                         @endphp
                         @foreach($future_teams as $future_team)
                           @if(isset($future_teams) and count($future_teams)!=0)
