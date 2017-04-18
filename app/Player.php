@@ -86,4 +86,10 @@ class Player extends Model
 
     return $players;
   }
+
+
+  public static function find_data($id)
+  {
+  }
+
 }

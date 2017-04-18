@@ -13,6 +13,8 @@ var fielder_2        ='';
 var fielder_3        ='';
 var center_fielder   ='';
 var m_fielder        ='';
+var count_team       = 0;
+
 
 add_players(championship,type_play);
 
@@ -236,15 +238,16 @@ function  tpl_players(championship,type_play,players) {
 function addPlayer(id, position, name, last_name, name_opponent, name_team, salary) {
 
   var verify_res              = verify_repeat(id,position);
-
+  var button_create           = "<button type='submit' class='btn btn-primary2 btn-lg' name='createlineup'>Crear Lineup</button>";
   var template_pos            = "<td id='pos'>" + position + "</td>" +
     "<td id='jug'><span id='teamcol'>" + name +" "+ last_name + "</td>" +
     "<td id='opo'>" + name_opponent + " vs <span id='teamcol'>" + name_team + "</span></td>" +
     "<td id='salario'>" + salary + "</td>" +
     "<td>" +
     "<a href='#' onclick='deletePlayer();'>" +
-    "<img src='../images/ico/menos.png' alt='menos' class='mashov'>" +
+    "<img src='/images/ico/menos.png' alt='menos' class='mashov'>" +
     "</a>" +
+    "<input type='hidden' name='" + position + "' value='" + id + "'>" +
     "</td>";
 
   var template_pa             = "<td id='pos'>" + position + "</td>" +
@@ -253,8 +256,9 @@ function addPlayer(id, position, name, last_name, name_opponent, name_team, sala
     "<td id='salario'>" + salary + "</td>" +
     "<td>" +
     "<a onclick='deletePlayer();'>" +
-    "<img src='../images/ico/menos.png' alt='menos' class='mashov'>" +
+    "<img src='/images/ico/menos.png' alt='menos' class='mashov'>" +
     "</a>" +
+    "<input type='hidden' name='" + position + "' value='" + id + "'>" +
     "</td>";
 
   if(verify_res == true) {
@@ -273,25 +277,33 @@ function addPlayer(id, position, name, last_name, name_opponent, name_team, sala
       var fielder3_select            ='';
 
       if (position == 'PA') {
-        pitchers_select  = template_pa;
-
+        pitchers_select   = template_pa;
+        count_team        = count_team + 1;
       } else if (position == 'C') {
         catchers_select     = template_pos;
+        count_team        = count_team + 1;
       } else if (position == '1B') {
         first_base_select   = template_pos;
+        count_team        = count_team + 1;
       } else if (position == '2B') {
         second_base_select  = template_pos;
+        count_team        = count_team + 1;
       } else if (position == '3B') {
         third_base_select   = template_pos;
+        count_team        = count_team + 1;
       } else if (position == 'SS') {
-        shortstop_select    = template_pos;
+        shortstop_select  = template_pos;
+        count_team        = count_team + 1;
       } else if (position == 'OF') {
         if (fielder1_select == '')
-          fielder1_select   = template_pos;
+          fielder1_select = template_pos;
+        count_team        = count_team + 1;
       } else if (fielder2_select == '') {
-        fielder2_select     = template_pos;
+        fielder2_select   = template_pos;
+        count_team        = count_team + 1;
       } else if (fielder3_select == '') {
-        fielder3_select     = template_pos;
+        fielder3_select   = template_pos;
+        count_team        = count_team + 1;
       }
 
       $("#playerPA").append(pitchers_select);
@@ -304,6 +316,9 @@ function addPlayer(id, position, name, last_name, name_opponent, name_team, sala
       $("#playerOF2").append(fielder2_select);
       $("#playerOF3").append(fielder3_select);
 
+      if (count_team == 9) {
+        $("#button_create").append(button_create);
+      }
     } else if (type_play == 'TURBO') {
 
       var pitchers_select            ='';
@@ -314,21 +329,29 @@ function addPlayer(id, position, name, last_name, name_opponent, name_team, sala
 
       if (position == 'PA') {
         pitchers_select  = template_pa;
-
+        count_team      = count_team + 1;
       } else if (position == 'C') {
         catchers_select     = template_pos;
+        count_team      = count_team + 1;
       } else if (position == '1B' || position == '3B') {
         center_fielder_select   = template_pos;
+        count_team      = count_team + 1;
       } else if (position == '2B' || position == 'SS') {
         m_fielder_select  = template_pos;
+        count_team      = count_team + 1;
       } else if (position == 'OF') {
         fielder1_select   = template_pos;
+        count_team      = count_team + 1;
       }
       $("#playerPA").append(pitchers_select);
       $("#playerC").append(catchers_select);
       $("#playerOF1").append(fielder1_select);
       $("#playerCI").append(center_fielder_select);
       $("#playerMI").append(m_fielder_select);
+
+      if (count_team == 5) {
+        $("#button_create").append(button_create);
+      }
     }
   }
 }

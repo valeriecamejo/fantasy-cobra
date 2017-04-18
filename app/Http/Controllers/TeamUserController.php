@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Player;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Team_user;
+use Illuminate\Support\Facades\Input;
 
 class TeamUserController extends Controller
 {
@@ -48,12 +50,22 @@ class TeamUserController extends Controller
   }
 
   public function new_team($type) {
-    return view('team.create') ->with('type', $type);
+    return view('team.create')
+      ->with('type', $type)
+      ->with('championship', '1')
+      ->with('date', Carbon::now()->format('d-m-Y'));
   }
 
   public function players() {
     $players = Player::players($_GET['championship'],$_GET['type_play']);
 
     echo json_encode($players);
+  }
+
+  public function save_team() {
+    $team = Team_user::save_team(Input::all());
+
+    var_dump(Input::all());
+
   }
 }
