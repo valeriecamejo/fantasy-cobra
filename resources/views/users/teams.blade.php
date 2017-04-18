@@ -236,7 +236,7 @@
           </div>
 
           <!-------------------------Future Teams ------------------------>
-          <div role="tabpanel" class="tab-pane fade in active  bordyel" id="messages">
+          <div role="tabpanel" class="tab-pane fade bordyel" id="messages">
             <!--<h2 class="msgnogame">No se encuentran lineups creados.</h2>-->
             <table class="table table-hover table-responsive tabledep2">
               <thead>
