@@ -19,6 +19,9 @@ var m_fielder        ='';
 var count_team       = 0;
 var remaining_salary = 50000;
 document.getElementsByName("salaryrest")[0].value = remaining_salary;
+$("#playerOF").empty();
+$("#playerOF1").empty();
+$("#playerOF2").empty();
 
 /************************************************************************
  * Load players
@@ -253,8 +256,6 @@ function  tpl_players(championship,type_play,players) {
  ************************************************************************/
 function addPlayer(id, position, name, last_name, name_opponent, name_team, salary) {
 
-  var verify_res              = verify_repeat(id,position);
-
   var button_create           = "<button type='submit' class='btn btn-primary2 btn-lg' name='createlineup'>Crear Lineup</button>";
 
   var template_pos            = "<td id='pos'>" + position + "</td>" +
@@ -301,6 +302,30 @@ function addPlayer(id, position, name, last_name, name_opponent, name_team, sala
     "<input type='hidden' name='" + position + "' value='" + id + "'>" +
     "</td>";
 
+  var template_of1            = "<td id='pos'> OF1 </td>" +
+    "<td id='jug'><span id='teamcol'>" + name +" "+ last_name + "</td>" +
+    "<td id='opo'>" + name_opponent + " vs <span id='teamcol'>" + name_team + "</span></td>" +
+    "<td id='salario'>" + salary + "</td>" +
+    "<td>" +
+    '<a  onclick=deletePlayer('+'"'+id+'","'+salary+'","playerOF1"); >' +
+    "<img src='/images/ico/menos.png' alt='menos' class='mashov'>" +
+    "</a>" +
+    "<input type='hidden' name='OF1' value='" + id + "'>" +
+    "</td>";
+
+  var template_of2            = "<td id='pos'> OF2 </td>" +
+    "<td id='jug'><span id='teamcol'>" + name +" "+ last_name + "</td>" +
+    "<td id='opo'>" + name_opponent + " vs <span id='teamcol'>" + name_team + "</span></td>" +
+    "<td id='salario'>" + salary + "</td>" +
+    "<td>" +
+    '<a  onclick=deletePlayer('+'"'+id+'","'+salary+'","playerOF2"); >' +
+    "<img src='/images/ico/menos.png' alt='menos' class='mashov'>" +
+    "</a>" +
+    "<input type='hidden' name='OF2' value='" + id + "'>" +
+    "</td>";
+
+  var verify_res              = verify_repeat(id,position);
+
   if(verify_res == true) {
 
     alert("El " + position + " ya fue seleccionado");
@@ -337,17 +362,17 @@ function addPlayer(id, position, name, last_name, name_opponent, name_team, sala
         shortstop_select  = template_pos;
         updateSalary(salary, "add")
       } else if (position == 'OF') {
-        if (fielder1_select == '')
+        if ($("#playerOF").is(':empty')) {
           fielder1_select = template_pos;
-        updateSalary(salary, "add")
-      } else if (fielder2_select == '') {
-        fielder2_select   = template_pos;
-        updateSalary(salary, "add")
-      } else if (fielder3_select == '') {
-        fielder3_select   = template_pos;
-        updateSalary(salary, "add")
+          updateSalary(salary, "add")
+        } else if ($("#playerOF1").is(':empty')) {
+          fielder2_select   = template_of1;
+          updateSalary(salary, "add")
+        } else if ($("#playerOF2").is(':empty')) {
+          fielder3_select   = template_of2;
+          updateSalary(salary, "add")
+        }
       }
-
       $("#playerPA").append(pitchers_select);
       $("#playerC").append(catchers_select);
       $("#player1B").append(first_base_select);
@@ -459,6 +484,16 @@ function verify_repeat(id_player,position_player) {
     } else if (position_player == 'OF') {
       if (fielder_1 == id_player || fielder_2 == id_player || fielder_3 == id_player) {
         repeat          = true;
+      } else {
+        if (fielder_1 == '') {
+          fielder_1       = id_player;
+        } else if (fielder_2 == '') {
+          fielder_2       = id_player;
+        } else if (fielder_3 == '') {
+          fielder_3       = id_player;
+        } else {
+          repeat          = true;
+        }
       }
     }
   } else if (type_play == 'TURBO') {
