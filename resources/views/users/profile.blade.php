@@ -70,7 +70,7 @@
                   <p>Contraseña anterior</p>
                 </div>
                 <div class="input-group InicioSes5">
-                  <input onkeypress="action_password_perfil()" id="password_perfil" type="password" name="password" class="form-control3 control2" placeholder="Escriba su contraseña" aria-describedby="sizing-addon2">
+                  <input onkeypress="action_password_perfil()" id="password_perfil" type="password" name="old_password" class="form-control3 control2" placeholder="Escriba su contraseña" aria-describedby="sizing-addon2">
                   @if($errors->has('password'))
                     <span class="incompleto">×</span>
                     @foreach($errors->get('password') as $error)
@@ -87,7 +87,7 @@
                   <p>Contraseña Nueva</p>
                 </div>
                 <div class="input-group InicioSes5">
-                  <input onkeypress="action_password_perfil()" id="password_perfil" type="password" name="new_password" class="form-control3 control2" placeholder="Escriba una contraseña nueva" aria-describedby="sizing-addon2">
+                  <input onkeypress="action_password_perfil()" id="password_perfil" type="password" name="password" class="form-control3 control2" placeholder="Escriba una contraseña nueva" aria-describedby="sizing-addon2">
                   @if($errors->has('password'))
                     <span class="incompleto">×</span>
                     @foreach($errors->get('password') as $error)
