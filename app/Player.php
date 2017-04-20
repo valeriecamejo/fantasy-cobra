@@ -88,8 +88,12 @@ class Player extends Model
   }
 
 
-  public static function find_data($id)
-  {
+  public static function find_data($id) {
+
+    $player = Player::where('id', '=', $id)
+      ->first();
+
+    return $player;
   }
 
 }

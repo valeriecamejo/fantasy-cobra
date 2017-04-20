@@ -11,18 +11,22 @@ class Team_user_players extends Model
     'legacy_id', 'player_id', 'team_user_id', 'name', 'last_name', 'position', 'salary', 'points'
   ];
 
-  public static function save_player($pa_s, $team_id)
-  {
-    $pa                   = new Team_user_players();
-    $pa->legacy_id        =  $pa_s->legacy_id;
-    $pa->player_id        =  $pa_s->id;
-    $pa->team_user_id     =  $team_id;
-    $pa->name             =  $pa_s->name;
-    $pa->last_name        =  $pa_s->last_name;
-    $pa->position         =  $pa_s->position;
-    $pa->salary           =  $pa_s->salary;
-    $pa->points           =  $pa_s->points;
-    $pa->save();
+  public static function save_player($player_obj, $team_id) {
+
+    $player                   = new Team_user_players();
+    $player->legacy_id        =  $player_obj['legacy_id'];
+    $player->player_id        =  $player_obj['id'];
+    $player->team_user_id     =  $team_id;
+    $player->name             =  $player_obj['name'];
+    $player->last_name        =  $player_obj['last_name'];
+    $player->position         =  $player_obj['position'];
+    $player->salary           =  $player_obj['salary'];
+    $player->points           =  $player_obj['points'];
+
+     if ($player->save()) {
+       return $player;
+     } else {
+       return false;
+     }
   }
-  //
 }

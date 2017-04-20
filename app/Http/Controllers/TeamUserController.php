@@ -7,6 +7,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Team_user;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class TeamUserController extends Controller
 {
@@ -63,9 +65,24 @@ class TeamUserController extends Controller
   }
 
   public function save_team() {
-    $team = Team_user::save_team(Input::all());
 
-    var_dump(Input::all());
+    if (Input::get('type_play') == 'TURBO') {
+      $team = Team_user::save_team_turbo(Input::all());
+
+    } elseif (Input::get('type_play') == 'REGULAR') {
+      $team = Team_user::save_team_regular(Input::all());
+
+    }
+
+    if ($team) {
+      Session::flash('message', 'Equipo creado con exito.');
+      Session::flash('class', 'success');
+      return Redirect::to('usuario/mis-equipos');
+    } else {
+      Session::flash('message', 'Error al crear el equipo.');
+      Session::flash('class', 'danger');
+      return redirect()->back();
+    }
 
   }
 }

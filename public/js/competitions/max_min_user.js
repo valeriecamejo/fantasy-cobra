@@ -27,7 +27,6 @@ function add_prize(min_user){
   var protocol        = location.protocol;
   var URLdomain       = window.location.host;
   var url_ajax        = protocol + "//" + URLdomain;
-  alert(url_ajax);
   var min_user = min_user;
   jQuery.ajax({
     url: url_ajax + "/usuario/obtener-premios",

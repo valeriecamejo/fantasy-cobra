@@ -9,13 +9,12 @@
 
     {!!  Form::open(array('url' => 'usuario/crear-equipo', 'method' => 'post')) !!}
 
-    <input type='hidden' id="salario_players" value="100000">
-    <input type='hidden' id="sport" value="1">
-    <input type='hidden' id="championship" value="1">
+    <input type='hidden' name="sport" id="sport" value="1">
+    <input type='hidden' name="championship" id="championship" value="1">
+    <input type='hidden' name="type_journal" id="championship" value="DAILY">
     <div class="modal-bodycompe">
       <div class="boxcompe">
         <p>Tipo de juego:  {{$type}} </p>
-        <input type="hidden" value="{{$type}}" name="type_play" id="type_play">
         <input type="hidden" value="{{$type}}" name="type_play" id="type_play">
         <!--<select class="form-compe2" name="type_play" id="type_play">
           <option value="REGULAR" >Regular</option>
@@ -71,10 +70,10 @@
               <div role="tabpanel" class="tab-pane fade" id="OFD">
 
               </div>
-              <div role="tabpanel" class="tab-pane fade" id="CID">
+              <div role="tabpanel" class="tab-pane fade" id="MID">
 
               </div>
-              <div role="tabpanel" class="tab-pane fade" id="MID">
+              <div role="tabpanel" class="tab-pane fade" id="CID">
 
               </div>
               <div role="tabpanel" class="tab-pane fade" id="BATSD">
@@ -94,8 +93,7 @@
           <div class="Usuariolineup" style="text-align:center;text-indent: 0;">EQUIPO</div>
           <div id="th2">
             <p id="salariorestante">Salario Restante:</p>
-            <!--<input id="salaryrest" name="salaryrest" value="" class="inputsalario" type="text" readonly placeholder="50.000">
-            --><input id="salaryrest" name="salaryrest" value="" class="inputsalario" type="text" readonly placeholder="50.000">
+            <input id="salaryrest" name="salaryrest"  class="inputsalario" type="text" readonly>
 
           </div>
           <table class="table table-striped2 table-hover2 tablelineup theadhead">
@@ -119,9 +117,9 @@
               </tr>
               <tr id="player1B">
               </tr>
-              <tr id="playerCI">
-              </tr>
               <tr id="playerMI">
+              </tr>
+              <tr id="playerCI">
               </tr>
               <tr id="player2B">
               </tr>
@@ -129,11 +127,11 @@
               </tr>
               <tr id="playerSS">
               </tr>
+              <tr id="playerOF">
+              </tr>
               <tr id="playerOF1">
               </tr>
               <tr id="playerOF2">
-              </tr>
-              <tr id="playerOF3">
               </tr>
               </tbody>
             </table>
@@ -144,8 +142,8 @@
         </div>
       </div>
       <div id="th22" class="wid50">
-        <button type="submit" class="btn btn-primary2 btn-return btn-lg" name="returnhome" onclick="">Regresar</button>
-        <button type="submit" class="btn btn-primarycan btn-lg" name="cancellineup" onclick="">Limpiar</button>
+        <a href="/lobby" class="btn btn-primary2 btn-return btn-lg">Regresar</a>
+        <!--<button type="submit" class="btn btn-primarycan btn-lg" name="cancellineup" onclick="">Limpiar</button>-->
         <div id="button_create"></div>
       </div>
     </div>
