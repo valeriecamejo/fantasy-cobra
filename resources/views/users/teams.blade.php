@@ -9,8 +9,7 @@
     <h3 class="Titulo1">MIS EQUIPOS</h3>
     <input type="hidden" id="first_game"  value="">
     <input type="hidden" id="hour" value="">
-    <div class="container-fluid BlokBoton">
-      <!-- Botones -->
+    <!--<div class="container-fluid BlokBoton">
       <div class="Boton1 oculto-movil">
         <a onclick="action(1,0)" style="color:white;">
           <div class="BotonRe">
@@ -19,6 +18,7 @@
         </a>
       </div>
     </div>
+    -->
 
     <div class="container desktop-visible">
       <div class="row Bcontainer">

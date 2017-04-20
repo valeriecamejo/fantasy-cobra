@@ -198,19 +198,19 @@ class Team_user extends Model {
         return false;
       }
 
-      $of_obj               = Player::find_data($input['OF1']);
+      $of_obj               = Player::find_data($input['OF']);
       $save_of              = Team_user_players::save_player($of_obj,$team->id);
       if (!$save_of) {
         return false;
       }
 
-      $of2_obj               = Player::find_data($input['OF2']);
+      $of2_obj               = Player::find_data($input['OF1']);
       $save_of2              = Team_user_players::save_player($of2_obj,$team->id);
       if (!$save_of2) {
         return false;
       }
 
-      $of3_obj               = Player::find_data($input['OF3']);
+      $of3_obj               = Player::find_data($input['OF2']);
       $save_of3              = Team_user_players::save_player($of3_obj,$team->id);
       if (!$save_of3) {
         return false;
