@@ -14,7 +14,7 @@ class AlterPlayersTable extends Migration
     public function up()
     {
         Schema::table('players', function (Blueprint $table) {
-            $table->integer('legacy_id')->after('sport_id');
+            $table->integer('legacy_id')->after('championship_id');
         });
     }
 
@@ -26,7 +26,7 @@ class AlterPlayersTable extends Migration
     public function down()
     {
         Schema::table('players', function (Blueprint $table) {
-            $table->dropColumn('legacy_id')->after('sport_id');
+            $table->dropColumn('legacy_id')->after('championship_id');
         });
     }
 }
