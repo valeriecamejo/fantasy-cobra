@@ -68,6 +68,7 @@
                 @foreach($today_teams as $today_team)
                 <tr>
                   <td class="tdimg1">
+
                     {!! Html::image($today_team->avatar,'',array('class' => 'tabimgtablet')) !!}
                   </td>
                   <td id="tdcomp">
@@ -76,7 +77,6 @@
                       @php
                       $contador=0;
                       $pts='0.00';
-                      $cant=0;
                       $lienupid='';
                       @endphp
                       @if(isset($today_competitions) and count($today_competitions)>0)
@@ -135,7 +135,9 @@
                       <button type='submit' class="BtnEntrar3" style="border-style:none;">INSCRIBIR</button>
                       {!! Form::close() !!}
                       @endif
-                      <span class="badge">{{count($today_competitions)}}</span>
+                      <span class="badge">
+                        {{ UtilityDate::team_registered_competition($today_teams, $today_team->team_user_id) }}
+                      </span>
                     </div>
                   </td>
                   @endif
@@ -191,7 +193,6 @@
                       @php
                       $contador=0;
                       $pts='0.00';
-                      $cant=0;
                       $lienupid='';
                       @endphp
                       {{Auth::user()->username}}
@@ -304,7 +305,11 @@
                       <input type="hidden" class="form-compe2" name="lineup_id" value="{{$future_team->id}}">
                       <button type='submit' class="BtnEntrar3" style="border-style:none;">INSCRIBIR</button>
                       {{ Form::close() }}
-                      <span class="badge">{{count($future_team->team_user_id)}}</span>
+                      <span class="badge">
+
+                      {{ UtilityDate::team_registered_competition($future_teams, $future_team->team_user_id) }}
+
+                      </span>
                     </div>
                   </td>
                   <td>{{$future_team->points}}</td>
@@ -357,6 +362,7 @@
                   @endif
                   <li class="tmovlineup">
                     <div class="linemovilimg">
+
                       {!! Html::image($today_team->avatar,'',array('class' => 'tabimgtablet')) !!}
                     </div>
                     <div class="namelineup">
@@ -426,15 +432,9 @@
                           @endif
 
                           <div class="spancomp">
-                            @if(isset($today_team->id))
                             <span class="badge">
-                              {{$cant}}
+                              {{ UtilityDate::team_registered_competition($today_teams, $today_team->team_user_id) }}
                             </span>
-                            @else
-                            <span class="badge noinscr">
-                              {{$cant}}
-                            </span>
-                            @endif
                           </div>
                         </li>
                       </a>
@@ -600,15 +600,9 @@
                           </div>
                           @endif
                           <div class="spancomp">
-                            @if(isset($future_team->id))
-                              <span class="badge">
-                              {{$cant}}
-                              </span>
-                            @else
-                              <span class="badge noinscr">
-                              {{$cant}}
-                              </span>
-                            @endif
+                            <span class="badge">
+                              {{ UtilityDate::team_registered_competition($future_teams, $future_team->team_user_id) }}
+                            </span>
                           </div>
                         </li>
                       </a>
@@ -620,7 +614,6 @@
               </div>
             </div>
           </div>
-          <!-- restab cierre -->
           <!-- restab cierre -->
           <div class="divtabfoot3">
             <div class="divtabfooty3">

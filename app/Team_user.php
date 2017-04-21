@@ -97,6 +97,8 @@ private static function team_by_times($time) {
   ->where(DB::raw('DATE_FORMAT(competitions.date, "%Y-%m-%d")'), $time, $today)
   ->where('team_users.user_id', '=', Auth::user()->id)
   ->get();
+
   return $team_by_times;
 }
+
 }

@@ -13,5 +13,18 @@ class UtilityDate{
 
         return $day_week[$wday];
     }
+
+  public  static function team_registered_competition($obj_teams, $team_id) {
+
+  $cant = '';
+  foreach ($obj_teams as $obj_team => $valor_obj_team) {
+
+    if ($valor_obj_team->team_user_id == $team_id) {
+      $cant ++;
+    };
+  }
+
+  return $cant;
+}
 }
 
