@@ -60,4 +60,11 @@ class CompetitionController extends Controller {
     }
 
   }
+
+  public function modal_competition() {
+    $competition = Competition::modal_competition($_GET['id_competition']);
+
+    echo json_encode($competition);
+  }
+
 }
