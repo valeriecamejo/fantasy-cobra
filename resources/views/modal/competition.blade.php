@@ -40,14 +40,14 @@
             <div class="subblockcomp">
               <div class="headsubblock">Participantes</div>
                 <div class="comptables" id="style-6">
-                  <table class="Tablepart table-striped3 table-hover3" id="competition_users">
+                  <table class="Tablepart table-striped3 table-hover3" id="competition_participants">
                   </table>
                 </div>
               </div>
               <div class="subblockcomp">
                 <div class="headsubblock">Premios</div>
                   <div class="comptables" id="style-6">
-                    <table class="TablePrem table-striped3 table-hover3" id="competition_awards">
+                    <table class="TablePrem table-striped3 table-hover3" id="competition_prizes">
                     </table>
                   </div>
                 </div>
