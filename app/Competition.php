@@ -155,5 +155,33 @@ public static function bettor_competitions() {
       return false;
     }
   }
+
+  public static function modal_competition($id_competition) {
+
+    $competition           = Competition::where('competitions.id', '=', $id_competition)->get();
+
+    foreach ($competition as $competition_info){
+      $prize_id           = $competition_info->prize_id;
+    }
+
+    $prize                 = Prize::join('prize_types', 'prize_types.prize_id', '=', 'prizes.id')
+      ->where('prizes.id', '=', $prize_id)
+      ->get();
+
+    $participants          =  User::select('users.name','users.last_name','users.username','team_subscribers.points')
+      ->join('team_users', 'team_users.user_id', '=', 'users.id')
+      ->join('team_subscribers', 'team_subscribers.team_user_id', '=', 'team_users.id')
+      ->join('competitions', 'competitions.id', '=', 'team_subscribers.competition_id')
+      ->where('competitions.id', '=', $id_competition)
+      ->orderBy('team_subscribers.points', 'DESC')
+      ->get();
+
+    $competition_data[]   = array(
+      'competition'       => $competition,
+      'prize'             => $prize,
+      'participants'      => $participants,
+    );
+    return $competition_data;
+  }
 }
 
