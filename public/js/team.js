@@ -11,7 +11,7 @@ var url_ajax = "https://www.fantasycobra.com.ve";
  *   Parametros de entrada:                                              *
  *                           +team_id: Id del equipo que                 *
  ************************************************************************/
-function team_modal(team_id,cont_teams,username){ 
+function team_modal(team_id,cont_teams,username){
 
     $.ajax({
         url: url_ajax + "/usuario/ver-equipos/modal-team",
@@ -31,7 +31,7 @@ function team_modal(team_id,cont_teams,username){
             $("#players_lineup").html("");
             //$("#buttonedit").html("");
             $('#activateedit').html('');
-            //console.log("=======>>"+data);  
+            //console.log("=======>>"+data);
             var datos = jQuery.parseJSON(data);
             add_info_team(datos, team_id, cont_teams, username);
         }
@@ -53,20 +53,14 @@ function add_info_team(datos, team_id, cont_teams, username){
     var date_lineup     =   0; // Obtengo le fecha del Lineup
     var lineup_id;  // Contiene el campo oculto con el id del Lineup a Editar
     var lineup_name;
-    var lineup_salary = "<tr>" +
-        "<td>" + "<b>Salario: </b></td>" +
-        "</tr>";
-    var lineup_date ="<tr>" +
-        "<td>" + "<b>Fecha: </b>- - - - </td>" +
-        "</tr>";
-    var lineup_points = "<tr>" +
-        "<td>" + "<b>Total Pts: </b>- - -</td>" +
-        "</tr>";
+
+
     var competition_modal = '';
     var competition_name;
     var competition_in;
     var competition_cost_entry;
     var competition_position;
+
     var players_lineup = "<thead>"+
                             "<tr>"+
                                 "<th>POS</th>"+
@@ -79,21 +73,6 @@ function add_info_team(datos, team_id, cont_teams, username){
 
         //----------------------Players-------------------
             $(element.players).each(function (j, players) {
-                date_lineup = players.datelin;
-
-                lineup_salary = "<tr>" +
-                    "<td>" + "<b>Salario: </b>" + players.salary_rest + "</td>" +
-                    "</tr>";
-
-                lineup_date ="<tr>" +
-                    "<td>" + "<b>Fecha: </b>"+ players.datelin + "</td>" +
-                    "</tr>";
-
-                if(players.pos=='OF1' || players.pos=='OF2' || players.pos=='OF3'){
-                    pos = players.pos.substr(0,2);
-                }else{
-                    pos = players.pos.substr(0,3);
-                }
 
                 players_lineup = players_lineup +
                     "<tr>"+
@@ -142,15 +121,15 @@ function add_info_team(datos, team_id, cont_teams, username){
 
     });
 
-   
+
     lineup_id = '<div id="buttonedit"><input type="hidden" name="team_id" id="team_id" value="'+team_id+'"></div>';
-    
+
     if(date_lineup<actual_date){
         //alert('es menor');
         $('#activateedit').html('');
 
     }else if((hour >= first_game) && (date_lineup > actual_date)){
-       
+
 
         boton_edit = lineup_id+'<button type="submit" class="btn btn-default btn-primary4"  style="margin: 5px 0px;">EDITAR EQUIPO</button>';
         $('#activateedit').append(boton_edit);
@@ -167,7 +146,7 @@ function add_info_team(datos, team_id, cont_teams, username){
 
     }
 
-    //------------------- Campo Oculto con Id del Lineup a Editar  
+    //------------------- Campo Oculto con Id del Lineup a Editar
    // lineup_id = '<div id="buttonedit"><input type="hidden" name="team_id" id="team_id" value="'+team_id+'"></div>';
 
     $("#lineup_salary").append(lineup_salary);
