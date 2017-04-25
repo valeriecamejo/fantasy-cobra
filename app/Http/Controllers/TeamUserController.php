@@ -37,9 +37,9 @@ class TeamUserController extends Controller
     $previous_teams = Team_user::previous_teams();
     $future_teams   = Team_user::future_teams();
 
-    $today_competitions    = Team_user::today_competitions();
-    $previous_competitions = Team_user::previous_competitions();
-    $future_competitions  = Team_user::future_competitions();
+    $today_competitions    = Team_user::today_teams();
+    $previous_competitions = Team_user::previous_teams();
+    $future_competitions  = Team_user::future_teams();
 
     return view('users.teams', array(
       'today_teams'           => $today_teams,

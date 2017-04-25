@@ -11,7 +11,7 @@ use Carbon\Carbon;
 class Team_user extends Model {
   protected $table = 'team_users';
   protected $fillable = [
-    'user_id', 'sport_id', 'championship_id', 'date_inscription', 'remaining_salary', 'name'
+    'user_id', 'sport_id', 'championship_id', 'name', 'date_inscription', 'type_journal', 'type_play', 'remaining_salary'
   ];
 
   /*********************************************
@@ -47,44 +47,13 @@ class Team_user extends Model {
     return $previous_teams = Team_user::team_by_times($time);
   }
 
-  /*********************************************
-   * today_competitions: List today competitions
-   * @param void
-   * @return $today_competitions
-   *********************************************/
-  public static function today_competitions() {
 
-    $time = "=";
-    return $today_competitions = Team_user::team_by_times($time);
-  }
-
-  /***********************************************
-   * previous_competitions: List previous competitions
-   * @param void
-   * @return $previous_competitions
-   ************************************************/
-  public static function previous_competitions() {
-
-    $time = "<";
-    return $previous_competitions = Team_user::team_by_times($time);
-  }
-
-  /**********************************************
-   * future_competitions: List futures competitions
-   * @param void
-   * @return $future_competitions
-   ***********************************************/
-  public static function future_competitions() {
-
-    $time = ">";
-    return $future_competitions = Team_user::team_by_times($time);
-  }
-
-  /**********************************************
+  /**************************************************
    * futures_competitions: List futures competitions
    * @param  $time
    * @return $futures_competitions
-   ***********************************************/
+   **************************************************/
+
   private static function team_by_times($time) {
 
     $today         = date('Y-m-d');
@@ -99,6 +68,7 @@ class Team_user extends Model {
       ->get();
     return $team_by_times;
   }
+
 
   public static function save_team_turbo($input) {
 
@@ -219,5 +189,4 @@ class Team_user extends Model {
       return $team;
     }
   }
-
 }
