@@ -33,7 +33,6 @@ date_default_timezone_set('Etc/GMT+4');
   {!! Html::script('js/date.js') !!}
   {!! Html::script('js/messageanimate.js') !!}
   {!! Html::script('js/moment.js') !!}
-  {!! Html::script('js/team.js') !!}
   {!! Html::script('js/password_perfil.js') !!}
   {!! Html::script('js/menu.js') !!}
   {!! Html::script('js/login.js') !!}
