@@ -351,7 +351,6 @@ class PlayersTableSeeder extends Seeder
           'name_team'          => 'DET',
           'name_opponent'      => 'NY',
         ),
-
       ));
     }
 }

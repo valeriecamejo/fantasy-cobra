@@ -25,7 +25,7 @@ class Team_SubscribersTableSeeder extends Seeder
                 'date'           => '2017-03-14 12:30:01',
                 'balance_before' => '10000',
                 'bonus'          => '1000',
-                'balance'        => '9500',
+                'balance'        => '11000',
                 'is_winner'      => true,
             ),
             array(
@@ -39,6 +39,19 @@ class Team_SubscribersTableSeeder extends Seeder
                 'balance_before' => '10000',
                 'bonus'          => '1000',
                 'balance'        => '9500',
+                'is_winner'      => true,
+            ),
+            array(
+                'sport_id'       => '1',
+                'competition_id' => '4',
+                'team_id'        => '1',
+                'team_user_id'   => '1',
+                'amount'         => '5000',
+                'points'         => '0',
+                'date'           => '2017-03-14 12:30:01',
+                'balance_before' => '10000',
+                'bonus'          => '1000',
+                'balance'        => '11000',
                 'is_winner'      => true,
             ),
         ));

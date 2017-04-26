@@ -1,6 +1,8 @@
 @extends ('layouts.template')
 
 @section ('content')
+
+{!! Html::script('js/teams/team_modal.js') !!}
 <div id="wrapper"> <!-- Abre Wrapper -->
   <!-- Sidebar -->
   <!-- Menú movil -->
@@ -69,11 +71,11 @@
                 <tr>
                   <td class="tdimg1">
 
-                    {!! Html::image($today_team->avatar,'',array('class' => 'tabimgtablet')) !!}
+                   <!-- {!! Html::image($today_team->avatar,'',array('class' => 'tabimgtablet')) !!} -->
                   </td>
                   <td id="tdcomp">
                     <!--#TODO anadir funcionalidad del modal con javascript-->
-                    <a onclick="team_modal({{$today_team->id}},{{$cont_teams}}, {{Auth::user()->username}})">
+                    <a onclick="team_modal({{$today_team->id}},{{$cont_teams}}, '{{Auth::user()->username}}')">
                       @php
                       $contador=0;
                       $pts='0.00';
@@ -111,8 +113,7 @@
                   </td>
                   <td></td>
                   <td class="RepColor">
-                    <a class="tdPremio" onclick="team_modal({{$today_team->id}}, {{$cont_teams}}, Auth::user()->username">{{$today_team->remaining_salary}} Bs.
-                    </a>
+                    {{$today_team->remaining_salary}} Bs.
                   </td>
                   <td></td>
                   @if($today_team->id == $today_competition->id)
@@ -122,7 +123,7 @@
                   @endphp
                   <td class="bdgedit">
                     <div class="contbtnbdg">
-                      <a onclick="team_modal({{$today_team->id}}, {{$cont_teams}}, Auth::user()->username)">
+                      <a onclick="team_modal({{$today_team->id}}, {{$cont_teams}}, '{{Auth::user()->username}}')">
                         @if($hour >= $competition_hour)
                         <div class="BtnEntrar31 noedit">VER</div>
                         @else
@@ -189,7 +190,7 @@
                   </td>
                   <td id="tdcomp">
                     <!--#TODO anadir funcionalidad del modal con javascript-->
-                    <a onclick="team_modal({{$previous_team->id}},{{$cont_teams}}, {{Auth::user()->username}})">
+                    <a onclick="team_modal({{$previous_team->id}},{{$cont_teams}}, '{{Auth::user()->username}}')">
                       @php
                       $contador=0;
                       $pts='0.00';
@@ -214,13 +215,12 @@
                   </td>
                   <td></td>
                   <td class="RepColor">
-                    <a class="tdPremio" onclick="team_modal({{$previous_team->id}}, {{$cont_teams}}, Auth::user()->username">{{$previous_team->remaining_salary}} Bs.
-                    </a>
+                    {{$previous_team->remaining_salary}} Bs.
                   </td>
                   <td></td>
                   <td class="bdgedit">
                     <div class="contbtnbdg">
-                      <a onclick="team_modal({{$previous_team->id}},{{$cont_teams}}, {{Auth::user()->username}})">
+                      <a onclick="team_modal({{$previous_team->id}},{{$cont_teams}}, '{{Auth::user()->username}}')">
                         <div class="BtnEntrar31 noedit">VER</div>
                       </a>
                     </div>
@@ -274,7 +274,7 @@
                     {!! Html::image($future_team->avatar,'',array('class' => 'tabimgtablet')) !!}
                   </td>
                   <td id="tdcomp">
-                    <a onclick="team_modal({{$future_team->id}}, {{$cont_teams}}, {{Auth::user()->username}}')">
+                    <a onclick="team_modal({{$future_team->id}}, {{$cont_teams}}, '{{Auth::user()->username}}')">
                       {{Auth::user()->username}}
                       <span style="color:transparent;">#</span>
                       {{$cont_teams}}
@@ -291,14 +291,12 @@
                   </td>
                   <td></td>
                   <td class="RepColor">
-                    <a class="tdPremio" onclick="team_modal({{$future_team->id}},{{$cont_teams}},'{{Auth::user()->username}})">
                       {{$future_team->remaining_salary}} Bs.
-                    </a>
                   </td>
                   <td></td>
                   <td class="bdgedit">
                     <div class="contbtnbdg">
-                      <a onclick="team_modal({{$future_team->id}}, {{$cont_teams}}, {{Auth::user()->username}})">
+                      <a onclick="team_modal({{$future_team->id}}, {{$cont_teams}}, '{{Auth::user()->username}}')">
                         <div class="BtnEntrar31">EDITAR</div>
                       </a>
                       {{ Form::open(array('url' => 'usuario/inscribir-equipo', 'method' => 'post')) }}
@@ -358,7 +356,7 @@
               @if(isset($today_teams))
               <a>
                 @else
-                <a onclick="team_modal({{$today_team->id}}, {{$cont_teams}}, {{Auth::user()->username}})">
+                <a onclick="team_modal({{$today_team->id}}, {{$cont_teams}}, '{{Auth::user()->username}}')">
                   @endif
                   <li class="tmovlineup">
                     <div class="linemovilimg">
@@ -457,7 +455,7 @@
                       @if(isset($previous_competitions) and count($previous_competitions)!=0)
                       <a>
                         @else
-                        <a onclick="team_modal({{$previous_team->id}},{{$cont_teams}},{{Auth::user()->username}})">
+                        <a onclick="team_modal({{$previous_team->id}},{{$cont_teams}}, '{{Auth::user()->username}}')">
                           @endif
                           <li class="tmovlineup">
                             <div class="linemovilimg">
@@ -497,21 +495,17 @@
                                 {{ date("d-m", $date) }}
                               </p>
                             </div>
+
                             <div class="btnreslineup">
                               <div class="BtnEntrarlineres3">
                                 {!! Html::image('images/ico/edit.png') !!}
                               </div>
                             </div>
+
                             <div class="spancomp">
-                              @if(isset($previous_team->id))
                               <span class="badge">
-                                {{$cant}}
+                                {{ UtilityDate::team_registered_competition($previous_teams, $previous_team->team_user_id) }}
                               </span>
-                              @else
-                              <span class="badge noinscr">
-                                {{$cant}}
-                              </span>
-                              @endif
                             </div>
                           </li>
                         </a>
@@ -529,13 +523,12 @@
                       <ul>
                         @php
                           $cont_teams=1;
-                          $cant=0;
                         @endphp
                         @foreach($future_teams as $future_team)
                           @if(isset($future_teams) and count($future_teams)!=0)
                             <a>
                           @else
-                            <a onclick="team_modal({{$future_teams->id}},{{$cont_teams}},{{Auth::user()->username}})">
+                            <a onclick="team_modal({{$future_teams->id}},{{$cont_teams}}, '{{Auth::user()->username}}')">
                           @endif
                             <li class="tmovlineup">
                               <div class="linemovilimg">

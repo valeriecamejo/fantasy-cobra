@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
-class TeamUserController extends Controller
-{
+class TeamUserController extends Controller {
 
   /***********************************
    * Create a new controller instance.
@@ -41,21 +40,23 @@ class TeamUserController extends Controller
     $previous_competitions = Team_user::previous_teams();
     $future_competitions  = Team_user::future_teams();
 
+//var_dump($future_competitions);exit();
+
     return view('users.teams', array(
-      'today_teams'           => $today_teams,
-      'previous_teams'        => $previous_teams,
-      'future_teams'          => $future_teams,
-      'today_competitions'    => $today_competitions,
-      'previous_competitions' => $previous_competitions,
-      'future_competitions'   => $future_competitions
-    ));
+                                     'today_teams'           => $today_teams,
+                                     'previous_teams'        => $previous_teams,
+                                     'future_teams'          => $future_teams,
+                                     'today_competitions'    => $today_competitions,
+                                     'previous_competitions' => $previous_competitions,
+                                     'future_competitions'   => $future_competitions
+                                     ));
   }
 
   public function new_team($type) {
     return view('team.create')
-      ->with('type', $type)
-      ->with('championship', '1')
-      ->with('date', Carbon::now()->format('d-m-Y'));
+    ->with('type', $type)
+    ->with('championship', '1')
+    ->with('date', Carbon::now()->format('d-m-Y'));
   }
 
   public function players() {
@@ -85,4 +86,18 @@ class TeamUserController extends Controller
     }
 
   }
+
+  /***************************************************
+   * team_data: Check the information of competitions
+                of the user and list of players.
+   * @param  void
+   * @return $team_data
+   ***************************************************/
+
+  public function team_data() {
+
+    $team_data = Team_user::team_data($_GET['team_id']);
+    echo json_encode($team_data);
+  }
+
 }

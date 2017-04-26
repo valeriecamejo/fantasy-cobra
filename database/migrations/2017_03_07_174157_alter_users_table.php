@@ -27,8 +27,9 @@ class AlterUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('date_last_connect')->after('dni');;
-            $table->dropColumn('ip')->after('date_last_connect');
+            $table->dropColumn('date_last_connect');
+            $table->dropColumn('ip');
+
         });
     }
 }
