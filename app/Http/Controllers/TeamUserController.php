@@ -60,7 +60,7 @@ class TeamUserController extends Controller {
   }
 
   public function players() {
-    $players = Player::players($_GET['championship'],$_GET['type_play'],$_GET['date_team']);
+    $players = Player::players($_GET['championship'],$_GET['type_play']);
 
     echo json_encode($players);
   }
@@ -98,6 +98,17 @@ class TeamUserController extends Controller {
 
     $team_data = Team_user::team_data($_GET['team_id']);
     echo json_encode($team_data);
+  }
+
+/***************************************************
+   * edit_team: Edit a team
+   * @param  void
+   * @return $team_data
+   ***************************************************/
+
+  public function edit_team() {
+
+    return view('team.edit');
   }
 
 }
