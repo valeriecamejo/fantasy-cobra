@@ -18,7 +18,7 @@ class Player extends Model
 
   }
 
-  public static function players($championship,$type_play){
+  public static function players($championship,$type_play,$date_team){
 
     $pa         = Player::where('championship_id', '=', $championship)
       ->where('position', '=', 'PA')
