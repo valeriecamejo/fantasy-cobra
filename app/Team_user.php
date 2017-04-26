@@ -11,7 +11,14 @@ use Carbon\Carbon;
 class Team_user extends Model {
   protected $table = 'team_users';
   protected $fillable = [
-    'user_id', 'sport_id', 'championship_id', 'name', 'date_inscription', 'type_journal', 'type_play', 'remaining_salary'
+    'user_id',
+    'sport_id',
+    'championship_id',
+    'name',
+    'date_inscription',
+    'type_journal',
+    'type_play',
+    'remaining_salary'
   ];
 
   /*********************************************
@@ -47,6 +54,11 @@ class Team_user extends Model {
     return $previous_teams = Team_user::team_by_times($time);
   }
 
+public static function future_competitions() {
+
+    $time = ">";
+    return $future_competitions = Team_user::team_registered_some_competitions($time);
+  }
 
   /**************************************************
    * futures_competitions: List futures competitions
@@ -65,8 +77,62 @@ class Team_user extends Model {
       ->join('championships', 'championships.id', '=', 'team_users.championship_id')
       ->where(DB::raw('DATE_FORMAT(competitions.date, "%Y-%m-%d")'), $time, $today)
       ->where('team_users.user_id', '=', Auth::user()->id)
+      ->orderBy('competitions.date', 'asc')
       ->get();
+
     return $team_by_times;
+  }
+
+  /***************************************************
+   * team_data: Check the information of competitions
+                of the user and list of players.
+   * @param  $team_id
+   * @return $futures_competitions
+   ***************************************************/
+
+  public static function team_data($team_id) {
+
+    $competitions = DB::table('competitions')
+      ->select('competitions.name', 'competitions.date', 'competitions.entry_cost', 'competitions.enrolled', 'competitions.user_max', 'team_subscribers.points', 'team_subscribers.competition_id', 'team_subscribers.team_user_id')
+      ->join('team_subscribers', 'team_subscribers.competition_id', '=', 'competitions.id')
+      ->where('team_subscribers.team_user_id', '=', $team_id)
+      ->get();
+
+    $team_information = DB::table('team_subscribers')
+      ->select('team_users.remaining_salary', 'competitions.date', 'team_subscribers.points')
+      ->join('team_users', 'team_users.id', '=', 'team_subscribers.team_user_id')
+      ->join('competitions', 'competitions.id', '=', 'team_subscribers.competition_id')
+      ->where('team_subscribers.team_user_id', '=', $team_id)
+      ->get();
+
+    $players = DB::table('team_user_players')
+      ->select('team_users.id', 'team_user_players.name', 'team_user_players.position', 'team_user_players.points')
+      ->join('team_users', 'team_users.id', '=', 'team_user_players.team_user_id')
+      ->where('team_users.id', '=', $team_id)
+      ->orderBy('team_user_players.id', 'asc')
+      ->get();
+
+      foreach ($competitions as $competition) {
+        $positions = DB::table('team_subscribers')
+          ->select('team_subscribers.competition_id', 'team_subscribers.points', 'team_subscribers.team_user_id')
+          ->where('team_subscribers.competition_id', '=', $competition->competition_id)
+          ->orderBy('team_subscribers.points', 'desc')
+          ->get();
+        $contador = 1;
+        foreach ($positions as $one_position) {
+          if ($one_position->team_user_id == $team_id) {
+            $competition->position = $contador;
+          }
+          $contador++;
+        }
+      }
+
+    $team_data[]         = array(
+      'team_information' => $team_information,
+      'competitions'     => $competitions,
+      'players'          => $players);
+
+    return $team_data;
   }
 
 
