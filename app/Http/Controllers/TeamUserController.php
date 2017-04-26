@@ -61,7 +61,6 @@ class TeamUserController extends Controller {
 
   public function players() {
     $players = Player::players($_GET['championship'],$_GET['type_play'],$_GET['date_team']);
-
     echo json_encode($players);
   }
 
