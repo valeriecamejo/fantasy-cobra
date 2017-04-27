@@ -42,7 +42,7 @@ class CompetitionsTableSeeder extends Seeder
         'championship_id'  => '2',
         'name'             => 'Second Competition',
         'type'             => 'PUBLIC',
-        'date'             => '2017-04-22 19:30:00',
+        'date'             => '2017-04-30 19:30:00',
         'type_journal'     => '7PM',
         'type_play'        => 'REGULAR',
         'type_competition' => '',

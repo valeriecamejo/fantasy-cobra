@@ -65,13 +65,12 @@
               <tbody>
                 @php
                 $cont_teams = 1;
-                $contador   = 1;
                 @endphp
                 @foreach($today_teams as $today_team)
                 <tr>
                   <td class="tdimg1">
 
-                   <!-- {!! Html::image($today_team->avatar,'',array('class' => 'tabimgtablet')) !!} -->
+                    {!! Html::image($today_team->avatar,'',array('class' => 'tabimgtablet')) !!}
                   </td>
                   <td id="tdcomp">
                     <!--#TODO anadir funcionalidad del modal con javascript-->
@@ -82,11 +81,9 @@
                       $lienupid='';
                       @endphp
                       @if(isset($today_competitions) and count($today_competitions)>0)
-                      {{Auth::user()->username}}
                       @foreach($today_competitions as $today_competition)
                       @if($today_team->id = $today_competition->id)
                       <span style="color:transparent;">#</span>
-                      {{$cont_teams}}
                       @php
                       $contador++;
                       $pts  = $today_competition->points;
@@ -94,11 +91,9 @@
                       @endphp
                       @endif
                       @endforeach
-                      @if($contador == 0)
                       {{Auth::user()->username}}
                       <span style="color:transparent;">#</span>
                       {{$cont_teams}}
-                      @endif
                       @endif
                     </a>
                   </td>
@@ -119,18 +114,18 @@
                   @if($today_team->id == $today_competition->id)
                   @php
                   $hour             = time();
-                  $competition_hour = date('H:i:s',strtotime($today_competition->date));
+                  $competition_hour = time($today_competition);
                   @endphp
                   <td class="bdgedit">
                     <div class="contbtnbdg">
                       <a onclick="team_modal({{$today_team->id}}, {{$cont_teams}}, '{{Auth::user()->username}}')">
-                        @if($hour >= $competition_hour)
+                        @if($hour <= $competition_hour)
                         <div class="BtnEntrar31 noedit">VER</div>
                         @else
                         <div class="BtnEntrar31">EDITAR</div>
                         @endif
                       </a>
-                      @if((strtotime($hour)) < ($competition_hour))
+                      @if((strtotime($hour)) > ($competition_hour))
                       {!! Form::open(array('url' => 'usuario/inscribir-equipo', 'method' => 'post')) !!}
                       <input type="hidden" class="form-compe2" name="lineup_id" value="{{$today_team->id}}">
                       <button type='submit' class="BtnEntrar3" style="border-style:none;">INSCRIBIR</button>
@@ -181,7 +176,6 @@
               <tbody>
                 @php
                 $cont_teams = 1;
-                $contador   = 1;
                 @endphp
                 @foreach($previous_teams as $previous_team)
                 <tr>
@@ -189,7 +183,6 @@
                     {!! Html::image($previous_team->avatar,'',array('class' => 'tabimgtablet')) !!}
                   </td>
                   <td id="tdcomp">
-                    <!--#TODO anadir funcionalidad del modal con javascript-->
                     <a onclick="team_modal({{$previous_team->id}},{{$cont_teams}}, '{{Auth::user()->username}}')">
                       @php
                       $contador=0;

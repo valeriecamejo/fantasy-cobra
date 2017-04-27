@@ -54,6 +54,19 @@ class Team_SubscribersTableSeeder extends Seeder
                 'balance'        => '11000',
                 'is_winner'      => true,
             ),
+            array(
+                'sport_id'       => '1',
+                'competition_id' => '2',
+                'team_id'        => '1',
+                'team_user_id'   => '1',
+                'amount'         => '1000',
+                'points'         => '0',
+                'date'           => '2017-03-14 12:30:00',
+                'balance_before' => '8000',
+                'bonus'          => '500',
+                'balance'        => '7500',
+                'is_winner'      => true,
+            ),
         ));
     }
 }
