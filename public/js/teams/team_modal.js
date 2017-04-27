@@ -84,7 +84,7 @@ function add_team_information(datos, team_id, cont_teams, username){
       //----------------------Team_information-------------------
       $(element.team_information).each(function (k, team_information) {
 
-        date_team = moment(team_information.date).format("YYYY-MM-DD");
+        date_team = moment(team_information.date).format("YYYY-MM-DD HH:mm");
 
           team_information_salary = "<tr>" +
               "<td>" + "<b>Salario: </b>" + team_information.remaining_salary + "</td>" +
@@ -152,18 +152,16 @@ function add_team_information(datos, team_id, cont_teams, username){
 
     teams_id = '<div id="buttonedit"><input type="hidden" name="team_id" id="team_id" value="'+team_id+'"></div>';
 
+    if (date_team > (actual_date)) {
 
-    if (moment(date_team).format("YYYY-MM-DD HH:mm") > actual_date){
+      $('#activateedit').empty();
+      boton_edit = teams_id+'<button type="submit" class="btn btn-default btn-primary4"  style="margin: 5px 0px;">EDITAR EQUIPO</button>';
+      $('#activateedit').append(boton_edit);
 
-        $('#activateedit').empty();
-        boton_edit = teams_id+'<button type="submit" class="btn btn-default btn-primary4"  style="margin: 5px 0px;">EDITAR EQUIPO</button>';
+    } else if (date_team <= actual_date) {
+
+        boton_edit = '<span style="color:#D8BD33;font-size: 15px">Las competiciones comenzaron</span>';
         $('#activateedit').append(boton_edit);
-
-    } else if (moment(date_team).format("YYYY-MM-DD HH:mm") < actual_date) {
-
-      boton_edit = '<span style="color:#D8BD33;font-size: 15px">Las competiciones comenzaron</span>';
-        $('#activateedit').append(boton_edit);
-
       }
 
     $("#team_information_salary").append(team_information_salary);
