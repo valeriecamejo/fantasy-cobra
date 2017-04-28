@@ -4,19 +4,18 @@
   <div class="container-fluid Ingresoprin" id="page-content-wrapper">
     <div class="Enunciado2">
       <h3 class="Titulo1">EDITAR EQUIPO</h3>
-      <h4 style="color:#e9e9e9;font-weight: 300;margin-top: -18px;font-size: 13pt;">Equipo para el día: <span style="color:#eec133;"></span></h4>
+      <h4 style="color:#e9e9e9;font-weight: 300;margin-top: -18px;font-size: 13pt;">Equipo para el día: {{($team_date)}}<span style="color:#eec133;"></span></h4>
     </div>
 
     {!!  Form::open(array('url' => 'usuario/crear-equipo', 'method' => 'post')) !!}
 
-    <input type='hidden' name="sport" id="sport" value="1">
-    <input type='hidden' name="championship" id="championship" value="1">
-    <input type='hidden' name="type_journal" id="championship" value="DAILY">
-    <input type='hidden' name="date_team" id="date_team" value="">
+    <input type='hidden' name="sport_id" id="sport_id" value="sport_id">
+    <input type='hidden' name="championship_id" id="championship_id" value="championship_id">
+    <input type='hidden' name="type_journal" id="type_journal" value="type_journal">
     <div class="modal-bodycompe">
       <div class="boxcompe">
-        <p>Tipo de juego:   </p>
-        <input type="hidden" value="" name="type_play" id="type_play">
+        <p>Tipo de juego: {{$type_play}}</p>
+        <input type="hidden" value="type_play" name="type_play" id="type_play">
         <!--<select class="form-compe2" name="type_play" id="type_play">
           <option value="REGULAR" >Regular</option>
           <option value="TURBO" selected> Turbo</option>
@@ -334,6 +333,6 @@
   </div>
   {!! Form::close() !!}
 
-  {!! Html::script('js/teams/create_team.js') !!}
+  {!! Html::script('js/teams/edit_team.js') !!}
 
 @stop
