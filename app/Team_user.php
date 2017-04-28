@@ -93,13 +93,13 @@ public static function future_competitions() {
   public static function team_data($team_id) {
 
     $competitions = DB::table('competitions')
-      ->select('competitions.name', 'competitions.date', 'competitions.entry_cost', 'competitions.enrolled', 'competitions.user_max', 'team_subscribers.points', 'team_subscribers.competition_id', 'team_subscribers.team_user_id')
+      ->select('competitions.name', 'competitions.date', 'competitions.entry_cost', 'competitions.enrolled', 'competitions.user_max', 'team_subscribers.points', 'team_subscribers.competition_id', 'team_subscribers.team_user_id', 'competitions.championship_id', 'competitions.sport_id')
       ->join('team_subscribers', 'team_subscribers.competition_id', '=', 'competitions.id')
       ->where('team_subscribers.team_user_id', '=', $team_id)
       ->get();
 
     $team_information = DB::table('team_subscribers')
-      ->select('team_users.remaining_salary', 'competitions.date', 'team_subscribers.points')
+      ->select('team_users.remaining_salary', 'competitions.date', 'team_subscribers.points', 'team_users.type_journal', 'team_users.type_play')
       ->join('team_users', 'team_users.id', '=', 'team_subscribers.team_user_id')
       ->join('competitions', 'competitions.id', '=', 'team_subscribers.competition_id')
       ->where('team_subscribers.team_user_id', '=', $team_id)
@@ -134,6 +134,26 @@ public static function future_competitions() {
 
     return $team_data;
   }
+
+  /**************************************************
+   * update_team: Update a bettor's team.
+   * @param  $input
+   * @return $team_information
+   **************************************************/
+
+  public static function update_team($input) {
+
+    $team_id = $input['team_id'];
+
+    $update_team = DB::table('team_user_players')
+      ->select('team_user_players.name', 'team_user_players.position', 'players.name_opponent', 'players.salary' )
+      ->join('players', 'players.id', '=', 'team_user_players.player_id')
+      ->where('team_user_id', '=', $team_id)
+      ->get();
+
+    return $update_team;
+  }
+
 
 
   public static function save_team_turbo($input) {

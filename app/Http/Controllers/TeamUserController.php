@@ -102,14 +102,41 @@ class TeamUserController extends Controller {
   }
 
 /***************************************************
-   * edit_team: Edit a team
+   * edit_team: View for edit a team
    * @param  void
-   * @return $team_data
+   * @return view('team.edit')
    ***************************************************/
 
   public function edit_team() {
 
-    return view('team.edit');
+    $team_date = Carbon::createFromFormat('Y-m-d H:i', input::get('team_date'))->format('d-m-Y');
+
+
+    return view('team.edit')
+         ->with('type_play', input::get('type_play'))
+         ->with('championship', input::get('championship_id'))
+         ->with('team_date', input::get('team_date'))
+         ->with('team_date', $team_date)
+         ->with('type_journal', input::get('type_journal'))
+         ->with('sport_id', input::get('sport_id'));
   }
 
+  /***************************************************
+   * update_team: Update a team
+   * @param  void
+   * @return $team_information
+   ***************************************************/
+
+  public function update_team() {
+
+    $update_team = Team_user::update_team(Input::all());
+    $players   = Player::players(input::get('championship_id'), input::get('type_play'), input::get('team_date'), input::get('type_journal'));
+
+    $team_information[]  = array(
+      'update_team'      => $update_team,
+      'players'          => $players);
+
+    echo json_encode($team_information);
+
+  }
 }
