@@ -54,7 +54,7 @@ function add_team_information(datos, team_id, cont_teams, username){
     var hour            =   $('#hour').val();       // Hora del sistema
     var boton_edit      =   ''; // Construye el boton de editar
     var actual_date     =   moment().format("YYYY-MM-DD HH:mm");  // Obtiene la fecha de hoy
-    var date_team     =   0; // Obtengo le fecha del Lineup
+    var team_date     =   0; // Obtengo le fecha del Lineup
     var teams_id;  // Contiene el campo oculto con el id del Lineup a Editar
     var team_name;
     var team_information_salary = "<tr>" +
@@ -84,7 +84,9 @@ function add_team_information(datos, team_id, cont_teams, username){
       //----------------------Team_information-------------------
       $(element.team_information).each(function (k, team_information) {
 
-        date_team = moment(team_information.date).format("YYYY-MM-DD HH:mm");
+        type_journal = team_information.type_journal;
+        type_play = team_information.type_play;
+        team_date = moment(team_information.date).format("YYYY-MM-DD HH:mm");
 
           team_information_salary = "<tr>" +
               "<td>" + "<b>Salario: </b>" + team_information.remaining_salary + "</td>" +
@@ -121,44 +123,52 @@ function add_team_information(datos, team_id, cont_teams, username){
 
       $(element.competitions).each(function (i, competitions) {
 
-          competition_modal = competition_modal +
-            "<div class='panel-group lincompsinscr' id='accordion' role='tablist' aria-multiselectable='true'>"+
-              "<div class='panel panel-default backblack'>"+
-                "<a role='button' data-toggle='collapse' data-parent='#accordion' href='#collapseOne"+competitions.competition_id+"' aria-expanded='true' aria-controls='collapseOne'>"+
-                  "<div class='panel-heading backhead' role='tab' id='headingOne'>"+
-                    "<h4 class='panel-title'>"+
-                    competitions.name+
-                    "<img src='../images/arrowd.png' class='icon-arrow-down' alt='flecha'>"+
-                    "</h4>"+
-                  "</div>"+
-                "</a>"+
-                "<div id='collapseOne"+competitions.competition_id+"' class='panel-collapse collapse' role='tabpanel' aria-labelledby='headingOne'>"+
-                  "<div class='panel-body'>"+
-                    "<table class='Tablacomplineups'>"+
-                      "<tbody>"+
-                        "<tr><td><b>Inscritos: </b>"+competitions.enrolled+"/"+competitions.user_max+"</td></tr>"+
-                        "<tr><td><b>Entrada: </b>"+competitions.entry_cost+" $.</td></tr>"+
-                        "<tr><td><b>Posición: </b>"+competitions.position+"</td></tr>"+
-                      "</tbody>"+
-                    "</table>"+
-                  "</div>"+
+        championship_id = competitions.championship_id;
+        sport_id = competitions.sport_id;
+
+        competition_modal = competition_modal +
+          "<div class='panel-group lincompsinscr' id='accordion' role='tablist' aria-multiselectable='true'>"+
+            "<div class='panel panel-default backblack'>"+
+              "<a role='button' data-toggle='collapse' data-parent='#accordion' href='#collapseOne"+competitions.competition_id+"' aria-expanded='true' aria-controls='collapseOne'>"+
+                "<div class='panel-heading backhead' role='tab' id='headingOne'>"+
+                  "<h4 class='panel-title'>"+
+                  competitions.name+
+                  "<img src='../images/arrowd.png' class='icon-arrow-down' alt='flecha'>"+
+                  "</h4>"+
+                "</div>"+
+              "</a>"+
+              "<div id='collapseOne"+competitions.competition_id+"' class='panel-collapse collapse' role='tabpanel' aria-labelledby='headingOne'>"+
+                "<div class='panel-body'>"+
+                  "<table class='Tablacomplineups'>"+
+                    "<tbody>"+
+                      "<tr><td><b>Inscritos: </b>"+competitions.enrolled+"/"+competitions.user_max+"</td></tr>"+
+                      "<tr><td><b>Entrada: </b>"+competitions.entry_cost+" $.</td></tr>"+
+                      "<tr><td><b>Posición: </b>"+competitions.position+"</td></tr>"+
+                    "</tbody>"+
+                  "</table>"+
                 "</div>"+
               "</div>"+
-            "</div>";
+            "</div>"+
+          "</div>";
 
       });
 
     });
 
-    teams_id = '<div id="buttonedit"><input type="hidden" name="team_id" id="team_id" value="'+team_id+'"></div>';
+    teams_id = '<div id="buttonedit"><input type="hidden" name="team_id" id="team_id" value="'+team_id+'">'+
+                  '<input type="hidden" name="championship_id" id="championship_id" value="'+championship_id+'">'+
+                  '<input type="hidden" name="team_date" id="team_date" value="'+team_date+'">'+
+                  '<input type="hidden" name="type_journal" id="type_journal" value="'+type_journal+'">'+
+                  '<input type="hidden" name="type_play" id="type_play" value="'+type_play+'"></div>';
+                  '<input type="hidden" name="sport_id" id="sport_id" value="'+sport_id+'"></div>';
 
-    if (date_team > (actual_date)) {
+    if (team_date > (actual_date)) {
 
       $('#activateedit').empty();
       boton_edit = teams_id+'<button type="submit" class="btn btn-default btn-primary4"  style="margin: 5px 0px;">EDITAR EQUIPO</button>';
       $('#activateedit').append(boton_edit);
 
-    } else if (date_team <= actual_date) {
+    } else if (team_date <= actual_date) {
 
         boton_edit = '<span style="color:#D8BD33;font-size: 15px">Las competiciones comenzaron</span>';
         $('#activateedit').append(boton_edit);
