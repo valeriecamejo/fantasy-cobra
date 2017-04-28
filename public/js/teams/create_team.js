@@ -5,6 +5,7 @@ var sport             = $("#sport").val();
 var championship      = $("#championship").val();
 var type_play         = $("#type_play").val();
 var date_team         = $("#date_team").val();
+var type_journal         = $("#type_journal").val();
 
 var pitcher          ='';
 var catcher          ='';
@@ -27,18 +28,18 @@ $("#playerOF2").empty();
 /************************************************************************
  * Load players
  ************************************************************************/
-  add_players(championship,type_play,date_team);
+  add_players(championship,type_play,date_team,type_journal);
 /************************************************************************
  * Action taken when change type_play default
  ************************************************************************/
 $("#type_play").change(function() {
   var  type_play      = $(this).val();
-  add_players(championship,type_play,date_team);
+  add_players(championship,type_play,date_team,type_journal);
 });
 /************************************************************************
  * Ajax Load players
  ************************************************************************/
-function add_players(championship,type_play,date_team) {
+function add_players(championship,type_play,date_team,type_journal) {
   var protocol        = location.protocol;
   var URLdomain       = window.location.host;
   var url_ajax        = protocol + "//" + URLdomain;
@@ -48,7 +49,7 @@ function add_players(championship,type_play,date_team) {
     url: url_ajax + "/usuario/obtener-jugadores",
     type: "GET",
     async: true,
-    data: {"championship": championship,"type_play": type_play,"date_team": date_team},
+    data: {"championship": championship,"type_play": type_play,"date_team": date_team,"type_journal": type_journal},
     success: function (data) {
       var players     = jQuery.parseJSON(data);
       tpl_players(championship,type_play,players)
