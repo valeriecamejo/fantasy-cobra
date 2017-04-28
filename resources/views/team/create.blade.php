@@ -11,7 +11,7 @@
 
     <input type='hidden' name="sport" id="sport" value="1">
     <input type='hidden' name="championship" id="championship" value="1">
-    <input type='hidden' name="type_journal" id="championship" value="DAILY">
+    <input type='hidden' name="type_journal" id="type_journal" value="DAILY">
     <input type='hidden' name="date_team" id="date_team" value="{{$date}}">
     <div class="modal-bodycompe">
       <div class="boxcompe">

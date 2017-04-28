@@ -61,7 +61,7 @@ class TeamUserController extends Controller {
 
   public function players() {
 
-    $players = Player::players($_GET['championship'],$_GET['type_play'],$_GET['date_team']);
+    $players = Player::players($_GET['championship'],$_GET['type_play'],$_GET['date_team'],$_GET['type_journal']);
 
     echo json_encode($players);
   }
