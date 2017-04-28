@@ -2,7 +2,9 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Player extends Model
 {
@@ -19,50 +21,24 @@ class Player extends Model
   }
 
   public static function players($championship,$type_play,$date_team, $type_journal){
-    $date       = "2017-04-28";
-    $pa         = Player::where('championship_id', '=', $championship)
-      ->where('position', '=', 'PA')
-      ->get();
 
-    $c         = Player::where('championship_id', '=', $championship)
-      ->where('position', '=', 'C')
-      ->get();
+    $pa         = Player::find_data_params($championship,$type_play,$date_team, $type_journal,'PA');
 
-    $fb        = Player::where('championship_id', '=', $championship)
-      ->where('position', '=', '1B')
-      ->get();
+    $c         = Player::find_data_params($championship,$type_play,$date_team, $type_journal,'C');
 
-    $sb        = Player::where('championship_id', '=', $championship)
-      ->where('position', '=', '2B')
-      ->get();
+    $fb        = Player::find_data_params($championship,$type_play,$date_team, $type_journal,'1B');
 
-    $tb        = Player::where('championship_id', '=', $championship)
-      ->where('position', '=', '3B')
-      ->get();
+    $sb        = Player::find_data_params($championship,$type_play,$date_team, $type_journal,'2B');
 
-    $ss        = Player::where('championship_id', '=', $championship)
-      ->where('position', '=', 'SS')
-      ->get();
+    $tb        = Player::find_data_params($championship,$type_play,$date_team, $type_journal,'3B');
 
-    $of        = Player::where('championship_id', '=', $championship)
-      ->where('position', '=', 'OF')
-      ->get();
+    $ss        = Player::find_data_params($championship,$type_play,$date_team, $type_journal,'SS');
 
-    $tbt       = Player::where('championship_id', '=', $championship)
-      ->where('position', '=', '3B');
+    $of        = Player::find_data_params($championship,$type_play,$date_team, $type_journal,'OF');
 
-    $ci        = Player::where('championship_id', '=', $championship)
-      ->where('position', '=', '1B')
-      ->union($tbt)
-      ->get();
+    $ci        = Player::find_data_params_union($championship,$type_play,$date_team, $type_journal,'3B', '1B');
 
-    $sst       = Player::where('championship_id', '=', $championship)
-      ->where('position', '=', 'SS');
-
-    $mi        = Player::where('championship_id', '=', $championship)
-      ->where('position', '=', '2B')
-      ->union($sst)
-      ->get();
+    $mi        = Player::find_data_params_union($championship,$type_play,$date_team, $type_journal,'SS', '2B');
 
     if ($type_play == 'REGULAR') {
       $players[]  = array(
@@ -94,6 +70,51 @@ class Player extends Model
       ->first();
 
     return $player;
+  }
+
+  public static function find_data_params($championship,$type_play,$date_team, $type_journal,$position) {
+    $date       = Carbon::now()->toDateString();
+
+    $player = Player::select('players.*')
+      ->join('teams', 'teams.id', '=', 'players.team_id')
+      ->join('games', function($games) {
+        $games->on('games.team_id_home', '=', 'teams.id');
+        $games->orOn('games.team_id_away', '=', 'teams.id');
+      })
+      ->where('players.championship_id', '=', $championship)
+      ->where(DB::raw('DATE_FORMAT(games.start_date, "%Y-%m-%d")'), '=', $date)
+      ->where('players.position', '=', $position)
+      ->get();
+
+    return $player;
+  }
+
+  public static function find_data_params_union($championship,$type_play,$date_team, $type_journal,$position, $position2) {
+    $date       = Carbon::now()->toDateString();
+
+    $player = Player::select('players.*')
+      ->join('teams', 'teams.id', '=', 'players.team_id')
+      ->join('games', function($games) {
+        $games->on('games.team_id_home', '=', 'teams.id');
+        $games->orOn('games.team_id_away', '=', 'teams.id');
+      })
+      ->where('players.championship_id', '=', $championship)
+      ->where(DB::raw('DATE_FORMAT(games.start_date, "%Y-%m-%d")'), '=', $date)
+      ->where('players.position', '=', $position);
+
+    $player_union = Player::select('players.*')
+      ->join('teams', 'teams.id', '=', 'players.team_id')
+      ->join('games', function($games) {
+        $games->on('games.team_id_home', '=', 'teams.id');
+        $games->orOn('games.team_id_away', '=', 'teams.id');
+      })
+      ->where('players.championship_id', '=', $championship)
+      ->where(DB::raw('DATE_FORMAT(games.start_date, "%Y-%m-%d")'), '=', $date)
+      ->where('players.position', '=', $position2)
+      ->union($player)
+      ->get();
+
+    return $player_union;
   }
 
 }
