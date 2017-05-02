@@ -3,7 +3,12 @@
         <div class="modal-content2" style="text-align: -webkit-center;text-align: -moz-center;">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title" id="inicioLabel"><img src="{{ URL::asset('images/ico/minimoneda.png') !!}" alt="">Cajero<img src="{{ URL::asset('images/ico/minimoneda.png') !!}" alt=""></h3>
+                <h3 class="modal-title" id="inicioLabel">
+                    {!! Html::image('images/ico/minimoneda.png') !!}
+                    Cajero
+                    {!! Html::image('images/ico/minimoneda.png') !!}
+
+                    </h3>
              </div>
             <div class="modal-body" style="margin:0;padding: 0px 0px 20px 0px;">
                 <div id="message_sport">
@@ -14,7 +19,7 @@
                         <div class="seleccion1">
                             <div class="conticodep">
 
-                                {!! Html::image('images/ico/deposit.png','',array('alt' => 'Recarga')); !!}
+                                {!! Html::image('images/ico/deposit.png','',array('alt' => 'Recarga')) !!}
 
                             </div>
                             <div class="conttextdep">
@@ -25,7 +30,7 @@
                     <a onclick="select_type(2)">
                         <div class="seleccion2">
                             <div class="conticodep">
-                                {!! Html::image('images/ico/money.png','',array('alt' => 'retira')); !!}
+                                {!! Html::image('images/ico/money.png','',array('alt' => 'retira')) !!}
                             </div>
                             <div class="conttextdep">
                                 <p>Retira</p>
@@ -46,25 +51,25 @@
                             <!-- Boton Paypal -->
                             @if(isset(Auth::user()->id_tipousuario) && Auth::user()->id_tipousuario==3 && Auth::user()->active==1)
 
-                                <!--<a href="{{ URL::to('usuario/cajero') !!}">
-                                    {!! Html::image('images/ico/credit.png','',array('alt' => 'credit')); !!}
+                                <!--<a href="usuario/cajero">
+                                    {!! Html::image('images/ico/credit.png','',array('alt' => 'credit')) !!}
                                     <span>Tarjeta Cr&eacute;dito</span>
 
                                 </a>-->
 
-                                <a href="{{ URL::to('usuario/transferencia') !!}">
-                                    {!! Html::image('images/ico/transfer.png','',array('alt' => 'transfer')); !!}
+                                <a href="usuario/transferencia">
+                                    {!! Html::image('images/ico/transfer.png','',array('alt' => 'transfer')) !!}
                                     <span>Transferencia</span>
                                 </a>
                             @else
 
-                                <!--<a onclick="login(6)">
-                                    {!! Html::image('images/ico/credit.png','',array('alt' => 'credit')); !!}
+                                <!--<a onclick="">
+                                    {!! Html::image('images/ico/credit.png','',array('alt' => 'credit')) !!}
                                     <span>Tarjeta Cr&eacute;dito</span>
                                 </a>-->
 
-                                <a onclick="login(7)">
-                                    {!! Html::image('images/ico/transfer.png','',array('alt' => 'transfer')); !!}
+                                <a onclick="">
+                                    {!! Html::image('images/ico/transfer.png','',array('alt' => 'transfer')) !!}
                                     <span>Transferencia</span>
                                 </a>
                             @endif
@@ -75,15 +80,15 @@
                         <div class="item active" id="getmoney-type">
                             @if(isset(Auth::user()->id_tipousuario) && Auth::user()->id_tipousuario==3 && Auth::user()->active==1)
 
-                                <a href="{{ URL::to('usuario/retirar-dinero') !!}">
-                                    {!! Html::image('images/ico/transfer.png','',array('alt' => 'transfer')); !!}
+                                <a href="usuario/retirar-dinero">
+                                    {!! Html::image('images/ico/transfer.png','',array('alt' => 'transfer')) !!}
                                     <span>Transferencia</span>
                                 </a>
                             @else
 
 
-                                <a onclick="login(8)">
-                                    {!! Html::image('images/ico/transfer.png','',array('alt' => 'transfer')); !!}
+                                <a onclick="">
+                                    {!! Html::image('images/ico/transfer.png','',array('alt' => 'transfer')) !!}
                                     <span>Transferencia</span>
                                 </a>
                             @endif
