@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Game;
 use App\Http\Requests\CompetitionRequest;
 use Illuminate\Http\Request;
 use App\Competition;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class CompetitionController extends Controller {
@@ -38,9 +40,19 @@ class CompetitionController extends Controller {
    * @return \Illuminate\View\View
    */
   public function new_competition($sport, $championship) {
-    return view('competition.create')
-      ->with('sport', $sport)
-      ->with('championship',$championship);
+
+    $games    = Game::date_games($sport, $championship);
+    if($games) {
+      return view('competition.create')
+        ->with('sport', $sport)
+        ->with('championship',$championship)
+        ->with('games',$games);
+    } else {
+      Session::flash('message', 'No hay juegos disponibles en el calendario para '.$championship);
+      Session::flash('class', 'danger');
+      return redirect()->back();
+    }
+
   }
   /**
    * save_competition
@@ -52,7 +64,8 @@ class CompetitionController extends Controller {
     if ($competition){
       Session::flash('message', 'Competición creada con exitosamente.');
       Session::flash('class', 'success');
-      return redirect('lobby');
+      return Redirect::to('/usuario/crear-equipo/'.$competition->type_play)
+        ->cookie('competition', $competition, 20);
     } else {
       Session::flash('message', 'Error al intentar crear la competición.');
       Session::flash('class', 'danger');

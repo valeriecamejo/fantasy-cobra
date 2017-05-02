@@ -66,32 +66,11 @@
             </div>
           </a>
         </div>
-        <div class="Boton1">
-          <a href="/usuario/crear-equipo/TURBO">
-            <div class="BotonRe">
-              CREAR EQUIPO TURBO
-            </div>
-          </a>
-        </div>
-        <div class="Boton1">
-          <a href="/usuario/crear-equipo/REGULAR">
-            <div class="BotonRe">
-              CREAR EQUIPO REGULAR
-            </div>
-          </a>
-        </div>
       @else
         <div class="Boton1">
           <a href=".login" data-toggle="modal">
             <div class="BotonRe">
               CREAR COMPETICIÓN
-            </div>
-          </a>
-        </div>
-        <div class="Boton1">
-          <a href=".login" data-toggle="modal">
-            <div class="BotonRe">
-              CREAR EQUIPO
             </div>
           </a>
         </div>

@@ -112,8 +112,8 @@ public static function bettor_competitions() {
     }
     $competition->name                = $input['name'];
     $competition->user_id             = Auth::user()->id;
-    $competition->date                = Carbon::createFromFormat('d-m-Y', $input['start_date'])
-                                        ->toDateTimeString();
+    $hour                             = Competition::verify_hour_journal($input['type_journal']);
+    $competition->date                = $input['start_date'].' '.$hour;
     $competition->user_max            = $input['max_user'];
     $competition->user_min            = $input['min_user'];
     $competition->prize_guaranteed    = 0;
@@ -122,7 +122,7 @@ public static function bettor_competitions() {
     $competition->cost_guaranteed     = 0;
     $competition->description         = '';
     $competition->is_important        = 0;
-    $competition->enrolled            = 0;
+    $competition->enrolled            = 1;
     $competition->permanent           = 0;
     $competition->type_journal        = $input['type_journal'];
     $competition->type_play           = $input['type_play'];
@@ -149,13 +149,18 @@ public static function bettor_competitions() {
     if ($input['max_user'] == 2) {
       $competition->type_competition    = 'H2H';
     }
-    if ($competition->save()) {
+    if ($competition) {
       return $competition;
     } else {
       return false;
     }
   }
 
+  /**
+   * modal_competition return data to modal competition
+   * @param string $id_competition
+   * @return string $competition_data
+   */
   public static function modal_competition($id_competition) {
 
     $competition           = Competition::where('competitions.id', '=', $id_competition)->get();
@@ -182,6 +187,29 @@ public static function bettor_competitions() {
       'participants'      => $participants,
     );
     return $competition_data;
+  }
+
+  /**
+   * verify_hour_journal return hour in relation to type journal
+   * @param string $type_journal
+   * @return $hour
+   */
+  private static function verify_hour_journal($type_journal) {
+    if ($type_journal == 'DAILY') {
+        $hour     ='03:00:00';
+        return    $hour;
+    } elseif ($type_journal == '3PM') {
+      $hour       ='15:00:00';
+      return      $hour;
+    } elseif ($type_journal == '7PM') {
+      $hour       ='19:00:00';
+      return      $hour;
+    } elseif ($type_journal == 'LONG') {
+      $hour       ='15:00:00';
+      return      $hour;
+    } else {
+      return false;
+    }
   }
 }
 
