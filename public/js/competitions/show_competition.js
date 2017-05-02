@@ -3,7 +3,7 @@ function showCompetition(id_competition) {
   var protocol        = location.protocol;
   var URLdomain       = window.location.host;
   var url             = protocol + "//" + URLdomain;
-
+  jQuery.noConflict();
   jQuery.ajax({
     url: url + "/usuario/competicion",
     type: "GET",
