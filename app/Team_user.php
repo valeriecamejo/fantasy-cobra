@@ -141,19 +141,17 @@ public static function future_competitions() {
    * @return $team_information
    **************************************************/
 
-  public static function update_team($input) {
-
-    $team_id = $input['team_id'];
+  public static function update_team($team_id) {
 
     $update_team = DB::table('team_user_players')
-      ->select('team_user_players.name', 'team_user_players.position', 'players.name_opponent', 'players.salary' )
+      ->select('team_user_players.name', 'team_user_players.position', 'players.salary' )
       ->join('players', 'players.id', '=', 'team_user_players.player_id')
       ->where('team_user_id', '=', $team_id)
+      ->orderBy('team_user_players.id')
       ->get();
 
     return $update_team;
   }
-
 
 
   public static function save_team_turbo($input) {

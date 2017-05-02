@@ -2,7 +2,7 @@
 
 
 /**********************************
-* modal_team.
+* team_modal.
 * @param competitions
 * @return tpl
 ***********************************/
@@ -57,6 +57,11 @@ function add_team_information(datos, team_id, cont_teams, username){
     var team_date     =   0; // Obtengo le fecha del Lineup
     var teams_id;  // Contiene el campo oculto con el id del Lineup a Editar
     var team_name;
+    var type_play = '';
+    var type_journal = '';
+    var sport_id = '';
+    var team_id = '';
+    var championship_id = '';
     var team_information_salary = "<tr>" +
         "<td>" + "<b>Salario: </b></td>" +
         "</tr>";
@@ -159,9 +164,10 @@ function add_team_information(datos, team_id, cont_teams, username){
                   '<input type="hidden" name="championship_id" id="championship_id" value="'+championship_id+'">'+
                   '<input type="hidden" name="team_date" id="team_date" value="'+team_date+'">'+
                   '<input type="hidden" name="type_journal" id="type_journal" value="'+type_journal+'">'+
-                  '<input type="hidden" name="type_play" id="type_play" value="'+type_play+'"></div>';
-                  '<input type="hidden" name="sport_id" id="sport_id" value="'+sport_id+'"></div>';
-
+                  '<input type="hidden" name="type_play" id="type_play" value="'+type_play+'">'+
+                  '<input type="hidden" name="sport_id" id="sport_id" value="'+sport_id+'">'+
+                  '<input type="hidden" name="team_id" id="team_id" value="'+team_id+'"></div>';
+alert(type_play);
     if (team_date > (actual_date)) {
 
       $('#activateedit').empty();

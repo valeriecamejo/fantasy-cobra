@@ -6,6 +6,7 @@ var championship_id  = $("#championship_id").val();
 var type_play        = $("#type_play").val();
 var team_date        = $("#team_date").val();
 var type_journal     = $("#type_journal").val();
+var team_id          = $("#team_id").val();
 
 var pitcher          ='';
 var catcher          ='';
@@ -28,32 +29,29 @@ $("#playerOF2").empty();
 /************************************************************************
  * Load players
  ************************************************************************/
-  add_players(championship_id,type_play,team_date);
-/************************************************************************
- * Action taken when change type_play default
- ************************************************************************/
-$("#type_play").change(function() {
-  var  type_play  = $(this).val();
-  add_players(championship_id,type_play,team_date);
-});
+
+add_player(team_id, championship_id, type_play, team_date, type_journal);
+
 /************************************************************************
  * Ajax Load players
  ************************************************************************/
-function add_players(championship_id,type_play,team_date) {
-  var protocol        = location.protocol;
-  var URLdomain       = window.location.host;
-  var url_ajax        = protocol + "//" + URLdomain;
-  var championship_id = championship_id;
-  var type_play       = type_play;
-  jQuery.ajax({
-    url: url_ajax + "/usuario/obtener-jugadores",
+function add_player(team_id, championship_id, type_play, team_date, type_journal) {
+
+var protocol  = location.protocol;
+var URLdomain = window.location.host;
+var url_ajax  = protocol + "//" + URLdomain;
+
+  $.ajax({
+
+    url: url_ajax + "/usuario/editar-equipo",
     type: "GET",
     async: true,
-    data: {"championship_id": championship_id,"type_play": type_play,"team_date": team_date},
+    data: {"team_id": team_id, "championship_id": championship_id, "type_play": type_play, "team_date": team_date, "type_journal": type_journal},
     success: function (data) {
-      var players     = jQuery.parseJSON(data);
-      tpl_players(championship_id,type_play,players)
+
+      var datos = data;
     }
+
   });
 }
 

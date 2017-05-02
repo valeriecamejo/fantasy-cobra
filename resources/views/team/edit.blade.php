@@ -10,17 +10,14 @@
     {!!  Form::open(array('url' => 'usuario/crear-equipo', 'method' => 'post')) !!}
 
     <input type='hidden' name="sport_id" id="sport_id" value="sport_id">
+    <input type='hidden' name="team_id" id="team_id" value="team_id">
     <input type='hidden' name="championship_id" id="championship_id" value="championship_id">
     <input type='hidden' name="type_journal" id="type_journal" value="type_journal">
+    <input type='hidden' name="type_play" id="type_play" value="type_play">
+    <input type='hidden' name="team_date" id="team_date" value="team_date">
     <div class="modal-bodycompe">
       <div class="boxcompe">
         <p>Tipo de juego: {{$type_play}}</p>
-        <input type="hidden" value="type_play" name="type_play" id="type_play">
-        <!--<select class="form-compe2" name="type_play" id="type_play">
-          <option value="REGULAR" >Regular</option>
-          <option value="TURBO" selected> Turbo</option>
-        </select>
-        -->
       </div>
     </div>
     <div class="hidden-xs" style="text-align:left;">
@@ -28,10 +25,6 @@
       <div class="CuerpoLineup cuerpoheight margrespL1">
         <div class="lineup nopadbot">
           <div class="Usuariolineup" style="text-align:center;text-indent: 0;">Jugadores Disponibles</div>
-          <!--<div id="th2">
-              <p id="buscar">BUSCAR</p>
-              <input type="text" placeholder="Introduzca su nombre" class="filtroequipo">
-          </div> -->
           <div>
             <!-- Nav tabs -->
             <div id="tabs"></div>

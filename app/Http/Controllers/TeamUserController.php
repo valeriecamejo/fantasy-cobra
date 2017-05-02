@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Player;
-use App\Team_subscriber;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Team_user;
@@ -53,23 +52,13 @@ class TeamUserController extends Controller {
                                      ));
   }
 
-  /**
-   * new_team
-   * @param string $type
-   */
   public function new_team($type) {
-    $competition      = \Request::cookie('competition');
     return view('team.create')
     ->with('type', $type)
-    ->with('type_journal', $competition->type_journal)
-    ->with('championship', $competition->championship_id)
-    ->with('sport', $competition->sport_id)
-    ->with('date', $competition->date);
+    ->with('championship', '1')
+    ->with('date', Carbon::now()->format('d-m-Y'));
   }
 
-  /**
-   * players return player list from crate team
-   */
   public function players() {
 
     $players = Player::players($_GET['championship'],$_GET['type_play'],$_GET['date_team'],$_GET['type_journal']);
@@ -77,23 +66,17 @@ class TeamUserController extends Controller {
     echo json_encode($players);
   }
 
-  /**
-   * save_team save team user
-   */
   public function save_team() {
-    $competition        = \Request::cookie('competition');
-    $competition->save();
-    $cookie = cookie('competition', $competition, 20);
 
     if (Input::get('type_play') == 'TURBO') {
-      $team                 = Team_user::save_team_turbo(Input::all());
+      $team = Team_user::save_team_turbo(Input::all());
+
     } elseif (Input::get('type_play') == 'REGULAR') {
-      $team                 = Team_user::save_team_regular(Input::all());
+      $team = Team_user::save_team_regular(Input::all());
+
     }
 
     if ($team) {
-      $team_subscriber      = Team_subscriber::inscription_team($team);
-
       Session::flash('message', 'Equipo creado con exito.');
       Session::flash('class', 'success');
       return Redirect::to('usuario/mis-equipos');
@@ -124,34 +107,34 @@ class TeamUserController extends Controller {
    * @return view('team.edit')
    ***************************************************/
 
-  public function edit_team() {
+  public function show_team() {
 
     $team_date = Carbon::createFromFormat('Y-m-d H:i', input::get('team_date'))->format('d-m-Y');
 
-
     return view('team.edit')
-         ->with('type_play', input::get('type_play'))
+         ->with('team_id',      input::get('team_id'))
+         ->with('type_play',    input::get('type_play'))
          ->with('championship', input::get('championship_id'))
-         ->with('team_date', input::get('team_date'))
-         ->with('team_date', $team_date)
+         ->with('team_date',    input::get('team_date'))
+         ->with('team_date',    $team_date)
          ->with('type_journal', input::get('type_journal'))
-         ->with('sport_id', input::get('sport_id'));
+         ->with('sport_id',     input::get('sport_id'));
   }
 
   /***************************************************
-   * update_team: Update a team
+   * update_team_players: Update a team
    * @param  void
    * @return $team_information
    ***************************************************/
 
-  public function update_team() {
+  public function update_team_players() {
 
-    $update_team = Team_user::update_team(Input::all());
-    $players   = Player::players(input::get('championship_id'), input::get('type_play'), input::get('team_date'), input::get('type_journal'));
-
+    $update_team = Team_user::update_team($_GET['team_id']);
+    $players     = Player::players($_GET['championship_id'], $_GET['type_play'], $_GET['team_date'], $_GET['type_journal']);
     $team_information[]  = array(
-      'update_team'      => $update_team,
-      'players'          => $players);
+                                'update_team' => $update_team,
+                                'players'     => $players
+                                );
 
     echo json_encode($team_information);
 

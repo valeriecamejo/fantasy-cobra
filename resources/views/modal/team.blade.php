@@ -43,7 +43,7 @@
             </div>
 
             <!--<div>-->
-            <form role="form" method="POST" action="{{ URL::action('TeamUserController@edit_team') }}">
+            <form role="form" method="POST" action="{{ URL::action('TeamUserController@show_team') }}">
               {{ csrf_field() }}
 
               <div class="footsubblock" id="activateedit">

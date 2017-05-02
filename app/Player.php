@@ -22,6 +22,7 @@ class Player extends Model
 
   public static function players($championship,$type_play,$date_team, $type_journal){
 
+
     $pa         = Player::find_data_params($championship,$type_play,$date_team, $type_journal,'PA');
 
     $c         = Player::find_data_params($championship,$type_play,$date_team, $type_journal,'C');
@@ -39,6 +40,8 @@ class Player extends Model
     $ci        = Player::find_data_params_union($championship,$type_play,$date_team, $type_journal,'3B', '1B');
 
     $mi        = Player::find_data_params_union($championship,$type_play,$date_team, $type_journal,'SS', '2B');
+
+var_dump($type_play);
 
     if ($type_play == 'REGULAR') {
       $players[]  = array(
