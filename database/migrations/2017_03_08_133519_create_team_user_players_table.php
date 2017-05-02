@@ -6,36 +6,38 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTeamUserPlayersTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('team_user_players', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('legacy_id');
-            $table->integer('player_id')->unsigned();
-            $table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
-            $table->integer('team_user_id')->unsigned();
-            $table->foreign('team_user_id')->references('id')->on('team_users')->onDelete('cascade');
-            $table->string('name');
-            $table->string('last_name');
-            $table->string('position');
-            $table->integer('salary');
-            $table->float('points')->default(0);
-            $table->timestamps();
-        });
-    }
+  /**
+   * Run the migrations.
+   *
+   * @return void
+   */
+  public function up()
+  {
+    Schema::create('team_user_players', function (Blueprint $table) {
+      $table->increments('id');
+      $table->integer('legacy_id');
+      $table->integer('player_id')->unsigned();
+      $table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
+      $table->integer('team_user_id')->unsigned();
+      $table->foreign('team_user_id')->references('id')->on('team_users')->onDelete('cascade');
+      $table->string('name');
+      $table->string('last_name');
+      $table->string('name_team');
+      $table->string('name_opponent');
+      $table->string('position');
+      $table->integer('salary');
+      $table->float('points')->default(0);
+      $table->timestamps();
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('team_user_players');
-    }
+  /**
+   * Reverse the migrations.
+   *
+   * @return void
+   */
+  public function down()
+  {
+    Schema::dropIfExists('team_user_players');
+  }
 }
