@@ -1,42 +1,34 @@
 //Url global
-
-
 /**********************************
-* team_modal.
+* modal_team.
 * @param competitions
 * @return tpl
 ***********************************/
-
 function team_modal(team_id, cont_teams, username) {
-
 var protocol  = location.protocol;
 var URLdomain = window.location.host;
 var url_ajax  = protocol + "//" + URLdomain;
 
-$.ajax({
+  jQuery.noConflict();
 
+$.ajax({
         url: url_ajax + "/usuario/ver-equipos",
         type: "GET",
         async: true,
         data: {"team_id": team_id},
         success: function (data) {
-
             var datos = jQuery.parseJSON(data);
             add_team_information(datos, team_id, cont_teams, username);
-
         }
     });
 }
-
 /**********************************
 * add_info_team: Add information
                  to team modal.
 * @param competitions
 * @return tpl
 ***********************************/
-
 function add_team_information(datos, team_id, cont_teams, username){
-
   $("#team_information_salary").empty();
   $("#team_information_date").empty();
   $("#team_information_points").empty();
@@ -49,7 +41,6 @@ function add_team_information(datos, team_id, cont_teams, username){
   $("#players_team").empty();
   $("#team_name").empty();
   $('#activateedit').empty();
-
     var pos = '';
     var hour            =   $('#hour').val();       // Hora del sistema
     var boton_edit      =   ''; // Construye el boton de editar
@@ -57,11 +48,6 @@ function add_team_information(datos, team_id, cont_teams, username){
     var team_date     =   0; // Obtengo le fecha del Lineup
     var teams_id;  // Contiene el campo oculto con el id del Lineup a Editar
     var team_name;
-    var type_play = '';
-    var type_journal = '';
-    var sport_id = '';
-    var team_id = '';
-    var championship_id = '';
     var team_information_salary = "<tr>" +
         "<td>" + "<b>Salario: </b></td>" +
         "</tr>";
@@ -83,40 +69,29 @@ function add_team_information(datos, team_id, cont_teams, username){
                             "<th>PUNTOS</th>"+
                           "</tr>"+
                         "</thead>";
-
     $(datos).each(function(index, element) {
-
       //----------------------Team_information-------------------
       $(element.team_information).each(function (k, team_information) {
-
         type_journal = team_information.type_journal;
         type_play = team_information.type_play;
         team_date = moment(team_information.date).format("YYYY-MM-DD HH:mm");
-
           team_information_salary = "<tr>" +
               "<td>" + "<b>Salario: </b>" + team_information.remaining_salary + "</td>" +
               "</tr>";
           team_information_date ="<tr>" +
               "<td>" + "<b>Fecha: </b>"+ moment(team_information.date).format("YYYY-MM-DD"); + "</td>" +
               "</tr>";
-
           team_information_points ="<tr>" +
               "<td>" + "<b>Pts: </b>"+ team_information.points; + "</td>" +
               "</tr>";
-
       });
-
-
       //----------------------Players-------------------
       $(element.players).each(function (j, players) {
-
-
           if(players.position=='OF' || players.position=='OF1' || players.position=='OF2'){
               pos = players.position.substr(0,2);
           }else{
               pos = players.position.substr(0,3);
           }
-
           players_team = players_team +
               "<tr>"+
               "<td>"+pos+"</td>"+
@@ -125,12 +100,9 @@ function add_team_information(datos, team_id, cont_teams, username){
               "</tr>";
       });
               //-------------------Equipo------------------------
-
       $(element.competitions).each(function (i, competitions) {
-
         championship_id = competitions.championship_id;
         sport_id = competitions.sport_id;
-
         competition_modal = competition_modal +
           "<div class='panel-group lincompsinscr' id='accordion' role='tablist' aria-multiselectable='true'>"+
             "<div class='panel panel-default backblack'>"+
@@ -155,31 +127,22 @@ function add_team_information(datos, team_id, cont_teams, username){
               "</div>"+
             "</div>"+
           "</div>";
-
       });
-
     });
-
     teams_id = '<div id="buttonedit"><input type="hidden" name="team_id" id="team_id" value="'+team_id+'">'+
                   '<input type="hidden" name="championship_id" id="championship_id" value="'+championship_id+'">'+
                   '<input type="hidden" name="team_date" id="team_date" value="'+team_date+'">'+
                   '<input type="hidden" name="type_journal" id="type_journal" value="'+type_journal+'">'+
                   '<input type="hidden" name="type_play" id="type_play" value="'+type_play+'">'+
-                  '<input type="hidden" name="sport_id" id="sport_id" value="'+sport_id+'">'+
-                  '<input type="hidden" name="team_id" id="team_id" value="'+team_id+'"></div>';
-alert(type_play);
+                  '<input type="hidden" name="sport_id" id="sport_id" value="'+sport_id+'"></div>';
     if (team_date > (actual_date)) {
-
       $('#activateedit').empty();
       boton_edit = teams_id+'<button type="submit" class="btn btn-default btn-primary4"  style="margin: 5px 0px;">EDITAR EQUIPO</button>';
       $('#activateedit').append(boton_edit);
-
     } else if (team_date <= actual_date) {
-
         boton_edit = '<span style="color:#D8BD33;font-size: 15px">Las competiciones comenzaron</span>';
         $('#activateedit').append(boton_edit);
       }
-
     $("#team_information_salary").append(team_information_salary);
     $("#team_information_date").append(team_information_date);
     $("#team_information_points").append(team_information_points);
@@ -188,5 +151,3 @@ alert(type_play);
     $("#team_name").text(username+" "+cont_teams);
     $("#myModal").modal("show");
 }
-
-

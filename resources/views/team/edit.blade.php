@@ -18,6 +18,7 @@
     <div class="modal-bodycompe">
       <div class="boxcompe">
         <p>Tipo de juego: {{$type_play}}</p>
+        <input type="hidden" value="type_play" name="type_play" id="type_play">
       </div>
     </div>
     <div class="hidden-xs" style="text-align:left;">

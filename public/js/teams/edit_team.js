@@ -8,6 +8,9 @@ var team_date        = $("#team_date").val();
 var type_journal     = $("#type_journal").val();
 var team_id          = $("#team_id").val();
 
+
+
+
 var pitcher          ='';
 var catcher          ='';
 var first_base       ='';
@@ -36,6 +39,8 @@ add_player(team_id, championship_id, type_play, team_date, type_journal);
  * Ajax Load players
  ************************************************************************/
 function add_player(team_id, championship_id, type_play, team_date, type_journal) {
+
+  jQuery.noConflict();
 
 var protocol  = location.protocol;
 var URLdomain = window.location.host;
