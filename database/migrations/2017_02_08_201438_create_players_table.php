@@ -25,8 +25,6 @@ class CreatePlayersTable extends Migration
             $table->integer('salary');
             $table->integer('points')->default(0);
             $table->string('status');
-            $table->string('name_team');
-            $table->string('name_opponent');
             $table->timestamps();
         });
     }

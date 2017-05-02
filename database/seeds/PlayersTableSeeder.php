@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PlayersTableSeeder extends Seeder
 {
@@ -11,7 +12,7 @@ class PlayersTableSeeder extends Seeder
      */
     public function run()
     {
-      \DB::table('players')->insert(array(
+      DB::table('players')->insert(array(
         array(
           'team_id'            => '1',
           'championship_id'    => '1',
@@ -22,8 +23,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'NY',
-          'name_opponent'      => 'DET',
         ),
         array(
           'team_id'            => '1',
@@ -35,8 +34,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'NY',
-          'name_opponent'      => 'DET',
         ),
         array(
           'team_id'            => '1',
@@ -48,8 +45,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'NY',
-          'name_opponent'      => 'DET',
         ),
         array(
           'team_id'            => '1',
@@ -61,8 +56,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'NY',
-          'name_opponent'      => 'DET',
         ),
         array(
           'team_id'            => '1',
@@ -74,8 +67,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'NY',
-          'name_opponent'      => 'DET',
         ),
         array(
           'team_id'            => '1',
@@ -87,8 +78,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'NY',
-          'name_opponent'      => 'DET',
         ),
         array(
           'team_id'            => '1',
@@ -100,8 +89,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'NY',
-          'name_opponent'      => 'DET',
         ),
         array(
           'team_id'            => '1',
@@ -113,8 +100,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'NY',
-          'name_opponent'      => 'DET',
         ),
         array(
           'team_id'            => '1',
@@ -126,8 +111,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'NY',
-          'name_opponent'      => 'DET',
         ),
         array(
           'team_id'            => '1',
@@ -139,8 +122,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'NY',
-          'name_opponent'      => 'DET',
         ),
         array(
           'team_id'            => '1',
@@ -152,8 +133,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'NY',
-          'name_opponent'      => 'DET',
         ),
         array(
           'team_id'            => '1',
@@ -165,8 +144,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'NY',
-          'name_opponent'      => 'DET',
         ),
         array(
           'team_id'            => '1',
@@ -178,8 +155,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'NY',
-          'name_opponent'      => 'DET',
         ),
 
         array(
@@ -192,8 +167,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'DET',
-          'name_opponent'      => 'NY',
         ),
         array(
           'team_id'            => '2',
@@ -205,8 +178,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'DET',
-          'name_opponent'      => 'NY',
         ),
         array(
           'team_id'            => '2',
@@ -218,8 +189,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'DET',
-          'name_opponent'      => 'NY',
         ),
         array(
           'team_id'            => '2',
@@ -231,8 +200,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'DET',
-          'name_opponent'      => 'NY',
         ),
         array(
           'team_id'            => '2',
@@ -244,8 +211,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'DET',
-          'name_opponent'      => 'NY',
         ),
         array(
           'team_id'            => '2',
@@ -257,8 +222,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'DET',
-          'name_opponent'      => 'NY',
         ),
         array(
           'team_id'            => '2',
@@ -270,8 +233,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'DET',
-          'name_opponent'      => 'NY',
         ),
         array(
           'team_id'            => '2',
@@ -283,8 +244,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'DET',
-          'name_opponent'      => 'NY',
         ),
         array(
           'team_id'            => '2',
@@ -296,8 +255,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'DET',
-          'name_opponent'      => 'NY',
         ),
         array(
           'team_id'            => '2',
@@ -309,8 +266,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'DET',
-          'name_opponent'      => 'NY',
         ),
         array(
           'team_id'            => '2',
@@ -322,8 +277,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'DET',
-          'name_opponent'      => 'NY',
         ),
         array(
           'team_id'            => '2',
@@ -335,8 +288,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'DET',
-          'name_opponent'      => 'NY',
         ),
         array(
           'team_id'            => '2',
@@ -348,8 +299,6 @@ class PlayersTableSeeder extends Seeder
           'salary'             => '5000',
           'points'             => '0',
           'status'             => '1',
-          'name_team'          => 'DET',
-          'name_opponent'      => 'NY',
         ),
       ));
     }

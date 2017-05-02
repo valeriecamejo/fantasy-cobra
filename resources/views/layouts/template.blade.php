@@ -28,14 +28,11 @@ date_default_timezone_set('Etc/GMT+4');
 
   <!--JS-->
   {!! Html::script('js/jquery.js') !!}
-  {!! Html::script('js/deposit.js') !!}
   {!! Html::script('js/jquery-ui.min.js') !!}
-  {!! Html::script('js/date.js') !!}
   {!! Html::script('js/messageanimate.js') !!}
   {!! Html::script('js/moment.js') !!}
   {!! Html::script('js/password_perfil.js') !!}
   {!! Html::script('js/menu.js') !!}
-  {!! Html::script('js/login.js') !!}
   {!! Html::script('js/sports.js') !!}
   {!! Html::script('js/responsiveslides.min.js') !!}
 
@@ -46,11 +43,7 @@ date_default_timezone_set('Etc/GMT+4');
   <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 </head>
 
-@if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
-  <body id="home" class="homepage" onmousemove="inactivity()" onkeypress="inactivity()">
-@else
   <body id="home" class="homepage">
-@endif
     <!-- Google Tag Manager -->
     <noscript>
       <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KC5MQD" height="0" width="0" style="display:none;visibility:hidden"></iframe>

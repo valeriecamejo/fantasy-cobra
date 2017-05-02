@@ -30,10 +30,7 @@
 
         <!--JS-->
         {!! Html::script('js/jquery.js') !!}
-        {!! Html::script('js/deposit.js') !!}
-        {!! Html::script('js/competition.js') !!}
         {!! Html::script('js/jquery-ui.min.js') !!}
-        {!! Html::script('js/date.js') !!}
         {!! Html::script('js/messageanimate.js') !!}
 
         <!--JS-->
@@ -80,8 +77,6 @@
         @include('modal/contact')
         @include('modal/forgot-password')
         @include('modal/login')
-        @include('modal/opponent')
-        @include('modal/team')
 
         <!-- -------------------------------- LOADING -------------------------------- -->
         @include('includes/cargando')
@@ -95,13 +90,13 @@
                 <div class="col-sm-2">
                     <ul class="social-icons">
                         <li onclick="document.getElementById('bloquea').style.display='block'">
-                            {!! Html::link('/','Lobby') !!}
+                            {!! Html::link('lobby','Lobby') !!}
                         </li>
                         <li onclick="document.getElementById('bloquea').style.display='block'">
-                            {!! Html::link('terminos-y-servicios','Términos y servicios'); !!}
+                            {!! Html::link('terminos-y-servicios','Términos y servicios') !!}
                         </li>
                         <li onclick="document.getElementById('bloquea').style.display='block'">
-                            {!! Html::link('politicas-de-privacidad','Políticas de privacidad'); !!}
+                            {!! Html::link('politicas-de-privacidad','Políticas de privacidad') !!}
                         </li>
                     </ul>
                 </div>
@@ -195,8 +190,6 @@
         {!! Html::script('js/jquery.isotope.min.js') !!}
         {!! Html::script('js/jquery.inview.min.js') !!}
         {!! Html::script('js/wow.min.js') !!}
-        {!! Html::script('js/webservice.js') !!}
         {!! Html::script('js/main.js') !!}
-        {!! Html::script('js/login.js') !!}
     </body>
 </html>
