@@ -160,8 +160,15 @@
 
         <div class="modal-bodycompe" id="short_competition">
           <div class="boxcompe" >
-            <p>Fecha Inicio</p>
-              <input type="text" name="start_date" id="datepicker" class="form-compe" placeholder="dd-mm-aaaa" value="{{Input::old('start_date')}}">
+            <p>Fecha</p>
+            <select class="form-compe2" name="start_date">
+              @foreach ($games as $date)
+                <option  value="{{$date}}">
+                  {{ date("d-m-Y", strtotime($date)) }}
+                </option>
+              @endforeach
+            </select>
+              <!--<input type="text" name="start_date" id="datepicker" class="form-compe" placeholder="dd-mm-aaaa" value="{{Input::old('start_date')}}">-->
           </div>
         </div>
 

@@ -19,8 +19,7 @@ class CreateTeamSubscribersTable extends Migration
             $table->foreign('sport_id')->references('id')->on('sports')->onDelete('cascade');
             $table->integer('competition_id')->unsigned();
             $table->foreign('competition_id')->references('id')->on('competitions')->onDelete('cascade');
-            $table->integer('team_id')->unsigned();
-            $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
+            $table->integer('team_id')->default(0);
             $table->integer('team_user_id')->unsigned();
             $table->foreign('team_user_id')->references('id')->on('team_users')->onDelete('cascade');
             $table->float('amount')->default(0);
