@@ -13,7 +13,7 @@
     <input type='hidden' name="championship" id="championship" value="{{$championship}}">
     <input type='hidden' name="type_journal" id="type_journal" value="{{$type_journal}}">
     <input type="hidden" name="type_play"  value="{{$type}}" id="type_play">
-    <input type='hidden' name="date_team" id="date_team" value="{{$date}}">
+    <input type='hidden' name="date_team" id="date_team" value="{{date("Y-m-d", strtotime($date))}}">
     <div class="modal-bodycompe">
       <div class="boxcompe">
         <p>Tipo de juego:  {{$type}} </p>
