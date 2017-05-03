@@ -211,5 +211,50 @@ public static function bettor_competitions() {
       return false;
     }
   }
+
+
+  /**
+   * validate_balance_bono
+   * @param $cost_entry
+   * @return object
+   */
+  private static function validate_balance_bono($cost_entry) {
+    $balance                                  = Auth::user()->bettor->balance;
+    $bonus                                    = Auth::user()->bettor->bonus;
+    $pay_cost_entry                           = new Team_subscriber();
+
+    if ($cost_entry > $bonus && $bonus != 0) {
+      $cost_pay_bonus                         = $cost_entry - $bonus;
+      $cost_pay_restant                       = $cost_entry - $cost_pay_bonus;
+
+      if ($cost_pay_restant > $balance) {
+        return false;
+      } else {
+        $cost_pay_balance   = $balance - $cost_pay_restant;
+
+        $pay_cost_entry->balance_before       = $balance;
+        $pay_cost_entry->balance_after        = $cost_pay_balance;
+        $pay_cost_entry->bonus                = $cost_pay_bonus;
+        $pay_cost_entry->balance              = $cost_pay_restant;
+      }
+
+    } elseif ($bonus >= $cost_entry) {
+
+      $pay_cost_entry->balance_before       = $balance;
+      $pay_cost_entry->balance_after        = 0;
+      $pay_cost_entry->bonus                = $cost_entry;
+      $pay_cost_entry->balance              = 0;
+
+    } elseif ($balance>= $cost_entry) {
+
+      $pay_cost_entry->balance_before       = $balance;
+      $pay_cost_entry->balance_after        = 0;
+      $pay_cost_entry->bonus                = $cost_entry;
+      $pay_cost_entry->balance              = 0;
+
+    } elseif ($balance < $cost_entry) {
+      return false;
+    }
+  }
 }
 
