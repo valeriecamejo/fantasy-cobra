@@ -9,16 +9,15 @@
 
     {!!  Form::open(array('url' => 'usuario/crear-equipo', 'method' => 'post')) !!}
 
-    <input type='hidden' name="sport_id" id="sport_id" value="sport_id">
-    <input type='hidden' name="team_id" id="team_id" value="team_id">
-    <input type='hidden' name="championship_id" id="championship_id" value="championship_id">
-    <input type='hidden' name="type_journal" id="type_journal" value="type_journal">
-    <input type='hidden' name="type_play" id="type_play" value="type_play">
-    <input type='hidden' name="team_date" id="team_date" value="team_date">
+    <input type='hidden' name="sport_id" id="sport_id" value="{{($sport_id)}}">
+    <input type='hidden' name="team_id" id="team_id" value="{{($team_id)}}">
+    <input type='hidden' name="championship_id" id="championship_id" value="{{($championship_id)}}">
+    <input type='hidden' name="type_journal" id="type_journal" value="{{($type_journal)}}">
+    <input type='hidden' name="type_play" id="type_play" value="{{($type_play)}}">
+    <input type='hidden' name="team_date" id="team_date" value="{{($team_date)}}">
     <div class="modal-bodycompe">
       <div class="boxcompe">
         <p>Tipo de juego: {{$type_play}}</p>
-        <input type="hidden" value="type_play" name="type_play" id="type_play">
       </div>
     </div>
     <div class="hidden-xs" style="text-align:left;">

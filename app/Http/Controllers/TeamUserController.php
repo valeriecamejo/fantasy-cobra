@@ -114,7 +114,7 @@ class TeamUserController extends Controller {
     return view('team.edit')
          ->with('team_id',      input::get('team_id'))
          ->with('type_play',    input::get('type_play'))
-         ->with('championship', input::get('championship_id'))
+         ->with('championship_id', input::get('championship_id'))
          ->with('team_date',    input::get('team_date'))
          ->with('team_date',    $team_date)
          ->with('type_journal', input::get('type_journal'))
