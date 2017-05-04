@@ -214,11 +214,11 @@ public static function bettor_competitions() {
 
 
   /**
-   * validate_balance_bono
+   * validate_balance_bonus
    * @param $cost_entry
    * @return object
    */
-  private static function validate_balance_bono($cost_entry) {
+  public static function validate_balance_bonus($cost_entry) {
     $balance                                  = Auth::user()->bettor->balance;
     $bonus                                    = Auth::user()->bettor->bonus;
     $pay_cost_entry                           = new Team_subscriber();
@@ -236,25 +236,96 @@ public static function bettor_competitions() {
         $pay_cost_entry->balance_after        = $cost_pay_balance;
         $pay_cost_entry->bonus                = $cost_pay_bonus;
         $pay_cost_entry->balance              = $cost_pay_restant;
+
+        return $pay_cost_entry;
       }
 
     } elseif ($bonus >= $cost_entry) {
 
       $pay_cost_entry->balance_before       = $balance;
-      $pay_cost_entry->balance_after        = 0;
+      $pay_cost_entry->balance_after        = $balance;
       $pay_cost_entry->bonus                = $cost_entry;
       $pay_cost_entry->balance              = 0;
+
+      return $pay_cost_entry;
 
     } elseif ($balance>= $cost_entry) {
 
       $pay_cost_entry->balance_before       = $balance;
-      $pay_cost_entry->balance_after        = 0;
-      $pay_cost_entry->bonus                = $cost_entry;
-      $pay_cost_entry->balance              = 0;
+      $pay_cost_entry->balance_after        = $balance - $cost_entry;
+      $pay_cost_entry->bonus                = 0;
+      $pay_cost_entry->balance              = $cost_entry;
 
+      return $pay_cost_entry;
     } elseif ($balance < $cost_entry) {
       return false;
     }
+  }
+
+
+  /**
+   * validate_enroll
+   * @param $id_competition
+   * @return boolean
+   */
+  public static function validate_enroll($id_competition) {
+    $competition      = Competition::where('id','=',$id_competition)
+      ->first();
+
+    if ($competition->enrolled == $competition->user_max) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  /**
+   * validate_password_competition
+   * @param $id_competition, $password
+   * @return boolean
+   */
+  public static function validate_password_competition($id_competition, $password) {
+    $competition      = Competition::where('id','=',$id_competition)
+      ->first();
+
+    if ($competition->password == $password) {
+      return $competition;
+    } else {
+      return false;
+    }
+  }
+
+  public static function find_competition_data($id) {
+    $competition_data                 = Competition::where('id','=',$id)
+      ->first();
+
+    $competition                      = new Competition();
+    $competition->id                  = $competition_data->id;
+    $competition->sport_id            = $competition_data->sport_id;
+    $competition->championship_id     = $competition_data->championship_id;
+    $competition->name                = $competition_data->name;
+    $competition->user_id             = $competition_data->user_id;
+    $competition->date                = $competition_data->date;
+    $competition->user_max            = $competition_data->user_max;
+    $competition->user_min            = $competition_data->user_min;
+    $competition->prize_guaranteed    = $competition_data->prize_guaranteed;
+    $competition->status              = $competition_data->status;
+    $competition->entry_cost          = $competition_data->entry_cost;
+    $competition->cost_guaranteed     = $competition_data->cost_guaranteed;
+    $competition->description         = $competition_data->description;
+    $competition->is_important        = $competition_data->is_important;
+    $competition->enrolled            = $competition_data->enrolled;
+    $competition->permanent           = $competition_data->permanent;
+    $competition->type_journal        = $competition_data->type_journal;
+    $competition->type_play           = $competition_data->type_play;
+    $competition->prize_id            = $competition_data->prize_id;
+    $competition->password            = $competition_data->password;
+    $competition->type                = $competition_data->type;
+    $competition->free                = $competition_data->free;
+    $competition->pot                 = $competition_data->pot;
+    $competition->type_competition    = $competition_data->type_competition;
+
+    return $competition;
   }
 }
 

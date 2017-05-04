@@ -65,7 +65,8 @@ class CompetitionController extends Controller {
       Session::flash('message', 'Competición creada con exitosamente.');
       Session::flash('class', 'success');
       return Redirect::to('/usuario/crear-equipo/'.$competition->type_play)
-        ->cookie('competition', $competition, 20);
+        ->cookie('competition', $competition, 20)
+        ->cookie('enroll', 'competition', 20);
     } else {
       Session::flash('message', 'Error al intentar crear la competición.');
       Session::flash('class', 'danger');
@@ -80,4 +81,21 @@ class CompetitionController extends Controller {
     echo json_encode($competition);
   }
 
+  /**
+   * new_team_competition
+   * @param $id
+   */
+  public function new_team_competition($id) {
+    $competition    = Competition::find_competition_data($id);
+    if ($competition) {
+      return Redirect::to('/usuario/crear-equipo/'.$competition->type_play)
+        ->cookie('competition', $competition, 20)
+        ->cookie('enroll', 'lobby', 20);
+    } else {
+      Session::flash('message', 'Ha ocurrido un error con la competición.');
+      Session::flash('class', 'danger');
+      return Redirect::to('lobby');
+    }
+
+  }
 }
