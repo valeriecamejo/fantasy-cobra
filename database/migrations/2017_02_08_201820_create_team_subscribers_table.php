@@ -26,6 +26,7 @@ class CreateTeamSubscribersTable extends Migration
             $table->float('points')->default(0);
             $table->dateTime('date');
             $table->float('balance_before');
+            $table->float('balance_after');
             $table->float('bonus')->nullable();
             $table->string('balance');
             $table->boolean('is_winner');

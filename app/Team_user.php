@@ -144,7 +144,7 @@ public static function future_competitions() {
   public static function update_team($team_id) {
 
     $update_team = DB::table('team_user_players')
-      ->select('team_user_players.name', 'team_user_players.position', 'players.salary' )
+      ->select('team_user_players.player_id', 'team_user_players.name', 'team_user_players.position', 'players.salary', 'team_user_players.last_name', 'team_user_players.name_opponent', 'team_user_players.name_team' )
       ->join('players', 'players.id', '=', 'team_user_players.player_id')
       ->where('team_user_id', '=', $team_id)
       ->orderBy('team_user_players.id')
