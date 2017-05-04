@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Competition;
 use App\Player;
 use App\Team_subscriber;
 use Carbon\Carbon;
@@ -58,7 +59,42 @@ class TeamUserController extends Controller {
    * @param string $type
    */
   public function new_team($type) {
-    $competition      = \Request::cookie('competition');
+    $competition                = \Request::cookie('competition');
+    $type_inscription           = \Request::cookie('enroll');
+
+    if ($type_inscription == 'lobby') {
+
+      $validate_enroll    = Competition::validate_enroll($competition->id);
+      if ($validate_enroll == false) {
+        Session::flash('message', 'La competición ya esta llena.');
+        Session::flash('class', 'danger');
+        return Redirect::to('lobby');
+      }
+
+      $validate_password_competition    = Competition::validate_password_competition($competition->id, $competition->password);
+      if ($validate_password_competition == false) {
+        Session::flash('message', 'Contraeña incorrecta.');
+        Session::flash('class', 'danger');
+        return Redirect::to('lobby');
+      }
+
+      $validate_balance_bonus     = Competition::validate_balance_bonus($competition->entry_cost);
+      if ($validate_balance_bonus == false) {
+        Session::flash('message', 'El costo de la entrada supera tu presupuesto.');
+        Session::flash('class', 'danger');
+        return Redirect::to('lobby');
+      }
+
+    } elseif ($type_inscription == 'competition') {
+
+      $validate_balance_bonus     = Competition::validate_balance_bonus($competition->entry_cost);
+      if ($validate_balance_bonus == false) {
+        Session::flash('message', 'El costo de la entrada supera tu presupuesto.');
+        Session::flash('class', 'danger');
+        return Redirect::to('lobby');
+      }
+
+    }
     return view('team.create')
     ->with('type', $type)
     ->with('type_journal', $competition->type_journal)
@@ -82,8 +118,12 @@ class TeamUserController extends Controller {
    */
   public function save_team() {
     $competition        = \Request::cookie('competition');
-    $competition->save();
-    $cookie = cookie('competition', $competition, 20);
+    $type_inscription   = \Request::cookie('enroll');
+
+    if ($type_inscription == 'competition') {
+      $competition->save();
+      $cookie = cookie('competition', $competition, 20);
+    }
 
     if (Input::get('type_play') == 'TURBO') {
       $team                 = Team_user::save_team_turbo(Input::all());
@@ -156,4 +196,5 @@ class TeamUserController extends Controller {
     echo json_encode($team_information);
 
   }
+
 }

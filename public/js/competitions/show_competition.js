@@ -90,6 +90,10 @@ function addData(competition_data) {
         }
       competition_date              = competition.date;
 
+      if (competition.enrolled < competition.user_max) {
+        button_create = button_create + "<a href='usuario/crear-equipo/competicion/"+competition.id+"' class='btn btn-default btn-primary4'>CREAR EQUIPO</a>";
+      }
+
     });
 
     //------------------------------ Participants
@@ -129,6 +133,8 @@ function addData(competition_data) {
   $("#competition_info").append(competition_info);
   $("#competition_participants").append(competition_participants);
   $("#competition_prizes").append(competition_prizes);
+  $("#button_create").append(button_create);
+
 
 
   $("#info_competition").modal("show");
