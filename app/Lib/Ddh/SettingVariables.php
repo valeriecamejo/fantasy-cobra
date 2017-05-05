@@ -5,15 +5,16 @@ use Illuminate\Support\Facades\DB;
 
 class SettingVariables {
 
-  public static $settings;
+  public static $settings = null;
 
   /**
    * @return object
    */
-  public static function setting_variables() {
+  static function retrieveSettingsDB() {
+    if (self::$settings == null) {
+      self::$settings = DB::table('settings')->get();
 
-    self::$settings                 = DB::table('settings')->get();
-    return self::$settings;
+    }
   }
 
   /**
@@ -21,10 +22,17 @@ class SettingVariables {
    * @return string
    */
   public static function getSettings($setting_required) {
-
-    return self::$settings;
+    self::retrieveSettingsDB();
+    $return           = null;
+    $setting_return   = self::$settings;
+    foreach ($setting_return as $variable) {
+      if ($variable->name == $setting_required) {
+        $return = $variable->value;
+      }
+    }
+    return $return;
   }
-
 }
 
-// \App\Lib\Ddh\SettingVariables::getSettings('min_user');
+//  \App\Lib\Ddh\SettingVariables::getSettings('min_retiro')
+
