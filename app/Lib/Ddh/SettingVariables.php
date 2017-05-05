@@ -2,21 +2,29 @@
 
 namespace App\Lib\Ddh;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\URL;
 
 class SettingVariables {
 
-$settings
-  static function setting_variables_return() {
+  public static $settings;
 
-    $settings                 = DB::table('settings')->get();
+  /**
+   * @return object
+   */
+  public static function setting_variables() {
 
+    self::$settings                 = DB::table('settings')->get();
+    return self::$settings;
   }
 
-  static function get($setting') {
-    return $settings[$setting]
+  /**
+   * @param string $setting_required
+   * @return string
+   */
+  public static function getSettings($setting_required) {
+
+    return self::$settings;
   }
 
 }
 
-//SettingVariables::get('min_deposito');
+// \App\Lib\Ddh\SettingVariables::getSettings('min_user');

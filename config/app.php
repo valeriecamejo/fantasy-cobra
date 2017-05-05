@@ -180,7 +180,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+      //provider of setting fantasy cobra
+      App\Providers\SettingVariablesProvider::class,
 
 
     ],
@@ -241,6 +242,7 @@ return [
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
         'UtilityDate' => 'App\Lib\Ddh\UtilityDate',
+        'SettingVariables' => 'App\Lib\Ddh\SettingVariables',
     ],
 
 ];
