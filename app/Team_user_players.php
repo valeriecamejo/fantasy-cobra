@@ -31,4 +31,23 @@ class Team_user_players extends Model
        return false;
      }
   }
+
+  public static function update_player($player_obj) {
+
+    $player                   =  Team_user_players::find($player_obj['id']);
+    $player->legacy_id        =  $player_obj['legacy_id'];
+    $player->name             =  $player_obj['name'];
+    $player->last_name        =  $player_obj['last_name'];
+    $player->name_team        =  $player_obj['name_team'];
+    $player->name_opponent    =  $player_obj['name_opponent'];
+    $player->position         =  $player_obj['position'];
+    $player->salary           =  $player_obj['salary'];
+    $player->points           =  $player_obj['points'];
+
+    if ($player->save()) {
+      return $player;
+    } else {
+      return false;
+    }
+  }
 }

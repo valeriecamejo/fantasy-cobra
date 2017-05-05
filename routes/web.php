@@ -55,7 +55,7 @@ Route::get('usuario/competicion', 'CompetitionController@modal_competition');
 Route::post('usuario/editar-equipo', 'TeamUserController@show_team');
 Route::get('usuario/editar-equipo', 'TeamUserController@update_team_players');
 Route::get('usuario/crear-equipo/competicion/{id}', 'CompetitionController@new_team_competition');
-
+Route::post('usuario/guardar-equipo', 'TeamUserController@save_modified_team');
 
 //Affiliate routes
 Route::get('afiliado', 'UserController@refer_friends');

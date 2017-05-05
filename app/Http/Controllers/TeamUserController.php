@@ -144,6 +144,7 @@ class TeamUserController extends Controller {
          ->with('team_date',    input::get('team_date'))
          ->with('team_date',    $team_date)
          ->with('type_journal', input::get('type_journal'))
+         ->with('remaining_salary', input::get('remaining_salary'))
          ->with('sport_id',     input::get('sport_id'));
   }
 
@@ -165,4 +166,16 @@ class TeamUserController extends Controller {
     echo json_encode($team_information);
 
   }
+
+  public function save_modified_team() {
+
+    if (Input::get('type_play') == 'REGULAR') {
+    $players = Team_user::modified_players_regular(Input::all());
+    } elseif (Input::get('type_play') == 'TURBO') {
+    $players = Team_user::modified_players_turbo(Input::all());
+    }
+
+    return redirect()->back();
+  }
+
 }

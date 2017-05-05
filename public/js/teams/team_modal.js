@@ -74,6 +74,8 @@ function add_team_information(datos, team_id, cont_teams, username){
       $(element.team_information).each(function (k, team_information) {
         type_journal = team_information.type_journal;
         type_play = team_information.type_play;
+        remaining_salary = team_information.remaining_salary;
+
         team_date = moment(team_information.date).format("YYYY-MM-DD HH:mm");
           team_information_salary = "<tr>" +
               "<td>" + "<b>Salario: </b>" + team_information.remaining_salary + "</td>" +
@@ -129,12 +131,14 @@ function add_team_information(datos, team_id, cont_teams, username){
           "</div>";
       });
     });
-    teams_id = '<div id="buttonedit"><input type="hidden" name="team_id" id="team_id" value="'+team_id+'">'+
-                  '<input type="hidden" name="championship_id" id="championship_id" value="'+championship_id+'">'+
-                  '<input type="hidden" name="team_date" id="team_date" value="'+team_date+'">'+
-                  '<input type="hidden" name="type_journal" id="type_journal" value="'+type_journal+'">'+
-                  '<input type="hidden" name="type_play" id="type_play" value="'+type_play+'">'+
-                  '<input type="hidden" name="sport_id" id="sport_id" value="'+sport_id+'"></div>';
+    teams_id = '<div id="buttonedit"><input type="hidden" name="team_id" id="team_id" value="'+ team_id +'">'+
+                  '<input type="hidden" name="championship_id" id="championship_id" value="'+ championship_id +'">'+
+                  '<input type="hidden" name="team_date" id="team_date" value="'+ team_date +'">'+
+                  '<input type="hidden" name="type_journal" id="type_journal" value="'+ type_journal +'">'+
+                  '<input type="hidden" name="type_play" id="type_play" value="'+ type_play +'">'+
+                  '<input type="hidden" name="remaining_salary" id="remaining_salary" value="'+ remaining_salary +'">'+
+                  '<input type="hidden" name="sport_id" id="sport_id" value="'+ sport_id +'"></div>';
+
     if (team_date > (actual_date)) {
       $('#activateedit').empty();
       boton_edit = teams_id+'<button type="submit" class="btn btn-default btn-primary4"  style="margin: 5px 0px;">EDITAR EQUIPO</button>';

@@ -7,7 +7,7 @@
       <h4 style="color:#e9e9e9;font-weight: 300;margin-top: -18px;font-size: 13pt;">Equipo para el día: {{($team_date)}}<span style="color:#eec133;"></span></h4>
     </div>
 
-    {!!  Form::open(array('url' => 'usuario/crear-equipo', 'method' => 'post')) !!}
+    {!!  Form::open(array('url' => 'usuario/guardar-equipo', 'method' => 'post')) !!}
 
     <input type='hidden' name="sport_id" id="sport_id" value="{{($sport_id)}}">
     <input type='hidden' name="team_id" id="team_id" value="{{($team_id)}}">
@@ -15,6 +15,7 @@
     <input type='hidden' name="type_journal" id="type_journal" value="{{($type_journal)}}">
     <input type='hidden' name="type_play" id="type_play" value="{{($type_play)}}">
     <input type='hidden' name="team_date" id="team_date" value="{{($team_date)}}">
+    <input type='hidden' name="remaining_salary" id="remaining_salary" value="{{($remaining_salary)}}">
     <div class="modal-bodycompe">
       <div class="boxcompe">
         <p>Tipo de juego: {{$type_play}}</p>

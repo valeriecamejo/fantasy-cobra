@@ -273,4 +273,94 @@ public static function future_competitions() {
       return $team;
     }
   }
+
+  public static function modified_players_regular($input) {
+
+    $pa_obj           = Player::find_data($input['PA']);
+    $update_pa        = Team_user_players::update_player($pa_obj);
+    if (!$update_pa) {
+      return false;
+    }
+
+    $c_obj            = Player::find_data($input['C']);
+    $update_c         = Team_user_players::update_player($c_obj);
+    if (!$update_c) {
+      return false;
+    }
+
+    $fb_obj           = Player::find_data($input['1B']);
+    $update_fb        = Team_user_players::update_player($fb_obj);
+    if (!$update_fb) {
+      return false;
+    }
+
+    $sb_obj           = Player::find_data($input['2B']);
+    $update_sb        = Team_user_players::update_player($sb_obj);
+    if (!$update_sb) {
+      return false;
+    }
+
+    $tb_obj           = Player::find_data($input['3B']);
+    $update_tb        = Team_user_players::update_player($tb_obj);
+    if (!$update_tb) {
+      return false;
+    }
+
+    $ss_obj           = Player::find_data($input['SS']);
+    $update_ss        = Team_user_players::update_player($ss_obj);
+    if (!$update_ss) {
+      return false;
+    }
+
+    $of_obj           = Player::find_data($input['OF']);
+    $update_of        = Team_user_players::update_player($of_obj);
+    if (!$update_of) {
+      return false;
+    }
+
+    $of2_obj          = Player::find_data($input['OF1']);
+    $update_of2       = Team_user_players::update_player($of2_obj);
+    if (!$update_of2) {
+      return false;
+    }
+
+    $of3_obj          = Player::find_data($input['OF2']);
+    $update_of3       = Team_user_players::update_player($of3_obj);
+    if (!$update_of3) {
+      return false;
+    }
+  }
+
+  public static function modified_players_turbo($input) {
+
+    $pa_obj           = Player::find_data($input['PA']);
+    $update_pa        = Team_user_players::update_player($pa_obj);
+    if (!$update_pa) {
+      return false;
+    }
+
+    $c_obj            = Player::find_data($input['C']);
+    $update_c         = Team_user_players::update_player($c_obj);
+    if (!$update_c) {
+      return false;
+    }
+
+    $mi_obj              = Player::find_data($input['MI']);
+    $update_mi           = Team_user_players::update_player($mi_obj);
+      if (!$update_mi) {
+        return false;
+      }
+
+    $ci_obj              = Player::find_data($input['CI']);
+      $update_ci         = Team_user_players::update_player($ci_obj);
+      if (!$update_ci) {
+        return false;
+      }
+
+    $of_obj           = Player::find_data($input['OF']);
+    $update_of        = Team_user_players::update_player($of_obj);
+    if (!$update_of) {
+      return false;
+    }
+  }
 }
