@@ -162,6 +162,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
         /*
         *Vendor Service Providers
@@ -241,6 +242,7 @@ return [
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
         'UtilityDate' => 'App\Lib\Ddh\UtilityDate',
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];
