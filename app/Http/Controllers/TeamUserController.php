@@ -167,15 +167,4 @@ class TeamUserController extends Controller {
 
   }
 
-  public function save_modified_team() {
-
-    if (Input::get('type_play') == 'REGULAR') {
-    $players = Team_user::modified_players_regular(Input::all());
-    } elseif (Input::get('type_play') == 'TURBO') {
-    $players = Team_user::modified_players_turbo(Input::all());
-    }
-
-    return redirect()->back();
-  }
-
 }

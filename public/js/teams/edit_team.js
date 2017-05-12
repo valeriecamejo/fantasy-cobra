@@ -20,6 +20,9 @@ var fielder_2        = '';
 var fielder_3        = '';
 var center_fielder   = '';
 var m_fielder        = '';
+var pitchers         = '';
+var catchers         = '';
+var fielders         = '';
 var count_team       = 0;
 document.getElementsByName("salaryrest")[0].value = remaining_salary;
 var button_create           = "<button type='submit' class='btn btn-primary2 btn-lg' name='createlineup'>Guardar Lineup</button>";
@@ -33,7 +36,7 @@ $("#playerOF2").empty();
  * Load players
  ************************************************************************/
 
-add_player(team_id, championship_id, type_play, team_date, type_journal);
+//add_player(team_id, championship_id, type_play, team_date, type_journal);
 
 /************************************************************************
  * Ajax Load players
@@ -67,13 +70,6 @@ var url_ajax  = protocol + "//" + URLdomain;
  ************************************************************************/
 function  tpl_user_players(type_play, datos) {
 
-  var pitchers                  = '';
-  var catchers                  = '';
-  var first_base                = '';
-  var second_base               = '';
-  var third_base                = '';
-  var shortstop                 = '';
-  var fielders                  = '';
   var c_fielder_position         = '';
   var c_fielder_name             = '';
   var c_fielder_last_name        = '';
@@ -467,15 +463,6 @@ function  tpl_user_players(type_play, datos) {
  ************************************************************************/
 function  tpl_players(championship, type_play, datos) {
 
-  var pitchers            ='';
-  var catchers            ='';
-  var first_base          ='';
-  var second_base         ='';
-  var third_base          ='';
-  var shortstop           ='';
-  var fielders            ='';
-  var center_fielder      ='';
-  var m_fielder           ='';
 
   $("#tabs").empty();
   $("#PAD").empty();
@@ -638,7 +625,6 @@ $(datos).each(function(index, element) {
       "</ul>";
     var   all_bats  = catchers + first_base + second_base + third_base + shortstop + fielders;
 
-
   } else if (type_play == 'TURBO') {
     var tabs = "<ul class='nav nav-tabs entirewidth' role='tablist'>" +
       "<li role='presentation' class='active'><a href='#PAD' id='PA' aria-controls='home' role='tab' data-toggle='tab'>PA</a></li> " +
@@ -671,6 +657,109 @@ $(datos).each(function(index, element) {
 function addPlayer(id, position, name, last_name, name_opponent, name_team, salary) {
 
   var button_create           = "<button type='submit' class='btn btn-primary2 btn-lg' name='createlineup'>Guardar Lineup</button>";
+
+if (type_play == 'REGULAR') {
+
+  var template_pa             = "<td id='pos'>" + position + "</td>" +
+    "<td id='jug'><span id='teamcol'>" + name + " / </span>" + last_name + " </td>" +
+    "<td id='opo'>" + name_opponent + " vs <span id='teamcol'>" + name_team + "</span></td>" +
+    "<td id='salario'>" + salary + "</td>" +
+    "<td>" +
+    '<a  onclick=deletePlayer('+'"'+id+'","'+salary+'","player'+position+'"); >' +
+    "<img src='/images/ico/menos.png' alt='menos' class='mashov'>" +
+    "</a>" +
+    "<input type='hidden' name='" + position + "' value='" + id + "'>" +
+    "</td>";
+
+  var template_ca            = "<td id='pos'>" + position + "</td>" +
+    "<td id='jug'><span id='teamcol'>" + name +" "+ last_name + "</td>" +
+    "<td id='opo'>" + name_opponent + " vs <span id='teamcol'>" + name_team + "</span></td>" +
+    "<td id='salario'>" + salary + "</td>" +
+    "<td>" +
+    '<a  onclick=deletePlayer('+'"'+id+'","'+salary+'","player'+position+'"); >' +
+    "<img src='/images/ico/menos.png' alt='menos' class='mashov'>" +
+    "</a>" +
+    "<input type='hidden' name='" + position + "' value='" + id + "'>" +
+    "</td>";
+
+  var template_b1            = "<td id='pos'>" + position + "</td>" +
+    "<td id='jug'><span id='teamcol'>" + name +" "+ last_name + "</td>" +
+    "<td id='opo'>" + name_opponent + " vs <span id='teamcol'>" + name_team + "</span></td>" +
+    "<td id='salario'>" + salary + "</td>" +
+    "<td>" +
+    '<a  onclick=deletePlayer('+'"'+id+'","'+salary+'","player'+position+'"); >' +
+    "<img src='/images/ico/menos.png' alt='menos' class='mashov'>" +
+    "</a>" +
+    "<input type='hidden' name='" + position + "' value='" + id + "'>" +
+    "</td>";
+
+  var template_b2            = "<td id='pos'>" + position + "</td>" +
+    "<td id='jug'><span id='teamcol'>" + name +" "+ last_name + "</td>" +
+    "<td id='opo'>" + name_opponent + " vs <span id='teamcol'>" + name_team + "</span></td>" +
+    "<td id='salario'>" + salary + "</td>" +
+    "<td>" +
+    '<a  onclick=deletePlayer('+'"'+id+'","'+salary+'","player'+position+'"); >' +
+    "<img src='/images/ico/menos.png' alt='menos' class='mashov'>" +
+    "</a>" +
+    "<input type='hidden' name='" + position + "' value='" + id + "'>" +
+    "</td>";
+
+  var template_b3            = "<td id='pos'>" + position + "</td>" +
+    "<td id='jug'><span id='teamcol'>" + name +" "+ last_name + "</td>" +
+    "<td id='opo'>" + name_opponent + " vs <span id='teamcol'>" + name_team + "</span></td>" +
+    "<td id='salario'>" + salary + "</td>" +
+    "<td>" +
+    '<a  onclick=deletePlayer('+'"'+id+'","'+salary+'","player'+position+'"); >' +
+    "<img src='/images/ico/menos.png' alt='menos' class='mashov'>" +
+    "</a>" +
+    "<input type='hidden' name='" + position + "' value='" + id + "'>" +
+    "</td>";
+
+  var template_ss            = "<td id='pos'>" + position + "</td>" +
+    "<td id='jug'><span id='teamcol'>" + name +" "+ last_name + "</td>" +
+    "<td id='opo'>" + name_opponent + " vs <span id='teamcol'>" + name_team + "</span></td>" +
+    "<td id='salario'>" + salary + "</td>" +
+    "<td>" +
+    '<a  onclick=deletePlayer('+'"'+id+'","'+salary+'","player'+position+'"); >' +
+    "<img src='/images/ico/menos.png' alt='menos' class='mashov'>" +
+    "</a>" +
+    "<input type='hidden' name='" + position + "' value='" + id + "'>" +
+    "</td>";
+
+  var template_of            = "<td id='pos'>" + position + "</td>" +
+    "<td id='jug'><span id='teamcol'>" + name +" "+ last_name + "</td>" +
+    "<td id='opo'>" + name_opponent + " vs <span id='teamcol'>" + name_team + "</span></td>" +
+    "<td id='salario'>" + salary + "</td>" +
+    "<td>" +
+    '<a  onclick=deletePlayer('+'"'+id+'","'+salary+'","player'+position+'"); >' +
+    "<img src='/images/ico/menos.png' alt='menos' class='mashov'>" +
+    "</a>" +
+    "<input type='hidden' name='" + position + "' value='" + id + "'>" +
+    "</td>";
+
+  var template_of1            = "<td id='pos'> OF1 </td>" +
+    "<td id='jug'><span id='teamcol'>" + name +" "+ last_name + "</td>" +
+    "<td id='opo'>" + name_opponent + " vs <span id='teamcol'>" + name_team + "</span></td>" +
+    "<td id='salario'>" + salary + "</td>" +
+    "<td>" +
+    '<a  onclick=deletePlayer('+'"'+id+'","'+salary+'","playerOF1"); >' +
+    "<img src='/images/ico/menos.png' alt='menos' class='mashov'>" +
+    "</a>" +
+    "<input type='hidden' name='OF1' value='" + id + "'>" +
+    "</td>";
+
+  var template_of2            = "<td id='pos'> OF2 </td>" +
+    "<td id='jug'><span id='teamcol'>" + name +" "+ last_name + "</td>" +
+    "<td id='opo'>" + name_opponent + " vs <span id='teamcol'>" + name_team + "</span></td>" +
+    "<td id='salario'>" + salary + "</td>" +
+    "<td>" +
+    '<a  onclick=deletePlayer('+'"'+id+'","'+salary+'","playerOF2"); >' +
+    "<img src='/images/ico/menos.png' alt='menos' class='mashov'>" +
+    "</a>" +
+    "<input type='hidden' name='OF2' value='" + id + "'>" +
+    "</td>";
+
+} else if (type_play == 'TURBO') {
 
   var template_pos            = "<td id='pos'>" + position + "</td>" +
     "<td id='jug'><span id='teamcol'>" + name +" "+ last_name + "</td>" +
@@ -737,6 +826,7 @@ function addPlayer(id, position, name, last_name, name_opponent, name_team, sala
     "</a>" +
     "<input type='hidden' name='OF2' value='" + id + "'>" +
     "</td>";
+}
 
   var verify_res              = verify_repeat(id,position);
 
@@ -761,23 +851,23 @@ function addPlayer(id, position, name, last_name, name_opponent, name_team, sala
         pitchers_select   = template_pa;
         updateSalary(salary, "add")
       } else if (position == 'C') {
-        catchers_select     = template_pos;
+        catchers_select     = template_ca;
         updateSalary(salary, "add")
       } else if (position == '1B') {
-        first_base_select   = template_pos;
+        first_base_select   = template_b1;
         updateSalary(salary, "add")
       } else if (position == '2B') {
-        second_base_select  = template_pos;
+        second_base_select  = template_b2;
         updateSalary(salary, "add")
       } else if (position == '3B') {
-        third_base_select   = template_pos;
+        third_base_select   = template_b3;
         updateSalary(salary, "add")
       } else if (position == 'SS') {
-        shortstop_select  = template_pos;
+        shortstop_select  = template_ss;
         updateSalary(salary, "add")
       } else if (position == 'OF') {
         if ($("#playerOF").is(':empty')) {
-          fielder1_select = template_pos;
+          fielder1_select = template_of;
           updateSalary(salary, "add")
         } else if ($("#playerOF1").is(':empty')) {
           fielder2_select   = template_of1;

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Team_user_players extends Model
 {
@@ -32,22 +33,15 @@ class Team_user_players extends Model
      }
   }
 
-  public static function update_player($player_obj) {
+  public static function playersByTeam($team_id) {
 
-    $player                   =  Team_user_players::find($player_obj['id']);
-    $player->legacy_id        =  $player_obj['legacy_id'];
-    $player->name             =  $player_obj['name'];
-    $player->last_name        =  $player_obj['last_name'];
-    $player->name_team        =  $player_obj['name_team'];
-    $player->name_opponent    =  $player_obj['name_opponent'];
-    $player->position         =  $player_obj['position'];
-    $player->salary           =  $player_obj['salary'];
-    $player->points           =  $player_obj['points'];
+    $players = DB::table('players')
+             ->select('players.*', 'team_user_players.name_team', 'team_user_players.name_opponent')
+             ->join('team_user_players', 'team_user_players.player_id', '=', 'players.id')
+             ->where('team_user_players.team_user_id', '=', $team_id)
+             ->get();
 
-    if ($player->save()) {
-      return $player;
-    } else {
-      return false;
-    }
+    return $players;
   }
+
 }

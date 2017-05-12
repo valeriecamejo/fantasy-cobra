@@ -41,11 +41,11 @@ function add_team_information(datos, team_id, cont_teams, username){
   $("#players_team").empty();
   $("#team_name").empty();
   $('#activateedit').empty();
-    var pos = '';
-    var hour            =   $('#hour').val();       // Hora del sistema
-    var boton_edit      =   ''; // Construye el boton de editar
-    var actual_date     =   moment().format("YYYY-MM-DD HH:mm");  // Obtiene la fecha de hoy
-    var team_date     =   0; // Obtengo le fecha del Lineup
+    var pos        = '';
+    var hour       =   $('#hour').val();       // Hora del sistema
+    var boton_edit =   ''; // Construye el boton de editar
+    var actual_date=   moment().format("YYYY-MM-DD HH:mm");  // Obtiene la fecha de hoy
+    var team_date  =   0; // Obtengo le fecha del Lineup
     var teams_id;  // Contiene el campo oculto con el id del Lineup a Editar
     var team_name;
     var team_information_salary = "<tr>" +
@@ -89,8 +89,8 @@ function add_team_information(datos, team_id, cont_teams, username){
       });
       //----------------------Players-------------------
       $(element.players).each(function (j, players) {
-          if(players.position=='OF' || players.position=='OF1' || players.position=='OF2'){
-              pos = players.position.substr(0,2);
+          if(players.position == 'OF' || players.position == 'OF1' || players.position == 'OF2'){
+              pos = players.position;
           }else{
               pos = players.position.substr(0,3);
           }
@@ -101,7 +101,7 @@ function add_team_information(datos, team_id, cont_teams, username){
                   "<td>"+players.points+"</td>"+
               "</tr>";
       });
-              //-------------------Equipo------------------------
+      //-------------------Equipo------------------------
       $(element.competitions).each(function (i, competitions) {
         championship_id = competitions.championship_id;
         sport_id = competitions.sport_id;

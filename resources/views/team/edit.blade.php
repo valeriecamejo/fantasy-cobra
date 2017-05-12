@@ -7,7 +7,7 @@
       <h4 style="color:#e9e9e9;font-weight: 300;margin-top: -18px;font-size: 13pt;">Equipo para el día: {{($team_date)}}<span style="color:#eec133;"></span></h4>
     </div>
 
-    {!!  Form::open(array('url' => 'usuario/guardar-equipo', 'method' => 'post')) !!}
+    {!!  Form::open(array('url' => '', 'method' => 'post')) !!}
 
     <input type='hidden' name="sport_id" id="sport_id" value="{{($sport_id)}}">
     <input type='hidden' name="team_id" id="team_id" value="{{($team_id)}}">
@@ -25,10 +25,37 @@
       <!-- abre contcrear -->
       <div class="CuerpoLineup cuerpoheight margrespL1">
         <div class="lineup nopadbot">
-          <div class="Usuariolineup" style="text-align:center;text-indent: 0;">Jugadores Disponibles</div>
+          <div id="Usuariolineup" class="Usuariolineup" style="text-align:center;text-indent: 0;">Jugadores Disponibles</div>
           <div>
             <!-- Nav tabs -->
-            <div id="tabs"></div>
+            <div id="tabs1">
+              <ul class="nav nav-tabs entirewidth" role="tablist">
+                <li role="presentation" class="active">
+                  <a href="#PAD" id="PA" aria-controls="home" role="tab" data-toggle="tab">PA</a>
+                </li>
+                <li role="presentation">
+                  <a href="#CD" id="C" aria-controls="profile" role="tab" data-toggle="tab">C</a>
+                </li>
+                <li role="presentation">
+                  <a href="#1BD" id="1B" aria-controls="messages" role="tab" data-toggle="tab">1B</a>
+                </li>
+                <li role="presentation">
+                  <a href="#2BD" id="2B" aria-controls="settings" role="tab" data-toggle="tab">2B</a>
+                </li>
+                <li role="presentation">
+                  <a href="#3BD" id="3B" aria-controls="settings" role="tab" data-toggle="tab">3B</a>
+                </li>
+                <li role="presentation">
+                  <a href="#SSD" id="SS" aria-controls="settings" role="tab" data-toggle="tab">SS</a>
+                </li>
+                <li role="presentation">
+                  <a href="#OFD" id="OF" aria-controls="settings" role="tab" data-toggle="tab">OF</a>
+                </li>
+                <li role="presentation">
+                  <a href="#BATSD" id="BATS" aria-controls="settings" role="tab" data-toggle="tab">BATS</a>
+                </li>
+              </ul>
+            </div>
 
             <table class="table table-striped2 table-hover2 tablelineup theadhead">
               <thead>
@@ -40,9 +67,12 @@
                 <th id="masmas"></th>
               </tr>
               </thead>
+              <tbody id="players_availables">
+
+              </tbody>
             </table>
             <!-- Tab panes -->
-            <div class="tab-content tab-contentnull scrollcreate createcontent">
+            <div id="players-availables" class="tab-content tab-contentnull scrollcreate createcontent">
               <div role="tabpanel" class="tab-pane active fade in" id="PAD">
 
               </div>
@@ -104,7 +134,7 @@
           <!-- Peloteros Seleccionados -->
           <div class="tableequipoheightmax">
             <table class="table table-striped2 table-hover2 tablelineup tableequipoheight">
-              <tbody>
+              <tbody id="playersTeam">
               <tr id="playerPA">
               </tr>
               <tr id="playerC">
@@ -325,8 +355,17 @@
       <!-- restab cierre -->
     </div>
   </div>
+
+  <div id="trPlayers"></div>
+
   {!! Form::close() !!}
 
+  {!! Html::script('js/players/journey.js') !!}
   {!! Html::script('js/teams/edit_team.js') !!}
+  {!! Html::script('js/validate/validate_players.js') !!}
+  {!! Html::script('js/teams/list.js') !!}
+  {!! Html::script('js/players/team_user.js') !!}
+
 
 @stop
+

@@ -55,7 +55,14 @@ Route::get('usuario/competicion', 'CompetitionController@modal_competition');
 Route::post('usuario/editar-equipo', 'TeamUserController@show_team');
 Route::get('usuario/editar-equipo', 'TeamUserController@update_team_players');
 Route::get('usuario/crear-equipo/competicion/{id}', 'CompetitionController@new_team_competition');
-Route::post('usuario/guardar-equipo', 'TeamUserController@save_modified_team');
+//Route::post('usuario/guardar-equipo', 'TeamUserController@save_modified_team');
+
+//Players routes
+Route::get('player/position/{position}', 'PlayerController@byPosition');
+Route::get('player/journey/{championship}/{date}/{journey}', 'PlayerController@byjourney');
+Route::get('player/team/{team_id}', 'PlayerController@playersByTeam');
+
+
 
 //Affiliate routes
 Route::get('afiliado', 'UserController@refer_friends');

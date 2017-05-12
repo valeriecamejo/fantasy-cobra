@@ -27,14 +27,18 @@ date_default_timezone_set('Etc/GMT+4');
   {!! Html::style('css/loader.css', array('media' => 'screen')) !!}
 
   <!--JS-->
-  {!! Html::script('js/jquery.js') !!}
+  <!-- Load jQuery -->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   {!! Html::script('js/jquery-ui.min.js') !!}
+  {!! Html::script('js/templates/load.js') !!}
   {!! Html::script('js/messageanimate.js') !!}
   {!! Html::script('js/moment.js') !!}
   {!! Html::script('js/password_perfil.js') !!}
   {!! Html::script('js/menu.js') !!}
   {!! Html::script('js/sports.js') !!}
   {!! Html::script('js/responsiveslides.min.js') !!}
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.8/handlebars.min.js"></script>
 
   <link rel="shortcut icon" href="images/ico/favicon.ico">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
@@ -44,22 +48,6 @@ date_default_timezone_set('Etc/GMT+4');
 </head>
 
   <body id="home" class="homepage">
-    <!-- Google Tag Manager -->
-    <noscript>
-      <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KC5MQD" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
-    <script>(function (w, d, s, l, i) {
-      w[l] = w[l] || [];
-      w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
-      var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
-        j.async = true;
-        j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, 'script', 'dataLayer', 'GTM-KC5MQD');
-    </script>
-    <!-- End Google Tag Manager -->
-
     <!-- -------------------------------- HEADER DESKTOP -------------------------------- -->
     <header id="header">
       <nav id="main-menu" class="navbar navbar-default navbar-fixed-top" role="banner">
@@ -247,7 +235,6 @@ date_default_timezone_set('Etc/GMT+4');
     {!! Html::script('js/jquery.inview.min.js') !!}
     {!! Html::script('js/wow.min.js') !!}
     {!! Html::script('js/main.js') !!}
-    {!! Html::script('css/personalStyles.css', array('media' => 'screen')) !!}
 
     @yield('javascript')
 
