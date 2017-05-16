@@ -44,62 +44,21 @@ class Team_user extends Model {
     return $this->hasMany('App\Team_user_players');
   }
 
-  /*********************************************
-   * today_teams: List today teams
-   * @param void
-   * @return $today_teams
-   *********************************************/
-  public static function today_teams() {
-
-    $time = "=";
-    return $today_teams = Team_user::team_by_times($time);
-  }
-
-  /*********************************************
-   * previous_teams: List previous teams
-   * @param void
-   * @return $previous_teams
-   *********************************************/
-  public static function previous_teams() {
-
-    $time = "<";
-    return $previous_teams = Team_user::team_by_times($time);
-  }
-
-  /*********************************************
-   * future_teams: List future teams
-   * @param void
-   * @return $future_teams
-   *********************************************/
-  public static function future_teams() {
-
-    $time = ">";
-    return $previous_teams = Team_user::team_by_times($time);
-  }
-
-public static function future_competitions() {
-
-    $time = ">";
-    return $future_competitions = Team_user::team_registered_some_competitions($time);
-  }
-
   /**************************************************
    * futures_competitions: List futures competitions
    * @param  $time
    * @return $futures_competitions
    **************************************************/
 
-  private static function team_by_times($time) {
-
-    $today         = date('Y-m-d');
+  public static function teamsUser() {
 
     $team_by_times = DB::table('team_users')
-      ->select('team_users.id', 'team_subscribers.points', 'team_users.name', 'team_users.user_id', 'championships.avatar', 'team_users.championship_id', 'competitions.date', 'team_users.remaining_salary', 'team_subscribers.competition_id', 'team_subscribers.team_user_id')
+      ->select('team_users.id', 'team_subscribers.points', 'team_users.name', 'team_users.user_id', 'championships.avatar', 'team_users.championship_id', 'competitions.date', 'team_users.remaining_salary', 'team_subscribers.competition_id', 'team_subscribers.team_user_id', 'sports.name as name_sport')
       ->join('team_subscribers', 'team_subscribers.team_user_id', '=', 'team_users.id')
       ->join('competitions', 'competitions.id', '=', 'team_subscribers.competition_id')
       ->join('championships', 'championships.id', '=', 'team_users.championship_id')
-      ->where(DB::raw('DATE_FORMAT(competitions.date, "%Y-%m-%d")'), $time, $today)
-      ->where('team_users.user_id', '=', Auth::user()->id)
+      ->join('sports', 'sports.id', '=', 'team_users.sport_id')
+      ->where('competitions.user_id', '=', Auth::user()->id)
       ->orderBy('competitions.date', 'asc')
       ->get();
 

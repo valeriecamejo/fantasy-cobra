@@ -27,22 +27,13 @@ class TeamUserController extends Controller {
   $futures_today
    *********************************************/
   public function bettor_teams() {
-    $today_teams    = Team_user::today_teams();
-    $previous_teams = Team_user::previous_teams();
-    $future_teams   = Team_user::future_teams();
-    $today_competitions    = Team_user::today_teams();
-    $previous_competitions = Team_user::previous_teams();
-    $future_competitions  = Team_user::future_teams();
-//var_dump($future_competitions);exit();
+    $teamsUser = Team_user::teamsUser();
+
     return view('users.teams', array(
-                                     'today_teams'           => $today_teams,
-                                     'previous_teams'        => $previous_teams,
-                                     'future_teams'          => $future_teams,
-                                     'today_competitions'    => $today_competitions,
-                                     'previous_competitions' => $previous_competitions,
-                                     'future_competitions'   => $future_competitions
+                                     'teamsUser'   => $teamsUser
                                      ));
-  }
+   }
+
   /**
    * new_team
    * @param string $type
