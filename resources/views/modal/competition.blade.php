@@ -1,13 +1,5 @@
 <script src="https://unpkg.com/vue"></script>
-<script>
-  var competitions_app = new Vue({
-    el: '#app',
-    data: {
-      message: 'Hello Vue!',
-      competition_details: '',
-  }
-  })
-</script>
+{!! Html::script('js/vuejs/competition/competition_details.js') !!}
 <div class="modal fade Competiciones" id="info_competition" tabindex="-1" role="dialog" aria-labelledby="inicioLabel">
   <div class="modal-dialog2" role="document">
     <div class="modal-content">
