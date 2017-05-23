@@ -4,10 +4,8 @@
 
 {!! Html::script('js/teams/filter_teams.js') !!}
 {!! Html::script('js/teams/team_modal.js') !!}
-<div id="wrapper"> <!-- Abre Wrapper -->
-  <!-- Sidebar -->
-  <!-- Menú movil -->
-  <!-- /#sidebar-wrapper -->
+
+
   <div class="container-fluid" id="page-content-wrapper">
     <h3 class="Titulo1">MIS EQUIPOS</h3>
 
@@ -44,6 +42,7 @@
   </div>
         <!-- Tab panes -->
         <!-------------------------Today Teams ------------------------>
+      <div id="app">
         <div class="tab-content tab-contentnull backblack tab-contentmislineups">
           <div role="tabpanel" class="tab-pane fade in active } ?> bordyel" id="today_teams">
             <table class="table table-hover table-responsive tabledep2">
@@ -61,7 +60,10 @@
                 </tr>
               </thead>
               <tbody id="teams-user">
-
+                <tr>
+                  <td>@{{ casa }}</td>
+                  <td>@{{ saludo }}</td>
+                </tr>
               </tbody>
             </table>
           </div> <!-- desktop tab -->
@@ -77,10 +79,11 @@
             </div>
           </div>
         </div>
+      </div>
         <br>
         <br>
         <br>
       @include('includes/footer-mobile')
-    </div>
   </div>
+  {!! Html::script('js/vuejs/teams/user_teams.js') !!}
 @stop

@@ -30,9 +30,9 @@ class TeamUserController extends Controller {
     $teamsUser = Team_user::teamsUser();
 
     return view('users.teams', array(
-                                     'teamsUser'   => $teamsUser
-                                     ));
-   }
+                                      'teamsUser'   => $teamsUser
+                                    ));
+  }
 
   /**
    * new_team
