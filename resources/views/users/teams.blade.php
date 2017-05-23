@@ -1,9 +1,6 @@
 @extends ('layouts.template')
 
 @section ('content')
-  <script src="https://unpkg.com/vue"></script>
-  {!! Html::script('js/vuejs/competition/competition_details.js') !!}
-  {!! Html::script('js/competitions/competition_details.js') !!}
   {!! Html::script('js/teams/team_modal.js') !!}
   <div id="wrapper"> <!-- Abre Wrapper -->
     <!-- Sidebar -->
@@ -103,12 +100,9 @@
                         {{$today_team->remaining_salary}} Bs.
                       </td>
                       <td></td>
-                      @if($today_team->id == $today_competition->id)
                         @php
                           $hour             = time();
                           $competition_hour = time($today_competition);
-                        echo $hour;
-                        echo $competition_hour;
                         @endphp
                         <td class="bdgedit">
                           <div class="contbtnbdg">
@@ -119,19 +113,22 @@
                                 <div class="BtnEntrar31">EDITAR</div>
                               @endif
                             </a>
-                            @if((strtotime($hour)) > ($competition_hour))
-                              {!! Form::open(array('url' => 'usuario/inscribir-equipo', 'method' => 'post')) !!}
-                              <input type="hidden" class="form-compe2" name="lineup_id" value="{{$today_team->id}}">
-                              {!! Form::close() !!}
-                              <button type='submit' class="BtnEntrar3" style="border-style:none;">INSCRIBIR</button>
-
-                            @endif
+                            <!--
+                            <div id="app">
+                              @{{ competition_details.date_competition }} con {{date("Y-m-d G", $date)}}
+                              <template v-if="competition_details && competition_details.date_ymd == '{{date("Y-m-d", $date)}}' && competition_details.date_competition >= competition_details.date_now && competition_details.enrolled < competition_details.user_max">
+                                <template v-if="competition_details.type_journal == '{{$today_team->type_journal}}' && competition_details.type_play == '{{$today_team->type_play}}'">
+                                  <a href="usuario/inscribir-equipo/{{$today_team->id}}"></a>
+                                  <button class="BtnEntrar3" style="border-style:none;">INSCRIBIR</button>
+                                </template>
+                              </template>
+                            </div>
+                            -->
                             <span class="badge">
-                        {{ UtilityDate::team_registered_competition($today_teams, $today_team->team_user_id) }}
-                      </span>
+                              {{ UtilityDate::team_registered_competition($today_teams, $today_team->team_user_id) }}
+                            </span>
                           </div>
                         </td>
-                      @endif
                       <td>{{$today_competition->points}}</td>
                     </tr>
                     @php
@@ -287,10 +284,15 @@
                           <a onclick="team_modal({{$future_team->id}}, {{$cont_teams}}, '{{Auth::user()->username}}')">
                             <div class="BtnEntrar31">EDITAR</div>
                           </a>
-                          {{ Form::open(array('url' => 'usuario/inscribir-equipo', 'method' => 'post')) }}
-                          <input type="hidden" class="form-compe2" name="lineup_id" value="{{$future_team->id}}">
-                          <button type='submit' class="BtnEntrar3" style="border-style:none;">INSCRIBIR</button>
-                          {{ Form::close() }}
+                          <div id="app">
+                            @{{ competition_details.type_play }} con {{$future_team->type_play}}
+                            <template v-if="competition_details && competition_details.date_competition == '{{date("Y-m-d G", $date)}}' && competition_details.enrolled < competition_details.user_max">
+                              <template v-if="competition_details.type_journal == '{{$future_team->type_journal}}' && competition_details.type_play == '{{$future_team->type_play}}' ">
+                                <!-- <a href="usuario/inscribir-equipo/{{$future_team->id}}"></a> -->
+                                  <button class="BtnEntrar3" style="border-style:none;">INSCRIBIR</button>
+                              </template>
+                            </template>
+                          </div>
                           <span class="badge">
 
                       {{ UtilityDate::team_registered_competition($future_teams, $future_team->team_user_id) }}
@@ -611,4 +613,7 @@
       @include('includes/footer-mobile')
     </div>
   </div>
+  <script src="https://unpkg.com/vue"></script>
+  {!! Html::script('js/competitions/competition_details.js') !!}
+  {!! Html::script('js/vuejs/competition/competition_details.js') !!}
 @stop

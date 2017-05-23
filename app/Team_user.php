@@ -71,7 +71,10 @@ public static function future_competitions() {
     $today         = date('Y-m-d');
 
     $team_by_times = DB::table('team_users')
-      ->select('team_users.id', 'team_subscribers.points', 'team_users.name', 'team_users.user_id', 'championships.avatar', 'team_users.championship_id', 'competitions.date', 'team_users.remaining_salary', 'team_subscribers.competition_id', 'team_subscribers.team_user_id')
+      ->select('team_users.id', 'team_subscribers.points', 'team_users.name',
+        'team_users.user_id', 'championships.avatar', 'team_users.championship_id',
+        'competitions.date', 'team_users.remaining_salary', 'team_subscribers.competition_id',
+        'team_subscribers.team_user_id', 'team_users.type_journal', 'team_users.type_play')
       ->join('team_subscribers', 'team_subscribers.team_user_id', '=', 'team_users.id')
       ->join('competitions', 'competitions.id', '=', 'team_subscribers.competition_id')
       ->join('championships', 'championships.id', '=', 'team_users.championship_id')
