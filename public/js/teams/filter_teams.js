@@ -1,7 +1,7 @@
 /*****************************************
 * filter_teams.
 * @param sport, filter_type
-* @return tmpl
+* @return tpl
 *****************************************/
 window.sport       = 'all';
 window.filter_type = 'all';

@@ -20,19 +20,27 @@ class TeamUserController extends Controller {
     $this->middleware('auth');
   }
   /*********************************************
-   * bettor_teams: Gets the user's teams.
+   * bettor_teams: Gets the user's view.
    * @param void
-   * @return $today_teams
-  $previous_teams
-  $futures_today
+   * @return view
    *********************************************/
   public function bettor_teams() {
+
+    return view('users.teams');
+  }
+
+  /*********************************************
+ * teams_by_user: Gets the user's teams.
+ * @param void
+ * @return $today_teams
+   *********************************************/
+  public function teams_by_user() {
+
     $teamsUser = Team_user::teamsUser();
 
-    return view('users.teams', array(
-                                      'teamsUser'   => $teamsUser
-                                    ));
+    echo json_encode($teamsUser);
   }
+
 
   /**
    * new_team

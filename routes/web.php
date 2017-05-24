@@ -51,6 +51,7 @@ Route::get('/usuario/crear-equipo/{type}', 'TeamUserController@new_team');
 Route::post('/usuario/crear-equipo', 'TeamUserController@save_team');
 Route::get('usuario/obtener-jugadores', 'TeamUserController@players');
 Route::get('usuario/ver-equipos', 'TeamUserController@team_data');
+Route::get('user-teams', 'TeamUserController@teams_by_user');
 Route::get('usuario/competicion', 'CompetitionController@modal_competition');
 Route::post('usuario/editar-equipo', 'TeamUserController@show_team');
 Route::get('usuario/editar-equipo', 'TeamUserController@update_team_players');

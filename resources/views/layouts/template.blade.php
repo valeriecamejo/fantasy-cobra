@@ -38,7 +38,6 @@ date_default_timezone_set('Etc/GMT+4');
   {!! Html::script('js/sports.js') !!}
   {!! Html::script('js/responsiveslides.min.js') !!}
 
-  <script src="https://unpkg.com/vue@2.1.8/dist/vue.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.8/handlebars.min.js"></script>
 
   @if(App::environment('production'))
@@ -46,6 +45,7 @@ date_default_timezone_set('Etc/GMT+4');
   @else
   {!! Html::script('js/vuejs/vue.js') !!}
   @endif
+   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
   <link rel="shortcut icon" href="images/ico/favicon.ico">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
