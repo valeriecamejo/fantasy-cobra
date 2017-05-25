@@ -60,8 +60,11 @@
                 </tr>
               </thead>
               <tbody>
+
                 <tr v-for="team in teams">
-                  <td> {{ Auth::user()->username }} @{{ team.name }}</td>
+                  <td> {{ Auth::user()->username }}
+                  <td> @{{ team.name }} </td>
+                  <td> @{{ team.date }} </td>
                 </tr>
               </tbody>
             </table>
