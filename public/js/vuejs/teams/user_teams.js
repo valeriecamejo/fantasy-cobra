@@ -6,6 +6,7 @@
                 filter_sport_val: 'all',
                 filter_type_val:  'all',
                 teams:               [],
+                date_today:          '',
               },
               mounted() {
                 axios.get('/user-teams').then((response) => {
@@ -35,16 +36,16 @@
                   this.teams = this.teams.filter(function(team) {
 
                     if (type == 'today_teams') {
-                      return moment(team.date).format('DD-MM-YYYY') == date_today;
+                      return moment(team.date).format('YYYY-MM-DD') == date_today;
                     } else if (type == 'previous_teams') {
-                        return moment(team.date).format('DD-MM-YYYY') < date_today;
+                        return moment(team.date).format('YYYY-MM-DD') < date_today;
                       } else if (type == 'future_teams') {
-                          return moment(team.date).format('DD-MM-YYYY') > date_today;
+                          return moment(team.date).format('YYYY-MM-DD') > date_today;
                         }
                   });
                 },
                 today: function() {
-                  return moment().format('DD-MM-YYYY');
+                  return moment().format('YYYY-MM-DD');
                 }
               }
          });

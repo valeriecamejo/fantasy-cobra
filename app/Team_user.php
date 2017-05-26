@@ -53,7 +53,7 @@ class Team_user extends Model {
   public static function teamsUser() {
 
     $teamsUser = DB::table('team_users')
-      ->select('team_users.id', 'team_subscribers.points', 'team_users.name', 'team_users.user_id', 'championships.avatar', 'team_users.championship_id', 'competitions.date', 'team_users.remaining_salary', 'team_subscribers.competition_id', 'team_subscribers.team_user_id', 'sports.name as name_sport')
+      ->select('team_users.id', 'team_subscribers.points', 'competitions.name', 'team_users.user_id', 'championships.avatar', 'team_users.championship_id', 'competitions.date', 'team_users.remaining_salary', 'team_subscribers.competition_id', 'team_subscribers.team_user_id', 'sports.name as name_sport')
       ->join('team_subscribers', 'team_subscribers.team_user_id', '=', 'team_users.id')
       ->join('competitions', 'competitions.id', '=', 'team_subscribers.competition_id')
       ->join('championships', 'championships.id', '=', 'team_users.championship_id')

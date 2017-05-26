@@ -49,22 +49,29 @@
               <thead>
                 <tr>
                   <th style="text-align: center;">Equipos</th>
-                  <th></th>
+
                   <th style="text-align: center;">Fecha</th>
-                  <th></th>
+
                   <th style="text-align: center;">Salario Restante</th>
-                  <th></th>
+
                   <th style="text-align: center;">Competiciones</th>
                   <th style="text-align: center;">Pts.</th>
-                  <th></th>
+
                 </tr>
               </thead>
               <tbody>
-
-                <tr v-for="team in teams">
-                  <td> {{ Auth::user()->username }}
-                  <td> @{{ team.name }} </td>
+                <tr v-if="teams == 0">
+                  <td style="text-align: center;" colspan="9">
+                    <h5>No tienes equipos creados</h5>
+                    <h4>Te invitamos a que disfrutes de la plataforma.</h4>
+                  </td>
+                </tr>
+                <tr v-else v-for="team in teams">
+                  <td> {{ Auth::user()->username }} </td>
                   <td> @{{ team.date }} </td>
+                  <td> @{{ team.remaining_salary }} </td>
+                  <td> @{{ team.name }} </td>
+                  <td> @{{ team.points }} </td>
                 </tr>
               </tbody>
             </table>
