@@ -7,6 +7,10 @@
                 filter_type_val:  'all',
                 teams:               [],
                 date_today:          '',
+            /*    protocol: location.protocol,
+                URLdomain: location.host,
+                url: protocol"//"URLdomain,
+            */
               },
               mounted() {
                 axios.get('/user-teams').then((response) => {

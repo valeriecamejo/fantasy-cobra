@@ -48,6 +48,7 @@
             <table class="table table-hover table-responsive tabledep2">
               <thead>
                 <tr>
+
                   <th style="text-align: center;">Equipos</th>
 
                   <th style="text-align: center;">Fecha</th>
@@ -56,7 +57,7 @@
 
                   <th style="text-align: center;">Competiciones</th>
                   <th style="text-align: center;">Pts.</th>
-
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -67,8 +68,9 @@
                   </td>
                 </tr>
                 <tr v-else v-for="team in teams">
-                  <td> {{ Auth::user()->username }} </td>
-                  <td> @{{ team.date }} </td>
+
+                  <td> @{{ team.avatar }} {{ Auth::user()->username }} </td>
+                  <td> {{ UtilityDate::dateAbbrevSpanish(getdate(01)) }}  @{{ team.date }} </td>
                   <td> @{{ team.remaining_salary }} </td>
                   <td> @{{ team.name }} </td>
                   <td> @{{ team.points }} </td>
