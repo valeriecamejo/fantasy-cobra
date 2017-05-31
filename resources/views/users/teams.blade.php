@@ -2,8 +2,8 @@
 
 @section ('content')
 
-<!-- {!! Html::script('js/teams/filter_teams.js') !!} -->
 {!! Html::script('js/teams/team_modal.js') !!}
+{!! Html::script('js/moment/locale/es.js') !!}
 
 <div id="app">
   <div class="container-fluid" id="page-content-wrapper">
@@ -48,15 +48,13 @@
             <table class="table table-hover table-responsive tabledep2">
               <thead>
                 <tr>
+                  <th></th>
                   <th style="text-align: center;">Equipos</th>
-
                   <th style="text-align: center;">Fecha</th>
-
                   <th style="text-align: center;">Salario Restante</th>
-
                   <th style="text-align: center;">Competiciones</th>
                   <th style="text-align: center;">Pts.</th>
-
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -66,12 +64,15 @@
                     <h4>Te invitamos a que disfrutes de la plataforma.</h4>
                   </td>
                 </tr>
+               <!-- <span > @{{ teams | filter_sport(filter_sport_val) }}  </span> -->
                 <tr v-else v-for="team in teams">
+                  <td> <img :src="'/' + team.avatar"> </td>
                   <td> {{ Auth::user()->username }} </td>
-                  <td> @{{ team.date }} </td>
+                  <td> @{{ moment(team.date).format('ddd DD-MM') }} </td>
                   <td> @{{ team.remaining_salary }} </td>
                   <td> @{{ team.name }} </td>
                   <td> @{{ team.points }} </td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>

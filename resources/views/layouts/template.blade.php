@@ -46,7 +46,6 @@ date_default_timezone_set('Etc/GMT+4');
   @else
     {!! Html::script('js/vuejs/vue.js') !!}
     {!! Html::script('js/vuejs/axios.min.js') !!}
-
   @endif
 
 
