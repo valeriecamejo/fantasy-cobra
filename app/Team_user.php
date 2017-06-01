@@ -45,7 +45,7 @@ class Team_user extends Model {
   }
 
   /**************************************************
-   * teamsUser: List competitions user
+   * teamsUser: List teams user
    * @param  void
    * @return $teamsUser
    **************************************************/

@@ -3,12 +3,14 @@ namespace App\Http\Controllers;
 use App\Competition;
 use App\Player;
 use App\Team_subscriber;
+use App\Bettor;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Team_user;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+
 class TeamUserController extends Controller {
   /***********************************
    * Create a new controller instance.
@@ -32,7 +34,7 @@ class TeamUserController extends Controller {
   /*********************************************
  * teams_by_user: Gets the user's teams.
  * @param void
- * @return $today_teams
+ * @return $teamsUser
    *********************************************/
   public function teams_by_user() {
 
@@ -40,7 +42,6 @@ class TeamUserController extends Controller {
 
     echo json_encode($teamsUser);
   }
-
 
   /**
    * new_team
@@ -165,5 +166,22 @@ class TeamUserController extends Controller {
     echo json_encode($team_information);
 
   }
+
+/***************************************************
+* show_withdrawals: View for withdrawal
+* @param  void
+* @return view
+*************************************************/
+
+  public function show_withdrawals() {
+
+    return View('ATM.withdrawals');
+  }
+
+/***************************************************
+* withdrawals: View for withdrawal
+* @param  void
+* @return 
+*************************************************/
 
 }
