@@ -181,7 +181,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+      //provider of setting fantasy cobra
+      App\Providers\SettingVariablesProvider::class,
 
 
     ],
@@ -243,6 +244,7 @@ return [
         'Html' => 'Collective\Html\HtmlFacade',
         'UtilityDate' => 'App\Lib\Ddh\UtilityDate',
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'SettingVariables' => 'App\Lib\Ddh\SettingVariables',
     ],
 
 ];
