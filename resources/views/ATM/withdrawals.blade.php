@@ -169,7 +169,28 @@
           <button type="submit" class="btn btn-primary7 btn-lg" onclick="document.getElementById('bloquea').style.display='block'">ENVIAR</button>
           </div>
 
-          
+          <div class="blocktransinnerctaban hidden-xs">
+            <div class="ctabancaria2">
+              <div class="backcolor2">
+                  <h3 class="Titclassban2">Balances</h3>
+              </div>
+              <div class="datctaban3">
+                <div class="datctabandiv">
+                  <p><b>Balance Bs.:</b> </p>
+                  <div class="datctabandivdiv">
+                    {{ Auth::user()->bettor->balance }}
+                  </div>
+              </div>
+
+              <div class="datctabandiv"><p><b>Máx. Retiro:</b></p>
+                <div class="datctabandivdiv">
+                  {{ Auth::user()->bettor->balance - Auth::user()->bettor->not_removable }}
+                  <input type="hidden" name="no_retirement" value="{{ Auth::user()->bettor->balance - Auth::user()->bettor->not_removable }}" readonly="readonly" style="max-width: 95%; border: transparent; text-align: center;">
+                </div>
+              </div>
+            </div>
+          </div>              
+
         </div>
       </div>
     </div>
