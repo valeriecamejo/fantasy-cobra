@@ -7,13 +7,13 @@
     "require": {
         "php": ">=5.6.4",
         "doctrine/dbal": "^2.5",
+        "fzaninotto/faker": "~1.4",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "laravelcollective/html":"5.4.*",
-        "fzaninotto/faker": "~1.4"
-
+        "laravelcollective/html": "5.4.*"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^2.3",
         "fzaninotto/faker": "~1.4",
         "laralib/l5scaffold": "^1.0",
         "mockery/mockery": "0.9.*",
@@ -51,5 +51,8 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true
+    },
+    "dependencies": {
+      "moment": "^2.15.2"
     }
 }

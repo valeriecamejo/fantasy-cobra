@@ -1,0 +1,23 @@
+
+  {{#each this}}
+    <tr id="player_{{id}}" class="{{position}}">
+      <td id='pos'> {{position}} </td>
+      <td id='jug'>
+        <span id='teamcol'> {{name}} {{last_name}}</span>
+      </td>
+      <td id='opo'> {{name_opponent}} <span id='teamcol'>vs {{name_team}} </span></td>
+      <td id='salario'> {{salary}} </td>
+      <td>
+        {{#if opo}}
+        <a class="add_player" data-player="{{id}}" data-position="{{position}}" data-salary="{{salary}}">
+          <img src='/images/ico/mas.png' alt='mas' class='mashov'>
+        </a>
+        {{else}}
+        <a class="remove_player" data-player="{{id}}" data-salary="{{salary}}">
+          <img src='/images/ico/menos.png' alt='menos' class='mashov'>
+        </a>
+        {{/if}}
+      </td>
+    </tr>
+  {{/each}}
+

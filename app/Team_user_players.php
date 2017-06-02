@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Team_user_players extends Model
 {
@@ -31,4 +32,16 @@ class Team_user_players extends Model
        return false;
      }
   }
+
+  public static function playersByTeam($team_id) {
+
+    $players = DB::table('players')
+             ->select('players.*', 'team_user_players.name_team', 'team_user_players.name_opponent')
+             ->join('team_user_players', 'team_user_players.player_id', '=', 'players.id')
+             ->where('team_user_players.team_user_id', '=', $team_id)
+             ->get();
+
+    return $players;
+  }
+
 }
