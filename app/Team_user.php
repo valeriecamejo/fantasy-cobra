@@ -21,66 +21,48 @@ class Team_user extends Model {
     'remaining_salary'
   ];
 
-  /*********************************************
-   * today_teams: List today teams
-   * @param void
-   * @return $today_teams
-   *********************************************/
-  public static function today_teams() {
+  static $positions = [
+    '1B'  => 1,
+    '2B'  => 1,
+    '3B'  => 1,
+    'C'   => 1,
+    'PA'  => 1,
+    'SS'  => 1,
+    'OF1' => 1,
+    'OF2' => 1,
+    'OF3' => 1,
+  ];
 
-    $time = "=";
-    return $today_teams = Team_user::team_by_times($time);
+
+  static function validate_positions () {
+    foreach (self::positions as $position => $qty) {
+
+    }
   }
 
-  /*********************************************
-   * previous_teams: List previous teams
-   * @param void
-   * @return $previous_teams
-   *********************************************/
-  public static function previous_teams() {
-
-    $time = "<";
-    return $previous_teams = Team_user::team_by_times($time);
-  }
-
-  /*********************************************
-   * future_teams: List future teams
-   * @param void
-   * @return $future_teams
-   *********************************************/
-  public static function future_teams() {
-
-    $time = ">";
-    return $previous_teams = Team_user::team_by_times($time);
-  }
-
-public static function future_competitions() {
-
-    $time = ">";
-    return $future_competitions = Team_user::team_registered_some_competitions($time);
+  public function team_players() {
+    return $this->hasMany('App\Team_user_players');
   }
 
   /**************************************************
-   * futures_competitions: List futures competitions
-   * @param  $time
-   * @return $futures_competitions
+   * teamsUser: List teams user
+   * @param  void
+   * @return $teamsUser
    **************************************************/
 
-  private static function team_by_times($time) {
+  public static function teamsUser() {
 
-    $today         = date('Y-m-d');
-
-    $team_by_times = DB::table('team_users')
-      ->select('team_users.id', 'team_subscribers.points', 'team_users.name', 'team_users.user_id', 'championships.avatar', 'team_users.championship_id', 'competitions.date', 'team_users.remaining_salary', 'team_subscribers.competition_id', 'team_subscribers.team_user_id')
+    $teamsUser = DB::table('team_users')
+      ->select('team_users.id', 'team_subscribers.points', 'competitions.name', 'team_users.user_id', 'championships.avatar', 'team_users.championship_id', 'competitions.date', 'team_users.remaining_salary', 'team_subscribers.competition_id', 'team_subscribers.team_user_id', 'sports.name as name_sport')
       ->join('team_subscribers', 'team_subscribers.team_user_id', '=', 'team_users.id')
       ->join('competitions', 'competitions.id', '=', 'team_subscribers.competition_id')
       ->join('championships', 'championships.id', '=', 'team_users.championship_id')
-      ->where(DB::raw('DATE_FORMAT(competitions.date, "%Y-%m-%d")'), $time, $today)
-      ->where('team_users.user_id', '=', Auth::user()->id)
+      ->join('sports', 'sports.id', '=', 'team_users.sport_id')
+      ->where('competitions.user_id', '=', Auth::user()->id)
       ->orderBy('competitions.date', 'asc')
       ->get();
 
-    return $team_by_times;
+    return $teamsUser;
   }
 
   /***************************************************
@@ -141,20 +123,26 @@ public static function future_competitions() {
    * @return $team_information
    **************************************************/
 
-  public static function update_team($input) {
-
-    $team_id = $input['team_id'];
+  public static function update_team($team_id) {
 
     $update_team = DB::table('team_user_players')
-      ->select('team_user_players.name', 'team_user_players.position', 'players.name_opponent', 'players.salary' )
+      ->select('team_user_players.player_id', 'team_user_players.name', 'team_user_players.position', 'players.salary', 'team_user_players.last_name', 'team_user_players.name_opponent', 'team_user_players.name_team' )
       ->join('players', 'players.id', '=', 'team_user_players.player_id')
       ->where('team_user_id', '=', $team_id)
+      ->orderBy('team_user_players.id')
       ->get();
 
     return $update_team;
   }
 
+  public function add_players() {
+    $tup = new Team_user_players();
+    $tup->team_user_id = $this->id;
+    $tup->save();
 
+    $this->team_players()->save($tup);
+
+  }
 
   public static function save_team_turbo($input) {
 
