@@ -76,7 +76,7 @@
             <h5>Retiro de Dinero</h5>
             <ul>
               <li>Para poder realizar retiro de dinero en la cuenta, se debe haber jugado el 50% de lo depositado.</li>
-              <li>El monto mínimo a retirar es {{\App\Lib\Ddh\SettingVariables::getSettings('min_retiro')}} <span class="fa fa-money fa-lg"></span>, de lo que se tenga en el Balance.</li>
+              <li>El monto mínimo a retirar es {{\App\Lib\Ddh\SettingVariables::getSettings('min_withdraw')}} <span class="fa fa-money fa-lg"></span>, de lo que se tenga en el Balance.</li>
             </ul>
 
             <p>Para más información contacta al staff de Fantasy Cobra en este <a href="">link.</a></p>

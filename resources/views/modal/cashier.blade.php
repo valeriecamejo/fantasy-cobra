@@ -15,7 +15,7 @@
 
                 </div>
                 <div class="cajaseleccion">
-                    <a onclick="select_type(1)">
+                    <a onclick="cash_out('recarga')">
                         <div class="seleccion1">
                             <div class="conticodep">
 
@@ -27,7 +27,7 @@
                             </div>
                         </div>
                     </a>
-                    <a onclick="select_type(2)">
+                    <a onclick="cash_out('retiro')">
                         <div class="seleccion2">
                             <div class="conticodep">
                                 {!! Html::image('images/ico/money.png','',array('alt' => 'retira')) !!}
@@ -39,7 +39,7 @@
                     </a>
                 </div>
             </div>
-            <div class="cajaligas11" id="select_type" style="display: none;">
+            <div class="cajaligas11" id="select_type" style="display:none;">
                 <div class="tituligas">
                     <h5>~ Selecciona tu transacci&oacute;n ~</h5>
                 </div>
@@ -49,7 +49,7 @@
                         <!-- Depositos -->
                         <div class="item active" id="pay-type">
                             <!-- Boton Paypal -->
-                            @if(isset(Auth::user()->id_tipousuario) && Auth::user()->id_tipousuario==3 && Auth::user()->active==1)
+                            @if(Auth::user()->user_type_id == 3)
 
                                 <!--<a href="usuario/cajero">
                                     {!! Html::image('images/ico/credit.png','',array('alt' => 'credit')) !!}
@@ -57,7 +57,7 @@
 
                                 </a>-->
 
-                                <a href="usuario/transferencia">
+                                <a href="#">
                                     {!! Html::image('images/ico/transfer.png','',array('alt' => 'transfer')) !!}
                                     <span>Transferencia</span>
                                 </a>
@@ -78,16 +78,14 @@
 
                         <!-- Retiros -->
                         <div class="item active" id="getmoney-type">
-                            @if(isset(Auth::user()->id_tipousuario) && Auth::user()->id_tipousuario==3 && Auth::user()->active==1)
+                            @if(Auth::user()->user_type_id == 2)
 
-                                <a href="usuario/retirar-dinero">
+                                <a href="retirar-dinero">
                                     {!! Html::image('images/ico/transfer.png','',array('alt' => 'transfer')) !!}
                                     <span>Transferencia</span>
                                 </a>
                             @else
-
-
-                                <a onclick="">
+                                <a href="retirar-dinero">
                                     {!! Html::image('images/ico/transfer.png','',array('alt' => 'transfer')) !!}
                                     <span>Transferencia</span>
                                 </a>
@@ -101,3 +99,4 @@
         </div>
     </div>
 </div>
+{!! Html::script('js/ATM/cash_out.js') !!}
