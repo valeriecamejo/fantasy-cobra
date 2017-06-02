@@ -64,9 +64,10 @@
             <div class="divBtn1">
               <a :href="'usuario/crear-equipo/competicion/'+ competition_details.id" class="btn btn-default btn-primary4">CREAR EQUIPO</a>
             </div>
-            <div class="divBtn2">
+           <!-- <div class="divBtn2">
               <a :href="'usuario/inscribir-equipo/competicion/'+ competition_details.id" class="btn btn-default btn-primary4">INSCRIBIR EQUIPO</a>
             </div>
+            -->
           </template>
         </div>
       </div>
