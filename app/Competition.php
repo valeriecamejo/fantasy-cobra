@@ -196,7 +196,7 @@ public static function bettor_competitions() {
    */
   private static function verify_hour_journal($type_journal) {
     if ($type_journal == 'DAILY') {
-        $hour     ='03:00:00';
+        $hour     ='15:00:00';
         return    $hour;
     } elseif ($type_journal == '3PM') {
       $hour       ='15:00:00';

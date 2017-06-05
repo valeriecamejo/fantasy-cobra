@@ -45,9 +45,9 @@ class Team_user extends Model {
   }
 
   /**************************************************
-   * futures_competitions: List futures competitions
-   * @param  $time
-   * @return $futures_competitions
+   * teamsUser: List teams user
+   * @param  void
+   * @return $teamsUser
    **************************************************/
 
   public static function teamsUser() {

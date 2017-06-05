@@ -36,4 +36,24 @@ class HomeController extends Controller
     }
   }
 
+  public function terms_services () {
+    return view('footer.terms_services');
+  }
+
+  public function politics_privacy () {
+    return view('footer.politics_privacy');
+  }
+
+  public function rules () {
+    return view('footer.rules');
+  }
+
+  public function score () {
+    return view('footer.score');
+  }
+
+  public function how_to_play () {
+    return view('footer.how_to_play');
+  }
+
 }

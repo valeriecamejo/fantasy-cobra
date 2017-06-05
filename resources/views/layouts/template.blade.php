@@ -46,7 +46,6 @@ date_default_timezone_set('Etc/GMT+4');
   @else
     {!! Html::script('js/vuejs/vue.js') !!}
     {!! Html::script('js/vuejs/axios.min.js') !!}
-
   @endif
 
 
@@ -142,55 +141,46 @@ date_default_timezone_set('Etc/GMT+4');
               </div>
               <div class="col-sm-2">
                 <ul class="social-icons">
-                  @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
-                    <li onclick="document.getElementById('bloquea').style.display='block'">
-                      {!! Html::link('usuario','Lobby') !!}</li>
-                    <li onclick="document.getElementById('bloquea').style.display='block'">
-                      {!! Html::link('usuario/terminos-y-servicios','Términos y servicios') !!}</li>
-                    <li onclick="document.getElementById('bloquea').style.display='block'">
-                      {!! Html::link('usuario/politicas-de-privacidad','Políticas de privacidad') !!}</li>
-                  @else
-                    <li onclick="document.getElementById('bloquea').style.display='block'">
-                      {!! Html::link('/','Lobby') !!}</li>
-                    <li onclick="document.getElementById('bloquea').style.display='block'">
-                      {!! Html::link('terminos-y-servicios','Términos y servicios') !!}</li>
-                    <li onclick="document.getElementById('bloquea').style.display='block'">
-                      {!! Html::link('politicas-de-privacidad','Políticas de privacidad') !!}</li>
-                  @endif
+                    <li>
+                      {!! Html::link('/','Lobby') !!}
+                    </li>
+                    <li>
+                      {!! Html::link('terminos-y-servicios','Términos y servicios') !!}
+                    </li>
+                    <li>
+                      {!! Html::link('politicas-de-privacidad','Políticas de privacidad') !!}
+                    </li>
                 </ul>
               </div>
               <div class="col-sm-2">
                 <ul class="social-icons">
-                  @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
-                    <li onclick="document.getElementById('bloquea').style.display='block'">
-                      {!! Html::link('usuario/como-jugar','¿Cómo jugar?') !!}</li>
-                    <li onclick="document.getElementById('bloquea').style.display='block'">
-                      {!! Html::link('usuario/reglas','Reglas') !!}</li>
-                    <li onclick="document.getElementById('bloquea').style.display='block'">
-                      {!! Html::link('usuario/puntos','Puntos') !!}</li>
-                  @else
-                    <li onclick="document.getElementById('bloquea').style.display='block'">
-                      {!! Html::link('como-jugar','¿Cómo jugar?') !!}</li>
-                    <li onclick="document.getElementById('bloquea').style.display='block'">
-                      {!! Html::link('reglas','Reglas') !!}</li>
-                    <li onclick="document.getElementById('bloquea').style.display='block'">
-                      {!! Html::link('puntos','Puntos') !!}</li>
-                  @endif
+                    <li>
+                      {!! Html::link('como-jugar','¿Cómo jugar?') !!}
+                    </li>
+                    <li>
+                      {!! Html::link('reglas','Reglas') !!}
+                    </li>
+                    <li>
+                      {!! Html::link('puntos','Puntos') !!}
+                    </li>
                 </ul>
               </div>
               <div class="Siguenos2">Síguenos en nuestras redes:</div>
               <div class="col-sm-5 redesfoot linkredes2" style="">
                 <ul class="social-icons" style="display: -webkit-inline-box;">
                   <li class="Siguenos">Síguenos en nuestras redes:</li>
-                  <li onclick="document.getElementById('bloquea').style.display='block'"><a
-                      href="https://www.facebook.com/fantasycobra/?fref=ts">{!! Html::image('images/fb2.png') !!}</a>
+                  <li>
+                    <a href="https://www.facebook.com/fantasycobra/?fref=ts">{!! Html::image('images/fb2.png') !!}</a>
                   </li>
-                  <li onclick="document.getElementById('bloquea').style.display='block'"><a
-                      href="https://twitter.com/Fantasy_Cobra">{!! Html::image('images/tw2.png') !!}</a></li>
-                  <li onclick="document.getElementById('bloquea').style.display='block'"><a
-                      href="https://www.instagram.com/fantasycobra">{!! Html::image('images/insta2.png') !!}</a></li>
-                  <li onclick="document.getElementById('bloquea').style.display='block'">
-                    <a href="skype:contacto_11689?call">{!! Html::image('images/skype-3.png') !!}</a></li>
+                  <li>
+                    <a href="https://twitter.com/Fantasy_Cobra">{!! Html::image('images/tw2.png') !!}</a>
+                  </li>
+                  <li>
+                    <a href="https://www.instagram.com/fantasycobra">{!! Html::image('images/insta2.png') !!}</a>
+                  </li>
+                  <li>
+                    <a href="skype:contacto_11689?call">{!! Html::image('images/skype-3.png') !!}</a>
+                  </li>
                 </ul>
               </div>
             </div>

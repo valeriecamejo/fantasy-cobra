@@ -59,6 +59,11 @@ function addData(competition_data) {
       competition_name            = competition.name;
       cost_guaranteed_g           = competition.cost_guaranteed;
 
+      competition.date_now = moment().format('YYYY-MM-DD HH');
+      competition.date_competition = moment(competition.date).format('YYYY-MM-DD HH');
+      competitions_app.competition_details = competition;
+      console.info(competitions_app);
+
       competition_enrolled        =   "<tr>"+
         "<td><b>Inscritos: </b>"+competition.enrolled+"/"+competition.user_max+"</td>"+
         "</tr>";
@@ -88,11 +93,6 @@ function addData(competition_data) {
       if(competition.type_competition == 1){
         competition_type_competition    = "<input type='text' placeholder='Introduzca contraseña' class='form-control2' id='password'>";
         }
-      competition_date              = competition.date;
-
-      if (competition.enrolled < competition.user_max) {
-        button_create = button_create + "<a href='usuario/crear-equipo/competicion/"+competition.id+"' class='btn btn-default btn-primary4'>CREAR EQUIPO</a>";
-      }
 
     });
 

@@ -98,4 +98,32 @@ class CompetitionController extends Controller {
     }
 
   }
+  /**
+   * enroll_team_competition
+   * @param $id
+   */
+  public function enroll_team_competition($id) {
+    $competition    = Competition::find_competition_data($id);
+    if ($competition) {
+      return Redirect::to('usuario/mis-equipos/')
+        ->cookie('competition', $competition, 20)
+        ->cookie('enroll', 'lobby', 20);
+    } else {
+      Session::flash('message', 'Ha ocurrido un error con la competición.');
+      Session::flash('class', 'danger');
+      return Redirect::to('lobby');
+    }
+
+  }
+  /**
+   * competition_details
+   */
+  public function competitionDetailsOfCookie() {
+    $competition_details_cookie  = \Request::cookie('competition');
+    if ($competition_details_cookie) {
+      echo json_encode($competition_details_cookie);
+    } else {
+      return false;
+    }
+  }
 }
