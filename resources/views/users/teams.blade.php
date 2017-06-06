@@ -53,6 +53,7 @@
                   <th style="text-align: center;">Fecha</th>
                   <th style="text-align: center;">Salario Restante</th>
                   <th style="text-align: center;">Competiciones</th>
+                  <th></th>
                   <th style="text-align: center;">Pts.</th>
                   <th></th>
                 </tr>
@@ -70,6 +71,23 @@
                   <td> @{{ moment(team.date).format('ddd DD-MM') }} </td>
                   <td> @{{ team.remaining_salary }} </td>
                   <td> @{{ team.name }} </td>
+                  <td class="bdgedit">
+
+                  <span v-if="moment(team.date).format('YYYY-MM-DD h:mm:ss') >= moment('now').format('YYYY-MM-DD h:mm:ss')">
+                    <a onclick="">
+                      <div class="BtnEntrar31 noedit">VER</div>
+                    </a>
+                  </span>
+
+                  <span v-else>
+                    <a onclick="">
+                      <div class="BtnEntrar31">EDITAR</div>
+                    </a>
+                    <button type='submit' class="BtnEntrar3" style="border-style:none;">INSCRIBIR</button>
+                  </span>
+
+                  </td>
+
                   <td> @{{ team.points }} </td>
                   <td></td>
                 </tr>
