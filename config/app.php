@@ -1,6 +1,6 @@
 <?php
 
-return [
+$result = [
 
     /*
     |--------------------------------------------------------------------------
@@ -162,7 +162,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
+
+
 
         /*
         *Vendor Service Providers
@@ -243,8 +244,19 @@ return [
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
         'UtilityDate' => 'App\Lib\Ddh\UtilityDate',
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        //'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'SettingVariables' => 'App\Lib\Ddh\SettingVariables',
     ],
 
 ];
+
+    /*
+    enviroment development
+    */
+    if (env('APP_ENV') === 'local') {
+      $result['providers'][] = Barryvdh\Debugbar\ServiceProvider::class;
+      $result['aliases'][]   = Barryvdh\Debugbar\Facade::class;
+
+    }
+
+    return $result;
