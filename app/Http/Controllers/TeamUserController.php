@@ -181,7 +181,7 @@ class TeamUserController extends Controller {
 /***************************************************
 * withdrawals: View for withdrawal
 * @param  void
-* @return 
+* @return
 *************************************************/
 
 }

@@ -1,5 +1,5 @@
 /*****************************************
-* cash_out: Displays an image depending 
+* cash_out: Displays an image depending
 * @param type
 * @return void
 *****************************************/
