@@ -72,18 +72,23 @@
                   <td> @{{ team.remaining_salary }} </td>
                   <td> @{{ team.name }} </td>
                   <td class="bdgedit">
-
-                  <span v-if="moment(team.date).format('YYYY-MM-DD h:mm:ss') >= moment('now').format('YYYY-MM-DD h:mm:ss')">
+                  <span v-if="moment(team.date).format('YYYY-MM-DD h:m') >= moment().format('YYYY-MM-DD h:m')">
                     <a onclick="">
-                      <div class="BtnEntrar31 noedit">VER</div>
+                      <div class="BtnEntrar31">VER</div>
                     </a>
+                  <!--  <a onclick="">
+                      <div class="BtnEntrar31">EDITAR</div>
+                    </a> -->
                   </span>
 
                   <span v-else>
                     <a onclick="">
-                      <div class="BtnEntrar31">EDITAR</div>
+                      <div class="BtnEntrar31 noedit">VER</div>
                     </a>
-                    <button type='submit' class="BtnEntrar3" style="border-style:none;">INSCRIBIR</button>
+                <!--    <a onclick="">
+                      <div class="BtnEntrar31 noedit">EDITAR</div>
+                    </a>
+                  <button type='submit' class="BtnEntrar3" style="border-style:none;">INSCRIBIR</button> -->
                   </span>
 
                   </td>
