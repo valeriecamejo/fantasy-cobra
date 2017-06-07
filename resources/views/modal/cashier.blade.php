@@ -57,7 +57,7 @@
 
                                 </a>
 
-                                <a href="/usuario/retirar-dinero">
+                                <a href="#">
                                     {!! Html::image('images/ico/transfer.png','',array('alt' => 'transfer')) !!}
                                     <span>Transferencia</span>
                                 </a>
