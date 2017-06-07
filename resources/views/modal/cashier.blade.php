@@ -57,7 +57,7 @@
 
                                 </a>
 
-                                <a href="#">
+                                <a href="/usuario/retirar-dinero">
                                     {!! Html::image('images/ico/transfer.png','',array('alt' => 'transfer')) !!}
                                     <span>Transferencia</span>
                                 </a>
@@ -68,7 +68,7 @@
                                     <span>Tarjeta Cr&eacute;dito</span>
                                 </a>-->
 
-                                <a href="retirar-dinero">
+                                <a href="/usuario/retirar-dinero">
                                     {!! Html::image('images/ico/transfer.png','',array('alt' => 'transfer')) !!}
                                     <span>Transferencia</span>
                                 </a>
@@ -78,7 +78,7 @@
 
                         <!-- Retiros -->
                         <div class="item active" id="getmoney-type">
-                                <a href="retirar-dinero">
+                                <a href="/usuario/retirar-dinero">
                                     {!! Html::image('images/ico/transfer.png','',array('alt' => 'transfer')) !!}
                                     <span>Transferencia</span>
                                 </a>
