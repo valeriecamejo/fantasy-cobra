@@ -33,6 +33,6 @@ class SettingVariables {
     return $return;
   }
 }
-
-//  \App\Lib\Ddh\SettingVariables::getSettings('min_retiro')
+//Forma de hacer uso de las variables de configuracion
+//  {{ \App\Lib\Ddh\SettingVariables::getSettings('min_retiro') }}
 

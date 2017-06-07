@@ -194,14 +194,13 @@
 
                 <div class="datctabandiv"><p><b>Mín. Retiro:</b></p>
                   <div class="datctabandivdiv">
-                      {{ \App\Lib\Ddh\SettingVariables::getSettings('min_withdraw') }}
+                    {{ \App\Lib\Ddh\SettingVariables::getSettings('min_withdraw') }}
                     <input type="hidden" name="min_withdraw" value="{{ \App\Lib\Ddh\SettingVariables::getSettings('min_withdraw') }}" readonly="readonly" style="max-width: 95%; border: transparent; text-align: center;">
                   </div>
                 </div>
 
               </div>
             </div>
-
           </div>
         </div>
       </div>
