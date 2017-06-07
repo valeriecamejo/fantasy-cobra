@@ -46,7 +46,7 @@
             <!-- Depositos -->
             <div class="item active" id="pay-type">
               <!-- Boton Paypal -->
-              @if(Auth::user()->user_type_id == 3)
+              @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id == 3)
                 <a href="#">
                   {!! Html::image('images/ico/credit.png','',array('alt' => 'credit')) !!}
                   <span>Tarjeta Cr&eacute;dito</span>
@@ -57,12 +57,10 @@
                   <span>Transferencia</span>
                 </a>
               @else
-
                 <!--<a onclick="">
                     {!! Html::image('images/ico/credit.png','',array('alt' => 'credit')) !!}
                     <span>Tarjeta Cr&eacute;dito</span>
                 </a>-->
-
                 <a href="/usuario/retirar-dinero">
                   {!! Html::image('images/ico/transfer.png','',array('alt' => 'transfer')) !!}
                   <span>Transferencia</span>
