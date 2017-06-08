@@ -48,8 +48,8 @@
             <table class="table table-hover table-responsive tabledep2">
               <thead>
                 <tr>
-                  <th></th>
-                  <th style="text-align: center;">Equipos</th>
+                <th></th>
+                  <th>Equipos</th>
                   <th style="text-align: center;">Fecha</th>
                   <th style="text-align: center;">Salario Restante</th>
                   <th style="text-align: center;">Competiciones</th>
@@ -67,34 +67,48 @@
                 </tr>
                 <tr v-else v-for="team in teams">
                   <td> <img :src="'/' + team.avatar"> </td>
-                  <td> {{ Auth::user()->username }} </td>
+                  <td id="tdcomp">
+                    {{ Auth::user()->username }}
+                    <span style="color:transparent;">#</span>
+                    <script type="text/template" id="cont_team_template">
+                  </script>
+                  </td>
+
                   <td> @{{ moment(team.date).format('ddd DD-MM') }} </td>
                   <td> @{{ team.remaining_salary }} </td>
                   <td> @{{ team.name }} </td>
                   <td class="bdgedit">
-                  <span v-if="moment(team.date).format('YYYY-MM-DD h:m') >= moment().format('YYYY-MM-DD h:m')">
-                    <a onclick="">
+                  <span v-if="moment().format('YYYY-MM-DD hh:mm') > moment(team.date).format('YYYY-MM-DD hh:mm')">
+                  <div class="contbtnbdg">
+                    <a @click="team_modal( team.id , team.name, teams )">
                       <div class="BtnEntrar31">VER</div>
                     </a>
-                  <!--  <a onclick="">
-                      <div class="BtnEntrar31">EDITAR</div>
-                    </a> -->
-                  </span>
-
-                  <span v-else>
-                    <a onclick="">
-                      <div class="BtnEntrar31 noedit">VER</div>
-                    </a>
-                <!--    <a onclick="">
                       <div class="BtnEntrar31 noedit">EDITAR</div>
                     </a>
-                  <button type='submit' class="BtnEntrar3" style="border-style:none;">INSCRIBIR</button> -->
+                  </div>
+                  <input type="hidden" class="form-compe2" name="lineup_id" value="@{{ team.id }}">
+                  <button type='submit' class="BtnEntrar3 noedit" style="border-style:none;">INSCRIBIR</button>
                   </span>
-
+                  <span v-else>
+                  <div class="contbtnbdg">
+                    <a @click="team_modal( team.id , team.name, teams )">
+                      <div class="BtnEntrar31">VER</div>
+                    </a>
+                    <a @click="team_modal( team.id , team.name, teams )">
+                      <div class="BtnEntrar31">EDITAR</div>
+                    </a>
+                  </div>
+                  <input type="hidden" class="form-compe2" name="lineup_id" value="@{{ team.id }}">
+                  <button type='submit' class="BtnEntrar3" style="border-style:none;">INSCRIBIR</button>
+                  </span>
+                  <span class="badge">
+                    @{{ team_count( team.id, teams, cant_inscription ) }}
+                  </span>
                   </td>
 
                   <td> @{{ team.points }} </td>
                   <td></td>
+
                 </tr>
               </tbody>
             </table>
@@ -118,4 +132,5 @@
       @include('includes/footer-mobile')
   </div>
   {!! Html::script('js/vuejs/teams/user_teams.js') !!}
+
 @stop

@@ -4,7 +4,8 @@
 * @param competitions
 * @return tpl
 ***********************************/
-function team_modal(team_id, cont_teams, username) {
+function show_team_modal(team_id, cont_teams, username) {
+
 var protocol  = location.protocol;
 var URLdomain = window.location.host;
 var url_ajax  = protocol + "//" + URLdomain;

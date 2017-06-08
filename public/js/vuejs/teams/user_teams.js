@@ -1,4 +1,5 @@
 
+
   vm = new Vue ({
               el: "#app",
               data: {
@@ -7,6 +8,9 @@
                 filter_type_val:  'all',
                 teams:               [],
                 date_today:          '',
+                team_id:              0,
+                cant_inscription:     0,
+                accountant:           0,
                 moment:          moment,
               },
               mounted() {
@@ -48,6 +52,25 @@
                 },
                 today: function() {
                   return moment().format('YYYY-MM-DD');
+                },
+                team_modal: function (team_id, username, teams) {
+                  this.accountant = 0;
+                  this.accountant =this.team_count(team_id, teams, this.cant_inscription);
+
+                  return show_team_modal(team_id, this.accountant, username);
+                },
+                team_count: function (team_id, teams, cant_inscription) {
+                  console.log(cant_inscription);
+                  $(teams).each(function(index, element) {
+
+                    if (element.team_user_id == team_id) {
+
+                      cant_inscription ++;
+                    }
+                    });
+
+                  return cant_inscription;
                 }
               }
          });
+
