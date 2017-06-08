@@ -58,7 +58,8 @@ Route::get('usuario/editar-equipo', 'TeamUserController@update_team_players');
 Route::get('usuario/crear-equipo/competicion/{id}', 'CompetitionController@new_team_competition');
 Route::get('usuario/inscribir-equipo/competicion/{id}', 'CompetitionController@enroll_team_competition');
 Route::get('competition-details', 'CompetitionController@competitionDetailsOfCookie');
-Route::get('usuario/retirar-dinero', 'TeamUserController@show_withdrawals');
+Route::get('usuario/retirar-dinero', 'PaymentController@show_withdrawals');
+Route::post('usuario/retirar-dinero', 'PaymentController@withdrawal');
 
 //Players routes
 Route::get('player/position/{position}', 'PlayerController@byPosition');

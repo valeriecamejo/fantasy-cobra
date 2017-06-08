@@ -4,20 +4,45 @@
 
 <div id="wrapper"> <!-- Abre Wrapper -->
   <div class="container-fluid Ingresoprin" id="page-content-wrapper">
+    <div class="container-fluid Ingresoprin" id="page-content-wrapper">
+      @if (Session::has('enviarmail'))
+           <div id="enviarmail" class="alert alert-success">
+              {{ Session::get('enviarmail') }}
+           </div>
+      @endif
+      @if (Session::get('msje') )
+          <div id="success" class="alert alert-success">
+              {{Session::get('msje')}}
+          </div>
+      @endif
+      @if (Session::get('msj') )
+      <div id="success" class="alert alert-danger">
+            {{Session::get('msj')}}
+      </div>
+      @endif
+
+      @if($errors->has('name') ||  $errors->has('surname') || $errors->has('identification') || $errors->has('phone') || $errors->has('amount') || $errors->has('number_account') || $errors->has('type_account') || $errors->has('bank') || $errors->has('email'))
+          <div id="danger" class="alert alert-danger">
+              <strong>Error:</strong> Debe completar todos los datos!
+          </div>
+      @endif
+
+
     <div class="container">
       <div class="row blocktrans">
         <div class="boxret">
           <div class="blocktransinner2">
             <h3 class="Titperf2">Cajero de Retiro</h3>
 
-          <!--Agregar FORM-->
+            <form class="form-horizontal" method="POST" action="{{ URL::action('PaymentController@withdrawal') }}">
+              {{ csrf_field() }}
 
             <div class="modal-bodyregis Top3">
               <div class="boxregis">
                   <p>Nombre</p>
               </div>
               <div class="input-group InicioSes">
-                <input type="text" class="form-control" placeholder="Escriba su nombre" aria-describedby="sizing-addon2" name="name" value="{{Input::old('name')}}">
+                <input type="text" class="form-control" placeholder="Escriba su nombre" aria-describedby="sizing-addon2" name="name" value="{{ old('name') }}">
                 @if($errors->has('name'))
                   <span class="incompleto4">×</span>
                   @foreach($errors->get('name') as $error)
@@ -29,13 +54,28 @@
 
             <div class="modal-bodyregis">
               <div class="boxregis">
+                  <p>Apellido</p>
+              </div>
+              <div class="input-group InicioSes">
+                <input type="text" class="form-control" placeholder="Escriba su apellido" aria-describedby="sizing-addon2" name="last_name" value="{{ old('last_name') }}">
+                @if($errors->has('last_name'))
+                  <span class="incompleto4">×</span>
+                  @foreach($errors->get('last_name') as $error)
+                    <span class="messageerror2">{{ $error }}</span>
+                  @endforeach
+                @endif
+              </div>
+            </div>
+
+            <div class="modal-bodyregis">
+              <div class="boxregis">
                   <p>Cédula</p>
               </div>
               <div class="input-group InicioSes">
-                <input type="text" class="form-control" placeholder="Nro. de Cédula" aria-describedby="sizing-addon2" name="identification" id="identification" value="{{Input::old('identification')}}">
-                @if($errors->has('identification'))
+                <input type="text" class="form-control" placeholder="Nro. de Cédula" aria-describedby="sizing-addon2" name="dni" id="dni" value="{{ old('dni') }}">
+                @if($errors->has('dni'))
                     <span class="incompleto4">×</span>
-                    @foreach($errors->get('identification') as $error)
+                    @foreach($errors->get('dni') as $error)
                         <span class="messageerror2">{{ $error }}</span>
                     @endforeach
                 @endif
@@ -47,7 +87,7 @@
                   <p>Teléfono</p>
               </div>
               <div class="input-group InicioSes">
-              <input type="text" class="form-control" placeholder="Nro. Teléfono" aria-describedby="sizing-addon2" name="phone" id="phone" value="{{Input::old('phone')}}">
+              <input type="text" class="form-control" placeholder="Nro. Teléfono" aria-describedby="sizing-addon2" name="phone" id="phone" value="{{ old('phone') }}">
                 @if($errors->has('phone'))
                   <span class="incompleto4">×</span>
                   @foreach($errors->get('phone') as $error)
@@ -62,7 +102,7 @@
                   <p>Cantidad a retirar</p>
               </div>
               <div class="input-group InicioSes">
-              <input type="text" class="form-control" placeholder="Bs. Retirar" aria-describedby="sizing-addon2" name="amount" id="amount" value="{{Input::old('amount')}}">
+              <input type="text" class="form-control" placeholder="Bs. Retirar" aria-describedby="sizing-addon2" name="amount" id="amount" value="{{ old('amount') }}">
                 @if($errors->has('amount'))
                   <span class="incompleto4">×</span>
                   @foreach($errors->get('amount') as $error)
@@ -77,7 +117,7 @@
                   <p>Nro. de cuenta</p>
               </div>
               <div class="input-group InicioSes">
-              <input type="text" class="form-control" placeholder="Nro. Cuenta" aria-describedby="sizing-addon2" name="number_account" id="number_account" value="{{Input::old('number_account')}}">
+              <input type="text" class="form-control" placeholder="Nro. Cuenta" aria-describedby="sizing-addon2" name="number_account" id="number_account" value="{{ old('number_account') }}">
                 @if($errors->has('number_account'))
                     <span class="incompleto4">×</span>
                     @foreach($errors->get('number_account') as $error)
@@ -156,7 +196,7 @@
                   <p>Correo Electrónico</p>
               </div>
               <div class="input-group InicioSes">
-              <input type="text" class="form-control" placeholder="ejemplo@gmail.com" aria-describedby="sizing-addon2" name="email" id="email" value="{{Input::old('email')}}">
+              <input type="text" class="form-control" placeholder="ejemplo@gmail.com" aria-describedby="sizing-addon2" name="email" id="email" value="{{ old('email') }}">
                 @if($errors->has('email'))
                   <span class="incompleto4">×</span>
                   @foreach($errors->get('email') as $error)
@@ -198,7 +238,7 @@
                     <input type="hidden" name="min_withdraw" value="{{ \App\Lib\Ddh\SettingVariables::getSettings('min_withdraw') }}" readonly="readonly" style="max-width: 95%; border: transparent; text-align: center;">
                   </div>
                 </div>
-
+              </form>
               </div>
             </div>
           </div>

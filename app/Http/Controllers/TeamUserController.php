@@ -167,21 +167,4 @@ class TeamUserController extends Controller {
 
   }
 
-/***************************************************
-* show_withdrawals: View for withdrawal
-* @param  void
-* @return view
-*************************************************/
-
-  public function show_withdrawals() {
-
-    return View('ATM.withdrawals');
-  }
-
-/***************************************************
-* withdrawals: View for withdrawal
-* @param  void
-* @return
-*************************************************/
-
 }
