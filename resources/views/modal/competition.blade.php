@@ -1,5 +1,4 @@
-<script src="https://unpkg.com/vue"></script>
-{!! Html::script('js/vuejs/competition/competition_details.js') !!}
+
 <div class="modal fade Competiciones" id="info_competition" tabindex="-1" role="dialog" aria-labelledby="inicioLabel">
   <div class="modal-dialog2" role="document">
     <div class="modal-content">
@@ -74,4 +73,4 @@
     </div>
   </div>
 </div>
-
+{!! Html::script('js/vuejs/competition/competition_details.js') !!}
