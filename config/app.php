@@ -12,7 +12,7 @@ $result = [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Laravel',
+    'name' => 'Fantasy Cobra',
 
     /*
     |--------------------------------------------------------------------------
@@ -25,7 +25,7 @@ $result = [
     |
     */
 
-    'env' => env('APP_ENV', 'production'),
+    'env' => env('APP_ENV', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -122,7 +122,9 @@ $result = [
 
     'log' => env('APP_LOG', 'single'),
 
-    'log_level' => env('APP_LOG_LEVEL', 'debug'),
+    'log_max_files' => 45,
+
+    'log_level' => env('APP_LOG_LEVEL', 'emergency'),
 
     /*
     |--------------------------------------------------------------------------
@@ -182,9 +184,9 @@ $result = [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-      //provider of setting fantasy cobra
-      App\Providers\SettingVariablesProvider::class,
 
+        //provider of setting fantasy cobra
+        App\Providers\SettingVariablesProvider::class,
 
     ],
 
@@ -244,7 +246,6 @@ $result = [
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
         'UtilityDate' => 'App\Lib\Ddh\UtilityDate',
-        //'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'SettingVariables' => 'App\Lib\Ddh\SettingVariables',
     ],
 

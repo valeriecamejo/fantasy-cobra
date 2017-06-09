@@ -30,15 +30,12 @@ date_default_timezone_set('Etc/GMT+4');
   <!-- Load jQuery -->
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   {!! Html::script('js/jquery-ui.min.js') !!}
-  {!! Html::script('js/templates/load.js') !!}
   {!! Html::script('js/messageanimate.js') !!}
   {!! Html::script('js/moment.js') !!}
   {!! Html::script('js/password_perfil.js') !!}
   {!! Html::script('js/menu.js') !!}
   {!! Html::script('js/sports.js') !!}
   {!! Html::script('js/responsiveslides.min.js') !!}
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.8/handlebars.min.js"></script>
 
   @if(App::environment('production'))
     <script src="https://unpkg.com/vue"></script>
