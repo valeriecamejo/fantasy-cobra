@@ -35,7 +35,7 @@
 
   <!-- Tab panes -->
   <div class="tab-content tab-contentnull tab-contenthome">
-    <div role="tabpanel" class="tab-pane fade in active bordyel" id="all-no-mobile">
+    <div role="tabpanel" class="tab-pane fade in active bordyel" id="competiciones">
       <table class="table table-hover table-responsive" id="tabledesk">
         <!-- Abre tabla -->
         <thead>
@@ -53,7 +53,74 @@
           </tr>
         </thead>
         <tbody id="table-all-no-mobile">
+          @foreach ($list_competitions as $competition)
+        <tr>
+          <td class="tdimg1">
+            {!! Html::image($competition->avatar,'',array('class' => 'tabimgtablet')) !!}
+          </td>
+          <td class="tdimg2">
+            @if($competition->is_important == 1)
+            {!! Html::image('images/ico/star.png','',array('class' => 'Startd')) !!}
+            @endif
+          </td>
+          <td class="tdcomp2 notdpad" id="tdcomp">
+            {!! $competition->name !!}
+          </td>
+          <td class="tdinscr2 notdpad">
+            <span>
+            </span>
+            {!! $competition->enrolled !!}/{!! $competition->user_max !!}
+          </td>
+          <td class="tdentr2 notdpad">
+            @if($competition->free == 0)
+            <span>
+              {!! Html::image('images/ico/multiple.png','',array('class' => 'multiple')) !!}
+            </span>
+            @endif
+            {!! $competition->entry_cost; !!}
+            Bs.
+          </td>
+          <td class="RepColor tdpremio2 notdpad">
+            <span>
+              @if($competition->pot == 1)
+              {!! Html::image('images/ico/aumento.png','',array('class' => 'tdAumenico')) !!}
+              @else
+              {!! Html::image('images/ico/garantizado.png','',array('class' => 'tdGaranico')) !!}
+              @endif
+            </span>
+            {!! $competition->cost_guaranteed !!}
+            Bs.
+          </td>
+          <td class="tdfecha2 notdpad">
+            @php
+            $date = strtotime($competition->date)
+            @endphp
 
+            {{ UtilityDate::dateAbbrevSpanish(getdate($date)) }}
+            {{ date("d-m", $date) }}
+
+          </td>
+          <td class="tdhora2 notdpad">
+            {{ date("h:i a", $date) }}
+          </td>
+          <td class="notdpad">
+            @php
+            $date  = new DateTime($competition->date);
+            $today = new DateTime("now");
+            @endphp
+            @if($competition->date == $today)
+            <span id="{{$competition->id}}" style="font-weight: bold;">00:00:00</span>
+            @else
+            <span id="{{$competition->id}}" style="font-weight: bold;">
+              {{ $today->diff($date)->format('%R%a días') }}
+            </span>
+            @endif
+          </td>
+          <td class="tdentrar2">
+            <div class="BtnEntrar2">ENTRAR</div>
+          </td>
+        </tr>
+        @endforeach
         </tbody>
       </table>
     </div>
