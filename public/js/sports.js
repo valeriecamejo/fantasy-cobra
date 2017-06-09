@@ -12,22 +12,22 @@ function modal_sport() {
 
   var options_baseball =
     "<a href='usuario/crear-competicion/baseball/mlb'>" +
-     "<img src='images/ico/selecmlb.png' alt='MLB'>" +
+     "<img src='/images/ico/selecmlb.png' alt='MLB'>" +
     "</a>";
 
   options_baseball = options_baseball +
     "<a href='usuario/crear-competicion/baseball/lvbp'>" +
-      "<img src='images/ico/seleclvbp.png' alt='LVBP'>" +
+      "<img src='/images/ico/seleclvbp.png' alt='LVBP'>" +
     "</a>";
 
   var options_football =
     "<a href='usuario/crear-competicion/football/laliga'>" +
-      "<img src='images/ico/seleclaliga.png' alt='LaLiga'>" +
+      "<img src='/images/ico/seleclaliga.png' alt='LaLiga'>" +
     "</a>";
 
   options_football = options_football +
     "<a href='usuario/crear-competicion/football/ucl'>" +
-      "<img src='images/ico/selecucl.png' alt='UCL'>" +
+      "<img src='/images/ico/selecucl.png' alt='UCL'>" +
     "</a>";
 
   $("#baseball-leagues").append(options_baseball);

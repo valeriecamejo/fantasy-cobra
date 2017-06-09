@@ -15,7 +15,7 @@
                     <a onclick="select_sport(1)">
                         <div class="seleccion1">
                             <div class="conticodep">
-                                {!! Html::image('images/ico/beisbolico.png','',array('alt' => 'Béisbol')) !!}
+                                {!! Html::image('/images/ico/beisbolico.png','',array('alt' => 'Béisbol')) !!}
                             </div>
                             <div class="conttextdep">
                                 <p>Béisbol</p>
@@ -25,7 +25,7 @@
                     <a onclick="select_sport(2)">
                         <div class="seleccion2">
                             <div class="conticodep">
-                                {!! Html::image('images/ico/futbollico.png','',array('alt' => 'Fútbol')) !!}
+                                {!! Html::image('/images/ico/futbollico.png','',array('alt' => 'Fútbol')) !!}
                             </div>
                             <div class="conttextdep">
                                 <p>Fútbol</p>
