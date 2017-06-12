@@ -32,7 +32,7 @@ class WithdrawalRequest extends FormRequest
     'dni'            => 'required|min:999999|numeric',
     'phone'          => 'required|regex:/^[0-9-]{11,13}+$/|max:9999999999999',
     'amount'         => 'required|numeric',
-    'number_account' => 'required|min:9999999999999999999|max:99999999999999999999|numeric',
+    'number_account' => 'required|min:11|regex:/[0-9a-zA-Z]/',
     'type_account'   => 'required',
     'bank'           => 'required',
     'email'          => 'required',
@@ -54,8 +54,8 @@ class WithdrawalRequest extends FormRequest
     'amount.numeric'          => 'La cédula solo puede contener números.',
     'number_account.required' => 'Campo requerido',
     'number_account.numeric'  => 'El numero de cuenta solo puede contener números.',
-    'number_account.min'      => 'El numero de cuenta debe contener 20 caracteres.',
-    'number_account.max'      => 'El numero de cuenta debe contener 20 caracteres.',
+    'number_account.min'      => 'El numero de cuenta debe contener minimo 11 caracteres.',
+    'number_account.required' => 'Campo requerido',
     'bank.required'           => 'Campo requerido',
     'email.required'          => 'Campo requerido'
 
