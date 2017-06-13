@@ -1,6 +1,6 @@
 <?php
 
-return [
+$result = [
 
     /*
     |--------------------------------------------------------------------------
@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Laravel',
+    'name' => 'Fantasy Cobra',
 
     /*
     |--------------------------------------------------------------------------
@@ -25,7 +25,7 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'production'),
+    'env' => env('APP_ENV', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -122,7 +122,9 @@ return [
 
     'log' => env('APP_LOG', 'single'),
 
-    'log_level' => env('APP_LOG_LEVEL', 'debug'),
+    'log_max_files' => 45,
+
+    'log_level' => env('APP_LOG_LEVEL', 'emergency'),
 
     /*
     |--------------------------------------------------------------------------
@@ -163,6 +165,8 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+
+
         /*
         *Vendor Service Providers
         */
@@ -181,7 +185,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-
+        //provider of setting fantasy cobra
+        App\Providers\SettingVariablesProvider::class,
 
     ],
 
@@ -241,6 +246,18 @@ return [
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
         'UtilityDate' => 'App\Lib\Ddh\UtilityDate',
+        'SettingVariables' => 'App\Lib\Ddh\SettingVariables',
     ],
 
 ];
+
+    /*
+    enviroment development
+    */
+    if (env('APP_ENV') === 'local') {
+      $result['providers'][] = Barryvdh\Debugbar\ServiceProvider::class;
+      $result['aliases'][]   = Barryvdh\Debugbar\Facade::class;
+
+    }
+
+    return $result;

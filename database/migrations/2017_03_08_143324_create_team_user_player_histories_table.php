@@ -23,6 +23,8 @@ class CreateTeamUserPlayerHistoriesTable extends Migration
             $table->foreign('team_user_id')->references('id')->on('team_users')->onDelete('cascade');
             $table->string('name');
             $table->string('last_name');
+            $table->string('name_team');
+            $table->string('name_opponent');
             $table->string('position');
             $table->integer('salary');
             $table->float('points')->default(0);

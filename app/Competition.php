@@ -112,8 +112,8 @@ public static function bettor_competitions() {
     }
     $competition->name                = $input['name'];
     $competition->user_id             = Auth::user()->id;
-    $competition->date                = Carbon::createFromFormat('d-m-Y', $input['start_date'])
-                                        ->toDateTimeString();
+    $hour                             = Competition::verify_hour_journal($input['type_journal']);
+    $competition->date                = $input['start_date'].' '.$hour;
     $competition->user_max            = $input['max_user'];
     $competition->user_min            = $input['min_user'];
     $competition->prize_guaranteed    = 0;
@@ -122,7 +122,7 @@ public static function bettor_competitions() {
     $competition->cost_guaranteed     = 0;
     $competition->description         = '';
     $competition->is_important        = 0;
-    $competition->enrolled            = 0;
+    $competition->enrolled            = 1;
     $competition->permanent           = 0;
     $competition->type_journal        = $input['type_journal'];
     $competition->type_play           = $input['type_play'];
@@ -149,11 +149,183 @@ public static function bettor_competitions() {
     if ($input['max_user'] == 2) {
       $competition->type_competition    = 'H2H';
     }
-    if ($competition->save()) {
+    if ($competition) {
       return $competition;
     } else {
       return false;
     }
+  }
+
+  /**
+   * modal_competition return data to modal competition
+   * @param string $id_competition
+   * @return string $competition_data
+   */
+  public static function modal_competition($id_competition) {
+
+    $competition           = Competition::where('competitions.id', '=', $id_competition)->get();
+
+    foreach ($competition as $competition_info){
+      $prize_id           = $competition_info->prize_id;
+    }
+
+    $prize                 = Prize::join('prize_types', 'prize_types.prize_id', '=', 'prizes.id')
+      ->where('prizes.id', '=', $prize_id)
+      ->get();
+
+    $participants          =  User::select('users.name','users.last_name','users.username','team_subscribers.points')
+      ->join('team_users', 'team_users.user_id', '=', 'users.id')
+      ->join('team_subscribers', 'team_subscribers.team_user_id', '=', 'team_users.id')
+      ->join('competitions', 'competitions.id', '=', 'team_subscribers.competition_id')
+      ->where('competitions.id', '=', $id_competition)
+      ->orderBy('team_subscribers.points', 'DESC')
+      ->get();
+
+    $competition_data[]   = array(
+      'competition'       => $competition,
+      'prize'             => $prize,
+      'participants'      => $participants,
+    );
+    return $competition_data;
+  }
+
+  /**
+   * verify_hour_journal return hour in relation to type journal
+   * @param string $type_journal
+   * @return $hour
+   */
+  private static function verify_hour_journal($type_journal) {
+    if ($type_journal == 'DAILY') {
+        $hour     ='15:00:00';
+        return    $hour;
+    } elseif ($type_journal == '3PM') {
+      $hour       ='15:00:00';
+      return      $hour;
+    } elseif ($type_journal == '7PM') {
+      $hour       ='19:00:00';
+      return      $hour;
+    } elseif ($type_journal == 'LONG') {
+      $hour       ='15:00:00';
+      return      $hour;
+    } else {
+      return false;
+    }
+  }
+
+
+  /**
+   * validate_balance_bonus
+   * @param $cost_entry
+   * @return object
+   */
+  public static function validate_balance_bonus($cost_entry) {
+    $balance                                  = Auth::user()->bettor->balance;
+    $bonus                                    = Auth::user()->bettor->bonus;
+    $pay_cost_entry                           = new Team_subscriber();
+
+    if ($cost_entry > $bonus && $bonus != 0) {
+      $cost_pay_bonus                         = $cost_entry - $bonus;
+      $cost_pay_restant                       = $cost_entry - $cost_pay_bonus;
+
+      if ($cost_pay_restant > $balance) {
+        return false;
+      } else {
+        $cost_pay_balance   = $balance - $cost_pay_restant;
+
+        $pay_cost_entry->balance_before       = $balance;
+        $pay_cost_entry->balance_after        = $cost_pay_balance;
+        $pay_cost_entry->bonus                = $cost_pay_bonus;
+        $pay_cost_entry->balance              = $cost_pay_restant;
+
+        return $pay_cost_entry;
+      }
+
+    } elseif ($bonus >= $cost_entry) {
+
+      $pay_cost_entry->balance_before       = $balance;
+      $pay_cost_entry->balance_after        = $balance;
+      $pay_cost_entry->bonus                = $cost_entry;
+      $pay_cost_entry->balance              = 0;
+
+      return $pay_cost_entry;
+
+    } elseif ($balance>= $cost_entry) {
+
+      $pay_cost_entry->balance_before       = $balance;
+      $pay_cost_entry->balance_after        = $balance - $cost_entry;
+      $pay_cost_entry->bonus                = 0;
+      $pay_cost_entry->balance              = $cost_entry;
+
+      return $pay_cost_entry;
+    } elseif ($balance < $cost_entry) {
+      return false;
+    }
+  }
+
+
+  /**
+   * validate_enroll
+   * @param $id_competition
+   * @return boolean
+   */
+  public static function validate_enroll($id_competition) {
+    $competition      = Competition::where('id','=',$id_competition)
+      ->first();
+
+    if ($competition->enrolled == $competition->user_max) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  /**
+   * validate_password_competition
+   * @param $id_competition, $password
+   * @return boolean
+   */
+  public static function validate_password_competition($id_competition, $password) {
+    $competition      = Competition::where('id','=',$id_competition)
+      ->first();
+
+    if ($competition->password == $password) {
+      return $competition;
+    } else {
+      return false;
+    }
+  }
+
+  public static function find_competition_data($id) {
+    $competition_data                 = Competition::where('id','=',$id)
+      ->first();
+
+    $competition                      = new Competition();
+    $competition->id                  = $competition_data->id;
+    $competition->sport_id            = $competition_data->sport_id;
+    $competition->championship_id     = $competition_data->championship_id;
+    $competition->name                = $competition_data->name;
+    $competition->user_id             = $competition_data->user_id;
+    $competition->date                = $competition_data->date;
+    $competition->user_max            = $competition_data->user_max;
+    $competition->user_min            = $competition_data->user_min;
+    $competition->prize_guaranteed    = $competition_data->prize_guaranteed;
+    $competition->status              = $competition_data->status;
+    $competition->entry_cost          = $competition_data->entry_cost;
+    $competition->cost_guaranteed     = $competition_data->cost_guaranteed;
+    $competition->description         = $competition_data->description;
+    $competition->is_important        = $competition_data->is_important;
+    $competition->enrolled            = $competition_data->enrolled;
+    $competition->permanent           = $competition_data->permanent;
+    $competition->type_journal        = $competition_data->type_journal;
+    $competition->type_play           = $competition_data->type_play;
+    $competition->prize_id            = $competition_data->prize_id;
+    $competition->password            = $competition_data->password;
+    $competition->type                = $competition_data->type;
+    $competition->free                = $competition_data->free;
+    $competition->pot                 = $competition_data->pot;
+    $competition->type_competition    = $competition_data->type_competition;
+
+    return $competition;
   }
 }
 

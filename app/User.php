@@ -32,8 +32,8 @@ class User extends Authenticatable
     'email',
     'sex',
     'dni',
-    'ip',
     'date_last_connect',
+    'ip',
     'remember_token'
   ];
 

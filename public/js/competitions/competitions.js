@@ -1,8 +1,8 @@
-/**********************************
+/*****************************************
 * filter_competitions.
-* @param sport, competitions
-* @return void
-***********************************/
+* @param sport, filter_type, competitions
+* @return tpl
+*****************************************/
 window.sport       = 'all';
 window.filter_type = 'all';
 

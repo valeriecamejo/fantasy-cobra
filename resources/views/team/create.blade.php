@@ -4,15 +4,26 @@
   <div class="container-fluid Ingresoprin" id="page-content-wrapper">
     <div class="Enunciado2">
       <h3 class="Titulo1">CREAR NUEVO EQUIPO</h3>
-      <h4 style="color:#e9e9e9;font-weight: 300;margin-top: -18px;font-size: 13pt;">Equipo para el día: <span style="color:#eec133;"></span></h4>
+      <h4 style="color:#e9e9e9;font-weight: 300;margin-top: -18px;font-size: 13pt;">Equipo para el día: {{date("d-m-Y", strtotime($date))}}<span style="color:#eec133;"></span></h4>
     </div>
 
     {!!  Form::open(array('url' => 'usuario/crear-equipo', 'method' => 'post')) !!}
 
-    <input type='hidden' id="salario_players" value="100000">
-    <input type='hidden' id="sport" value="1">
-    <input type='hidden' id="championship" value="1">
-
+    <input type='hidden' name="sport" id="sport" value="{{$sport}}">
+    <input type='hidden' name="championship" id="championship" value="{{$championship}}">
+    <input type='hidden' name="type_journal" id="type_journal" value="{{$type_journal}}">
+    <input type="hidden" name="type_play"  value="{{$type}}" id="type_play">
+    <input type='hidden' name="date_team" id="date_team" value="{{date("Y-m-d", strtotime($date))}}">
+    <div class="modal-bodycompe">
+      <div class="boxcompe">
+        <p>Tipo de juego:  {{$type}} </p>
+        <!--<select class="form-compe2" name="type_play" id="type_play">
+          <option value="REGULAR" >Regular</option>
+          <option value="TURBO" selected> Turbo</option>
+        </select>
+        -->
+      </div>
+    </div>
     <div class="hidden-xs" style="text-align:left;">
       <!-- abre contcrear -->
       <div class="CuerpoLineup cuerpoheight margrespL1">
@@ -24,16 +35,8 @@
           </div> -->
           <div>
             <!-- Nav tabs -->
-            <ul class="nav nav-tabs entirewidth" role="tablist">
-              <li role="presentation" class="active"><a href="#PAD" id="PA" aria-controls="home" role="tab" data-toggle="tab">PA</a></li>
-              <li role="presentation"><a href="#CD" id="C" aria-controls="profile" role="tab" data-toggle="tab">C</a></li>
-              <li role="presentation"><a href="#1BD" id="1B" aria-controls="messages" role="tab" data-toggle="tab">1B</a></li>
-              <li role="presentation"><a href="#2BD" id="2B" aria-controls="settings" role="tab" data-toggle="tab">2B</a></li>
-              <li role="presentation"><a href="#3BD" id="3B" aria-controls="settings" role="tab" data-toggle="tab">3B</a></li>
-              <li role="presentation"><a href="#SSD" id="SS" aria-controls="settings" role="tab" data-toggle="tab">SS</a></li>
-              <li role="presentation"><a href="#OFD" id="OF" aria-controls="settings" role="tab" data-toggle="tab">OF</a></li>
-              <li role="presentation"><a href="#BATSD" id="BATS" aria-controls="settings" role="tab" data-toggle="tab">BATS</a></li>
-            </ul>
+            <div id="tabs"></div>
+
             <table class="table table-striped2 table-hover2 tablelineup theadhead">
               <thead>
               <tr>
@@ -68,6 +71,12 @@
               <div role="tabpanel" class="tab-pane fade" id="OFD">
 
               </div>
+              <div role="tabpanel" class="tab-pane fade" id="MID">
+
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="CID">
+
+              </div>
               <div role="tabpanel" class="tab-pane fade" id="BATSD">
 
               </div>
@@ -85,8 +94,7 @@
           <div class="Usuariolineup" style="text-align:center;text-indent: 0;">EQUIPO</div>
           <div id="th2">
             <p id="salariorestante">Salario Restante:</p>
-            <!--<input id="salaryrest" name="salaryrest" value="" class="inputsalario" type="text" readonly placeholder="50.000">
-            --><input id="salaryrest" name="salaryrest" value="" class="inputsalario" type="text" readonly placeholder="50.000">
+            <input id="salaryrest" name="salaryrest"  class="inputsalario" type="text" readonly>
 
           </div>
           <table class="table table-striped2 table-hover2 tablelineup theadhead">
@@ -105,83 +113,26 @@
             <table class="table table-striped2 table-hover2 tablelineup tableequipoheight">
               <tbody>
               <tr id="playerPA">
-                <td id="pos">PA</td>
-                <td id="jug"><span id="teamcol">name /</span>name </td>
-                <td id="opo">team vs <span id="teamcol"> oponente</span></td>
-                <td id="salario">1000</td>
-                <td>
-                  <a href="#" onclick="deletePlayer('id');">
-                    {!! Html::image('images/ico/menos.png','menos', array('class'=>'mashov')) !!}
-                  </a>
-                </td>
               </tr>
-
               <tr id="playerC">
-                <td id="pos">C</td>
-                <td id="jug"><span id="teamcol">name</td>
-                <td id="opo">oponente vs <span id="teamcol"> team</span></td>
-                <td id="salario">1000</td>
-                <td>
-                  <a href="#" onclick="deletePlayer('id');">
-                    {!! Html::image('images/ico/menos.png','menos', array('class'=>'mashov')) !!}
-                  </a>
-                </td>
               </tr>
-
               <tr id="player1B">
-
-                <td id="pos">1B</td>
-                <td id="jug"><span id="teamcol"></td>
-                <td id="opo"> vs <span id="teamcol"> </span></td>
-                <td id="salario"></td>
-                <td>
-                  <a href="#" onclick="deletePlayer('id');">
-                    {!! Html::image('images/ico/menos.png','menos', array('class'=>'mashov')) !!}
-                  </a>
-                </td>
+              </tr>
+              <tr id="playerMI">
+              </tr>
+              <tr id="playerCI">
               </tr>
               <tr id="player2B">
-                <td id="pos">2B</td>
-                <td id="jug"></td>
-                <td id="opo"></td>
-                <td id="salario"></td>
-                <td><a href=""></a>
               </tr>
               <tr id="player3B">
-                <td id="pos">3B</td>
-                <td id="jug"></td>
-                <td id="opo"></td>
-                <td id="salario"></td>
-                <td><a href=""></a>
               </tr>
-
               <tr id="playerSS">
-                <td id="pos">SS</td>
-                <td id="jug"></td>
-                <td id="opo"></td>
-                <td id="salario"></td>
-                <td><a href=""></a>
+              </tr>
+              <tr id="playerOF">
               </tr>
               <tr id="playerOF1">
-                <td id="pos">OF</td>
-                <td id="jug"></td>
-                <td id="opo"></td>
-                <td id="salario"></td>
-                <td><a href=""></a>
               </tr>
               <tr id="playerOF2">
-                <td id="pos">OF</td>
-                <td id="jug"></td>
-                <td id="opo"></td>
-                <td id="salario"></td>
-                <td><a href=""></a>
-              </tr>
-              <tr id="playerOF3">
-                <td id="pos">OF3</td>
-                <td id="jug"></td>
-                <td id="opo"></td>
-                <td id="salario"></td>
-                <td><a href=""></a>
               </tr>
               </tbody>
             </table>
@@ -192,9 +143,9 @@
         </div>
       </div>
       <div id="th22" class="wid50">
-        <button type="submit" class="btn btn-primary2 btn-return btn-lg" name="returnhome" onclick="">Regresar</button>
-        <button type="submit" class="btn btn-primarycan btn-lg" name="cancellineup" onclick="">Limpiar</button>
-        <button type="submit" class="btn btn-primary2 btn-lg" name="createlineup" onclick="">Crear Lineup</button>
+        <a href="/lobby" class="btn btn-primary2 btn-return btn-lg">Regresar</a>
+        <!--<button type="submit" class="btn btn-primarycan btn-lg" name="cancellineup" onclick="">Limpiar</button>-->
+        <div id="button_create"></div>
       </div>
     </div>
     {!! Form::close() !!}

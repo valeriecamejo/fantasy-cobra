@@ -66,25 +66,11 @@
             </div>
           </a>
         </div>
-        <div class="Boton1">
-          <a href="{{ URL::action('TeamController@new_team') }}">
-            <div class="BotonRe">
-              CREAR EQUIPO
-            </div>
-          </a>
-        </div>
       @else
         <div class="Boton1">
           <a href=".login" data-toggle="modal">
             <div class="BotonRe">
               CREAR COMPETICIÓN
-            </div>
-          </a>
-        </div>
-        <div class="Boton1">
-          <a href=".login" data-toggle="modal">
-            <div class="BotonRe">
-              CREAR EQUIPO
             </div>
           </a>
         </div>

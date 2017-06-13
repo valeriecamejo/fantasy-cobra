@@ -39,13 +39,12 @@ class History extends Model {
     return $all_competitions;
   }
 
-/***********************************
-* won_competitions: List the history
-                    of competitions
+/****************************************************
+* won_competitions: List the history of competitions
                     won of the user.
 * @param void
 * @return $won_competitions
-***********************************/
+****************************************************/
   public static function won_competitions() {
 
 
@@ -57,25 +56,24 @@ class History extends Model {
                       ->where('team_subscribers.is_winner', '=', true)
                       ->orderBy('competitions.date', 'desc')
                       ->get();
-//var_dump($won_competitions);exit();
+
     return $won_competitions;
   }
 
-/***********************************
-* transactions: List the history
-                of transactions
+/*************************************************
+* transactions: List the history of transactions
                 of the user.
 * @param void
 * @return $transactions
-***********************************/
+**************************************************/
   public static function transactions() {
 
     $transactions = DB::table('payments')
                   ->join('bettors', 'bettors.user_id', '=', 'payments.user_id')
                   ->join('users', 'users.id', '=', 'payments.user_id')
                   ->where('users.id', '=', Auth::user()->id)
-                  ->where('payments.approved_pay', '=', true)
-                  ->orderBy('payments.date', 'desc')
+                  ->where('payments.approved', '=', true)
+                  ->orderBy('payments.created_at', 'desc')
                   ->get();
 
     return $transactions;

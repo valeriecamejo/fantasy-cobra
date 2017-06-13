@@ -24,10 +24,12 @@ $("#min_user").change(function() {
  *   Params:        int min_user
  ************************************************************************/
 function add_prize(min_user){
-  var url_ajax = "http://localhost:8000/";
+  var protocol        = location.protocol;
+  var URLdomain       = window.location.host;
+  var url_ajax        = protocol + "//" + URLdomain;
   var min_user = min_user;
   jQuery.ajax({
-    url: url_ajax + "usuario/obtener-premios",
+    url: url_ajax + "/usuario/obtener-premios",
     type: "GET",
     async: true,
     data: {"min_user": min_user},

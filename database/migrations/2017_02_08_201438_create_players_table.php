@@ -17,8 +17,8 @@ class CreatePlayersTable extends Migration
             $table->increments('id');
             $table->integer('team_id')->unsigned();
             $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
-            $table->integer('sport_id')->unsigned();
-            $table->foreign('sport_id')->references('id')->on('sports')->onDelete('cascade');
+            $table->integer('championship_id')->unsigned();
+            $table->foreign('championship_id')->references('id')->on('championships')->onDelete('cascade');
             $table->string('name');
             $table->string('last_name');
             $table->string('position');

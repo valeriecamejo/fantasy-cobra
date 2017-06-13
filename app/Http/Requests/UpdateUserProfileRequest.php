@@ -26,7 +26,7 @@ class UpdateUserProfileRequest extends FormRequest
   {
     return [
     'dni'          => 'required|max:9999999999|min:999999|numeric|unique:users,dni,' . Auth::user()->id,
-    'phone'        => 'required|max:9999999999999|numeric|'
+    'phone'        => 'required|regex:/^[0-9-]{11,13}+$/',
     ];
   }
 
