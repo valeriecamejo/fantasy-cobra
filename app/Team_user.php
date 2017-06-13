@@ -58,7 +58,7 @@ class Team_user extends Model {
       ->join('competitions', 'competitions.id', '=', 'team_subscribers.competition_id')
       ->join('championships', 'championships.id', '=', 'team_users.championship_id')
       ->join('sports', 'sports.id', '=', 'team_users.sport_id')
-      ->where('competitions.user_id', '=', Auth::user()->id)
+      ->where('team_users.user_id', '=', Auth::user()->id)
       ->orderBy('competitions.date', 'desc')
       ->get();
 

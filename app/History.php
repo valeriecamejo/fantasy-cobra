@@ -26,13 +26,12 @@ class History extends Model {
   public static function all_competitions() {
 
     $today            = date('Y-m-d');
-    $all_competitions = DB::table('team_subscribers')
+    $all_competitions = DB::table('competitions')
                       ->select('competitions.status', 'competitions.name', 'competitions.date as competition_date', 'competitions.entry_cost', 'team_subscribers.balance_before', 'competitions.id', 'team_subscribers.team_user_id', 'team_users.id', 'team_subscribers.competition_id', 'team_users.championship_id', 'championships.avatar')
-                      ->join('competitions', 'competitions.id', '=', 'team_subscribers.competition_id')
+                      ->join('team_subscribers', 'team_subscribers.competition_id', '=', 'competitions.id')
                       ->join('team_users', 'team_users.id', '=', 'team_subscribers.team_user_id')
                       ->join('championships', 'championships.id', '=', 'team_users.championship_id')
                       ->where('team_users.user_id', '=', Auth::user()->id)
-                      ->where('competitions.date', '<', $today)
                       ->orderBy('competitions.date', 'desc')
                       ->get();
 
@@ -48,12 +47,13 @@ class History extends Model {
   public static function won_competitions() {
 
 
-    $won_competitions = DB::table('team_subscribers')
+    $won_competitions = DB::table('competitions')
                       ->select('competitions.prize_id', 'team_subscribers.amount', 'team_subscribers.balance_before', 'competitions.name', 'competitions.date as competition_date', 'team_subscribers.date', 'competitions.championship_id', 'championships.avatar')
-                      ->join('competitions', 'team_subscribers.competition_id', '=', 'competitions.id')
+                      ->join('team_subscribers', 'team_subscribers.competition_id', '=', 'competition_id')
                       ->join('team_users', 'team_users.id', '=', 'team_subscribers.team_user_id')
                       ->join('championships', 'championships.id', '=', 'team_users.championship_id')
-                      ->where('team_subscribers.is_winner', '=', true)
+                      ->where('team_subscribers.is_winner', '=', 1)
+                      ->where('team_subscribers.team_user_id', '=', Auth::user()->id)
                       ->orderBy('competitions.date', 'desc')
                       ->get();
 
