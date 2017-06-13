@@ -29,7 +29,6 @@
                   this.filter_type(this.teams, filter_type, date_today);
                 },
                 filter_sport: function (teams_user, sport) {
-                  console.log(teams_user)
                   if (sport == 'all') return this.teams = this.teamsUser;
 
                   this.teams = this.teamsUser.filter(function(team) {
@@ -40,7 +39,6 @@
                   if (type == 'all') return this.teams;
 
                   this.teams = teams_user.filter(function(team) {
-                  console.info('tipo de juego:', teams_user);
                     if (type == 'today_teams') {
                       return moment(team.date).format('YYYY-MM-DD') == date_today;
                     } else if (type == 'previous_teams') {
@@ -60,7 +58,6 @@
                   return show_team_modal(team_id, this.accountant, username);
                 },
                 team_count: function (team_id, teams, cant_inscription) {
-                  console.log(cant_inscription);
                   $(teams).each(function(index, element) {
 
                     if (element.team_user_id == team_id) {

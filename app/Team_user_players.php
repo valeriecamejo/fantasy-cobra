@@ -33,6 +33,12 @@ class Team_user_players extends Model
      }
   }
 
+/********************************************
+* playersByTeam: Find players on a team
+* @param $team_id
+* @return $players
+********************************************/
+
   public static function playersByTeam($team_id) {
 
     $players = DB::table('players')

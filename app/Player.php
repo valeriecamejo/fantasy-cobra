@@ -10,8 +10,7 @@ class Player extends Model
     protected $fillable = [
   'team_id', 'sport_id', 'name', 'last_name', 'position', 'salary', 'points', 'status'
   ];
-  function less_than_equal_salary($salary) {
-  }
+
   public static function players($championship,$type_play,$date_team, $type_journal){
     $pa = Player::find_data_params($championship,$type_play,$date_team, $type_journal,'PA');
     $c  = Player::find_data_params($championship,$type_play,$date_team, $type_journal,'C');
@@ -44,7 +43,7 @@ class Player extends Model
     return $players;
   }
 
-  static function byJourney($championship, $date, $journey) {
+  static function byJourney($championship, $date) {
 
     $player = Player::select('players.*','teams.short_nickname as name_team',
       DB::raw('if(players.team_id = games.team_id_home, games.team_id_away, games.team_id_home) as opo'),
