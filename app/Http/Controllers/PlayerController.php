@@ -10,9 +10,9 @@ use Illuminate\Http\Request;
 class PlayerController extends Controller
 {
 
-    public function byJourney($championship, $date, $journey)
+    public function byJourney($championship, $date)
     {
-        $players = Player::byJourney($championship, $date, $journey);
+        $players = Player::byJourney($championship, $date);
 
         $players_coll = array();
 
@@ -26,13 +26,7 @@ class PlayerController extends Controller
     public function playersByTeam($team_id) {
 
       $team_players      = Team_user_players::playersByTeam($team_id);
-/*
-      $team_players_coll = array();
 
-      foreach ($team_players as $team_player) {
-        $team_players_coll[$team_player->position][] = $team_player;
-      }
-*/
       return response()->json($team_players);
     }
 

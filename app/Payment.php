@@ -36,7 +36,7 @@ class Payment extends Model
   $payment->user_id          = Auth::user()->id;
   $payment->amount           = $input['amount'];
   $payment->transaction_type = 'retiro';
-  $payment->balance_before   = Auth::user()->bettor->balance;;
+  $payment->balance_before   = Auth::user()->bettor->balance;
   $payment->account_number   = $input['number_account'];
   $payment->bank             = $input['bank'];
   $payment->status           = 'pendiente';

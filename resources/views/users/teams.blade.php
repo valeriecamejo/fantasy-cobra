@@ -53,7 +53,7 @@
                   <th style="text-align: center;">Fecha</th>
                   <th style="text-align: center;">Salario Restante</th>
                   <th style="text-align: center;">Competiciones</th>
-                  <th></th>
+
                   <th style="text-align: center;">Pts.</th>
                   <th></th>
                 </tr>
@@ -76,34 +76,34 @@
 
                   <td> @{{ moment(team.date).format('ddd DD-MM') }} </td>
                   <td> @{{ team.remaining_salary }} </td>
-                  <td> @{{ team.name }} </td>
                   <td class="bdgedit">
                   <span v-if="moment().format('YYYY-MM-DD hh:mm') > moment(team.date).format('YYYY-MM-DD hh:mm')">
                   <div class="contbtnbdg">
                     <a @click="team_modal( team.id , team.name, teams )">
                       <div class="BtnEntrar31">VER</div>
                     </a>
-                      <div class="BtnEntrar31 noedit">EDITAR</div>
-                    </a>
+               <!--       <div class="BtnEntrar31 noedit">EDITAR</div>
+                    </a> -->
                   </div>
-                  <input type="hidden" class="form-compe2" name="lineup_id" value="@{{ team.id }}">
-                  <button type='submit' class="BtnEntrar3 noedit" style="border-style:none;">INSCRIBIR</button>
+           <!--   <input type="hidden" class="form-compe2" name="lineup_id" value="@{{ team.id }}">
+                  <button type='submit' class="BtnEntrar3 noedit" style="border-style:none;">INSCRIBIR</button> -->
                   </span>
                   <span v-else>
                   <div class="contbtnbdg">
                     <a @click="team_modal( team.id , team.name, teams )">
                       <div class="BtnEntrar31">VER</div>
                     </a>
-                    <a @click="team_modal( team.id , team.name, teams )">
-                      <div class="BtnEntrar31">EDITAR</div>
-                    </a>
+              <!--      <a @click="team_modal( team.id , team.name, teams )">
+                      <div class="BtnEntrar31 noedit">EDITAR</div>
+                    </a> -->
                   </div>
-                  <input type="hidden" class="form-compe2" name="lineup_id" value="@{{ team.id }}">
+          <!--    <input type="hidden" class="form-compe2" name="lineup_id" value="@{{ team.id }}">
                   <button type='submit' class="BtnEntrar3" style="border-style:none;">INSCRIBIR</button>
-                  </span>
                   <span class="badge">
-                    @{{ team_count( team.id, teams, cant_inscription ) }}
+                    @{{ team_count( team.id, teams, cant_inscription ) }} </a>
+                  </span> -->
                   </span>
+
                   </td>
 
                   <td> @{{ team.points }} </td>
