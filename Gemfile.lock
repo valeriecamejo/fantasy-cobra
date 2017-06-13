@@ -21,6 +21,8 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (4.1.0)
     rake (12.0.0)
+    slackistrano (3.1.1)
+      capistrano (>= 3.5.0)
     sshkit (1.13.1)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
@@ -31,6 +33,7 @@ PLATFORMS
 DEPENDENCIES
   capistrano (~> 3.8.0)
   capistrano-laravel
+  slackistrano
 
 BUNDLED WITH
    1.14.6

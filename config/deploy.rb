@@ -62,6 +62,11 @@ set :deploy_to, "/srv/apps/#{fetch(:application)}"
 
 #server 'fantasycobra.com', user: 'deploy', roles: %w{app db web}
 
+set :slackistrano, {
+  channel: '#fantasycobra-ng',
+  webhook: 'https://hooks.slack.com/services/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'
+}
+
 namespace :deploy do
     desc "Build"
     after :updated, :build do
