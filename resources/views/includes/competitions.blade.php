@@ -79,7 +79,7 @@
                 {!! Html::image('images/ico/multiple.png','',array('class' => 'multiple')) !!}
               </span>
             @endif
-            {!! $competition->entry_cost; !!}
+            {!! $competition->entry_cost !!}
             Bs.
           </td>
           <td class="RepColor tdpremio2 notdpad">
@@ -119,7 +119,11 @@
             @endif
           </td>
           <td class="tdentrar2">
-            <div class="BtnEntrar2" onclick="showCompetition({{$competition->id}})">ENTRAR</div>
+            @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
+              <div class="BtnEntrar2" onclick="showCompetition({{$competition->id}})">ENTRAR</div>
+            @else
+              <div class="BtnEntrar2" href=".login" data-toggle="modal">ENTRAR</div>
+            @endif
           </td>
         </tr>
       @endforeach
