@@ -73,18 +73,12 @@
             <div id="players-availables" class="tab-content tab-contentnull scrollcreate createcontent">
               <div role="tabpanel" class="tab-pane active fade in" id="PAD">
 
-
-
-                 <div is="my-component"
-                  v-for="(all_player, index) in all_players.PA"
-                  :all_player="all_player"
-                  :saludo="saludo">
+                <div
+                  is="players"
+                  v-for="(player, index) in players.PA"
+                  :player="player"
+                >
                 </div>
-
-
-
-
-
 
               </div>
               <div role="tabpanel" class="tab-pane fade" id="CD" >
@@ -147,6 +141,12 @@
             <table class="table table-striped2 table-hover2 tablelineup tableequipoheight">
               <tbody id="playersTeam">
                 <tr id="playerPA">
+
+                <div is="my-players"
+                  v-for="(myPlayer, index) in myPlayers"
+                  :my-player="myPlayer">
+                </div>
+
                 </tr>
                 <tr id="playerC">
                 </tr>
@@ -371,11 +371,38 @@
 
 <!-- Templates for Components -->
 
-<template id="my-component">
-  <div>
-    @{{ all_player.position }}
-  </div>
+
+<!-- Template of all players -->
+<template id="players">
+  <tr>
+    <td id='pos'>@{{ player.position }}</td>
+    <td id='jug'>@{{ player.name }} @{{ player.last_name }}<span id='teamcol'>
+    <td id='opo'>@{{ player.name_opponent }} vs <span id='teamcol'>@{{ player.name_team }}</span></td>
+    <td id='salario'>@{{ player.salary }}</td>
+    <td>
+      <a @click=addPlayer(player)>
+      <img src='/images/ico/mas.png' alt='mas' class='mashov'>
+      </a>
+    </td>
+  </tr>
 </template>
+<!-- End Template of all players -->
+
+<!-- Template of my players -->
+<template id="my-players">
+  <tr>
+    <td id='pos'>@{{ myPlayer.position }}</td>
+    <td id='jug'>@{{ myPlayer.name }} @{{ myPlayer.last_name }}<span id='teamcol'>
+    <td id='opo'>@{{ myPlayer.name_opponent }} vs <span id='teamcol'>@{{ myPlayer.name_team }}</span></td>
+    <td id='salario'>@{{ myPlayer.salary }}</td>
+    <td>
+      <a @click=removePlayer(myPlayer)>
+      <img src='/images/ico/mas.png' alt='menos' class='mashov'>
+      </a>
+    </td>
+  </tr>
+</template>
+<!-- End Template of my players -->
 
 <!-- End Templates for Components -->
 

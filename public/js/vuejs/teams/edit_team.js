@@ -1,25 +1,41 @@
 
-Vue.component('my-component', {
-  template: '#my-component',
-  props: ['player', 'saludo', 'all_player'],
+Vue.component('players', {
+  template: '#players',
+  props: ['myPlayer', 'player'],
+  methods: {
+            addPlayer: function (player) {
+              console.info('Jugador', player);
+              console.info('Mis jugadores', vm.myPlayers);
+              vm.myPlayers.push(player);
+            }
+  }
 });
+
+Vue.component('my-players', {
+  template: '#my-players',
+  props: ['myPlayer'],
+  methods: {
+            removePlayer: function (myPlayer) {
+              console.log('Metodo removePlayer')
+            }
+  }
+});
+
 
 var vm = new Vue ({
   el: "#edit",
   data: {
     saludo: 'Al fin se muestra',
-    all_players:  '',
-    players_1b: '',
-    players: JSON.parse(sessionStorage.getItem("element.players")),
+    players:  '',
+    myPlayers: JSON.parse(sessionStorage.getItem("element.players")),
     team_data: JSON.parse(sessionStorage.getItem("team"))
   },
   mounted() {
     axios.get('/player/journey/' + this.team_data.championship_id + '/' + this.team_data.team_date,
               {}).then((response) => {
-                this.all_players = response.data;
-                this.players_1b =  this.all_players['1B']
-                console.info('Team Players: ', this.team_players);
-                console.info('Players: ', this.all_players);
+                this.players = response.data;
+                console.info('Team Players: ', this.myPlayers);
+                console.info('Players: ', this.players);
               });
             }
-          });
+  });
