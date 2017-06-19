@@ -88,7 +88,7 @@ class Team_user extends Model {
       ->get();
 
     $players = DB::table('team_user_players')
-      ->select('team_users.id', 'team_user_players.name', 'team_user_players.last_name', 'team_user_players.position', 'team_user_players.points')
+      ->select('team_users.id', 'team_user_players.name', 'team_user_players.last_name', 'team_user_players.position', 'team_user_players.points', 'team_user_players.name_opponent', 'team_user_players.salary', 'team_user_players.player_id')
       ->join('team_users', 'team_users.id', '=', 'team_user_players.team_user_id')
       ->where('team_users.id', '=', $team_id)
       ->orderBy('team_user_players.id', 'asc')

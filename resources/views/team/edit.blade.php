@@ -1,24 +1,22 @@
+
 @extends ('layouts.template')
 
 @section ('content')
+
+<div id="edit">
   <div class="container-fluid Ingresoprin" id="page-content-wrapper">
     <div class="Enunciado2">
       <h3 class="Titulo1">EDITAR EQUIPO</h3>
       <h4 style="color:#e9e9e9;font-weight: 300;margin-top: -18px;font-size: 13pt;">Equipo para el día: {{($team_date)}}<span style="color:#eec133;"></span></h4>
     </div>
 
+<!--- Form -->
+
     {!!  Form::open(array('url' => '', 'method' => 'post')) !!}
 
-    <input type='hidden' name="sport_id" id="sport_id" value="{{($sport_id)}}">
-    <input type='hidden' name="team_id" id="team_id" value="{{($team_id)}}">
-    <input type='hidden' name="championship_id" id="championship_id" value="{{($championship_id)}}">
-    <input type='hidden' name="type_journal" id="type_journal" value="{{($type_journal)}}">
-    <input type='hidden' name="type_play" id="type_play" value="{{($type_play)}}">
-    <input type='hidden' name="team_date" id="team_date" value="{{($team_date)}}">
-    <input type='hidden' name="remaining_salary" id="remaining_salary" value="{{($remaining_salary)}}">
     <div class="modal-bodycompe">
       <div class="boxcompe">
-        <p>Tipo de juego: {{$type_play}}</p>
+        <p>Tipo de juego: @{{ team_data.type_play }} </p>
       </div>
     </div>
     <div class="hidden-xs" style="text-align:left;">
@@ -59,13 +57,13 @@
 
             <table class="table table-striped2 table-hover2 tablelineup theadhead">
               <thead>
-              <tr>
-                <th id="pos">POS</th>
-                <th id="jug">JUGADOR</th>
-                <th id="opo">OPO</th>
-                <th id="salario">SALARIO</th>
-                <th id="masmas"></th>
-              </tr>
+                <tr>
+                  <th id="pos">POS</th>
+                  <th id="jug">JUGADOR</th>
+                  <th id="opo">OPO</th>
+                  <th id="salario">SALARIO</th>
+                  <th id="masmas"></th>
+                </tr>
               </thead>
               <tbody id="players_availables">
 
@@ -75,8 +73,21 @@
             <div id="players-availables" class="tab-content tab-contentnull scrollcreate createcontent">
               <div role="tabpanel" class="tab-pane active fade in" id="PAD">
 
+
+
+                 <div is="my-component"
+                  v-for="(all_player, index) in all_players.PA"
+                  :all_player="all_player"
+                  :saludo="saludo">
+                </div>
+
+
+
+
+
+
               </div>
-              <div role="tabpanel" class="tab-pane fade" id="CD">
+              <div role="tabpanel" class="tab-pane fade" id="CD" >
 
               </div>
               <div role="tabpanel" class="tab-pane fade" id="1BD">
@@ -117,46 +128,46 @@
           <div class="Usuariolineup" style="text-align:center;text-indent: 0;">EQUIPO</div>
           <div id="th2">
             <p id="salariorestante">Salario Restante:</p>
-            <input id="salaryrest" name="salaryrest"  class="inputsalario" type="text" readonly>
+            <input id="salaryrest" :value="team_data.remaining_salary" name="salaryrest"  class="inputsalario" type="text" readonly>
 
           </div>
           <table class="table table-striped2 table-hover2 tablelineup theadhead">
             <thead>
-            <tr>
-              <th id="pos">POS</th>
-              <th id="jug">JUGADOR</th>
-              <th id="opo">OPO</th>
-              <th id="salario">SALARIO</th>
-              <th id="masmas"></th>
-            </tr>
+              <tr>
+                <th id="pos">POS</th>
+                <th id="jug">JUGADOR</th>
+                <th id="opo">OPO</th>
+                <th id="salario">SALARIO</th>
+                <th id="masmas"></th>
+              </tr>
             </thead>
           </table>
           <!-- Peloteros Seleccionados -->
           <div class="tableequipoheightmax">
             <table class="table table-striped2 table-hover2 tablelineup tableequipoheight">
               <tbody id="playersTeam">
-              <tr id="playerPA">
-              </tr>
-              <tr id="playerC">
-              </tr>
-              <tr id="player1B">
-              </tr>
-              <tr id="playerMI">
-              </tr>
-              <tr id="playerCI">
-              </tr>
-              <tr id="player2B">
-              </tr>
-              <tr id="player3B">
-              </tr>
-              <tr id="playerSS">
-              </tr>
-              <tr id="playerOF">
-              </tr>
-              <tr id="playerOF1">
-              </tr>
-              <tr id="playerOF2">
-              </tr>
+                <tr id="playerPA">
+                </tr>
+                <tr id="playerC">
+                </tr>
+                <tr id="player1B">
+                </tr>
+                <tr id="playerMI">
+                </tr>
+                <tr id="playerCI">
+                </tr>
+                <tr id="player2B">
+                </tr>
+                <tr id="player3B">
+                </tr>
+                <tr id="playerSS">
+                </tr>
+                <tr id="playerOF">
+                </tr>
+                <tr id="playerOF1">
+                </tr>
+                <tr id="playerOF2">
+                </tr>
               </tbody>
             </table>
           </div>
@@ -166,13 +177,13 @@
         </div>
       </div>
       <div id="th22" class="wid50">
-        <a href="/lobby" class="btn btn-primary2 btn-return btn-lg">Regresar</a>
+        <a href="/usuario/mis-equipos" class="btn btn-primary2 btn-return btn-lg">Regresar</a>
         <!--<button type="submit" class="btn btn-primarycan btn-lg" name="cancellineup" onclick="">Limpiar</button>-->
         <div id="button_create"></div>
       </div>
     </div>
     {!! Form::close() !!}
-  <!-- cierre contcrear -->
+    <!-- cierre contcrear -->
 
     <!--    Crear Lineup  Movil     -->
     {!!  Form::open(array('url' => 'usuario/crear-equipo', 'method' => 'post')) !!}
@@ -203,12 +214,12 @@
           </ul>
           <table class="table table-striped2 table-hover2 tablelineup theadhead">
             <thead>
-            <tr>
-              <th id="pos">POS</th>
-              <th id="jug">JUGADOR</th>
-              <th id="salario">SALARIO</th>
-              <th id="masmas"></th>
-            </tr>
+              <tr>
+                <th id="pos">POS</th>
+                <th id="jug">JUGADOR</th>
+                <th id="salario">SALARIO</th>
+                <th id="masmas"></th>
+              </tr>
             </thead>
           </table>
           <div class="tab-content tab-contentnull scrollcreate">
@@ -250,13 +261,13 @@
           <div class="lineup">
             <table class="table table-striped2 table-hover2 tablelineup theadhead">
               <thead>
-              <tr>
-                <th id="pos">POS</th>
-                <th id="jug">JUGADOR</th>
-                <!--<th id="opo">OPO</th>-->
-                <th id="salario">SALARIO</th>
-                <th id="masmas"></th>
-              </tr>
+                <tr>
+                  <th id="pos">POS</th>
+                  <th id="jug">JUGADOR</th>
+                  <!--<th id="opo">OPO</th>-->
+                  <th id="salario">SALARIO</th>
+                  <th id="masmas"></th>
+                </tr>
               </thead>
             </table>
             <div class="tableequipoheightmax">
@@ -355,17 +366,31 @@
       <!-- restab cierre -->
     </div>
   </div>
+</div>
 
-  <div id="trPlayers"></div>
 
-  {!! Form::close() !!}
+<!-- Templates for Components -->
 
-  {!! Html::script('js/players/journey.js') !!}
+<template id="my-component">
+  <div>
+    @{{ all_player.position }}
+  </div>
+</template>
+
+<!-- End Templates for Components -->
+
+
+{!! Form::close() !!}
+
+<!-- End Form -->
+
+<!--  {!! Html::script('js/players/journey.js') !!}
   {!! Html::script('js/teams/edit_team.js') !!}
   {!! Html::script('js/validate/validate_players.js') !!}
   {!! Html::script('js/teams/list.js') !!}
   {!! Html::script('js/players/team_user.js') !!}
+-->
 
-
+{!! Html::script('js/vuejs/teams/edit_team.js') !!}
 @stop
 
