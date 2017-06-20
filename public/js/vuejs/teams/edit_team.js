@@ -4,9 +4,7 @@ Vue.component('players', {
   props: ['myPlayer', 'player', 'position'],
   methods: {
             addPlayer: function (player) {
-              console.info('Jugador', player);
               vm.myPlayers.push(player);
-              console.info('Mis jugadores', vm.myPlayers);
             }
   }
 });
