@@ -1,31 +1,27 @@
 
 Vue.component('players', {
   template: '#players',
-  props: ['myPlayer', 'player'],
+  props: ['myPlayer', 'player', 'position'],
   methods: {
             addPlayer: function (player) {
               console.info('Jugador', player);
-              console.info('Mis jugadores', vm.myPlayers);
               vm.myPlayers.push(player);
+              console.info('Mis jugadores', vm.myPlayers);
             }
   }
 });
 
 Vue.component('my-players', {
   template: '#my-players',
-  props: ['myPlayer'],
-  methods: {
-            removePlayer: function (myPlayer) {
-              console.log('Metodo removePlayer')
-            }
-  }
+  props: ['myPlayer']
 });
 
 
 var vm = new Vue ({
   el: "#edit",
   data: {
-    saludo: 'Al fin se muestra',
+    index: '',
+    position: 'PA',
     players:  '',
     myPlayers: JSON.parse(sessionStorage.getItem("element.players")),
     team_data: JSON.parse(sessionStorage.getItem("team"))

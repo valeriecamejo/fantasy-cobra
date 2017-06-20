@@ -77,11 +77,20 @@
                   is="players"
                   v-for="(player, index) in players.PA"
                   :player="player"
+                  :position="position"
                 >
                 </div>
 
               </div>
               <div role="tabpanel" class="tab-pane fade" id="CD" >
+
+                <div
+                  is="players"
+                  v-for="(player, index) in players.C"
+                  :player="player"
+                  :position="position"
+                >
+                </div>
 
               </div>
               <div role="tabpanel" class="tab-pane fade" id="1BD">
@@ -144,7 +153,9 @@
 
                 <div is="my-players"
                   v-for="(myPlayer, index) in myPlayers"
-                  :my-player="myPlayer">
+                  :my-player="myPlayer"
+                  :index="index"
+                  v-on:remove="myPlayers.splice(index, 1)">
                 </div>
 
                 </tr>
@@ -396,8 +407,8 @@
     <td id='opo'>@{{ myPlayer.name_opponent }} vs <span id='teamcol'>@{{ myPlayer.name_team }}</span></td>
     <td id='salario'>@{{ myPlayer.salary }}</td>
     <td>
-      <a @click=removePlayer(myPlayer)>
-      <img src='/images/ico/mas.png' alt='menos' class='mashov'>
+      <a @click="$emit('remove')">
+      <img src='/images/ico/menos.png' alt='menos' class='mashov'>
       </a>
     </td>
   </tr>
