@@ -63,7 +63,7 @@ Route::post('usuario/retirar-dinero', 'PaymentController@withdrawal');
 
 //Players routes
 Route::get('player/position/{position}', 'PlayerController@byPosition');
-Route::get('player/journey/{championship}/{date}/{journey}', 'PlayerController@byjourney');
+Route::get('player/journey/{championship}/{date}', 'PlayerController@byjourney');
 Route::get('player/team/{team_id}', 'PlayerController@playersByTeam');
 
 //Affiliate routes
