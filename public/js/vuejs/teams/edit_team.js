@@ -35,8 +35,7 @@ Vue.component('my-players', {
 var vm = new Vue ({
   el: "#edit",
   data: {
-    index: '',
-    position: 'PA',
+    index: '',\
     players:  '',
     myPlayers: JSON.parse(sessionStorage.getItem("element.players")),
     team_data: JSON.parse(sessionStorage.getItem("team"))
