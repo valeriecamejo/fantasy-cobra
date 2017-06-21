@@ -9,7 +9,16 @@ class Team_user_players extends Model
 {
   protected $table = 'team_user_players';
   protected $fillable = [
-    'legacy_id', 'player_id', 'team_user_id', 'name', 'last_name', 'name_team', 'name_opponent','position', 'salary', 'points'
+    'legacy_id',
+    'player_id',
+    'team_user_id',
+    'name',
+    'last_name',
+    'name_team',
+    'name_opponent',
+    'position',
+    'salary',
+    'points'
   ];
 
   public static function save_player($player_obj, $team_id) {

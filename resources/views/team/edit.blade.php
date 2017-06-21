@@ -27,9 +27,7 @@
           <div>
             <!-- Nav tabs -->
             <div id="tabs1">
-              <tabs>
                 <ul class="nav nav-tabs entirewidth" role="tablist">
-
                   <tab role="presentation" class="active">
                     <a href="#PAD" id="PA" aria-controls="home" role="tab" data-toggle="tab">PA</a>
                   </tab>
@@ -55,7 +53,6 @@
                     <a href="#BATSD" id="BATS" aria-controls="settings" role="tab" data-toggle="tab">BATS</a>
                   </tab>
                 </ul>
-              </tabs>
             </div>
 
             <table class="table table-striped2 table-hover2 tablelineup theadhead">

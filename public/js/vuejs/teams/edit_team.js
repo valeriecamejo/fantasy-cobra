@@ -2,16 +2,33 @@
 Vue.component('players', {
   template: '#players',
   props: ['myPlayer', 'player', 'position'],
+
+  data: function() {
+    return {
+      activeTab: '',
+      tabs: []
+    }
+  },
   methods: {
             addPlayer: function (player) {
-              vm.myPlayers.push(player);
-            }
+
+              if ( ((vm.team_data.type_play == 'TURBO') && (vm.myPlayers.length) < 5) ||
+                 ((vm.team_data.type_play == 'REGULAR') && (vm.myPlayers.length) < 9) )  {
+                vm.myPlayers.push(player);
+                console.info('My Players: ', vm.myPlayers.length);
+              }
+            },
+            activate: function (tab) {
+              console.log(tab);
+              this.activeTab = tab;
+              this.$emit('activateTab', tab);
+    }
   }
 });
 
 Vue.component('my-players', {
   template: '#my-players',
-  props: ['myPlayer']
+  props: ['myPlayer'],
 });
 
 

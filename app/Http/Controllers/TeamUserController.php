@@ -91,9 +91,13 @@ class TeamUserController extends Controller {
     $players = Player::players($_GET['championship'],$_GET['type_play'],$_GET['date_team'],$_GET['type_journal']);
     echo json_encode($players);
   }
-  /**
-   * save_team save team user
-   */
+
+  /*********************************************
+ * save_team: save team user.
+ * @param void
+ * @return $message
+   *********************************************/
+
   public function save_team() {
     $competition        = \Request::cookie('competition');
     $type_inscription   = \Request::cookie('enroll');
@@ -155,9 +159,24 @@ class TeamUserController extends Controller {
                                 'update_team' => $update_team,
                                 'players'     => $players
                                 );
-
     echo json_encode($team_information);
+  }
 
+  /***************************************************
+   * save_team_edited: save user edited team
+   * @param  void
+   * @return $team_information
+   ***************************************************/
+
+  public function save_team_edited () {
+
+    $update_team = Team_user::update_team($_GET['team_id']);
+    $players     = Player::players($_GET['championship_id'], $_GET['type_play'], $_GET['team_date'], $_GET['type_journal']);
+    $team_information[]  = array(
+                                'update_team' => $update_team,
+                                'players'     => $players
+                                );
+    echo json_encode($team_information);
   }
 
 }
