@@ -45,6 +45,8 @@ class Player extends Model
 
   static function byJourney($championship, $date) {
 
+    $team_date = Carbon::createFromFormat('Y-m-d H:i', $date)->format('Y-m-d');
+
     $player = Player::select('players.*','teams.short_nickname as name_team',
       DB::raw('if(players.team_id = games.team_id_home, games.team_id_away, games.team_id_home) as opo'),
       DB::raw('(select teams.short_nickname from teams where teams.id = opo) as name_opponent'))
@@ -54,7 +56,7 @@ class Player extends Model
         $games->orOn('games.team_id_away', '=', 'teams.id');
       })
       ->where('players.championship_id', '=', $championship)
-      ->where(DB::raw('DATE_FORMAT(games.start_date, "%Y-%m-%d")'), '=', $date)
+      ->where(DB::raw('DATE_FORMAT(games.start_date, "%Y-%m-%d")'), '=', $team_date)
       ->orderBy('players.position', 'asc')
       ->get();
 

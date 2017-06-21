@@ -93,9 +93,9 @@
                     <a @click="team_modal( team.id , team.name, teams )">
                       <div class="BtnEntrar31">VER</div>
                     </a>
-              <!--      <a @click="team_modal( team.id , team.name, teams )">
+                    <a @click="team_modal( team.id , team.name, teams )">
                       <div class="BtnEntrar31 noedit">EDITAR</div>
-                    </a> -->
+                    </a>
                   </div>
           <!--    <input type="hidden" class="form-compe2" name="lineup_id" value="@{{ team.id }}">
                   <button type='submit' class="BtnEntrar3" style="border-style:none;">INSCRIBIR</button>

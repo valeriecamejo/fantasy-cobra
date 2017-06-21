@@ -138,14 +138,7 @@ class TeamUserController extends Controller {
     $team_date = Carbon::createFromFormat('Y-m-d H:i', input::get('team_date'))->format('Y-m-d');
 
     return view('team.edit')
-         ->with('team_id',      input::get('team_id'))
-         ->with('type_play',    input::get('type_play'))
-         ->with('championship_id', input::get('championship_id'))
-        // ->with('team_date',    input::get('team_date'))
-         ->with('team_date',    $team_date)
-         ->with('type_journal', input::get('type_journal'))
-         ->with('remaining_salary', input::get('remaining_salary'))
-         ->with('sport_id',     input::get('sport_id'));
+         ->with('team_date', $team_date);
   }
 
   /***************************************************

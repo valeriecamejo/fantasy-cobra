@@ -1,4 +1,4 @@
-//Url global
+
 /**********************************
 * modal_team.
 * @param competitions
@@ -30,6 +30,7 @@ $.ajax({
 * @return tpl
 ***********************************/
 function add_team_information(datos, team_id, cont_teams, username){
+
   $("#team_information_salary").empty();
   $("#team_information_date").empty();
   $("#team_information_points").empty();
@@ -71,6 +72,10 @@ function add_team_information(datos, team_id, cont_teams, username){
                           "</tr>"+
                         "</thead>";
     $(datos).each(function(index, element) {
+
+        var team_players = JSON.stringify(element.players);
+        sessionStorage.setItem("element.players", team_players);
+
       //----------------------Team_information-------------------
       $(element.team_information).each(function (k, team_information) {
         type_journal = team_information.type_journal;
@@ -133,14 +138,30 @@ function add_team_information(datos, team_id, cont_teams, username){
       });
     });
     teams_id = '<div id="buttonedit"><input type="hidden" name="team_id" id="team_id" value="'+ team_id +'">'+
-                  '<input type="hidden" name="championship_id" id="championship_id" value="'+ championship_id +'">'+
-                  '<input type="hidden" name="team_date" id="team_date" value="'+ team_date +'">'+
-                  '<input type="hidden" name="type_journal" id="type_journal" value="'+ type_journal +'">'+
-                  '<input type="hidden" name="type_play" id="type_play" value="'+ type_play +'">'+
-                  '<input type="hidden" name="remaining_salary" id="remaining_salary" value="'+ remaining_salary +'">'+
-                  '<input type="hidden" name="sport_id" id="sport_id" value="'+ sport_id +'"></div>';
+               '<input type="hidden" name="team_date" id="team_date" value="'+ team_date +'">';
+
+  window.team = {
+      team_id: team_id,
+      championship_id: championship_id,
+      team_date: team_date,
+      type_journal: type_journal,
+      type_play: type_play,
+      remaining_salary: remaining_salary,
+      sport_id: sport_id
+    };
+
+  var team_data = JSON.stringify(team);
+  sessionStorage.setItem("team", team_data);
 
 
+    if (team_date > (actual_date)) {
+      $('#activateedit').empty();
+      boton_edit = teams_id+'<button type="submit" class="btn btn-default btn-primary4"  style="margin: 5px 0px;">EDITAR EQUIPO</button>';
+      $('#activateedit').append(boton_edit);
+    } else if (team_date <= actual_date) {
+        boton_edit = '<span style="color:#D8BD33;font-size: 15px">Las competiciones comenzaron</span>';
+        $('#activateedit').append(boton_edit);
+      }
     $("#team_information_salary").append(team_information_salary);
     $("#team_information_date").append(team_information_date);
     $("#team_information_points").append(team_information_points);
