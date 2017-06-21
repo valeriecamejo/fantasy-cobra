@@ -263,4 +263,15 @@ class Team_user extends Model {
       return $team;
     }
   }
+
+  /**************************************************
+   * save_team: Update a bettor's team.
+   * @param  $input
+   * @return $team_information
+   **************************************************/
+
+    public static function save_team($input) {
+
+      var_dump($input);exit();
+    }
 }

@@ -170,13 +170,7 @@ class TeamUserController extends Controller {
 
   public function save_team_edited () {
 
-    $update_team = Team_user::update_team($_GET['team_id']);
-    $players     = Player::players($_GET['championship_id'], $_GET['type_play'], $_GET['team_date'], $_GET['type_journal']);
-    $team_information[]  = array(
-                                'update_team' => $update_team,
-                                'players'     => $players
-                                );
-    echo json_encode($team_information);
+    $team = Team_user::save_team(Input::all());
   }
 
 }

@@ -1,7 +1,7 @@
 
 Vue.component('players', {
   template: '#players',
-  props: ['myPlayer', 'player', 'position'],
+  props: ['myPlayer', 'player'],
 
   data: function() {
     return {
@@ -11,31 +11,51 @@ Vue.component('players', {
   },
   methods: {
             addPlayer: function (player) {
-
-              if ( ((vm.team_data.type_play == 'TURBO') && (vm.myPlayers.length) < 5) ||
-                 ((vm.team_data.type_play == 'REGULAR') && (vm.myPlayers.length) < 9) )  {
-                vm.myPlayers.push(player);
-                console.info('My Players: ', vm.myPlayers.length);
+              this.existPosition(player.position);
+              console.log(vm.countPosition.length);
+              if (vm.countPosition.length != 0) {
+                alert("La position " + player.position + " ya fue seleccionada");
+              } else {
+                if ( ((vm.team_data.type_play == 'TURBO') && (vm.myPlayers.length) < 5) ||
+                   ((vm.team_data.type_play == 'REGULAR') && (vm.myPlayers.length) < 9) )  {
+                    if (vm.team_data.remaining_salary >= player.salary ) {
+                      vm.team_data.remaining_salary = vm.team_data.remaining_salary - player.salary;
+                      vm.myPlayers.push(player);
+                    }
+                } else {
+                    alert("Se han seleccionado todos los jugadores");
+                }
               }
             },
             activate: function (tab) {
-              console.log(tab);
               this.activeTab = tab;
               this.$emit('activateTab', tab);
-    }
+            },
+            existPosition: function (position) {
+
+              vm.countPosition = vm.myPlayers.filter(function(element) {
+                return element.position == position;
+                  });
+            }
   }
 });
 
 Vue.component('my-players', {
   template: '#my-players',
   props: ['myPlayer'],
+  methods: {
+            decSalary: function (player) {
+              vm.team_data.remaining_salary = vm.team_data.remaining_salary + player.salary;
+            }
+  }
 });
 
 
 var vm = new Vue ({
   el: "#edit",
   data: {
-    index: '',\
+    countPosition: '',
+    index: '',
     players:  '',
     myPlayers: JSON.parse(sessionStorage.getItem("element.players")),
     team_data: JSON.parse(sessionStorage.getItem("team"))

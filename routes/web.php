@@ -60,6 +60,8 @@ Route::get('usuario/inscribir-equipo/competicion/{id}', 'CompetitionController@e
 Route::get('competition-details', 'CompetitionController@competitionDetailsOfCookie');
 Route::get('usuario/retirar-dinero', 'PaymentController@show_withdrawals');
 Route::post('usuario/retirar-dinero', 'PaymentController@withdrawal');
+Route::post('usuario/guardar-equipo', 'TeamUserController@save_team_edited');
+
 
 //Players routes
 Route::get('player/position/{position}', 'PlayerController@byPosition');

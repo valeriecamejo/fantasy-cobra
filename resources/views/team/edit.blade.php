@@ -11,8 +11,8 @@
     </div>
 
 <!--- Form -->
-
-    {!!  Form::open(array('url' => '', 'method' => 'post')) !!}
+    <form class="form-horizontal" method="POST" action="{{ URL::action('TeamUserController@save_team_edited') }}">
+      {{ csrf_field() }}
 
     <div class="modal-bodycompe">
       <div class="boxcompe">
@@ -77,7 +77,6 @@
                   is="players"
                   v-for="(player, index) in players.PA"
                   :player="player"
-                  :position="position"
                 >
                 </div>
 
@@ -123,7 +122,7 @@
           <div class="Usuariolineup" style="text-align:center;text-indent: 0;">EQUIPO</div>
           <div id="th2">
             <p id="salariorestante">Salario Restante:</p>
-            <input id="salaryrest" :value="team_data.remaining_salary" name="salaryrest"  class="inputsalario" type="text" readonly>
+            <input id="salaryrest" :value="team_data.remaining_salary" name="remaining_salary"  class="inputsalario" type="text" readonly>
 
           </div>
           <table class="table table-striped2 table-hover2 tablelineup theadhead">
@@ -146,6 +145,7 @@
                 <div is="my-players"
                   v-for="(myPlayer, index) in myPlayers"
                   :my-player="myPlayer"
+                  :count-position="countPosition"
                   :index="index"
                   v-on:remove="myPlayers.splice(index, 1)">
                 </div>
@@ -182,16 +182,20 @@
       <div id="th22" class="wid50">
         <a href="/usuario/mis-equipos" class="btn btn-primary2 btn-return btn-lg">Regresar</a>
         <!--<button type="submit" class="btn btn-primarycan btn-lg" name="cancellineup" onclick="">Limpiar</button>-->
+        <input type="hidden" v-model="myPlayers" value="myPlayers" name="myPlayers">
+        <div>
+          <button type='submit' class='btn btn-primary2 btn-lg' name='createlineup' onclick="">Guardar Lineup</button>
+        </div>
         <div id="button_create"></div>
       </div>
     </div>
-    {!! Form::close() !!}
+    </form>
     <!-- cierre contcrear -->
 
     <!--    Crear Lineup  Movil     -->
     {!!  Form::open(array('url' => 'usuario/crear-equipo', 'method' => 'post')) !!}
     <div class="restab visible-xs" style="margin-top:30px; margin-bottom: 60px;">
-      <div class="linemovbut">
+      <div  class="linemovbut">
         <button type="submit" class="btn btn-default btn-primary4" name="createlineup" onclick="">CREAR LINEUP</button>
         <button type="submit" class="btn btn-default btn-primary4" name="returnhome" onclick="">REGRESAR</button>
       </div>
@@ -399,7 +403,7 @@
     <td id='opo'>@{{ myPlayer.name_opponent }} vs <span id='teamcol'>@{{ myPlayer.name_team }}</span></td>
     <td id='salario'>@{{ myPlayer.salary }}</td>
     <td>
-      <a @click="$emit('remove')">
+      <a @click="$emit('remove'), decSalary(myPlayer)">
       <img src='/images/ico/menos.png' alt='menos' class='mashov'>
       </a>
     </td>
