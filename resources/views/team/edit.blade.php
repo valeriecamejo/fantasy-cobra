@@ -28,30 +28,30 @@
             <!-- Nav tabs -->
             <div id="tabs1">
                 <ul class="nav nav-tabs entirewidth" role="tablist">
-                  <tab role="presentation" class="active">
-                    <a href="#PAD" id="PA" aria-controls="home" role="tab" data-toggle="tab">PA</a>
-                  </tab>
-                  <tab role="presentation">
-                    <a href="#CD" id="C" aria-controls="profile" role="tab" data-toggle="tab">C</a>
-                  </tab>
-                  <tab role="presentation">
-                    <a href="#1BD" id="1B" aria-controls="messages" role="tab" data-toggle="tab">1B</a>
-                  </tab>
-                  <tab role="presentation">
-                    <a href="#2BD" id="2B" aria-controls="settings" role="tab" data-toggle="tab">2B</a>
-                  </tab>
-                  <tab role="presentation">
-                    <a href="#3BD" id="3B" aria-controls="settings" role="tab" data-toggle="tab">3B</a>
-                  </tab>
-                  <tab role="presentation">
-                    <a href="#SSD" id="SS" aria-controls="settings" role="tab" data-toggle="tab">SS</a>
-                  </tab>
-                  <tab role="presentation">
-                    <a href="#OFD" id="OF" aria-controls="settings" role="tab" data-toggle="tab">OF</a>
-                  </tab>
-                  <tab role="presentation">
-                    <a href="#BATSD" id="BATS" aria-controls="settings" role="tab" data-toggle="tab">BATS</a>
-                  </tab>
+                  <li role="presentation" class="active">
+                    <a href="#" aria-controls="home" role="tab" data-toggle="tab" @click="players=allPlayers.PA">PA</a>
+                  </li>
+                  <li role="presentation">
+                    <a href="#" aria-controls="profile" role="tab" data-toggle="tab" @click="players=allPlayers.C">C</a>
+                  </li>
+                  <li role="presentation">
+                    <a href="#" aria-controls="messages" role="tab" data-toggle="tab" @click="players=allPlayers['1B']">1B</a>
+                  </li>
+                  <li role="presentation">
+                    <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['2B']">2B</a>
+                  </li>
+                  <li role="presentation">
+                    <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['SS']">3B</a>
+                  </li>
+                  <li role="presentation">
+                    <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['3B']">SS</a>
+                  </li>
+                  <li role="presentation">
+                    <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['OF']">OF</a>
+                  </li>
+                  <li role="presentation">
+                    <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="showBat=allPlayers">BAT</a>
+                  </li>
                 </ul>
             </div>
 
@@ -71,15 +71,16 @@
             </table>
             <!-- Tab panes -->
             <div id="players-availables" class="tab-content tab-contentnull scrollcreate createcontent">
-              <div role="tabpanel" class="tab-pane active fade in" id="PAD">
+              <div role="tabpanel" class="tab-pane active fade in">
 
-                <div
+                <list-players :players="players"></list-players>
+              <!--  <div
                   is="players"
                   v-for="(player, index) in players.PA"
                   :player="player"
                 >
                 </div>
-
+              -->
               </div>
               <div role="tabpanel" class="tab-pane fade" id="CD" >
 
@@ -380,7 +381,7 @@
 
 
 <!-- Template of all players -->
-<template id="players">
+<!-- <template id="players">
   <tr>
     <td id='pos'>@{{ player.position }}</td>
     <td id='jug'>@{{ player.name }} @{{ player.last_name }}<span id='teamcol'>
@@ -392,7 +393,7 @@
       </a>
     </td>
   </tr>
-</template>
+</template> -->
 <!-- End Template of all players -->
 
 <!-- Template of my players -->
@@ -410,6 +411,22 @@
   </tr>
 </template>
 <!-- End Template of my players -->
+
+<template id="list-players">
+<tbody>
+  <tr v-for="player in players">
+    <td id='pos'>@{{ player.position }}</td>
+    <td id='jug'>@{{ player.name }} @{{ player.last_name }}<span id='teamcol'>
+    <td id='opo'>@{{ player.name_opponent }} vs <span id='teamcol'>@{{ player.name_team }}</span></td>
+    <td id='salario'>@{{ player.salary }}</td>
+    <td>
+      <a @click="switchPlayerMyTeam(player)">
+        <img src='/images/ico/mas.png' alt='mas' class='mashov'>
+      </a>
+    </td>
+  </tr>
+</tbody>
+</template>
 
 <!-- End Templates for Components -->
 

@@ -3,12 +3,6 @@ Vue.component('players', {
   template: '#players',
   props: ['myPlayer', 'player'],
 
-  data: function() {
-    return {
-      activeTab: '',
-      tabs: []
-    }
-  },
   methods: {
             addPlayer: function (player) {
               this.existPosition(player.position);
@@ -51,21 +45,33 @@ Vue.component('my-players', {
 });
 
 
+
+Vue.component('list-players', {
+  template: '#list-players',
+  props: [ 'players']
+})
+
 var vm = new Vue ({
   el: "#edit",
   data: {
     countPosition: '',
-    index: '',
-    players:  '',
+    index:         '',
+    allPlayers:    '',
+    players:       '',
     myPlayers: JSON.parse(sessionStorage.getItem("element.players")),
     team_data: JSON.parse(sessionStorage.getItem("team"))
   },
   mounted() {
     axios.get('/player/journey/' + this.team_data.championship_id + '/' + this.team_data.team_date,
               {}).then((response) => {
-                this.players = response.data;
+                this.allPlayers = response.data;
+
                 console.info('Team Players: ', this.myPlayers);
+                console.info('Players: ', this.allPlayers);
+                this.players = this.allPlayers.PA;
                 console.info('Players: ', this.players);
               });
             }
-  });
+});
+
+
