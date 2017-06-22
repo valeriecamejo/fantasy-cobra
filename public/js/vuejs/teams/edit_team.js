@@ -47,7 +47,6 @@ Vue.component('list-players', {
       }
     },
     existPosition: function (position) {
-
       vm.countPosition = vm.myPlayers.filter(function(element) {
         return element.position == position;
       });
@@ -75,7 +74,30 @@ var vm = new Vue ({
                 this.players = this.allPlayers.PA;
                 console.info('Players: ', this.players);
               });
-            }
-          });
+            },
+  methods: {
+    showPlayers: function (positions) { // showPlayers(['2B', 'SS'])
+
+      // return vm.allPlayers.forEach(function (item, index ) {
+      //     console.log('ENTRE')
+        // if (positions === 'BATS' ) {
+        //   if (element.PA === undefined) {
+        //     return true
+        //   }
+        // } else {
+        //   //positions.forEach(function(item, index ) {
+        //     if(element[item] !== undefined ){
+        //       return true
+        //     }
+        //   })
+        // }
+
+        // console.log(element);
+        // return false
+
+     // })
+    }
+  }
+});
 
 

@@ -34,23 +34,29 @@
                   <li role="presentation">
                     <a href="#" aria-controls="profile" role="tab" data-toggle="tab" @click="players=allPlayers.C">C</a>
                   </li>
-                  <li role="presentation">
+                  <li v-if="team_data.type_play == 'REGULAR'" role="presentation">
                     <a href="#" aria-controls="messages" role="tab" data-toggle="tab" @click="players=allPlayers['1B']">1B</a>
                   </li>
-                  <li role="presentation">
+                  <li v-if="team_data.type_play == 'TURBO'" role="presentation">
+                    <a href="#" aria-controls="messages" role="tab" data-toggle="tab" @click="showPlayers('MI')">MI</a>
+                  </li>
+                  <li v-if="team_data.type_play == 'REGULAR'" role="presentation">
                     <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['2B']">2B</a>
                   </li>
-                  <li role="presentation">
-                    <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['SS']">3B</a>
+                  <li v-if="team_data.type_play == 'TURBO'" role="presentation">
+                    <a href="#" aria-controls="messages" role="tab" data-toggle="tab" @click="showPlayers('CI')">CI</a>
+                  </li>
+                  <li v-if="team_data.type_play == 'REGULAR'" role="presentation">
+                    <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['3B']">3B</a>
                   </li>
                   <li role="presentation">
-                    <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['3B']">SS</a>
+                    <a v-if="team_data.type_play == 'REGULAR'" href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['SS']">SS</a>
                   </li>
                   <li role="presentation">
                     <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['OF']">OF</a>
                   </li>
-                  <li role="presentation">
-                    <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="showBat=allPlayers">BAT</a>
+                  <li v-if="team_data.type_play == 'REGULAR'"role="presentation">
+                    <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="showPlayers(allPlayers)">BAT</a>
                   </li>
                 </ul>
             </div>
@@ -74,13 +80,7 @@
               <div role="tabpanel" class="tab-pane active fade in">
 
                 <list-players :players="players"></list-players>
-              <!--  <div
-                  is="players"
-                  v-for="(player, index) in players.PA"
-                  :player="player"
-                >
-                </div>
-              -->
+
               </div>
               <div role="tabpanel" class="tab-pane fade" id="CD" >
 
