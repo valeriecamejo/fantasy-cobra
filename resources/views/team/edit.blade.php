@@ -420,7 +420,7 @@
     <td id='opo'>@{{ player.name_opponent }} vs <span id='teamcol'>@{{ player.name_team }}</span></td>
     <td id='salario'>@{{ player.salary }}</td>
     <td>
-      <a @click="switchPlayerMyTeam(player)">
+      <a @click=addPlayer(player)>
         <img src='/images/ico/mas.png' alt='mas' class='mashov'>
       </a>
     </td>

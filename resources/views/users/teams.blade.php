@@ -131,6 +131,7 @@
         <br>
       @include('includes/footer-mobile')
   </div>
-  {!! Html::script('js/vuejs/teams/user_teams.js') !!}
+
+{!! Html::script('js/vuejs/teams/user_teams.js') !!}
 
 @stop
