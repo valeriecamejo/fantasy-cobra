@@ -59,6 +59,7 @@ var vm = new Vue ({
   data: {
     countPosition: '',
     index:         '',
+    show:          [],
     allPlayers:    '',
     players:       '',
     myPlayers: JSON.parse(sessionStorage.getItem("element.players")),
@@ -77,9 +78,26 @@ var vm = new Vue ({
             },
   methods: {
     showPlayers: function (positions) { // showPlayers(['2B', 'SS'])
+    console.info('POSITIONS:', positions)
 
-      // return vm.allPlayers.forEach(function (item, index ) {
-      //     console.log('ENTRE')
+    $.each(vm.allPlayers, function( index, value ) {
+
+      if (positions === 'BATS' ) {
+        if (index   !== 'PA') {
+           vm.show.push(value)
+        }
+      } else {
+        if (index !== positions[0]) {
+          // console.log('MI Y CI')
+          // console.log(index)
+          // console.log(positions[0])
+
+        }
+      }
+      return vm.show
+    });
+
+
         // if (positions === 'BATS' ) {
         //   if (element.PA === undefined) {
         //     return true

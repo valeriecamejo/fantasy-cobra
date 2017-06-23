@@ -38,13 +38,13 @@
                     <a href="#" aria-controls="messages" role="tab" data-toggle="tab" @click="players=allPlayers['1B']">1B</a>
                   </li>
                   <li v-if="team_data.type_play == 'TURBO'" role="presentation">
-                    <a href="#" aria-controls="messages" role="tab" data-toggle="tab" @click="showPlayers('MI')">MI</a>
+                    <a href="#" aria-controls="messages" role="tab" data-toggle="tab" @click="showPlayers(['2B', 'SS'])">MI</a>
                   </li>
                   <li v-if="team_data.type_play == 'REGULAR'" role="presentation">
                     <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['2B']">2B</a>
                   </li>
                   <li v-if="team_data.type_play == 'TURBO'" role="presentation">
-                    <a href="#" aria-controls="messages" role="tab" data-toggle="tab" @click="showPlayers('CI')">CI</a>
+                    <a href="#" aria-controls="messages" role="tab" data-toggle="tab" @click="showPlayers(['2B', 'SS'])">CI</a>
                   </li>
                   <li v-if="team_data.type_play == 'REGULAR'" role="presentation">
                     <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['3B']">3B</a>
@@ -56,7 +56,7 @@
                     <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['OF']">OF</a>
                   </li>
                   <li v-if="team_data.type_play == 'REGULAR'"role="presentation">
-                    <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="showPlayers(allPlayers)">BAT</a>
+                    <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="showPlayers('BATS')">BAT</a>
                   </li>
                 </ul>
             </div>
