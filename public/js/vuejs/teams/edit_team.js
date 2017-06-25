@@ -78,23 +78,27 @@ var vm = new Vue ({
             },
   methods: {
     showPlayers: function (positions) { // showPlayers(['2B', 'SS'])
-    console.info('POSITIONS:', positions)
+
+    vm.show = []
 
     $.each(vm.allPlayers, function( index, value ) {
 
       if (positions === 'BATS' ) {
         if (index   !== 'PA') {
-           vm.show.push(value)
+          $.each(value, function( index, valor ) {
+          console.info(vm.show.push(valor))
+          vm.show.push(valor)
+          });
         }
-      } else {
-        if (index !== positions[0]) {
+      // } else {
+      //   if (index !== positions[0]) {
           // console.log('MI Y CI')
           // console.log(index)
           // console.log(positions[0])
 
         }
-      }
-      return vm.show
+
+      return vm.players = vm.show
     });
 
 
