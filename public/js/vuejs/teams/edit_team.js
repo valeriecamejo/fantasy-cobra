@@ -29,9 +29,7 @@ Vue.component('list-players', {
 
   methods: {
     addPlayer: function (player) {
-      console.info(player);
       this.existPosition(player.position);
-      console.log(vm.countPosition.length);
       if (vm.countPosition.length != 0) {
         alert("La position " + player.position + " ya fue seleccionada");
       } else {
@@ -69,11 +67,10 @@ var vm = new Vue ({
     axios.get('/player/journey/' + this.team_data.championship_id + '/' + this.team_data.team_date,
               {}).then((response) => {
                 this.allPlayers = response.data;
-
-                console.info('Team Players: ', this.myPlayers);
-                console.info('Players: ', this.allPlayers);
                 this.players = this.allPlayers.PA;
-                console.info('Players: ', this.players);
+                if (vm.myPlayers == 'Array[5]') {
+                  console.log('Hay 5 arrays')
+                }
               });
             },
   methods: {

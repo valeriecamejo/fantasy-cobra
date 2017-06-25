@@ -184,7 +184,7 @@
         <a href="/usuario/mis-equipos" class="btn btn-primary2 btn-return btn-lg">Regresar</a>
         <!--<button type="submit" class="btn btn-primarycan btn-lg" name="cancellineup" onclick="">Limpiar</button>-->
         <input type="hidden" v-model="myPlayers" value="myPlayers" name="myPlayers">
-        <div>
+        <div  v-if="team_data.type_play == 'TURBO' && myPlayers.length == 5 || team_data.type_play == 'REGULAR' && myPlayers.length == 9">
           <button type='submit' class='btn btn-primary2 btn-lg' name='createlineup' onclick="">Guardar Lineup</button>
         </div>
         <div id="button_create"></div>
