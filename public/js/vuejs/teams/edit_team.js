@@ -79,45 +79,25 @@ var vm = new Vue ({
   methods: {
     showPlayers: function (positions) { // showPlayers(['2B', 'SS'])
 
-    vm.show = []
+      vm.show = []
 
-    $.each(vm.allPlayers, function( index, value ) {
+      $.each(vm.allPlayers, function( index, value ) {
 
-      if (positions === 'BATS' ) {
-        if (index   !== 'PA') {
-          $.each(value, function( index, valor ) {
-          console.info(vm.show.push(valor))
-          vm.show.push(valor)
-          });
-        }
-      // } else {
-      //   if (index !== positions[0]) {
-          // console.log('MI Y CI')
-          // console.log(index)
-          // console.log(positions[0])
-
-        }
-
-      return vm.players = vm.show
-    });
-
-
-        // if (positions === 'BATS' ) {
-        //   if (element.PA === undefined) {
-        //     return true
-        //   }
-        // } else {
-        //   //positions.forEach(function(item, index ) {
-        //     if(element[item] !== undefined ){
-        //       return true
-        //     }
-        //   })
-        // }
-
-        // console.log(element);
-        // return false
-
-     // })
+        if (positions === 'BATS' ) {
+          if (index   !== 'PA') {
+            $.each(value, function( index, valor ) {
+              vm.show.push(valor)
+            });
+          }
+        } else {
+            if (index === positions[0] || index === positions[1]) {
+              $.each(value, function( index, valor ) {
+              vm.show.push(valor)
+              });
+            }
+          }
+        return vm.players = vm.show
+      });
     }
   }
 });

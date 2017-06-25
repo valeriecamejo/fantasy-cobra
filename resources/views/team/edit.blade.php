@@ -44,7 +44,7 @@
                     <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['2B']">2B</a>
                   </li>
                   <li v-if="team_data.type_play == 'TURBO'" role="presentation">
-                    <a href="#" aria-controls="messages" role="tab" data-toggle="tab" @click="showPlayers(['2B', 'SS'])">CI</a>
+                    <a href="#" aria-controls="messages" role="tab" data-toggle="tab" @click="showPlayers(['1B', '3B'])">CI</a>
                   </li>
                   <li v-if="team_data.type_play == 'REGULAR'" role="presentation">
                     <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['3B']">3B</a>
