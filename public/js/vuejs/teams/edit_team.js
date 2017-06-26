@@ -29,12 +29,14 @@ Vue.component('list-players', {
 
   methods: {
     addPlayer: function (player) {
-      this.existPosition(player.position);
+      this.existPosition(player.position, player.player_id);
+      console.info('Cantidad de OF', vm.countOF)
+      console.info('Cantidad de posiciones',vm.countPosition)
       if (vm.countPosition.length != 0) {
         alert("La position " + player.position + " ya fue seleccionada");
       } else {
         if ( ((vm.team_data.type_play == 'TURBO') && (vm.myPlayers.length) < 5) ||
-            ((vm.team_data.type_play == 'REGULAR') && (vm.myPlayers.length) < 9) )  {
+          ((vm.team_data.type_play == 'REGULAR') && (vm.myPlayers.length) < 9) )  {
           if (vm.team_data.remaining_salary >= player.salary ) {
             vm.team_data.remaining_salary = vm.team_data.remaining_salary - player.salary;
             vm.myPlayers.push(player);
@@ -44,10 +46,25 @@ Vue.component('list-players', {
         }
       }
     },
-    existPosition: function (position) {
-      vm.countPosition = vm.myPlayers.filter(function(element) {
-        return element.position == position;
-      });
+    existPosition: function (position, player_id) {
+      
+      if (position == 'OF') {
+        vm.countOF = vm.myPlayers.filter(function(element) {
+          return element.position == position
+        });
+        if (vm.countOF.length < 3) {
+          vm.countPosition = vm.myPlayers.filter(function(element) {
+            return element.player_id == player_id
+          });
+        } else {
+           vm.countPosition = vm.countOF
+           console.log(vm.countPosition)
+          }
+      } else {
+          vm.countPosition = vm.myPlayers.filter(function(element) {
+            return element.position == position
+          });
+        }
     }
   }
 })
@@ -60,43 +77,44 @@ var vm = new Vue ({
     show:          [],
     allPlayers:    '',
     players:       '',
+    countOF:        0,
     myPlayers: JSON.parse(sessionStorage.getItem("element.players")),
     team_data: JSON.parse(sessionStorage.getItem("team"))
   },
   mounted() {
     axios.get('/player/journey/' + this.team_data.championship_id + '/' + this.team_data.team_date,
-              {}).then((response) => {
-                this.allPlayers = response.data;
-                this.players = this.allPlayers.PA;
-                if (vm.myPlayers == 'Array[5]') {
-                  console.log('Hay 5 arrays')
-                }
+      {}).then((response) => {
+        this.allPlayers = response.data;
+        this.players = this.allPlayers.PA;
+        if (vm.myPlayers == 'Array[5]') {
+          console.log('Hay 5 arrays')
+        }
+      });
+    },
+    methods: {
+      showPlayers: function (positions) {
+
+        vm.show = []
+
+        $.each(vm.allPlayers, function( index, value ) {
+
+          if (positions === 'BATS' ) {
+            if (index   !== 'PA') {
+              $.each(value, function( index, valor ) {
+                vm.show.push(valor)
               });
-            },
-  methods: {
-    showPlayers: function (positions) { // showPlayers(['2B', 'SS'])
-
-      vm.show = []
-
-      $.each(vm.allPlayers, function( index, value ) {
-
-        if (positions === 'BATS' ) {
-          if (index   !== 'PA') {
-            $.each(value, function( index, valor ) {
-              vm.show.push(valor)
-            });
-          }
-        } else {
+            }
+          } else {
             if (index === positions[0] || index === positions[1]) {
               $.each(value, function( index, valor ) {
-              vm.show.push(valor)
+                vm.show.push(valor)
               });
             }
           }
-        return vm.players = vm.show
-      });
+          return vm.players = vm.show
+        });
+      }
     }
-  }
-});
+  });
 
 
