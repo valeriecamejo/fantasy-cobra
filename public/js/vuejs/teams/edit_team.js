@@ -22,7 +22,6 @@ Vue.component('my-players', {
 });
 
 
-
 Vue.component('list-players', {
   template: '#list-players',
   props: [ 'players'],
@@ -47,7 +46,7 @@ Vue.component('list-players', {
       }
     },
     existPosition: function (position, player_id) {
-      
+
       if (position == 'OF') {
         vm.countOF = vm.myPlayers.filter(function(element) {
           return element.position == position

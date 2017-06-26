@@ -19,8 +19,8 @@ class Team_Turbo_user extends Team_user {
   $positions = [
     'C'  => 1,
     'PA' => 1,
-    'MI' => 1,  //Middle infield
-    'CI' => 1,  //Corner infield
+    'MI' => 2,  //Middle infield
+    'CI' => 2,  //Corner infield
     'OF' => 1,  //outfiled
   ];
 

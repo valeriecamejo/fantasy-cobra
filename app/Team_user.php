@@ -28,17 +28,68 @@ class Team_user extends Model {
     'C'   => 1,
     'PA'  => 1,
     'SS'  => 1,
-    'OF1' => 1,
-    'OF2' => 1,
-    'OF3' => 1,
+    'OF'  => 3,
   ];
 
 
-  static function validate_positions () {
-    foreach (self::positions as $position => $qty) {
 
+/**************************************************
+ * validate_positions: Positions validation
+ * @param  $input
+ * @return $bool
+ **************************************************/
+
+  static function validate_positions ($players) {
+
+    $tmpPositions = array();
+    $errors       = array();
+
+    if (is_array($players) || is_object($players)) {
+      foreach ($players as $player) {
+        $tmpPositions[$player->position][] = $player;
+      }
+
+      foreach (self::$positions as $position => $qty) {
+        if (count($tmpPositions[$position]) !== $qty ) {
+          $errors[] = ["Excedio numero de jugadores para la posicion" + $position];
+        }
+      }
     }
+    return (count($errors) > 0 ? $erros : false);
   }
+
+
+/**************************************************
+ * validate_remaining_salary: Positions validation
+ * @param  $players
+ * @return $bool
+ **************************************************/
+
+  static function validate_remaining_salary ($players) {
+
+    $remaining_salary = 0;
+    $suma = 0;
+
+    if (is_array($players) || is_object($players)) {
+      foreach ($players as $player) {
+        $suma = $suma + $player->salary;
+      }
+    }
+
+    return $suma > \App\Lib\Ddh\SettingVariables::getSettings('players_salary') ? $erros : false;
+  }
+
+
+/**************************************************
+ * validate_date: Validation of date of competition
+ * @param  $players
+ * @return $bool
+ **************************************************/
+
+  static function validate_date ($date_competition) {
+    //var_dump($date_competition);exit();
+  }
+
 
 public function team_players() {
   return $this->hasMany('App\Team_user_players');
@@ -272,10 +323,19 @@ public static function save_team_regular($input) {
 
   public static function save_team($input) {
 
-    //var_dump($input);exit();
-    if ($input['remaining_salary'] >= 0) {
-        
-          }      
+  var_dump($input);exit();
+
+    // DB::table('team_user_players')
+    //   ->where('team_user_id', )
+    // if ($input['remaining_salary'] >= 0) {
+
+    // }
+
+    // DB::table('users')
+    //   ->where('id', 1)
+    //   ->update(['votes' => 1]);
+
+
 
   }
 }

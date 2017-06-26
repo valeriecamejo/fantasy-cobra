@@ -124,6 +124,7 @@
           <div id="th2">
             <p id="salariorestante">Salario Restante:</p>
             <input id="salaryrest" :value="team_data.remaining_salary" name="remaining_salary"  class="inputsalario" type="text" readonly>
+            <input id="team_data" :value="JSON.stringify(team_data)" name="team_data" type="hidden">
 
           </div>
           <table class="table table-striped2 table-hover2 tablelineup theadhead">
@@ -183,9 +184,9 @@
       <div id="th22" class="wid50">
         <a href="/usuario/mis-equipos" class="btn btn-primary2 btn-return btn-lg">Regresar</a>
         <!--<button type="submit" class="btn btn-primarycan btn-lg" name="cancellineup" onclick="">Limpiar</button>-->
-        <input type="hidden" v-model="myPlayers" value="myPlayers" name="myPlayers">
+        <input type="hidden" :value="JSON.stringify(myPlayers)" name="myPlayers">
         <div  v-if="team_data.type_play == 'TURBO' && myPlayers.length == 5 || team_data.type_play == 'REGULAR' && myPlayers.length == 9">
-          <button type='submit' class='btn btn-primary2 btn-lg' name='createlineup' onclick="">Guardar Lineup</button>
+          <button type='submit' class='btn btn-primary2 btn-lg' name='createlineup'>Guardar Lineup</button>
         </div>
         <div id="button_create"></div>
       </div>

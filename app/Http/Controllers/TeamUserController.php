@@ -168,9 +168,14 @@ class TeamUserController extends Controller {
    * @return $team_information
    ***************************************************/
 
-  public function save_team_edited () {
+  public function save_team_edited (Request $request) {
 
-    $team = Team_user::save_team(Input::all());
+    $myPlayers = json_decode($request['myPlayers']);
+    $team_data = json_decode($request['team_data']);
+
+    $validate_positions        = Team_user::validate_positions($myPlayers);
+    $validate_remaining_salary = Team_user::validate_remaining_salary($myPlayers);
+    //$validate_date             = Team_user::validate_remaining_salary($team_data['team_date']);
   }
 
 }

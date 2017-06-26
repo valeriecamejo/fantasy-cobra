@@ -47,7 +47,7 @@ class Player extends Model
 
     $team_date = Carbon::createFromFormat('Y-m-d H:i', $date)->format('Y-m-d');
 
-    $player = Player::select('players.*','teams.short_nickname as name_team',
+    $player = Player::select('players.*','teams.short_nickname as name_team', 'players.id as player_id',
       DB::raw('if(players.team_id = games.team_id_home, games.team_id_away, games.team_id_home) as opo'),
       DB::raw('(select teams.short_nickname from teams where teams.id = opo) as name_opponent'))
       ->join('teams', 'teams.id', '=', 'players.team_id')
