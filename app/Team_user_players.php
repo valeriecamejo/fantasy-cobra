@@ -5,8 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class Team_user_players extends Model
-{
+class Team_user_players extends Model {
+
   protected $table = 'team_user_players';
   protected $fillable = [
     'legacy_id',
@@ -57,6 +57,32 @@ class Team_user_players extends Model
              ->get();
 
     return $players;
+  }
+
+/********************************************
+* save_team_edited: Save team of user
+* @param $players
+* @return $players
+********************************************/
+
+  public static function save_team_edited($players, $team_user_id) {
+
+    foreach ($players as $player) {
+      $ret = DB::table('team_user_players')
+        ->where('team_user_id', $team_user_id)
+        ->where('position', $player->position)
+        ->update([
+                 'legacy_id'      => 1,
+                 'player_id'      => $player->player_id,
+                 'name'           => $player->name,
+                 'last_name'      => $player->last_name,
+                 'name_team'      => $player->name_team,
+                 'name_opponent'  => $player->name_opponent,
+                 'salary'         => $player->salary,
+          ]);
+      }
+
+    return $ret;
   }
 
 }

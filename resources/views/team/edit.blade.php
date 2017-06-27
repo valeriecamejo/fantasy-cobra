@@ -436,13 +436,6 @@
 
 <!-- End Form -->
 
-<!--  {!! Html::script('js/players/journey.js') !!}
-  {!! Html::script('js/teams/edit_team.js') !!}
-  {!! Html::script('js/validate/validate_players.js') !!}
-  {!! Html::script('js/teams/list.js') !!}
-  {!! Html::script('js/players/team_user.js') !!}
--->
-
 {!! Html::script('js/vuejs/teams/edit_team.js') !!}
 @stop
 

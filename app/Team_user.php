@@ -55,7 +55,7 @@ class Team_user extends Model {
         }
       }
     }
-    return (count($errors) > 0 ? $erros : false);
+    return (count($errors) > 0 ? $errors : false);
   }
 
 
@@ -68,26 +68,33 @@ class Team_user extends Model {
   static function validate_remaining_salary ($players) {
 
     $remaining_salary = 0;
-    $suma = 0;
+    $suma             = 0;
+    $errors           = array();
 
     if (is_array($players) || is_object($players)) {
       foreach ($players as $player) {
         $suma = $suma + $player->salary;
       }
     }
-
-    return $suma > \App\Lib\Ddh\SettingVariables::getSettings('players_salary') ? $erros : false;
+    $errors[]    = ["Excedio el monto del salario para crear equipo"];
+    return $suma > \App\Lib\Ddh\SettingVariables::getSettings('players_salary') ? $errors : false;
   }
 
 
 /**************************************************
  * validate_date: Validation of date of competition
- * @param  $players
+ * @param  $date_competition
  * @return $bool
  **************************************************/
 
   static function validate_date ($date_competition) {
-    //var_dump($date_competition);exit();
+
+    $today  = date('Y-m-d H:i');
+    $errors = array();
+
+    $errors[] = ["La competicion esta por comenzar. No puede modificar su equipo"];
+
+     return $today > $date_competition ? $errors : false;
   }
 
 
@@ -243,99 +250,76 @@ public static function save_team_turbo($input) {
   }
 }
 
-public static function save_team_regular($input) {
+  public static function save_team_regular($input) {
 
-  $team                   = new Team_user();
-  $team->user_id          = Auth::user()->id;
-  $team->sport_id         = $input['sport'];
-  $team->championship_id  = $input['championship'];
-  $team->name             = '';
-  $team->date_inscription = Carbon::now()->toDateTimeString();
-  $team->type_journal     = $input['type_journal'];
-  $team->type_play        = $input['type_play'];
-  $team->remaining_salary = $input['salaryrest'];
+    $team                   = new Team_user();
+    $team->user_id          = Auth::user()->id;
+    $team->sport_id         = $input['sport'];
+    $team->championship_id  = $input['championship'];
+    $team->name             = '';
+    $team->date_inscription = Carbon::now()->toDateTimeString();
+    $team->type_journal     = $input['type_journal'];
+    $team->type_play        = $input['type_play'];
+    $team->remaining_salary = $input['salaryrest'];
 
-  if ($team->save()){
+    if ($team->save()){
 
-    $pa_obj               = Player::find_data($input['PA']);
-    $save_pa              = Team_user_players::save_player($pa_obj,$team->id);
-    if (!$save_pa) {
-      return false;
+      $pa_obj               = Player::find_data($input['PA']);
+      $save_pa              = Team_user_players::save_player($pa_obj,$team->id);
+      if (!$save_pa) {
+        return false;
+      }
+
+      $c_obj               = Player::find_data($input['C']);
+      $save_c              = Team_user_players::save_player($c_obj,$team->id);
+      if (!$save_c) {
+        return false;
+      }
+
+      $fb_obj              = Player::find_data($input['1B']);
+      $save_fb             = Team_user_players::save_player($fb_obj,$team->id);
+      if (!$save_fb) {
+        return false;
+      }
+
+      $sb_obj              = Player::find_data($input['2B']);
+      $save_sb             = Team_user_players::save_player($sb_obj,$team->id);
+      if (!$save_sb) {
+        return false;
+      }
+
+      $tb_obj              = Player::find_data($input['3B']);
+      $save_tb             = Team_user_players::save_player($tb_obj,$team->id);
+      if (!$save_tb) {
+        return false;
+      }
+
+      $ss_obj              = Player::find_data($input['SS']);
+      $save_ss            = Team_user_players::save_player($ss_obj,$team->id);
+      if (!$save_ss) {
+        return false;
+      }
+
+      $of_obj               = Player::find_data($input['OF']);
+      $save_of              = Team_user_players::save_player($of_obj,$team->id);
+      if (!$save_of) {
+        return false;
+      }
+
+      $of2_obj               = Player::find_data($input['OF1']);
+      $save_of2              = Team_user_players::save_player($of2_obj,$team->id);
+      if (!$save_of2) {
+        return false;
+      }
+
+      $of3_obj               = Player::find_data($input['OF2']);
+      $save_of3              = Team_user_players::save_player($of3_obj,$team->id);
+      if (!$save_of3) {
+        return false;
+      }
+
+      return $team;
     }
-
-    $c_obj               = Player::find_data($input['C']);
-    $save_c              = Team_user_players::save_player($c_obj,$team->id);
-    if (!$save_c) {
-      return false;
-    }
-
-    $fb_obj              = Player::find_data($input['1B']);
-    $save_fb             = Team_user_players::save_player($fb_obj,$team->id);
-    if (!$save_fb) {
-      return false;
-    }
-
-    $sb_obj              = Player::find_data($input['2B']);
-    $save_sb             = Team_user_players::save_player($sb_obj,$team->id);
-    if (!$save_sb) {
-      return false;
-    }
-
-    $tb_obj              = Player::find_data($input['3B']);
-    $save_tb             = Team_user_players::save_player($tb_obj,$team->id);
-    if (!$save_tb) {
-      return false;
-    }
-
-    $ss_obj              = Player::find_data($input['SS']);
-    $save_ss            = Team_user_players::save_player($ss_obj,$team->id);
-    if (!$save_ss) {
-      return false;
-    }
-
-    $of_obj               = Player::find_data($input['OF']);
-    $save_of              = Team_user_players::save_player($of_obj,$team->id);
-    if (!$save_of) {
-      return false;
-    }
-
-    $of2_obj               = Player::find_data($input['OF1']);
-    $save_of2              = Team_user_players::save_player($of2_obj,$team->id);
-    if (!$save_of2) {
-      return false;
-    }
-
-    $of3_obj               = Player::find_data($input['OF2']);
-    $save_of3              = Team_user_players::save_player($of3_obj,$team->id);
-    if (!$save_of3) {
-      return false;
-    }
-
-    return $team;
   }
-}
 
-/**************************************************
- * save_team: Update a bettor's team.
- * @param  $input
- * @return $team_information
- **************************************************/
-
-  public static function save_team($input) {
-
-  var_dump($input);exit();
-
-    // DB::table('team_user_players')
-    //   ->where('team_user_id', )
-    // if ($input['remaining_salary'] >= 0) {
-
-    // }
-
-    // DB::table('users')
-    //   ->where('id', 1)
-    //   ->update(['votes' => 1]);
-
-
-
-  }
 }
