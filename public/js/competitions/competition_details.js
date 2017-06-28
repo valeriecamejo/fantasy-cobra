@@ -12,6 +12,5 @@ jQuery.ajax({
     competition_data.date_ymd = moment().format('YYYY-MM-DD');
     competition_data.date_competition = moment(competition_data.date).format('YYYY-MM-DD HH');
     competitions_app.competition_details = competition_data;
-    console.info(competitions_app);
   }
 });

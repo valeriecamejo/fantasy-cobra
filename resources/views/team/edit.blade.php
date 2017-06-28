@@ -380,23 +380,6 @@
 
 <!-- Templates for Components -->
 
-
-<!-- Template of all players -->
-<!-- <template id="players">
-  <tr>
-    <td id='pos'>@{{ player.position }}</td>
-    <td id='jug'>@{{ player.name }} @{{ player.last_name }}<span id='teamcol'>
-    <td id='opo'>@{{ player.name_opponent }} vs <span id='teamcol'>@{{ player.name_team }}</span></td>
-    <td id='salario'>@{{ player.salary }}</td>
-    <td>
-      <a @click=addPlayer(player)>
-      <img src='/images/ico/mas.png' alt='mas' class='mashov'>
-      </a>
-    </td>
-  </tr>
-</template> -->
-<!-- End Template of all players -->
-
 <!-- Template of my players -->
 <template id="my-players">
   <tr>
@@ -413,6 +396,7 @@
 </template>
 <!-- End Template of my players -->
 
+<!-- Template of players -->
 <template id="list-players">
 <tbody>
   <tr v-for="player in players">
@@ -428,6 +412,7 @@
   </tr>
 </tbody>
 </template>
+<!-- End Template of players -->
 
 <!-- End Templates for Components -->
 

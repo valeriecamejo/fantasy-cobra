@@ -29,16 +29,29 @@ Vue.component('list-players', {
   methods: {
     addPlayer: function (player) {
       this.existPosition(player.position, player.player_id);
-      console.info('Cantidad de OF', vm.countOF)
-      console.info('Cantidad de posiciones',vm.countPosition)
       if (vm.countPosition.length != 0) {
-        alert("La position " + player.position + " ya fue seleccionada");
+        alert("La position ya fue seleccionada");
       } else {
         if ( ((vm.team_data.type_play == 'TURBO') && (vm.myPlayers.length) < 5) ||
-          ((vm.team_data.type_play == 'REGULAR') && (vm.myPlayers.length) < 9) )  {
+            ((vm.team_data.type_play == 'REGULAR') && (vm.myPlayers.length) < 9) )  {
           if (vm.team_data.remaining_salary >= player.salary ) {
-            vm.team_data.remaining_salary = vm.team_data.remaining_salary - player.salary;
-            vm.myPlayers.push(player);
+            vm.team_data.remaining_salary = vm.team_data.remaining_salary - player.salary
+            if (vm.team_data.type_play == 'TURBO') {
+              if (player['position'] == '2B' || player['position'] == 'SS') {
+                player['position'] = 'MI'
+                vm.myPlayers.push(player)
+              } else {
+                if (player['position'] == '1B' || player['position'] =='3B') {
+                  player['position'] = 'CI'
+                  vm.myPlayers.push(player)
+                } else {
+                  vm.myPlayers.push(player)
+                }
+              }
+            }
+            if (vm.team_data.type_play == 'REGULAR') {
+              vm.myPlayers.push(player)
+            }
           }
         } else {
           alert("Se han seleccionado todos los jugadores");
@@ -47,23 +60,42 @@ Vue.component('list-players', {
     },
     existPosition: function (position, player_id) {
 
-      if (position == 'OF') {
-        vm.countOF = vm.myPlayers.filter(function(element) {
-          return element.position == position
-        });
-        if (vm.countOF.length < 3) {
-          vm.countPosition = vm.myPlayers.filter(function(element) {
-            return element.player_id == player_id
-          });
-        } else {
-           vm.countPosition = vm.countOF
-           console.log(vm.countPosition)
-          }
-      } else {
-          vm.countPosition = vm.myPlayers.filter(function(element) {
+      if (vm.team_data.type_play == 'REGULAR') {
+        if (position == 'OF') {
+          vm.countOF = vm.myPlayers.filter(function(element) {
             return element.position == position
           });
+          if (vm.countOF.length < 3) {
+            vm.countPosition = vm.myPlayers.filter(function(element) {
+              return element.player_id == player_id
+            });
+          } else {
+             vm.countPosition = vm.countOF
+            }
+        } else {
+            vm.countPosition = vm.myPlayers.filter(function(element) {
+              return element.position == position
+            });
+          }
+      } else {
+          if (vm.team_data.type_play == 'TURBO') {
+            if ( (position == '2B') || (position == 'SS') ) {
+              vm.countPosition = vm.myPlayers.filter(function(element) {
+                return element.position == 'MI'
+              });
+            } else {
+                if ( (position == '1B') || (position == '3B') ) {
+                  vm.countPosition = vm.myPlayers.filter(function(element) {
+                    return element.position == 'CI'
+                  });
+                } else {
+                    vm.countPosition = vm.myPlayers.filter(function(element) {
+                      return element.position == position
+                    });
+                }
+          }
         }
+      }
     }
   }
 })

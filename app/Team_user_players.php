@@ -21,7 +21,7 @@ class Team_user_players extends Model {
     'points'
   ];
 
-  public static function save_player($player_obj, $team_id) {
+  public static function save_player($player_obj, $team_id, $type_play) {
 
     $player                   = new Team_user_players();
     $player->legacy_id        =  $player_obj['legacy_id'];
@@ -31,7 +31,20 @@ class Team_user_players extends Model {
     $player->last_name        =  $player_obj['last_name'];
     $player->name_team        =  $player_obj['name_team'];
     $player->name_opponent    =  $player_obj['name_opponent'];
-    $player->position         =  $player_obj['position'];
+
+    if ($type_play == 'TURBO') {
+
+      if ( $player_obj['position'] == '2B' || $player_obj['position'] == 'SS' ) {
+        $player->position          = 'MI';
+      } elseif ( $player_obj['position'] == '1B' || $player_obj['position'] == '3B' ) {
+            $player->position          = 'CI' ;
+      } else {
+            $player->position         =  $player_obj['position'];
+      }
+    } elseif ($type_play == 'REGULAR') {
+        $player->position         =  $player_obj['position'];
+    }
+
     $player->salary           =  $player_obj['salary'];
     $player->points           =  $player_obj['points'];
 
@@ -65,12 +78,12 @@ class Team_user_players extends Model {
 * @return $players
 ********************************************/
 
-  public static function save_team_edited($players, $team_user_id) {
+  public static function save_team_edited($players, $team_user_id, $type_play) {
 
     foreach ($players as $player) {
       $ret = DB::table('team_user_players')
         ->where('team_user_id', $team_user_id)
-        ->where('position', $player->position)
+        ->where('position',     $player->position)
         ->update([
                  'legacy_id'      => 1,
                  'player_id'      => $player->player_id,

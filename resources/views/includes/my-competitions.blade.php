@@ -1,4 +1,6 @@
 {!! Html::script('js/competitions/competitions.js') !!}
+{!! Html::script('js/vuejs/competition/competition_details.js') !!}
+
   <div class="container-fluid Filtros">
     <div class="BlockFil col-sm-6">
       <h4>Elige tu liga</h4>
@@ -117,7 +119,9 @@
             @endif
           </td>
           <td class="tdentrar2">
-            <div class="BtnEntrar2">ENTRAR</div>
+            <a>
+              <div class="BtnEntrar2">ENTRAR</div>
+            </a>
           </td>
         </tr>
         @endforeach

@@ -217,31 +217,31 @@ public static function save_team_turbo($input) {
   if ($team->save()){
 
     $pa_obj               = Player::find_data($input['PA']);
-    $save_pa              = Team_user_players::save_player($pa_obj,$team->id);
+    $save_pa              = Team_user_players::save_player($pa_obj,$team->id, $team->type_play);
     if (!$save_pa) {
       return false;
     }
 
     $c_obj               = Player::find_data($input['C']);
-    $save_c              = Team_user_players::save_player($c_obj,$team->id);
+    $save_c              = Team_user_players::save_player($c_obj,$team->id, $team->type_play);
     if (!$save_c) {
       return false;
     }
 
     $mi_obj              = Player::find_data($input['MI']);
-    $save_mi             = Team_user_players::save_player($mi_obj,$team->id);
+    $save_mi             = Team_user_players::save_player($mi_obj,$team->id, $team->type_play);
     if (!$save_mi) {
       return false;
     }
 
     $ci_obj              = Player::find_data($input['CI']);
-    $save_ci             = Team_user_players::save_player($ci_obj,$team->id);
+    $save_ci             = Team_user_players::save_player($ci_obj,$team->id, $team->type_play);
     if (!$save_ci) {
       return false;
     }
 
     $of_obj               = Player::find_data($input['OF']);
-    $save_of              = Team_user_players::save_player($of_obj,$team->id);
+    $save_of              = Team_user_players::save_player($of_obj,$team->id, $team->type_play);
     if (!$save_of) {
       return false;
     }
@@ -265,55 +265,55 @@ public static function save_team_turbo($input) {
     if ($team->save()){
 
       $pa_obj               = Player::find_data($input['PA']);
-      $save_pa              = Team_user_players::save_player($pa_obj,$team->id);
+      $save_pa              = Team_user_players::save_player($pa_obj,$team->id, $team->type_play);
       if (!$save_pa) {
         return false;
       }
 
       $c_obj               = Player::find_data($input['C']);
-      $save_c              = Team_user_players::save_player($c_obj,$team->id);
+      $save_c              = Team_user_players::save_player($c_obj,$team->id, $team->type_play);
       if (!$save_c) {
         return false;
       }
 
       $fb_obj              = Player::find_data($input['1B']);
-      $save_fb             = Team_user_players::save_player($fb_obj,$team->id);
+      $save_fb             = Team_user_players::save_player($fb_obj,$team->id, $team->type_play);
       if (!$save_fb) {
         return false;
       }
 
       $sb_obj              = Player::find_data($input['2B']);
-      $save_sb             = Team_user_players::save_player($sb_obj,$team->id);
+      $save_sb             = Team_user_players::save_player($sb_obj,$team->id, $team->type_play);
       if (!$save_sb) {
         return false;
       }
 
       $tb_obj              = Player::find_data($input['3B']);
-      $save_tb             = Team_user_players::save_player($tb_obj,$team->id);
+      $save_tb             = Team_user_players::save_player($tb_obj,$team->id, $team->type_play);
       if (!$save_tb) {
         return false;
       }
 
       $ss_obj              = Player::find_data($input['SS']);
-      $save_ss            = Team_user_players::save_player($ss_obj,$team->id);
+      $save_ss            = Team_user_players::save_player($ss_obj,$team->id, $team->type_play);
       if (!$save_ss) {
         return false;
       }
 
       $of_obj               = Player::find_data($input['OF']);
-      $save_of              = Team_user_players::save_player($of_obj,$team->id);
+      $save_of              = Team_user_players::save_player($of_obj,$team->id, $team->type_play);
       if (!$save_of) {
         return false;
       }
 
       $of2_obj               = Player::find_data($input['OF1']);
-      $save_of2              = Team_user_players::save_player($of2_obj,$team->id);
+      $save_of2              = Team_user_players::save_player($of2_obj,$team->id, $team->type_play);
       if (!$save_of2) {
         return false;
       }
 
       $of3_obj               = Player::find_data($input['OF2']);
-      $save_of3              = Team_user_players::save_player($of3_obj,$team->id);
+      $save_of3              = Team_user_players::save_player($of3_obj,$team->id, $team->type_play);
       if (!$save_of3) {
         return false;
       }

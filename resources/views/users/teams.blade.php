@@ -78,31 +78,31 @@
                   <td> @{{ team.remaining_salary }} </td>
                   <td class="bdgedit">
                     <span v-if="moment().format('YYYY-MM-DD hh:mm') > moment(team.date).format('YYYY-MM-DD hh:mm')">
-                    <div class="contbtnbdg">
-                      <a @click="team_modal( team.id , team.name, teams )">
-                        <div class="BtnEntrar31">VER</div>
-                      </a>
-                 <!--       <div class="BtnEntrar31 noedit">EDITAR</div>
-                      </a> -->
-                    </div>
-             <!--   <input type="hidden" class="form-compe2" name="lineup_id" value="@{{ team.id }}">
-                    <button type='submit' class="BtnEntrar3 noedit" style="border-style:none;">INSCRIBIR</button> -->
+                      <div class="contbtnbdg">
+                        <a @click="team_modal( team.id , team.name, teams )">
+                          <div class="BtnEntrar31">VER</div>
+                        </a>
+                   <!--       <div class="BtnEntrar31 noedit">EDITAR</div>
+                        </a> -->
+                      </div>
+               <!--   <input type="hidden" class="form-compe2" name="lineup_id" value="@{{ team.id }}">
+                      <button type='submit' class="BtnEntrar3 noedit" style="border-style:none;">INSCRIBIR</button> -->
+                      </span>
+                      <span v-else>
+                      <div class="contbtnbdg">
+                        <a @click="team_modal( team.id , team.name, teams )">
+                          <div class="BtnEntrar31">VER</div>
+                        </a>
+                        <a v-if="moment().format('YYYY-MM-DD hh:mm') < moment(team.date).format('YYYY-MM-DD hh:mm')" @click="team_modal( team.id , team.name, teams )">
+                          <div class="BtnEntrar31 noedit">EDITAR</div>
+                        </a>
+                      </div>
+              <!--   <input type="hidden" class="form-compe2" name="lineup_id" value="@{{ team.id }}">
+                      <button type='submit' class="BtnEntrar3" style="border-style:none;">INSCRIBIR</button>
+                      <span class="badge">
+                        @{{ team_count( team.id, teams, cant_inscription ) }} </a>
+                      </span> -->
                     </span>
-                    <span v-else>
-                    <div class="contbtnbdg">
-                      <a @click="team_modal( team.id , team.name, teams )">
-                        <div class="BtnEntrar31">VER</div>
-                      </a>
-                      <a v-if="moment().format('YYYY-MM-DD hh:mm') < moment(team.date).format('YYYY-MM-DD hh:mm')" @click="team_modal( team.id , team.name, teams )">
-                        <div class="BtnEntrar31 noedit">EDITAR</div>
-                      </a>
-                    </div>
-            <!--    <input type="hidden" class="form-compe2" name="lineup_id" value="@{{ team.id }}">
-                    <button type='submit' class="BtnEntrar3" style="border-style:none;">INSCRIBIR</button>
-                    <span class="badge">
-                      @{{ team_count( team.id, teams, cant_inscription ) }} </a>
-                    </span> -->
-                  </span>
                   </td>
 
                   <td> @{{ team.points }} </td>

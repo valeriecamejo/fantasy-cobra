@@ -185,7 +185,7 @@ class TeamUserController extends Controller {
     $validate_date             = Team_user::validate_date($team_data->team_date);
 
     if ( ($validate_positions && $validate_remaining_salary && $validate_date) == false ) {
-      $save_team_edited = Team_user_players::save_team_edited($myPlayers, $team_data->team_id);
+      $save_team_edited = Team_user_players::save_team_edited($myPlayers, $team_data->team_id, $team_data->type_play);
 
       if ($save_team_edited == true) {
         Session::flash('message', 'Equipo modificado con exito.');
