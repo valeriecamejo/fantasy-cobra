@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 
 class CountriesTableSeeder extends Seeder {
@@ -14,12 +15,12 @@ class CountriesTableSeeder extends Seeder {
 
     $faker = Faker::create();
 
-    \DB::table('countries')->insert(array(
-      array(
-        'name'        => 'Estados Unidos',
-        'description' => 'Descripción'
-      )
-    ));
+    DB::table('countries')->insert(array(
+                                         array(
+                                               'name'        => 'Estados Unidos',
+                                               'description' => 'Descripción'
+                                               )
+                                         ));
 
   }
 }

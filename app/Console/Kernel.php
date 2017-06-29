@@ -12,9 +12,11 @@ class Kernel extends ConsoleKernel
      *
      * @var array
      */
-    protected $commands = [
-        //
+    protected $commands = [Commands\SendWelcomeEmailCommand::class,
     ];
+// protected $commands = [
+//         \App\Console\Commands\SendWelcomeEmailCommand::class,
+//     ];
 
     /**
      * Define the application's command schedule.
@@ -26,6 +28,11 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+      $schedule->command('send:welcome')
+               ->dailyAt('18:08')
+               ->when(function(){
+                       return !is_null($this->users);
+                });
     }
 
     /**
