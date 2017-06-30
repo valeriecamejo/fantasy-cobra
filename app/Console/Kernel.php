@@ -12,7 +12,9 @@ class Kernel extends ConsoleKernel
      *
      * @var array
      */
-    protected $commands = [Commands\SendWelcomeEmailCommand::class,
+    protected $commands = [
+      Commands\SendWelcomeEmailCommand::class,
+      Commands\PointsByPlaysCommand::class,
     ];
 // protected $commands = [
 //         \App\Console\Commands\SendWelcomeEmailCommand::class,
@@ -29,10 +31,13 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
       $schedule->command('send:welcome')
-               ->dailyAt('18:08')
-               ->when(function(){
-                       return !is_null($this->users);
-                });
+      ->dailyAt('18:08')
+      ->when(function(){
+       return !is_null($this->users);
+     });
+
+      $schedule->command('play:point')
+               ->dailyAt('17:28');
     }
 
     /**
@@ -42,6 +47,6 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        require base_path('routes/console.php');
+      require base_path('routes/console.php');
     }
-}
+  }
