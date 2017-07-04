@@ -165,8 +165,6 @@ $result = [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-
-
         /*
         *Vendor Service Providers
         */

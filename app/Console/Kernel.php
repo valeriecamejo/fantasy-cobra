@@ -30,11 +30,9 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+
       $schedule->command('send:welcome')
-      ->dailyAt('18:08')
-      ->when(function(){
-       return !is_null($this->users);
-     });
+               ->dailyAt('17:28');
 
       $schedule->command('play:point')
                ->dailyAt('17:28');
