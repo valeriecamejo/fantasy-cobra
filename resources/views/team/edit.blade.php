@@ -55,7 +55,7 @@
                   <li role="presentation">
                     <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['OF']">OF</a>
                   </li>
-                  <li v-if="team_data.type_play == 'REGULAR'"role="presentation">
+                  <li role="presentation">
                     <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="showPlayers('BATS')">BAT</a>
                   </li>
                 </ul>
