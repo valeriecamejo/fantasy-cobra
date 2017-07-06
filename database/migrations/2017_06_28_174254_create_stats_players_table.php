@@ -15,13 +15,12 @@ class CreateStatsPlayersTable extends Migration
     {
         Schema::create('stats_players', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('stats');
+            $table->string('name');
             $table->integer('legacy_id');
             $table->string('description')->nullable();
             $table->integer('sport_id')->unsigned();
             $table->foreign('sport_id')->references('id')->on('sports')->onDelete('cascade');
-            $table->integer('championship_id')->unsigned();
-            $table->foreign('championship_id')->references('id')->on('championships')->onDelete('cascade');
+            $table->boolean('calculated')->nullable();
             $table->integer('points');
             $table->timestamps();
         });

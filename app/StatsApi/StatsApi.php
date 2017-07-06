@@ -34,7 +34,7 @@ class StatsApi {
 
   static function clientHttp(){
     if (self::$clientHttp == null) {
-      self::$clientHttp = new Client();
+      self::$clientHttp   = new Client();
       //self::login();
 
    /*   self::$clientHttp->setDefaultOption('headers/access-token', self::$params['access_token']);

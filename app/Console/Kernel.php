@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
       Commands\SendWelcomeEmailCommand::class,
       Commands\PointsByPlaysCommand::class,
+      Commands\PlayersPointsCommand::class
     ];
 // protected $commands = [
 //         \App\Console\Commands\SendWelcomeEmailCommand::class,
@@ -35,6 +36,9 @@ class Kernel extends ConsoleKernel
                ->dailyAt('17:28');
 
       $schedule->command('play:point')
+               ->dailyAt('17:28');
+
+      $schedule->command('players:point')
                ->dailyAt('17:28');
     }
 
