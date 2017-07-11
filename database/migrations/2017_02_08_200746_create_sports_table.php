@@ -15,8 +15,10 @@ class CreateSportsTable extends Migration
     {
         Schema::create('sports', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('legacy_id');
             $table->string('name');
             $table->string('description')->nullable();
+            $table->boolean('approved')->default(true);
             $table->timestamps();
         });
     }
