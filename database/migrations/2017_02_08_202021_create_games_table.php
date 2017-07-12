@@ -15,6 +15,7 @@ class CreateGamesTable extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('legacy_id');
             $table->integer('tournament_id')->unsigned();
             $table->foreign('tournament_id')->references('id')->on('tournaments')->onDelete('cascade');
             $table->integer('tournament_group_id')->unsigned();

@@ -17,6 +17,7 @@ class TeamsTableSeeder extends Seeder
 
     DB::table('teams')->insert(array(
                                      array(
+                                           'legacy_id'      => '1',
                                            'stadium_id'     => '1',
                                            'name'           => 'New York Yankees ',
                                            'nickname'       => 'Yankees',
@@ -27,6 +28,7 @@ class TeamsTableSeeder extends Seeder
                                            'history'        => 'Historia de los Yankees',
                                            ),
                                      array(
+                                           'legacy_id'      => '2',
                                            'stadium_id'     => '1',
                                            'name'           => 'Detroit Tigers',
                                            'nickname'       => 'Yankees',
@@ -37,14 +39,15 @@ class TeamsTableSeeder extends Seeder
                                            'history'        => 'Historia de Detroit',
                                            ),
                                      array(
-                                           'stadium_id'      => '2',
-                                           'name'            => 'Real Madrid C.F',
-                                           'nickname'        => 'Real Madrid',
-                                           'short_nickname'  => 'RM',
-                                           'logo'            => 'www.rm.com',
-                                           'president'       => 'Pedro Morales',
-                                           'coach'           => 'José Blanco',
-                                           'history'         => 'Historia de los Yankees',
+                                           'legacy_id'      => '3',
+                                           'stadium_id'     => '2',
+                                           'name'           => 'Real Madrid C.F',
+                                           'nickname'       => 'Real Madrid',
+                                           'short_nickname' => 'RM',
+                                           'logo'           => 'www.rm.com',
+                                           'president'      => 'Pedro Morales',
+                                           'coach'          => 'José Blanco',
+                                           'history'        => 'Historia de los Yankees',
                                            ),
                                      ));
   }

@@ -15,6 +15,7 @@ class CreatePositionsTable extends Migration
     {
         Schema::create('positions', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('legacy_id');
             $table->integer('sport_id')->unsigned();
             $table->foreign('sport_id')->references('id')->on('sports')->onDelete('cascade');
             $table->string('name');
