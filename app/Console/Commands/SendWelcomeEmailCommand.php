@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 Use App\User;
 use GuzzleHttp\Client;
 use App\StatsApi\SportApi;
+use App\StatsApi\PlayersApi;
 
 class SendWelcomeEmailCommand extends Command
 {
@@ -86,7 +87,9 @@ class SendWelcomeEmailCommand extends Command
 
         //$client_stats = StatsApi::login();
 
-        print_r(SportApi::getAll());
+       // print_r(SportApi::getAll());
+
+        print_r(PlayersApi::saveUpdatePlayers());
 
         //print_r($client_stats);
 

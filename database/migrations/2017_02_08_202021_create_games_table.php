@@ -30,6 +30,7 @@ class CreateGamesTable extends Migration
             $table->string('schema_team_home');
             $table->string('schema_team_away');
             $table->string('mvp')->nullable();
+            $table->dateTime('legacy_stat_request')->nullable();
             $table->timestamps();
         });
     }

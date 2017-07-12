@@ -22,6 +22,7 @@ class CreateTournamentsTable extends Migration
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->boolean('is_active');
+            $table->dateTime('legacy_stat_request')->nullable();
             $table->timestamps();
         });
     }
