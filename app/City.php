@@ -8,6 +8,8 @@ class City extends Model
 {
 	protected $table = 'championships';
 	protected $fillable = [
-  'country_id', 'name', 'description'
-  ];
+                         'country_id',
+                         'name',
+                         'description'
+                        ];
 }

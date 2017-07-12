@@ -10,11 +10,11 @@ use Carbon\Carbon;
 class Team_Turbo_user extends Team_user {
   protected $table = 'team_users';
   protected $fillable = [
-    'user_id',
-    'sport_id',
-    'championship_id',
-    'name',
-  ];
+                         'user_id',
+                         'sport_id',
+                         'championship_id',
+                         'name',
+                        ];
 
   static $positions = [
     'C'  => 1,

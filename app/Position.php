@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Prize extends Model
+class Position extends Model
 {
-	protected $table = 'prizes';
-	protected $fillable = [
-                         'description',
-                         'active',
-                         'type',
-                         'total_people'
+  protected $table = 'positions';
+  protected $fillable = [
+                         'legacy_id',
+                         'sport_id',
+                         'name',
+                         'description'
                         ];
 
   public static function prize_min_user($min_user){

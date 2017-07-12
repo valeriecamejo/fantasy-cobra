@@ -11,18 +11,18 @@ class Payment extends Model
 {
 	protected $table = 'payments';
 	protected $fillable = [
-  	'user_id',
-  	'amount',
-  	'paid',
-  	'balance_before',
-  	'account_number',
-  	'bank',
-  	'reference_number',
-  	'type',
-  	'approved_pay',
-  	'transfer_date',
-  	'type_account'
-  ];
+                         'user_id',
+                         'amount',
+                         'paid',
+                         'balance_before',
+                         'account_number',
+                         'bank',
+                         'reference_number',
+                         'type',
+                         'approved_pay',
+                         'transfer_date',
+                         'type_account'
+                        ];
 
 /********************************************
 * withdrawal: Registration of withdrawal

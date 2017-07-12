@@ -10,10 +10,6 @@ use App\StatsApi\SportApi;
 class SendWelcomeEmailCommand extends Command
 {
 
-
-
-
-
     // Authentication is set in the client.
     /*$request = $digitalOcean->get('droplets');
 

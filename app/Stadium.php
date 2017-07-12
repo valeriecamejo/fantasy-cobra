@@ -8,6 +8,10 @@ class Stadium extends Model
 {
 	protected $table = 'stadiums';
 	protected $fillable = [
-  'city_id', 'name', 'capacity', 'image', 'description'
-  ];
+                         'city_id',
+                         'name',
+                         'capacity',
+                         'image',
+                         'description'
+                        ];
 }

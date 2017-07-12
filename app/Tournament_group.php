@@ -8,6 +8,9 @@ class Tournament_group extends Model
 {
 	protected $table = 'tournament_groups';
 	protected $fillable = [
-  'tournament_id', 'name', 'description'
-  ];
+                         'legacy_id',
+                         'tournament_id',
+                         'name',
+                         'description'
+                        ];
 }

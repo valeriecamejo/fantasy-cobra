@@ -8,8 +8,17 @@ class Player extends Model
   // TODO tomar en cuanta que todo consulta debe estar combinada con el championship
     protected $table    = 'players';
     protected $fillable = [
-  'team_id', 'sport_id', 'name', 'last_name', 'position', 'salary', 'points', 'status'
-  ];
+                           'team_id',
+                           'championship_id',
+                           'legacy_id',
+                           'sport_id',
+                           'name',
+                           'last_name',
+                           'position',
+                           'salary',
+                           'points',
+                           'status'
+                          ];
 
   public static function players($championship,$type_play,$date_team, $type_journal){
     $pa = Player::find_data_params($championship,$type_play,$date_team, $type_journal,'PA');

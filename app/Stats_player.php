@@ -8,11 +8,11 @@ class Stats_player extends Model
 {
   protected $table    = 'stats_players';
   protected $fillable = [
-                          'name',
-                          'legacy_id',
-                          'description',
-                          'sport_id',
-                          'calculated',
-                          'points'
+                         'name',
+                         'legacy_id',
+                         'description',
+                         'sport_id',
+                         'calculated',
+                         'points'
                         ];
 }
