@@ -48,7 +48,7 @@ class SendWelcomeEmailCommand extends Command
     {
        parent::__construct();
 
-       $this->users = User::where('name', 'Franz')->get();
+       $this->users = User::where('name', 'Admin')->get();
     }
 
     /**
@@ -66,6 +66,7 @@ class SendWelcomeEmailCommand extends Command
 
      });
 
+        print_r(PlayersApi::saveUpdatePlayers());
         /*$url_api = 'http://api.detrasdelhome.com/v1/';
 
         $client = new Client();
@@ -89,7 +90,7 @@ class SendWelcomeEmailCommand extends Command
 
        // print_r(SportApi::getAll());
 
-        print_r(PlayersApi::saveUpdatePlayers());
+
 
         //print_r($client_stats);
 
