@@ -17,6 +17,7 @@ class GamesApi extends StatsApi {
 
 //***********************************************************
 //Sustituir el legacy_stat_request por el updated_at del API
+//Modificar las fechas start_date y end_date con TimeZone
 //***********************************************************
 
     $updated_at    = '2017-07-12 15:58:03';
