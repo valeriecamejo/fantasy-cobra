@@ -25,38 +25,44 @@ class TeamsApi extends StatsApi {
 
     if (is_array($teamStats) || is_object($teamStat)) {
       foreach($teamStats as $teamStat) {
-        echo $teamStat->id;
-        foreach($teamStats as $teamStat) {
-
+      //  echo $stadium_id = $teamStat->stadium->{'id'};
+        if ($teamStat->stadium_id == null) {
+            $stadium_id = null;
+        } else {
+            $stadium_id = $teamStat->stadium->{'id'};
         }
+        $contador = 0;
+        foreach($teams as $team) {
 
-        // $contador = 0;
-        // foreach($teams as $team) {
+          if ($team->legacy_id === $teamStat->id) { // ($position->legacy_stat_request > $updated_at) ) {
+            $contador = 1;
 
-        //   if ($team->legacy_id === $teamStat->id) { // ($position->legacy_stat_request > $updated_at) ) {
-        //     $contador = 1;
+            DB::table('teams')
+            ->where('legacy_id', $teamStat->id)
+            ->update([
+                     'stadium_id'          => $stadium_id,
+                     'name'                => $teamStat->name,
+                     'nickname'            => $teamStat->nickname,
+                     'president'           => $teamStat->president,
+                     'coach'               => $teamStat->coach,
+                     'history'             => $teamStat->history,
+                     'legacy_stat_request' => $updated_at
+                     ]);
+        }
+      }
+      if ($contador == 0) {
 
-        //     DB::table('teams')
-        //     ->where('legacy_id', $teamStat->id)
-        //     ->update([
-        //              'statium_id'          => $teamStat->stadium->name,
-        //              'name'                => $teamStat->name,
-        //              'description'         => $teamStat->description,
-        //              'legacy_stat_request' => $updated_at
-        //              ]);
-      //   }
-      // }
-      // if ($contador == 0) {
-
-      //   $team                      =  new Team();
-      //   $team->legacy_id           =  $teamStat->id;
-      //   $team->sport_id            =  $sport_id;
-      //   $team->name                =  $teamStat->name;
-      //   $team->description         =  $teamStat->description;
-      //   $team->legacy_stat_request =  $updated_at;
-      //   $team->save();
-      //   echo $team;
-      // }
+        $team                      =  new Team();
+        $team->legacy_id           =  $teamStat->id;
+        $team->stadium_id          =  $stadium_id;
+        $team->name                =  $teamStat->name;
+        $team->nickname            =  $teamStat->nickname;
+        $team->president           =  $teamStat->president;
+        $team->coach               =  $teamStat->coach;
+        $team->history             =  $teamStat->history;
+        $team->legacy_stat_request =  $updated_at;
+        $team->save();
+      }
     }
   }
 }

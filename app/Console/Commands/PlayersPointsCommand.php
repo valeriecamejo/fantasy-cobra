@@ -34,7 +34,7 @@ class PlayersPointsCommand extends Command
     {
       parent::__construct();
 
-      $this->points = Stats_player::where('calculated', '1')->get();
+     // $this->points = Stats_player::where('calculated', '1')->get();
     }
 
     /**
