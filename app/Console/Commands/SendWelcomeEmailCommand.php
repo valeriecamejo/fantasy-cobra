@@ -5,8 +5,13 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 Use App\User;
 use GuzzleHttp\Client;
-use App\StatsApi\SportApi;
+use App\StatsApi\TeamsApi;
+use App\StatsApi\SportsApi;
 use App\StatsApi\PlayersApi;
+use App\StatsApi\PositionsApi;
+use App\StatsApi\ChampionshipsApi;
+use App\StatsApi\TournamentsApi;
+use App\StatsApi\TournamentGroupsApi;
 
 class SendWelcomeEmailCommand extends Command
 {
@@ -66,7 +71,7 @@ class SendWelcomeEmailCommand extends Command
 
      });
 
-        print_r(PlayersApi::saveUpdatePlayers());
+        print_r(TeamsApi::saveUpdateTeams(1));
         /*$url_api = 'http://api.detrasdelhome.com/v1/';
 
         $client = new Client();

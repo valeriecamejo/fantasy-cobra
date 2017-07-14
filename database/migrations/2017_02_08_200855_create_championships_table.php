@@ -20,6 +20,7 @@ class CreateChampionshipsTable extends Migration
             $table->foreign('sport_id')->references('id')->on('sports')->onDelete('cascade');
             $table->string('name');
             $table->string('description')->nullable();
+            $table->boolean('is_active');
             $table->dateTime('legacy_stat_request')->nullable();
             $table->timestamps();
         });

@@ -25,17 +25,7 @@ class Team_UsersTableSeeder extends Seeder
                                                 'name'             => 'Prueba 1',
                                                 'type_journal'     => '7PM',
                                                 'type_play'        => 'REGULAR',
-                                                ),
-                                          array(
-                                                'user_id'          => '2',
-                                                'sport_id'         => '2',
-                                                'championship_id'  => '3',
-                                                'date_inscription' => '2017-03-14 12:30:00',
-                                                'remaining_salary' => '25000',
-                                                'name'             => 'Prueba 2',
-                                                'type_journal'     => '3PM',
-                                                'type_play'        => 'TURBO',
-                                                ),
+                                                )
                                           ));
   }
 }

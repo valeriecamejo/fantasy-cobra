@@ -2,19 +2,19 @@
 
 namespace App\Lib\Ddh;
 
-class UtilityDate{
+use Carbon\Carbon;
 
-    public static function dateAbbrevSpanish($today) {
+class UtilityDate {
 
-        //$today = getdate($today);
-        //Log::info($today);
-        $wday     = $today['wday'];//$today['wday'];
-        $day_week = array ("Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab");
+  public static function dateAbbrevSpanish($today) {
 
-        return $day_week[$wday];
-    }
+      $wday     = $today['wday'];
+      $day_week = array ("Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab");
 
-  public  static function team_registered_competition($obj_teams, $team_id) {
+      return $day_week[$wday];
+  }
+
+  public static function team_registered_competition($obj_teams, $team_id) {
 
   $cant = '';
   foreach ($obj_teams as $obj_team => $valor_obj_team) {
@@ -26,6 +26,15 @@ class UtilityDate{
 
   return $cant;
   }
+
+  public static function dateTZ($date) {
+
+    $date = Carbon::createFromFormat('Y-m-d H:i:s', $date, 'America/Caracas');
+    $date->setTimezone('UTC');
+
+  return $date;
+  }
+
 }
 
 

@@ -3,9 +3,10 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+
 class Player extends Model
 {
-  // TODO tomar en cuanta que todo consulta debe estar combinada con el championship
+
     protected $table    = 'players';
     protected $fillable = [
                            'team_id',

@@ -19,10 +19,10 @@ class CreateTournamentsTable extends Migration
             $table->integer('championship_id')->unsigned();
             $table->foreign('championship_id')->references('id')->on('championships')->onDelete('cascade');
             $table->string('name');
-            $table->dateTime('start_date');
-            $table->dateTime('end_date');
+            $table->dateTimeTz('start_date');
+            $table->dateTimeTz('end_date');
             $table->boolean('is_active');
-            $table->dateTime('legacy_stat_request')->nullable();
+            $table->dateTimeTz('legacy_stat_request')->nullable();
             $table->timestamps();
         });
     }

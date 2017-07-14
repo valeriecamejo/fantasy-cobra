@@ -16,6 +16,7 @@ class PlayersApi extends StatsApi {
 
   public static function saveUpdatePlayers () {
 
+  //TO DO
   //****************************************
   //Sustituir '$update_at' por el de la data
   //Sustituir championship_id
@@ -24,7 +25,7 @@ class PlayersApi extends StatsApi {
   //****************************************
 
     $championship_id = 1;
-    $update          = '2017-07-12 15:58:03';
+    $updated_at          = '2017-07-12 15:58:03';
 
     $players     = DB::table('players')->where('championship_id', '=', $championship_id)->get();
     $playerStats = json_decode(self::$allPlayers);
@@ -36,7 +37,7 @@ class PlayersApi extends StatsApi {
         $contador = 0;
 
         foreach($players as $player) {
-          if ($player->legacy_id == $playerStat->id) { //&& ($player->legacy_stat_request > $update) ) {
+          if ($player->legacy_id == $playerStat->id) { //&& ($player->legacy_stat_request > $updated_at) ) {
             $contador = 1;
             $position = Position::positionPlayer($playerStat->position_id);
 
@@ -48,11 +49,10 @@ class PlayersApi extends StatsApi {
                      'name'                => $playerStat->name,
                      'last_name'           => $playerStat->last_name,
                      'position'            => $position[0]->name,
-                     'legacy_stat_request' => $update
+                     'legacy_stat_request' => $updated_at
                      ]);
           }
         }
-
         if ($contador == 0) {
 
             $player                      =  new Player();
@@ -64,9 +64,8 @@ class PlayersApi extends StatsApi {
             $player->points              =  0;
             $player->position            =  $position[0]->name;
             $player->status              =  1;
-            $player->legacy_stat_request =  $update;
+            $player->legacy_stat_request =  $updated_at;
             $player->save();
-
         }
       }
     }
