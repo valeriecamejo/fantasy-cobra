@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\User;
 use GuzzleHttp\Client;
+use App\StatsApi\GamesApi;
 use App\StatsApi\TeamsApi;
 use App\StatsApi\SportsApi;
 use App\StatsApi\PlayersApi;
@@ -46,7 +47,9 @@ class SendWelcomeEmailCommand extends Command
      */
     public function handle()
     {
+        $star_date = '2017-07-14 15:00';
+        $end_date  = '2017-08-29 20:00';
         echo 'hola'. "\n";
-        print_r(TeamsApi::saveUpdateTeams());
+        print_r(GamesApi::saveUpdateGames($star_date, $end_date));
     }
 }

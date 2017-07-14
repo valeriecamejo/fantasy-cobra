@@ -16,19 +16,17 @@ class CreateGamesTable extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('legacy_id');
-            $table->integer('tournament_id')->unsigned();
-            $table->foreign('tournament_id')->references('id')->on('tournaments')->onDelete('cascade');
-            $table->integer('tournament_group_id')->unsigned();
-            $table->foreign('tournament_group_id')->references('id')->on('tournament_groups')->onDelete('cascade');
-            $table->integer('team_id_home');
-            $table->integer('team_id_away');
-            $table->dateTime('start_date');
-            $table->dateTime('end_date');
+            $table->integer('tournament_id');
+            $table->integer('team_id_home')->nullable();
+            $table->integer('team_id_away')->nullable();
+            $table->integer('tournament_group_id')->nullable();
+            $table->dateTime('start_date')->nullable();
+            $table->dateTime('end_date')->nullable();
             $table->integer('score_home')->default(0);
             $table->integer('score_away')->default(0);
-            $table->string('status');
-            $table->string('schema_team_home');
-            $table->string('schema_team_away');
+            $table->string('status')->nullable();
+            $table->string('schema_team_home')->nullable();
+            $table->string('schema_team_away')->nullable();
             $table->string('mvp')->nullable();
             $table->dateTime('legacy_stat_request')->nullable();
             $table->timestamps();
