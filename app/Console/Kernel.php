@@ -36,10 +36,10 @@ class Kernel extends ConsoleKernel
                ->dailyAt('17:28');
 
       $schedule->command('play:point')
-               ->dailyAt('17:28');
+               ->dailyAt('13:46');
 
       $schedule->command('players:point')
-               ->dailyAt('17:28');
+               ->dailyAt('14:02');
     }
 
     /**
@@ -52,3 +52,4 @@ class Kernel extends ConsoleKernel
       require base_path('routes/console.php');
     }
   }
+
