@@ -24,7 +24,7 @@ class CreateTeamsTable extends Migration
             $table->string('president')->nullable();
             $table->string('coach')->nullable();
             $table->string('history')->nullable();
-            $table->dateTime('legacy_stat_request')->nullable();
+            $table->dateTimeTz('legacy_stat_request')->nullable();
             $table->timestamps();
         });
     }

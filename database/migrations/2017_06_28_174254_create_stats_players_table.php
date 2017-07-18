@@ -22,7 +22,7 @@ class CreateStatsPlayersTable extends Migration
             $table->foreign('sport_id')->references('id')->on('sports')->onDelete('cascade');
             $table->boolean('calculated')->nullable();
             $table->integer('points');
-            $table->dateTime('legacy_stat_request')->nullable();
+            $table->dateTimeTz('legacy_stat_request')->nullable();
             $table->timestamps();
         });
     }

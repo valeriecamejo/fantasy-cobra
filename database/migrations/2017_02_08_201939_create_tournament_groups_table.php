@@ -20,7 +20,7 @@ class CreateTournamentGroupsTable extends Migration
             $table->foreign('tournament_id')->references('id')->on('tournaments')->onDelete('cascade');
             $table->string('name');
             $table->string('description')->nullable();
-            $table->dateTime('legacy_stat_request')->nullable();
+            $table->dateTimeTz('legacy_stat_request')->nullable();
             $table->timestamps();
         });
     }

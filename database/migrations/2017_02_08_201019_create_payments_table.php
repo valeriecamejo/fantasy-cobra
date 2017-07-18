@@ -37,7 +37,7 @@ class CreatePaymentsTable extends Migration
             $table->string('state')->nullable();
             $table->string('city')->nullable();
             $table->integer('reference_number')->nullable();
-            $table->dateTime('transfer_date')->nullable();
+            $table->dateTimeTz('transfer_date')->nullable();
             $table->integer('account_type')->nullable();
             $table->timestamps();
         });

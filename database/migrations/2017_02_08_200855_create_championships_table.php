@@ -21,7 +21,7 @@ class CreateChampionshipsTable extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->boolean('is_active');
-            $table->dateTime('legacy_stat_request')->nullable();
+            $table->dateTimeTz('legacy_stat_request')->nullable();
             $table->timestamps();
         });
     }

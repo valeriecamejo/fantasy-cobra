@@ -24,7 +24,7 @@ class CreateTeamSubscribersTable extends Migration
             $table->foreign('team_user_id')->references('id')->on('team_users')->onDelete('cascade');
             $table->float('amount')->default(0);
             $table->float('points')->default(0);
-            $table->dateTime('date');
+            $table->dateTimeTz('date');
             $table->float('balance_before');
             $table->float('balance_after');
             $table->float('bonus')->nullable();

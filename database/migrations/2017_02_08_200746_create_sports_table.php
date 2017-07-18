@@ -19,7 +19,7 @@ class CreateSportsTable extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->boolean('approved')->default(true);
-            $table->dateTime('legacy_stat_request')->nullable();
+            $table->dateTimeTz('legacy_stat_request')->nullable();
             $table->timestamps();
         });
     }

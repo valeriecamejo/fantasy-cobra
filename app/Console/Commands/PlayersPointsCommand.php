@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 Use DB;
+use DateTimeZone;
+use DateTime;
 Use App\Player;
 Use App\Stats_player;
 use Illuminate\Console\Command;
@@ -60,17 +62,18 @@ class PlayersPointsCommand extends Command
              if ( $player_stat->stat_id == $valuePoint['legacy_id'] ) {
                $stat_points = $player_stat->quantity * $valuePoint['points'];
                $total_points = $consult['points'] + $stat_points;
+               $date = new DateTime($player_stat->time);
 
                Player::where('legacy_id', $player_stat->player_id)
-               ->update(
-                        ['points' => $total_points]
-                        );
+               ->update([
+                        'points'              => $total_points,
+                        'legacy_stat_request' => $date
+                        ]);
+
              }
            }
-
          }
        }
-
      }
    }
  }
@@ -106,7 +109,7 @@ class PlayersPointsCommand extends Command
       "tournament_phase_id": 3,
       "player_stats": [
       {
-        "id": 16,
+        "id": 1,
         "player_id": 2,
         "stat_id": 2,
         "team_id": 2,
@@ -140,7 +143,7 @@ class PlayersPointsCommand extends Command
         }
       },
       {
-        "id": 17,
+        "id": 2,
         "player_id": 2,
         "stat_id": 2,
         "team_id": 2,

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use \DateTime;
 use Illuminate\Console\Command;
 use App\User;
 use GuzzleHttp\Client;
@@ -37,7 +38,7 @@ class SendWelcomeEmailCommand extends Command
      */
     public function __construct()
     {
-        parent::__construct();
+      parent::__construct();
     }
 
     /**
@@ -45,11 +46,13 @@ class SendWelcomeEmailCommand extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public static function handle()
     {
+
         $star_date = '2017-07-14 15:00';
         $end_date  = '2017-08-29 20:00';
         echo 'hola'. "\n";
         print_r(GamesApi::saveUpdateGames($star_date, $end_date));
+
+      }
     }
-}
