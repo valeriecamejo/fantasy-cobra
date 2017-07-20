@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
 
     for($i = 0; $i < 20; $i ++){
       DB::table('users')->insert(array (
-                                        'user_type_id'      => '3',
+                                        'user_type_id'      => 3,
                                         'name'              => $faker->firstName,
                                         'last_name'         => $faker->lastName,
                                         'username'          => $faker->userName,

@@ -17,8 +17,8 @@ class TeamsTableSeeder extends Seeder
 
     DB::table('teams')->insert(array(
                                      array(
-                                           'legacy_id'      => '1',
-                                           'stadium_id'     => '1',
+                                           'legacy_id'      =>  1,
+                                           'stadium_id'     =>  1,
                                            'name'           => 'New York Yankees ',
                                            'nickname'       => 'Yankees',
                                            'short_nickname' => 'NY',
@@ -28,8 +28,8 @@ class TeamsTableSeeder extends Seeder
                                            'history'        => 'Historia de los Yankees',
                                            ),
                                      array(
-                                           'legacy_id'      => '2',
-                                           'stadium_id'     => '1',
+                                           'legacy_id'      =>  2,
+                                           'stadium_id'     =>  1,
                                            'name'           => 'Detroit Tigers',
                                            'nickname'       => 'Yankees',
                                            'short_nickname' => 'DET',
@@ -39,8 +39,8 @@ class TeamsTableSeeder extends Seeder
                                            'history'        => 'Historia de Detroit',
                                            ),
                                      array(
-                                           'legacy_id'      => '3',
-                                           'stadium_id'     => '2',
+                                           'legacy_id'      =>  3,
+                                           'stadium_id'     =>  2,
                                            'name'           => 'Real Madrid C.F',
                                            'nickname'       => 'Real Madrid',
                                            'short_nickname' => 'RM',

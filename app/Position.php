@@ -23,11 +23,4 @@ class Position extends Model
    return $prize;
   }
 
-  public static function positionPlayer($position_id){
-
-   $position = Position::select('name')->where('legacy_id', $position_id)
-     ->get();
-   return $position;
-  }
-
 }

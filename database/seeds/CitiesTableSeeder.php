@@ -18,9 +18,9 @@ class CitiesTableSeeder extends Seeder
 
     DB::table('cities')->insert(array(
                                       array(
-                                            'country_id'     => '1',
-                                            'name'        => 'Nueva York',
-                                            'description'    => 'Descripción',
+                                            'country_id'   =>  1,
+                                            'name'         => 'Nueva York',
+                                            'description'  => 'Descripción',
                                             ),
                                       ));
   }

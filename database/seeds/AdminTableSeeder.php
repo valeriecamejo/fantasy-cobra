@@ -14,7 +14,7 @@ class AdminTableSeeder extends Seeder
 
     DB::table('users')->insert(array (
 
-                                      'user_type_id'      => '1',
+                                      'user_type_id'      => 1,
                                       'name'              => 'Admin',
                                       'last_name'         => 'Admin',
                                       'username'          => 'admin',

@@ -15,7 +15,7 @@ class GamesTableSeeder extends Seeder
   {
     DB::table('games')->insert(array(
                                      array(
-                                           'legacy_id'             => '1',
+                                           'legacy_id'             => 1,
                                            'tournament_id'         => 1,
                                            'tournament_group_id'   => 1,
                                            'team_id_home'          => 1,
@@ -29,7 +29,7 @@ class GamesTableSeeder extends Seeder
                                            'schema_team_away'      => 'Data de prueba',
                                            ),
                                      array(
-                                           'legacy_id'             => '2',
+                                           'legacy_id'             => 2,
                                            'tournament_id'         => 1,
                                            'tournament_group_id'   => 1,
                                            'team_id_home'          => 1,
@@ -43,7 +43,7 @@ class GamesTableSeeder extends Seeder
                                            'schema_team_away'      => 'Data de prueba',
                                            ),
                                      array(
-                                           'legacy_id'             => '3',
+                                           'legacy_id'             => 3,
                                            'tournament_id'         => 1,
                                            'tournament_group_id'   => 1,
                                            'team_id_home'          => 1,
@@ -57,7 +57,7 @@ class GamesTableSeeder extends Seeder
                                            'schema_team_away'      => 'Data de prueba',
                                            ),
                                      array(
-                                           'legacy_id'             => '4',
+                                           'legacy_id'             => 4,
                                            'tournament_id'         => 1,
                                            'tournament_group_id'   => 1,
                                            'team_id_home'          => 1,
@@ -71,7 +71,7 @@ class GamesTableSeeder extends Seeder
                                            'schema_team_away'      => 'Data de prueba',
                                            ),
                                      array(
-                                           'legacy_id'             => '5',
+                                           'legacy_id'             => 5,
                                            'tournament_id'         => 1,
                                            'tournament_group_id'   => 1,
                                            'team_id_home'          => 1,
@@ -85,7 +85,7 @@ class GamesTableSeeder extends Seeder
                                            'schema_team_away'      => 'Data de prueba',
                                            ),
                                      array(
-                                           'legacy_id'             => '6',
+                                           'legacy_id'             => 6,
                                            'tournament_id'         => 1,
                                            'tournament_group_id'   => 1,
                                            'team_id_home'          => 1,

@@ -17,14 +17,14 @@ class StadiumsTableSeeder extends Seeder
 
     DB::table('stadiums')->insert(array(
                                         array(
-                                              'city_id'     => '1',
+                                              'city_id'     =>  1,
                                               'name'        => 'Yankee Stadium',
                                               'capacity'    => '90500',
                                               'image'       => 'images/stadiumyankees.png',
                                               'description' => 'Descripción',
                                               ),
                                         array(
-                                              'city_id'     => '1',
+                                              'city_id'     =>  1,
                                               'name'        => 'Estadio Santiago Bernabéu',
                                               'capacity'    => '81044',
                                               'image'       => 'images/stadiumRealMadrid.png',

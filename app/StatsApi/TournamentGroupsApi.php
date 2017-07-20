@@ -23,7 +23,7 @@ class TournamentGroupsApi extends StatsApi {
 //*********************************************************
 
     $updated_at           = '2017-07-12 15:58:03';
-    $tournament_id           = 1;
+    $tournament_id        = 1;
     $tournamentGroups     = DB::table('tournament_groups')->get();
     $tournamentGroupStats = json_decode(self::$allTournamentGroups);
 

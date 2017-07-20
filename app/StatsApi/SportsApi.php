@@ -30,7 +30,7 @@ class SportsApi extends StatsApi {
 //Sustituir el legacy_stat_request por el updated_at del API
 //***********************************************************
 
-    $updated_at           = '2017-07-12 15:58:03';
+    $updated_at = '2017-07-12 15:58:03';
     $sports     = DB::table('sports')->get();
     $sportStats = json_decode(self::$allSports);
 

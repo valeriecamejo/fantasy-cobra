@@ -13,13 +13,13 @@ class ChampionshipsApi extends StatsApi {
 * @return void
 **************************************************/
 
-  public static function saveUpdateChampionships ($sport_id) {
+public static function saveUpdateChampionships ($sport_id) {
 
 //***********************************************************
 //Sustituir el legacy_stat_request por el updated_at del API
 //***********************************************************
 
-    $updated_at           = '2017-07-12 15:58:03';
+    $updated_at        = '2017-07-12 15:58:03';
     $championships     = DB::table('championships')->where('sport_id', $sport_id)->get();
     $championshipStats = json_decode(self::$allChampionships);
 
@@ -28,21 +28,21 @@ class ChampionshipsApi extends StatsApi {
         $contador = 0;
         foreach($championships as $championship) {
 
-          if ($championship->legacy_id === $championshipStat->id) { // ($championship->legacy_stat_request > $updated_at) ) {
+          if ($championship->legacy_id === $championshipStat->id) { // ($championship->legacy_stat_request < $updated_at) ) {
             $contador = 1;
 
             DB::table('championships')
             ->where('legacy_id', $championshipStat->id)
             ->update([
-                     'sport_id'            => $sport_id,
-                     'name'                => $championshipStat->name,
-                     'description'         => $championshipStat->description,
-                     'is_active'           => $championshipStat->is_active,
-                     'legacy_stat_request' => $updated_at
-                     ]);
+               'sport_id'            => $sport_id,
+               'name'                => $championshipStat->name,
+               'description'         => $championshipStat->description,
+               'is_active'           => $championshipStat->is_active,
+               'legacy_stat_request' => $updated_at
+               ]);
         }
-      }
-      if ($contador == 0) {
+    }
+    if ($contador == 0) {
 
         $championship                      =  new Championship();
         $championship->legacy_id           =  $championshipStat->id;
@@ -53,22 +53,22 @@ class ChampionshipsApi extends StatsApi {
         $championship->legacy_stat_request =  $updated_at;
         $championship->save();
         echo $championship;
-      }
     }
-  }
+}
+}
 }
 
 
 static $allChampionships = '[
 {
-"id": 1,
-"name": "Baseball",
-"description": "Baseball",
-"icon_updated_at": null,
-"icon_file_size": null,
-"icon_content_type": null,
-"icon_file_name": null,
-"championships": [
+    "id": 1,
+    "name": "Baseball",
+    "description": "Baseball",
+    "icon_updated_at": null,
+    "icon_file_size": null,
+    "icon_content_type": null,
+    "icon_file_name": null,
+    "championships": [
     {
         "id": 1,
         "sport_id": 1,
@@ -124,8 +124,8 @@ static $allChampionships = '[
         "icon_file_name": null,
         "is_active": true
     }
-   ]
-  }
+    ]
+}
 ]';
 
 }
