@@ -10,11 +10,11 @@ use App\Lib\Ddh\UtilityDate;
 
 class TournamentsApi extends StatsApi {
 
-/********************************************
-* saveUpdateTournaments: Save or team of user
+/***************************************************
+* saveUpdateTournaments: Save or update a tournament
 * @param void
 * @return void
-********************************************/
+***************************************************/
 
   public static function saveUpdateTournaments () {
 

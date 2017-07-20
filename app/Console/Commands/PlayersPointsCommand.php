@@ -7,6 +7,8 @@ use DateTimeZone;
 use DateTime;
 Use App\Player;
 Use App\Stats_player;
+Use App\Team_subscriber;
+Use App\Team_user_players;
 use Illuminate\Console\Command;
 
 class PlayersPointsCommand extends Command
@@ -24,8 +26,10 @@ class PlayersPointsCommand extends Command
      * @var string
      */
     protected $description = 'Assign points to players according to their moves';
-    private   $points = 'Hola';
-    private   $index  = null;
+    private   $points      = '';
+    private   $index       = null;
+    public    $updated     = '2017-07-12 15:58:03';
+    public    $pointsForTeam = 0;
 
     /**
      * Create a new command instance.
@@ -38,6 +42,30 @@ class PlayersPointsCommand extends Command
 
       $this->points = Stats_player::where('calculated', '1')->get();
     }
+
+    public static function updatePoints ( $player_id, $total_points ) {
+
+      Team_user_players::where('legacy_id', $player_id)
+       ->update([
+                 'points' => $total_points
+        ]);
+
+      $team_users = DB::table('team_user_players')
+        ->where('player_id', "=", $player_id)
+        ->get();
+
+      foreach ($team_users as $team_user) {
+       
+        $pointsForTeam = Team_user_players::where('team_user_id', $team_user->team_user_id)->sum('points'). "\n";
+        // Team_subscriber::where('team_user_id', "=", $team_user->team_user_id)
+        //   ->update([
+        //             'points' => $pointsForTeam
+        //     ]);
+      }
+    
+    }
+
+
 
     /**
      * Execute the console command.
@@ -69,7 +97,8 @@ class PlayersPointsCommand extends Command
                         'points'              => $total_points,
                         'legacy_stat_request' => $date
                         ]);
-
+               PlayersPointsCommand::updatePoints( $player_stat->player_id, $total_points );
+               
              }
            }
          }
