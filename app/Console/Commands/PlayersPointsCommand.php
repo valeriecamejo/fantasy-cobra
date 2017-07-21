@@ -43,26 +43,18 @@ class PlayersPointsCommand extends Command
       $this->points = Stats_player::where('calculated', '1')->get();
     }
 
-    public static function updatePoints ( $player_id, $total_points ) {
+    public static function pointsForTeam() {
 
-      Team_user_players::where('legacy_id', $player_id)
-       ->update([
-                 'points' => $total_points
-        ]);
-
-      $team_users = DB::table('team_user_players')
-        ->where('player_id', "=", $player_id)
-        ->get();
+      $team_users = DB::table('team_user_players')->select('team_user_id')->distinct('team_user_id')->get();
 
       foreach ($team_users as $team_user) {
-       
-        $pointsForTeam = Team_user_players::where('team_user_id', $team_user->team_user_id)->sum('points'). "\n";
-        // Team_subscriber::where('team_user_id', "=", $team_user->team_user_id)
-        //   ->update([
-        //             'points' => $pointsForTeam
-        //     ]);
+        // echo $team_user->team_user_id. "\n";
+        $points = Team_user_players::where('team_user_id', $team_user->team_user_id)->sum('points');
+        Team_subscriber::where('team_user_id', $team_user->team_user_id)
+        ->update([
+         'points' => $points
+         ]);
       }
-    
     }
 
 
@@ -77,7 +69,7 @@ class PlayersPointsCommand extends Command
      $json = json_decode($this->stats);
 
      if (is_array($json) || is_object($json)) {
-
+       
       foreach($json[0]->tournament_phases as $tournament_phase) {
 
         foreach($tournament_phase->tournament_groups as $tournament_group) {
@@ -94,17 +86,22 @@ class PlayersPointsCommand extends Command
 
                Player::where('legacy_id', $player_stat->player_id)
                ->update([
-                        'points'              => $total_points,
-                        'legacy_stat_request' => $date
-                        ]);
-               PlayersPointsCommand::updatePoints( $player_stat->player_id, $total_points );
+                'points'              => $total_points,
+                'legacy_stat_request' => $date
+                ]);
                
+               Team_user_players::where('legacy_id', $player_stat->player_id)
+               ->update([
+                 'points' => $total_points
+                 ]);
              }
            }
          }
        }
      }
    }
+
+   PlayersPointsCommand::pointsForTeam();
  }
 
  private $stats = '[
