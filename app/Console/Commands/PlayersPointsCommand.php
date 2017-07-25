@@ -7,8 +7,6 @@ use DateTimeZone;
 use DateTime;
 Use App\Player;
 Use App\Stats_player;
-Use App\Team_subscriber;
-Use App\Team_user_players;
 use Illuminate\Console\Command;
 
 class PlayersPointsCommand extends Command
@@ -26,10 +24,8 @@ class PlayersPointsCommand extends Command
      * @var string
      */
     protected $description = 'Assign points to players according to their moves';
-    private   $points      = '';
-    private   $index       = null;
-    public    $updated     = '2017-07-12 15:58:03';
-    public    $pointsForTeam = 0;
+    private   $points = 'Hola';
+    private   $index  = null;
 
     /**
      * Create a new command instance.
@@ -43,22 +39,6 @@ class PlayersPointsCommand extends Command
       $this->points = Stats_player::where('calculated', '1')->get();
     }
 
-    public static function pointsForTeam() {
-
-      $team_users = DB::table('team_user_players')->select('team_user_id')->distinct('team_user_id')->get();
-
-      foreach ($team_users as $team_user) {
-        // echo $team_user->team_user_id. "\n";
-        $points = Team_user_players::where('team_user_id', $team_user->team_user_id)->sum('points');
-        Team_subscriber::where('team_user_id', $team_user->team_user_id)
-        ->update([
-         'points' => $points
-         ]);
-      }
-    }
-
-
-
     /**
      * Execute the console command.
      *
@@ -69,7 +49,7 @@ class PlayersPointsCommand extends Command
      $json = json_decode($this->stats);
 
      if (is_array($json) || is_object($json)) {
-       
+
       foreach($json[0]->tournament_phases as $tournament_phase) {
 
         foreach($tournament_phase->tournament_groups as $tournament_group) {
@@ -86,22 +66,16 @@ class PlayersPointsCommand extends Command
 
                Player::where('legacy_id', $player_stat->player_id)
                ->update([
-                'points'              => $total_points,
-                'legacy_stat_request' => $date
-                ]);
-               
-               Team_user_players::where('legacy_id', $player_stat->player_id)
-               ->update([
-                 'points' => $total_points
-                 ]);
+                        'points'              => $total_points,
+                        'legacy_stat_request' => $date
+                        ]);
+
              }
            }
          }
        }
      }
    }
-
-   PlayersPointsCommand::pointsForTeam();
  }
 
  private $stats = '[

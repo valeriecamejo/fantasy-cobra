@@ -166,6 +166,11 @@ $result = [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
+        *Passport Service Providers
+        */
+        Laravel\Passport\PassportServiceProvider::class,
+
+        /*
         *Vendor Service Providers
         */
         Collective\Html\HtmlServiceProvider::class,
