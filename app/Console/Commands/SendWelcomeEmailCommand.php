@@ -48,7 +48,10 @@ class SendWelcomeEmailCommand extends Command
      */
     public static function handle()
     {
+      $star_date = '2017-07-14 15:00';
+      $end_date  = '2017-08-29 20:00';
 
-       echo "done";
+      GamesApi::saveUpdateGames($star_date, $end_date);
+      //echo "done";
     }
 }
