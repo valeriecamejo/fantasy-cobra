@@ -3,11 +3,13 @@
 namespace App\StatsApi;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7;
+use GuzzleHttp\Exception\RequestException;
 
 class StatsApi {
 
 //Base url
-  static $base_url = 'http://api.detrasdelhome.com/v1/';
+  static $base_url = 'https://api.detrasdelhome.com/v1/';
 
   static $endpoint_login = 'sign_in';
 
@@ -18,29 +20,10 @@ class StatsApi {
 //Creating a Client
   static $clientHttp = null;
 
-/*
-  $res = $client->post($base_url . 'sign_in', [
-                       'json' => ['email' => 'jedkaryd@gmail.com',
-                       'password' => '123stats']
-                       ]);
-
-  $res->getStatusCode();
-
-  echo "access-token => {$res->getHeader('access-token')[0]} \n\n";
-  echo "client => {$res->getHeader('client')[0]} \n\n";
-  echo "uid => {$res->getHeader('uid')[0]} \n\n";
-
-  echo  "\n\n" . $res->getBody();*/
 
   static function clientHttp(){
     if (self::$clientHttp == null) {
       self::$clientHttp   = new Client();
-      //self::login();
-
-   /*   self::$clientHttp->setDefaultOption('headers/access-token', self::$params['access_token']);
-      self::$clientHttp->setDefaultOption('headers/uid', self::$params['uid']);
-      self::$clientHttp->setDefaultOption('headers/client', self::$params['client']);*/
-      //self::$clientHttp->setDefaultOption('headers', self::$params);
     }
 
     return self::$clientHttp;
@@ -48,7 +31,7 @@ class StatsApi {
 
 
 
-  static function login() {
+  static function login () {
 
     //if (self::$clientHttp == null) {
       $response = self::clientHttp()->post(self::$base_url . self::$endpoint_login,[
@@ -62,8 +45,21 @@ class StatsApi {
 
       self::$params = $params;
     //}
+  // echo $response->getStatusCode(). "\n";   
+  // echo $response->getReasonPhrase(). "\n";    
+  // echo $params['access-token']. "\n";
+  // echo $params['uid']. "\n";
+  // echo $params['client']. "\n"; 
 
-    return $response;
+    return $params;
+  }
+
+
+  static function service ($service_url, $params) {
+
+    $resp = self::clientHttp()->get(self::$base_url . $service_url, self::$params);
+
+    return $resp;
   }
 
 }

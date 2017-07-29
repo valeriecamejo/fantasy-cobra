@@ -3,7 +3,6 @@
 namespace App\StatsApi;
 
 use DB;
-
 use DateTimeZone;
 use DateTime;
 use App\Player;
@@ -20,6 +19,11 @@ class PlayerStatsApi extends StatsApi {
 ********************************************************/
 
 public static function saveUpdatePlayerStatsApi () {
+
+  // $service = 'players/3/tournaments/stats';
+  // $params = StatsApi::login();
+  // StatsApi::service($service, $params);
+ $stats         = json_decode($response);
 
 	$index         = null;
 	$updated       = '2017-07-12 15:58:03';
