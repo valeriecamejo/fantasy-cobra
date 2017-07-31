@@ -33,9 +33,7 @@ public static function saveUpdateGames ($star_date, $end_date) {
         $end_date          = new DateTime($gameStat->game->{"end_date"});
         $updated_at          = new DateTime($updated);
         foreach($games as $game) {
-           //   echo $gameStat->game->{"id"}. "-". $game->legacy_id. "\n";
-           // echo $game->start_date. "\n";
-          if ( $gameStat->game->{"id"} === $game->legacy_id ) { // && ($game->legacy_stat_request !== $updated_at){
+          if ( $gameStat->game->{"id"} === $game->legacy_id ) { // && ($game->legacy_stat_request < $updated_at){
             
             $contador = 1;
 
@@ -59,7 +57,6 @@ public static function saveUpdateGames ($star_date, $end_date) {
         }
     }
       if ($contador == 0) {
-          // echo $contador. "-". $gameStat->game->{"id"}. "\n";
 
         $game                      = new Game();
         $game->legacy_id           = $gameStat->game->{"id"};
@@ -77,6 +74,8 @@ public static function saveUpdateGames ($star_date, $end_date) {
         $game->mvp                 = $gameStat->game->{"mvp"};
         $game->legacy_stat_request = $updated_at;
         $game->save();
+
+        return $game;
       }
     }
   }

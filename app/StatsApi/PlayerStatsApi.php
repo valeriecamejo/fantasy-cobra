@@ -23,7 +23,7 @@ public static function saveUpdatePlayerStatsApi () {
   // $service = 'players/3/tournaments/stats';
   // $params = StatsApi::login();
   // StatsApi::service($service, $params);
- $stats         = json_decode($response);
+ //$stats         = json_decode($statsApi);
 
 	$index         = null;
 	$updated       = '2017-07-12 15:58:03';

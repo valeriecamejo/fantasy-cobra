@@ -23,8 +23,7 @@ class DailyTasksCommand extends Command
      *
      * @var string
      */
-    protected $description   = 'Performs daily tasks.';
-   
+    protected $description = 'Performs daily tasks.';
     /**
      * Create a new command instance.
      *
@@ -40,7 +39,7 @@ class DailyTasksCommand extends Command
      *
      * @return mixed
      */
-    public function handle() {
+    public static function handle() {
 
       $star_date       = '2017-07-14 15:00';
       $end_date        = '2017-08-29 20:00';
@@ -48,9 +47,6 @@ class DailyTasksCommand extends Command
 
        PlayersApi::saveUpdatePlayers($championship_id);
        PlayerStatsApi::saveUpdatePlayerStatsApi();
-       GamesApi::saveUpdateGames($star_date, $end_date);
-
-
-        echo "Updated\n";
+       GamesApi::saveUpdateGames($star_date, $end_date); 
     }
   }

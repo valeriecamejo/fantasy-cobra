@@ -53,7 +53,6 @@ class SendWelcomeEmailCommand extends Command
       $star_date = '2017-07-14 15:00';
       $end_date  = '2017-08-29 20:00';
 
-      GamesApi::saveUpdateGames($star_date, $end_date);
-      // PlayerStatsApi::saveUpdatePlayerStatsApi();
+     $game = GamesApi::saveUpdateGames($star_date, $end_date);
     }
 }
