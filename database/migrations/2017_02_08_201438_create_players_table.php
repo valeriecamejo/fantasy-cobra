@@ -25,6 +25,7 @@ class CreatePlayersTable extends Migration
             $table->integer('salary')->nullable();
             $table->integer('points')->default(0);
             $table->string('status');
+            $table->string('status_api')->nullable();
             $table->dateTimeTz('legacy_stat_request')->nullable();
             $table->timestamps();
         });

@@ -6,9 +6,11 @@ use \DateTime;
 use App\User;
 use App\StatsApi\StatsApi;
 use App\StatsApi\GamesApi;
+use App\StatsApi\StatsApi;
 use App\StatsApi\TeamsApi;
 use App\StatsApi\SportsApi;
 use App\StatsApi\PlayersApi;
+use App\StatsApi\PlayerStatsApi;
 use App\StatsApi\PositionsApi;
 use Illuminate\Console\Command;
 use App\StatsApi\ChampionshipsApi;
@@ -48,13 +50,9 @@ class SendWelcomeEmailCommand extends Command
      */
     public static function handle()
     {
+      $star_date = '2017-07-14 15:00';
+      $end_date  = '2017-08-29 20:00';
 
-        // $star_date = '2017-07-14 15:00';
-        // $end_date  = '2017-08-29 20:00';
-        // echo 'hola'. "\n";
-        //print_r(PlayersApi::saveUpdatePlayers(1));
-       //print_r(TournamentsApi::saveUpdateTournaments());
-
-      print_r(StatsApi::login());
-      }
+     $game = GamesApi::saveUpdateGames($star_date, $end_date);
     }
+}

@@ -77,3 +77,6 @@ Route::get('/politicas-de-privacidad', 'HomeController@politics_privacy');
 Route::get('/como-jugar', 'HomeController@how_to_play');
 Route::get('/reglas', 'HomeController@rules');
 Route::get('/puntos', 'HomeController@score');
+
+//Web Hook
+Route::get('/stats', 'StatController@updateStats');

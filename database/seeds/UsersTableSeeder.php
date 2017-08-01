@@ -12,7 +12,7 @@ class UsersTableSeeder extends Seeder
 
     $faker = Faker::create();
 
-    for($i = 0; $i < 20; $i ++){
+    for($i = 0; $i < 1; $i ++){
       DB::table('users')->insert(array (
                                         'user_type_id'      => 3,
                                         'name'              => $faker->firstName,
