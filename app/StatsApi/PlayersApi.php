@@ -24,6 +24,17 @@ public static function saveUpdatePlayers ($championship_id) {
   //   -Status del player
   //****************************************
 
+  //$championships = championship::where('is_active', 1)->get();
+
+  // foreach($championships as $championship) {
+  //   echo $championship['legacy_id'];
+
+  // $service = 'players/$championship['id']/tournaments/stats';
+  // $params  = StatsApi::login();
+  // StatsApi::service($service, $params);
+  // $stats   = json_decode($statsApi);
+
+
   $championship_id = 1;
   $updated_at      = '2017-07-12 15:58:03';
 
@@ -69,6 +80,7 @@ public static function saveUpdatePlayers ($championship_id) {
         }
       }
     }
+  }
   }
 
   static $allPlayers = '[

@@ -19,17 +19,22 @@ class PlayerStatsApi extends StatsApi {
 * @return void
 ********************************************************/
 
-public static function saveUpdatePlayerStatsApi () {
+public static function saveUpdatePlayerStatsApi ( $route, $statsWebHook ) {
 
   //$championships = championship::where('is_active', 1)->get();
 
   // foreach($championships as $championship) {
   //   echo $championship['legacy_id'];
 
+  // if ( $route == 'cronJob' ) {
+
   // $service = 'players/$championship['id']/tournaments/stats';
   // $params  = StatsApi::login();
   // StatsApi::service($service, $params);
   // $stats   = json_decode($statsApi);
+  // } elseif ( $route == 'webHook' ) {
+  //   $stats   = json_decode($statsWebHook);
+  // }
 
 	$index         = null;
 	$updated       = '2017-07-12 15:58:03';
@@ -96,6 +101,7 @@ public static function pointsForTeam() {
              'points' => $points
              ]);
   }
+
 }
 
  static $statsApi = '[

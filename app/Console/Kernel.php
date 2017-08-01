@@ -33,7 +33,7 @@ class Kernel extends ConsoleKernel
                ->dailyAt('17:28');
 
       $schedule->command('task:update')
-               ->dailyAt('03:00');
+               ->dailyAt('14:56');
 
       // $schedule->command('players:point')
       //          ->dailyAt('03:00');

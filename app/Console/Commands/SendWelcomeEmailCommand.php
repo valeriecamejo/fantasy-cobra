@@ -49,10 +49,13 @@ class SendWelcomeEmailCommand extends Command
      */
     public static function handle()
     {
-      $star_date = '2017-07-14 15:00';
-      $end_date  = '2017-08-29 20:00';
+      $star_date    = '2017-07-14 15:00';
+      $end_date     = '2017-08-29 20:00';
+      $route        = 'cronJob';
+      $statsWebHook = null;
+
 
      // $game = GamesApi::saveUpdateGames($star_date, $end_date);
-     PlayerStatsApi::saveUpdatePlayerStatsApi();
+     PlayerStatsApi::saveUpdatePlayerStatsApi( $route, $statsWebHook );
     }
 }

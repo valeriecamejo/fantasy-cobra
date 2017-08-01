@@ -20,9 +20,9 @@ public function __construct()
 	$this->middleware('auth');
 }
 
-public function updateStats() {
+public function updateStats ( $statsWebHook ) {
 
-  PlayerStatsApi::saveUpdatePlayerStatsApi();
+  PlayerStatsApi::saveUpdatePlayerStatsApi( $statsWebHook );
 }
 
 }
