@@ -25,6 +25,5 @@ public function updateStats() {
   PlayerStatsApi::saveUpdatePlayerStatsApi();
 }
 
-
 }
 

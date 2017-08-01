@@ -12,28 +12,23 @@ class StatsApi {
 //Base url
   static $base_url = 'https://api.detrasdelhome.com/v1/';
 
-  public static function login() {
+  static $endpoint_login = 'sign_in';
 
-    static $base_url = 'http://api.detrasdelhome.com/v1/';
-
-    static $endpoint_login = 'sign_in';
-
-    static $params = ['access-token' => null,
-                      'uid'          => null,
-                      'client'       => null];
+  static $params = ['access-token' => null,
+                    'uid'          => null,
+                    'client'       => null];
 
 //Creating a Client
   static $clientHttp = null;
 
-  static function clientHttp(){
+  static function clientHttp () {
+
     if (self::$clientHttp == null) {
-      self::$clientHttp   = new Client();
+        self::$clientHttp = new Client();
     }
 
     return self::$clientHttp;
   }
-
-
 
   static function login () {
 

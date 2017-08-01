@@ -7,6 +7,7 @@ use DateTimeZone;
 use DateTime;
 use App\Player;
 use App\Stats_player;
+use App\Championship;
 use App\Team_subscriber;
 use App\Team_user_players;
 
@@ -20,10 +21,15 @@ class PlayerStatsApi extends StatsApi {
 
 public static function saveUpdatePlayerStatsApi () {
 
-  // $service = 'players/3/tournaments/stats';
-  // $params = StatsApi::login();
+  //$championships = championship::where('is_active', 1)->get();
+
+  // foreach($championships as $championship) {
+  //   echo $championship['legacy_id'];
+
+  // $service = 'players/$championship['id']/tournaments/stats';
+  // $params  = StatsApi::login();
   // StatsApi::service($service, $params);
- //$stats         = json_decode($statsApi);
+  // $stats   = json_decode($statsApi);
 
 	$index         = null;
 	$updated       = '2017-07-12 15:58:03';
@@ -33,42 +39,42 @@ public static function saveUpdatePlayerStatsApi () {
   $points        = Stats_player::where('calculated', '1')->get();
   $stats         = json_decode(self::$statsApi);
 
-   if (is_array($stats) || is_object($stats)) {
-     
-    
-     foreach($stats[0]->tournament_phases as $tournament_phase) {
+  if (is_array($stats) || is_object($stats)) {
 
-       foreach($tournament_phase->tournament_groups as $tournament_group) {
+    foreach($stats[0]->tournament_phases as $tournament_phase) {
+
+      foreach($tournament_phase->tournament_groups as $tournament_group) {
 
         foreach($tournament_group->player_stats as $player_stat) {
 
-          $consult = Player::where('legacy_id', $player_stat->player_id)->first();
+          $player = Player::where('legacy_id', $player_stat->player_id)->first();
 
           foreach ($points as $point => $valuePoint) {
 
-           if ( $player_stat->stat_id == $valuePoint['legacy_id'] ) {
-             $stat_points = $player_stat->quantity * $valuePoint['points'];
-             $total_points = $consult['points'] + $stat_points;
-             $date = new DateTime($player_stat->time);
+            if ( $player_stat->stat_id == $valuePoint['legacy_id'] ) {
+              $stat_points = $player_stat->quantity * $valuePoint['points'];
+              $total_points = $player['points'] + $stat_points;
+              $date = new DateTime($player_stat->time);
 
-             Player::where('legacy_id', $player_stat->player_id)
-             ->update([
-              'points'              => $total_points,
-              'legacy_stat_request' => $date
-              ]);
-             
-             Team_user_players::where('legacy_id', $player_stat->player_id)
-             ->update([
-               'points' => $total_points
-               ]);
-           }
-         }
+              Player::where('legacy_id', $player_stat->player_id)
+              ->update([
+                       'points'              => $total_points,
+                       'legacy_stat_request' => $date
+                       ]);
+
+              Team_user_players::where('legacy_id', $player_stat->player_id)
+              ->update([
+                       'points' => $total_points
+                       ]);
+            }
+          }
         }
       }
     }
- }
+  }
 
- PlayerStatsApi::pointsForTeam();
+    PlayerStatsApi::pointsForTeam();
+  // }
 }
 
 /********************************************************
@@ -79,7 +85,7 @@ public static function saveUpdatePlayerStatsApi () {
 
 public static function pointsForTeam() {
 
-	$points      = 0;
+	$points     = 0;
   $team_users = DB::table('team_user_players')->select('team_user_id')->distinct('team_user_id')->get();
 
   foreach ($team_users as $team_user) {
@@ -87,8 +93,8 @@ public static function pointsForTeam() {
     $points = Team_user_players::where('team_user_id', $team_user->team_user_id)->sum('points');
     Team_subscriber::where('team_user_id', $team_user->team_user_id)
     ->update([
-     'points' => $points
-     ]);
+             'points' => $points
+             ]);
   }
 }
 

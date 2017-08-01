@@ -26,7 +26,7 @@ class ChampionshipsTableSeeder extends Seeder
                                                    'sport_id'     => 1,
                                                    'name'         => 'LVBP',
                                                    'description'  => 'Liga Venezolana de Béisbol Profesional',
-                                                   'is_active'    => true,
+                                                   'is_active'    => false,
                                                    'avatar'       => 'images/BolaLVBP.png'
                                                    )
                                              ));

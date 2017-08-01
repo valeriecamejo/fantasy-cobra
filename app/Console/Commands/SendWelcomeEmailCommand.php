@@ -6,7 +6,6 @@ use \DateTime;
 use App\User;
 use App\StatsApi\StatsApi;
 use App\StatsApi\GamesApi;
-use App\StatsApi\StatsApi;
 use App\StatsApi\TeamsApi;
 use App\StatsApi\SportsApi;
 use App\StatsApi\PlayersApi;
@@ -53,6 +52,7 @@ class SendWelcomeEmailCommand extends Command
       $star_date = '2017-07-14 15:00';
       $end_date  = '2017-08-29 20:00';
 
-     $game = GamesApi::saveUpdateGames($star_date, $end_date);
+     // $game = GamesApi::saveUpdateGames($star_date, $end_date);
+     PlayerStatsApi::saveUpdatePlayerStatsApi();
     }
 }

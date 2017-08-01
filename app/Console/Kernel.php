@@ -17,9 +17,6 @@ class Kernel extends ConsoleKernel
       Commands\DailyTasksCommand::class,
       Commands\PlayersPointsCommand::class
     ];
-// protected $commands = [
-//         \App\Console\Commands\SendWelcomeEmailCommand::class,
-//     ];
 
     /**
      * Define the application's command schedule.
