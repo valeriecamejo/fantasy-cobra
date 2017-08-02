@@ -41,14 +41,11 @@ class DailyTasksCommand extends Command
      */
     public static function handle() {
 
-      $star_date       = '2017-07-14 15:00';
-      $end_date        = '2017-08-29 20:00';
-      $championship_id = 1;
       $route           = 'cronJob';
       $statsWebHook    = null;
 
-       PlayersApi::saveUpdatePlayers($championship_id);
+       PlayersApi::saveUpdatePlayers();
        PlayerStatsApi::saveUpdatePlayerStatsApi( $route, $statsWebHook );
-       GamesApi::saveUpdateGames($star_date, $end_date);
+       GamesApi::saveUpdateGames();
     }
   }
