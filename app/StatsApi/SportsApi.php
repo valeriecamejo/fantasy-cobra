@@ -30,6 +30,14 @@ class SportsApi extends StatsApi {
 //Sustituir el legacy_stat_request por el updated_at del API
 //***********************************************************
 
+/**************************************************************
+//CODIGO PARA LA SOLICITUD DEL SERVICIO SPORT AL API
+// $service = 'sports';
+// $params  = StatsApi::login();
+// jsonApi  = StatsApi::service($service, $params);
+// $stats   = json_decode($jsonApi);
+*///***********************************************************
+
     $updated_at = '2017-07-12 15:58:03';
     $sports     = DB::table('sports')->get();
     $sportStats = json_decode(self::$allSports);
@@ -40,7 +48,7 @@ class SportsApi extends StatsApi {
 
         foreach($sports as $sport) {
 
-          if ($sport->legacy_id == $sportStat->id) { // ($sport->legacy_stat_request > $updated_at) ) {
+          if ($sport->legacy_id == $sportStat->id) { // ($sport->legacy_stat_request < $updated_at) ) {
             $contador = 1;
 
             DB::table('sports')

@@ -13,14 +13,22 @@ class ChampionshipsApi extends StatsApi {
 * @return void
 **************************************************/
 
-public static function saveUpdateChampionships ($sport_id) {
+public static function saveUpdateChampionships () {
 
 //***********************************************************
 //Sustituir el legacy_stat_request por el updated_at del API
 //***********************************************************
 
+/**************************************************************
+//CODIGO PARA LA SOLICITUD DEL SERVICIO CHAMPIONSHIP AL API
+// $service = 'championships';
+// $params  = StatsApi::login();
+// jsonApi  = StatsApi::service($service, $params);
+// $stats   = json_decode($jsonApi);
+*///***********************************************************
+
     $updated_at        = '2017-07-12 15:58:03';
-    $championships     = DB::table('championships')->where('sport_id', $sport_id)->get();
+    $championships     = DB::table('championships')->get();
     $championshipStats = json_decode(self::$allChampionships);
 
     if (is_array($championshipStats) || is_object($championshipStats)) {
@@ -34,7 +42,7 @@ public static function saveUpdateChampionships ($sport_id) {
             DB::table('championships')
             ->where('legacy_id', $championshipStat->id)
             ->update([
-               'sport_id'            => $sport_id,
+               'sport_id'            => $championshipStat->sport_id,
                'name'                => $championshipStat->name,
                'description'         => $championshipStat->description,
                'is_active'           => $championshipStat->is_active,
@@ -46,7 +54,7 @@ public static function saveUpdateChampionships ($sport_id) {
 
         $championship                      =  new Championship();
         $championship->legacy_id           =  $championshipStat->id;
-        $championship->sport_id            =  $sport_id;
+        $championship->sport_id            =  $championshipStat->sport_id;
         $championship->name                =  $championshipStat->name;
         $championship->description         =  $championshipStat->description;
         $championship->is_active           =  $championshipStat->is_active;

@@ -23,30 +23,30 @@ class TournamentGroupsApi extends StatsApi {
 //***********************************************************
 
 
-    /**************************************************************
-    //CODIGO PARA SOLICITAR LOS TOURNAMENT_GROUP POR TOURNAMENT_ID
-    //
-    // $tournaments = tournament::where('is_active', true)->get();
-    //
-      // foreach($tournaments as $tournament) {
+/**************************************************************
+//CODIGO PARA SOLICITAR LOS TOURNAMENT_GROUP POR TOURNAMENT_ID
+//
+// $tournaments = tournament::where('is_active', true)->get();
+//
+  // foreach($tournaments as $tournament) {
 
-        // $service = 'tournaments/$tournament_legacy_id/groups';
-        // $params  = StatsApi::login();
-        // jsonApi  = StatsApi::service($service, $params);
-        // $stats   = json_decode($jsonApi);
+    // $service = 'tournaments/$tournament_legacy_id/groups';
+    // $params  = StatsApi::login();
+    // jsonApi  = StatsApi::service($service, $params);
+    // $stats   = json_decode($jsonApi);
 
-      // $tournament_id        = $tournament['id'];
-      // $tournament_legacy_id = $tournament['legacy_id'];
-    *///***********************************************************
+  // $tournament_id        = $tournament['id'];
+  // $tournament_legacy_id = $tournament['legacy_id'];
+*///***********************************************************
     
-      $tournament_id    = 1;
-      $updated_at       = '2017-07-12 15:58:03';
-      $tournamentGroups = DB::table('tournament_groups')->get();
-      $tournament_group_id = null;
-      //*****************************************************************************************************
-      //Al reaizar la consulta al Api, debe sustituirse la linea anterior por la siguiente linea de codigo:
-      // $tournamentGroups     = tournament_group::where('tournament_id', $tournament_id)->get();
-      //*****************************************************************************************************
+      $tournament_id       = 1;
+      $updated_at          = '2017-07-12 15:58:03';
+      $tournamentGroups    = DB::table('tournament_groups')->get();
+
+//*****************************************************************************************************
+//Al reaizar la consulta al Api, debe sustituirse la linea anterior por la siguiente linea de codigo:
+// $tournamentGroups     = tournament_group::where('tournament_id', $tournament_id)->get();
+//*****************************************************************************************************
      
       $tournamentGroupStats = json_decode(self::$allTournamentGroups);
 
@@ -60,7 +60,7 @@ class TournamentGroupsApi extends StatsApi {
             
             if ( ($tournamentGroup->legacy_id === $tournamentGroupStat->id) && ( $tournamentGroupStat->tournament_group_id === null) ) { // ($tournamentGroup->legacy_stat_request < $updated_at) ) {
               $contador = 1;
-              
+
               DB::table('tournament_groups')
               ->where('legacy_id', $tournamentGroupStat->id)
               ->update([
@@ -84,6 +84,7 @@ class TournamentGroupsApi extends StatsApi {
         }
       }
     }
+  // }
   }
 
 
