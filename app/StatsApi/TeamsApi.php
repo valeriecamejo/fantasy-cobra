@@ -23,10 +23,10 @@ public static function saveUpdateTeams () {
 //CODIGO PARA SOLICITAR LOS TEAMS POR TOURNAMENT_ID
 //
 // $tournaments = tournament::where('is_active', true)->get();
-// $tournament_legacy_id = $tournament['legacy_id'];
 
   // foreach($tournaments as $tournament) {
-
+    
+    // $tournament_legacy_id = $tournament['legacy_id'];
     // $service = 'tournaments/$tournament_legacy_id/teams';
     // $params  = StatsApi::login();
     // jsonApi  = StatsApi::service($service, $params);

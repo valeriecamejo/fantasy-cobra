@@ -15,67 +15,83 @@ class GamesApi extends StatsApi {
 * @return void
 **************************************************/
 
-public static function saveUpdateGames ($star_date, $end_date) {
+public static function saveUpdateGames () {
 
 //***********************************************************
 //Sustituir el legacy_stat_request por el updated_at del API
+//Sustituir el tournament_id en la consulta del $games
 //***********************************************************
 
+/**************************************************************
+//CODIGO PARA SOLICITAR LOS TOURNAMENT_GROUP POR TOURNAMENT_ID
+//
+// $tournaments = tournament::where('is_active', true)->get();
+//
+  // foreach($tournaments as $tournament) {
+
+    // $tournament_legacy_id = $tournament['legacy_id'];
+    // $service = 'tournaments/$tournament_legacy_id/games';
+    // $params  = StatsApi::login();
+    // jsonApi  = StatsApi::service($service, $params);
+    // $stats   = json_decode($jsonApi);
+*///***********************************************************
+
     $updated  = date("Y-m-d H:i:s e");
-    $games     = DB::table('games')->whereBetween('start_date', [$star_date, $end_date])->get();
-    $gameStats = json_decode(self::$allGames);
+    $games     = DB::table('games')->where('tournament_id', 1)->get();
+    $gameStatsApis = json_decode(self::$allGames);
 
-    if (is_array($gameStats) || is_object($gameStats)) {
-      foreach($gameStats[0]->stat as $gameStat) {
+    if (is_array($gameStatsApis) || is_object($gameStatsApis)) {
+      foreach($gameStatsApis[0]->tournament_groups as $gameStatsApi) {
+        foreach($gameStatsApi->games as $gameStat) {
+          $contador          = 0;
+          $start_date        = new DateTime($gameStat->start_date);
+          $end_date          = new DateTime($gameStat->end_date);
+          $updated_at        = new DateTime($updated);
+          foreach($games as $game) {
+          if ( $gameStat->id === $game->legacy_id ) { // && ($game->legacy_stat_request < $updated_at){
 
-        $contador          = 0;
-        $start_date        = new DateTime($gameStat->game->{"start_date"});
-        $end_date          = new DateTime($gameStat->game->{"end_date"});
-        $updated_at        = new DateTime($updated);
-        foreach($games as $game) {
-          if ( $gameStat->game->{"id"} === $game->legacy_id ) { // && ($game->legacy_stat_request < $updated_at){
-            
             $contador = 1;
 
             DB::table('games')
-            ->where('legacy_id', $gameStat->game->{"id"})
+            ->where('legacy_id', $gameStat->id)
             ->update([
-               'tournament_id'       => $gameStat->game->{"tournament_id"},
-               'tournament_group_id' => $gameStat->game->{"tournament_group_id"},
-               'team_id_home'        => $gameStat->game->team_home->{"id"},
-               'team_id_away'        => $gameStat->game->team_away->{"id"},
-               'start_date'          => $start_date,
-               'end_date'            => $end_date,
-               'score_home'          => $gameStat->game->{"score_home"},
-               'score_away'          => $gameStat->game->{"score_away"},
-               'status'              => $gameStat->game->{"status"},
-               'schema_team_home'    => $gameStat->game->{"schema_team_home"},
-               'schema_team_away'    => $gameStat->game->{"schema_team_away"},
-               'mvp'                 => $gameStat->game->{"mvp"},
-               'legacy_stat_request' => $updated_at
-               ]);
+             'tournament_id'       => $gameStat->tournament_id,
+             'tournament_group_id' => $gameStat->tournament_group_id,
+             'team_id_home'        => $gameStat->team_home->{"id"},
+             'team_id_away'        => $gameStat->team_away->{"id"},
+             'start_date'          => $start_date,
+             'end_date'            => $end_date,
+             'score_home'          => $gameStat->score_home,
+             'score_away'          => $gameStat->score_away,
+             'status'              => $gameStat->status,
+             'schema_team_home'    => $gameStat->schema_team_home,
+             'schema_team_away'    => $gameStat->schema_team_away,
+             'mvp'                 => $gameStat->mvp,
+             'legacy_stat_request' => $updated_at
+             ]);
+          }
         }
-    }
-      if ($contador == 0) {
+        if ($contador == 0) {
 
-        $game                      = new Game();
-        $game->legacy_id           = $gameStat->game->{"id"};
-        $game->tournament_id       = $gameStat->game->{"tournament_id"};
-        $game->tournament_group_id = $gameStat->game->{"tournament_group_id"};
-        $game->team_id_home        = $gameStat->game->team_home->{"id"};
-        $game->team_id_away        = $gameStat->game->team_away->{"id"};
-        $game->start_date          = $start_date;
-        $game->end_date            = $end_date;
-        $game->score_home          = $gameStat->game->{"score_home"};
-        $game->score_away          = $gameStat->game->{"score_away"};
-        $game->status              = $gameStat->game->{"status"};
-        $game->schema_team_home    = $gameStat->game->{"schema_team_home"};
-        $game->schema_team_away    = $gameStat->game->{"schema_team_away"};
-        $game->mvp                 = $gameStat->game->{"mvp"};
-        $game->legacy_stat_request = $updated_at;
-        $game->save();
+          $game                      = new Game();
+          $game->legacy_id           = $gameStat->id;
+          $game->tournament_id       = $gameStat->tournament_id;
+          $game->tournament_group_id = $gameStat->tournament_group_id;
+          $game->team_id_home        = $gameStat->team_home->{"id"};
+          $game->team_id_away        = $gameStat->team_away->{"id"};
+          $game->start_date          = $start_date;
+          $game->end_date            = $end_date;
+          $game->score_home          = $gameStat->score_home;
+          $game->score_away          = $gameStat->score_away;
+          $game->status              = $gameStat->status;
+          $game->schema_team_home    = $gameStat->schema_team_home;
+          $game->schema_team_away    = $gameStat->schema_team_away;
+          $game->mvp                 = $gameStat->mvp;
+          $game->legacy_stat_request = $updated_at;
+          $game->save();
 
-        return $game;
+          return $game;
+        }
       }
     }
   }
@@ -84,265 +100,974 @@ public static function saveUpdateGames ($star_date, $end_date) {
 
 static $allGames = '[
 {
-    "tournament": {
-        "id": 8,
-        "name": "La Liga 2017-2017"
-    },
-    "stat": [
+    "id": 1,
+    "championship_id": 1,
+    "name": "MLB 2015-2016",
+    "description": "MLB",
+    "icon_updated_at": null,
+    "icon_file_size": null,
+    "icon_content_type": null,
+    "icon_file_name": null,
+    "start_date": "2015-12-04T00:00:00.000Z",
+    "end_date": "2016-06-07T00:00:00.000Z",
+    "is_active": false,
+    "tournament_groups": [
         {
-            "game": {
-                "id": 1,
-                "tournament_id": 8,
-                "tournament_group_id": null,
-                "team_home_id": 11,
-                "team_away_id": 9,
-                "start_date": "2017-08-21T20:15:00.000Z",
-                "end_date": null,
-                "score_home": 1,
-                "score_away": 1,
-                "status": "finished",
-                "referee_id": null,
-                "schema_team_home": null,
-                "schema_team_away": null,
-                "mvp": null,
-                "outstanding": true,
-                "broadcast_on": null,
-                "round": 1,
-                "team_home": {
-                    "id": 11,
-                    "city_id": null,
-                    "stadium_id": null,
-                    "name": "Atl. Madrid",
-                    "nickname": null,
-                    "logo": "/icons/original/missing.png",
-                    "president": null,
-                    "coach": null,
-                    "history": null,
-                    "logo_file_name": null,
-                    "logo_content_type": null,
-                    "logo_file_size": null,
-                    "logo_updated_at": null
+            "id": 1,
+            "tournament_id": 1,
+            "name": "Liga Americana",
+            "description": "Liga Americana",
+            "tournament_group_id": null,
+            "tournament_phase_id": 1,
+            "games": [
+                {
+                    "id": 1,
+                    "tournament_id": 1,
+                    "tournament_group_id": 1,
+                    "team_home_id": 2,
+                    "team_away_id": 3,
+                    "start_date": "2016-12-01T00:00:00.000Z",
+                    "end_date": "2016-12-01T00:00:00.000Z",
+                    "score_home": 6,
+                    "score_away": 1,
+                    "status": "pending",
+                    "referee_id": null,
+                    "schema_team_home": "{\"players\": \"Player 1\"}",
+                    "schema_team_away": "{\"players\": \"Player 1\"}",
+                    "mvp": null,
+                    "outstanding": true,
+                    "broadcast_on": null,
+                    "round": null,
+                    "team_home": {
+                        "id": 2,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "New York Yankees",
+                        "nickname": "NY",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    },
+                    "team_away": {
+                        "id": 3,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "Tigres de Aragua",
+                        "nickname": "TIG",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    }
                 },
-                "team_away": {
+                {
+                    "id": 2,
+                    "tournament_id": 1,
+                    "tournament_group_id": 1,
+                    "team_home_id": 2,
+                    "team_away_id": 3,
+                    "start_date": "2016-12-04T00:00:00.000Z",
+                    "end_date": "2016-12-04T00:00:00.000Z",
+                    "score_home": 4,
+                    "score_away": 10,
+                    "status": "finished",
+                    "referee_id": null,
+                    "schema_team_home": "{\"players\": \"Player 1\"}",
+                    "schema_team_away": "{\"players\": \"Player 1\"}",
+                    "mvp": null,
+                    "outstanding": true,
+                    "broadcast_on": null,
+                    "round": null,
+                    "team_home": {
+                        "id": 2,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "New York Yankees",
+                        "nickname": "NY",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    },
+                    "team_away": {
+                        "id": 3,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "Tigres de Aragua",
+                        "nickname": "TIG",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    }
+                },
+                {
+                    "id": 3,
+                    "tournament_id": 1,
+                    "tournament_group_id": 1,
+                    "team_home_id": 2,
+                    "team_away_id": 3,
+                    "start_date": "2017-03-07T00:00:00.000Z",
+                    "end_date": "2017-03-07T00:00:00.000Z",
+                    "score_home": 1,
+                    "score_away": 1,
+                    "status": "in_process",
+                    "referee_id": null,
+                    "schema_team_home": "{\"players\": \"Player 1\"}",
+                    "schema_team_away": "{\"players\": \"Player 2\"}",
+                    "mvp": null,
+                    "outstanding": true,
+                    "broadcast_on": null,
+                    "round": null,
+                    "team_home": {
+                        "id": 2,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "New York Yankees",
+                        "nickname": "NY",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    },
+                    "team_away": {
+                        "id": 3,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "Tigres de Aragua",
+                        "nickname": "TIG",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    }
+                },
+                {
+                    "id": 4,
+                    "tournament_id": 1,
+                    "tournament_group_id": 1,
+                    "team_home_id": 2,
+                    "team_away_id": 3,
+                    "start_date": "2017-03-07T00:00:00.000Z",
+                    "end_date": "2017-03-07T00:00:00.000Z",
+                    "score_home": 1,
+                    "score_away": 1,
+                    "status": "finished",
+                    "referee_id": null,
+                    "schema_team_home": "{\"players\": \"Player 1\"}",
+                    "schema_team_away": "{\"players\": \"Player 2\"}",
+                    "mvp": null,
+                    "outstanding": true,
+                    "broadcast_on": null,
+                    "round": null,
+                    "team_home": {
+                        "id": 2,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "New York Yankees",
+                        "nickname": "NY",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    },
+                    "team_away": {
+                        "id": 3,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "Tigres de Aragua",
+                        "nickname": "TIG",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    }
+                },
+                {
+                    "id": 5,
+                    "tournament_id": 2,
+                    "tournament_group_id": 1,
+                    "team_home_id": 1,
+                    "team_away_id": 2,
+                    "start_date": "2016-12-01T00:00:00.000Z",
+                    "end_date": "2016-12-01T00:00:00.000Z",
+                    "score_home": 1,
+                    "score_away": 1,
+                    "status": "in_process",
+                    "referee_id": null,
+                    "schema_team_home": "{\"players\": \"Player 1\"}",
+                    "schema_team_away": "{\"players\": \"Player 2\"}",
+                    "mvp": null,
+                    "outstanding": true,
+                    "broadcast_on": null,
+                    "round": null,
+                    "team_home": {
+                        "id": 1,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "Tigres de Detroit",
+                        "nickname": "TD",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    },
+                    "team_away": {
+                        "id": 2,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "New York Yankees",
+                        "nickname": "NY",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    }
+                },
+                {
+                    "id": 6,
+                    "tournament_id": 2,
+                    "tournament_group_id": 1,
+                    "team_home_id": 1,
+                    "team_away_id": 2,
+                    "start_date": "2016-12-01T00:00:00.000Z",
+                    "end_date": "2016-12-01T00:00:00.000Z",
+                    "score_home": 1,
+                    "score_away": 1,
+                    "status": "in_process",
+                    "referee_id": null,
+                    "schema_team_home": "{\"players\": \"Player 1\"}\"Players\": \"Player 1\"",
+                    "schema_team_away": "{\"players\": \"Player 2\"}",
+                    "mvp": null,
+                    "outstanding": true,
+                    "broadcast_on": null,
+                    "round": null,
+                    "team_home": {
+                        "id": 1,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "Tigres de Detroit",
+                        "nickname": "TD",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    },
+                    "team_away": {
+                        "id": 2,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "New York Yankees",
+                        "nickname": "NY",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    }
+                },
+                {
+                    "id": 7,
+                    "tournament_id": 3,
+                    "tournament_group_id": 1,
+                    "team_home_id": 2,
+                    "team_away_id": 3,
+                    "start_date": "2017-03-10T00:00:00.000Z",
+                    "end_date": "2017-03-10T00:00:00.000Z",
+                    "score_home": 1,
+                    "score_away": 1,
+                    "status": "in_process",
+                    "referee_id": null,
+                    "schema_team_home": "{\"players\": \"Player 1\"}",
+                    "schema_team_away": "{\"players\": \"Player 2\"}",
+                    "mvp": null,
+                    "outstanding": null,
+                    "broadcast_on": null,
+                    "round": null,
+                    "team_home": {
+                        "id": 2,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "New York Yankees",
+                        "nickname": "NY",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    },
+                    "team_away": {
+                        "id": 3,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "Tigres de Aragua",
+                        "nickname": "TIG",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    }
+                },
+                {
+                    "id": 8,
+                    "tournament_id": 4,
+                    "tournament_group_id": 1,
+                    "team_home_id": 1,
+                    "team_away_id": 2,
+                    "start_date": "2017-03-15T00:00:00.000Z",
+                    "end_date": "2017-03-15T00:00:00.000Z",
+                    "score_home": 1,
+                    "score_away": 1,
+                    "status": "deferred",
+                    "referee_id": null,
+                    "schema_team_home": "{\"players\": \"Player 1\"}",
+                    "schema_team_away": "{\"players\": \"Player 2\"}",
+                    "mvp": null,
+                    "outstanding": null,
+                    "broadcast_on": null,
+                    "round": null,
+                    "team_home": {
+                        "id": 1,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "Tigres de Detroit",
+                        "nickname": "TD",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    },
+                    "team_away": {
+                        "id": 2,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "New York Yankees",
+                        "nickname": "NY",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    }
+                },
+                {
                     "id": 9,
-                    "city_id": null,
-                    "stadium_id": null,
-                    "name": "Alaves",
-                    "nickname": null,
-                    "logo": "/icons/original/missing.png",
-                    "president": null,
-                    "coach": null,
-                    "history": null,
-                    "logo_file_name": null,
-                    "logo_content_type": null,
-                    "logo_file_size": null,
-                    "logo_updated_at": null
-                }
-            }
-        },
-        {
-            "game": {
-                "id": 18,
-                "tournament_id": 8,
-                "tournament_group_id": null,
-                "team_home_id": 12,
-                "team_away_id": 13,
-                "start_date": "2017-08-20T16:15:00.000Z",
-                "end_date": null,
-                "score_home": 6,
-                "score_away": 2,
-                "status": "finished",
-                "referee_id": null,
-                "schema_team_home": null,
-                "schema_team_away": null,
-                "mvp": null,
-                "outstanding": true,
-                "broadcast_on": null,
-                "round": 1,
-                "team_home": {
+                    "tournament_id": 2,
+                    "tournament_group_id": 1,
+                    "team_home_id": 1,
+                    "team_away_id": 2,
+                    "start_date": "2017-03-09T00:00:00.000Z",
+                    "end_date": "2017-03-09T00:00:00.000Z",
+                    "score_home": 1,
+                    "score_away": 1,
+                    "status": "deferred",
+                    "referee_id": null,
+                    "schema_team_home": "{\"players\": \"Player 1\"}",
+                    "schema_team_away": "{\"players\": \"Player 2\"}",
+                    "mvp": null,
+                    "outstanding": null,
+                    "broadcast_on": null,
+                    "round": null,
+                    "team_home": {
+                        "id": 1,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "Tigres de Detroit",
+                        "nickname": "TD",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    },
+                    "team_away": {
+                        "id": 2,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "New York Yankees",
+                        "nickname": "NY",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    }
+                },
+                {
+                    "id": 10,
+                    "tournament_id": 3,
+                    "tournament_group_id": 1,
+                    "team_home_id": 2,
+                    "team_away_id": 3,
+                    "start_date": "2016-12-01T00:00:00.000Z",
+                    "end_date": "2016-12-01T00:00:00.000Z",
+                    "score_home": 1,
+                    "score_away": 1,
+                    "status": "deferred",
+                    "referee_id": null,
+                    "schema_team_home": "{\"players\": \"Player 1\"}",
+                    "schema_team_away": "{\"players\": \"Player 2\"}",
+                    "mvp": null,
+                    "outstanding": true,
+                    "broadcast_on": null,
+                    "round": null,
+                    "team_home": {
+                        "id": 2,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "New York Yankees",
+                        "nickname": "NY",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    },
+                    "team_away": {
+                        "id": 3,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "Tigres de Aragua",
+                        "nickname": "TIG",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    }
+                },
+                {
+                    "id": 11,
+                    "tournament_id": 4,
+                    "tournament_group_id": 1,
+                    "team_home_id": 1,
+                    "team_away_id": 2,
+                    "start_date": "2016-12-01T00:00:00.000Z",
+                    "end_date": "2016-12-01T00:00:00.000Z",
+                    "score_home": 1,
+                    "score_away": 1,
+                    "status": "finished",
+                    "referee_id": null,
+                    "schema_team_home": "{\"players\": \"Player 1\"}",
+                    "schema_team_away": "{\"players\": \"Player 2\"}",
+                    "mvp": null,
+                    "outstanding": null,
+                    "broadcast_on": null,
+                    "round": null,
+                    "team_home": {
+                        "id": 1,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "Tigres de Detroit",
+                        "nickname": "TD",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    },
+                    "team_away": {
+                        "id": 2,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "New York Yankees",
+                        "nickname": "NY",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    }
+                },
+                {
                     "id": 12,
-                    "city_id": null,
-                    "stadium_id": null,
-                    "name": "Barcellona",
-                    "nickname": null,
-                    "logo": "/icons/original/missing.png",
-                    "president": null,
-                    "coach": null,
-                    "history": null,
-                    "logo_file_name": null,
-                    "logo_content_type": null,
-                    "logo_file_size": null,
-                    "logo_updated_at": null
+                    "tournament_id": 1,
+                    "tournament_group_id": 1,
+                    "team_home_id": 1,
+                    "team_away_id": 2,
+                    "start_date": null,
+                    "end_date": null,
+                    "score_home": 10,
+                    "score_away": 23,
+                    "status": "in_process",
+                    "referee_id": 1,
+                    "schema_team_home": "{\"players\": \"Player 1\"}",
+                    "schema_team_away": "{\"players\": \"Player 2\"}",
+                    "mvp": null,
+                    "outstanding": null,
+                    "broadcast_on": null,
+                    "round": null,
+                    "team_home": {
+                        "id": 1,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "Tigres de Detroit",
+                        "nickname": "TD",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    },
+                    "team_away": {
+                        "id": 2,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "New York Yankees",
+                        "nickname": "NY",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    }
                 },
-                "team_away": {
+                {
                     "id": 13,
-                    "city_id": null,
-                    "stadium_id": null,
-                    "name": "Betis Balompie",
-                    "nickname": null,
-                    "logo": "/icons/original/missing.png",
-                    "president": null,
-                    "coach": null,
-                    "history": null,
-                    "logo_file_name": null,
-                    "logo_content_type": null,
-                    "logo_file_size": null,
-                    "logo_updated_at": null
-                }
-            }
-        },
-        {
-            "game": {
-                "id": 19,
-                "tournament_id": 8,
-                "tournament_group_id": null,
-                "team_home_id": 14,
-                "team_away_id": 20,
-                "start_date": "2017-08-21T20:15:00.000Z",
-                "end_date": null,
-                "score_home": 1,
-                "score_away": 1,
-                "status": "finished",
-                "referee_id": null,
-                "schema_team_home": null,
-                "schema_team_away": null,
-                "mvp": null,
-                "outstanding": true,
-                "broadcast_on": null,
-                "round": 1,
-                "team_home": {
+                    "tournament_id": 1,
+                    "tournament_group_id": 1,
+                    "team_home_id": 1,
+                    "team_away_id": 2,
+                    "start_date": null,
+                    "end_date": null,
+                    "score_home": 11,
+                    "score_away": 13,
+                    "status": "finished",
+                    "referee_id": 2,
+                    "schema_team_home": "{\"players\": \"Player 1\"}",
+                    "schema_team_away": "{\"players\": \"Player 2\"}",
+                    "mvp": null,
+                    "outstanding": null,
+                    "broadcast_on": null,
+                    "round": null,
+                    "team_home": {
+                        "id": 1,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "Tigres de Detroit",
+                        "nickname": "TD",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    },
+                    "team_away": {
+                        "id": 2,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "New York Yankees",
+                        "nickname": "NY",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    }
+                },
+                {
                     "id": 14,
-                    "city_id": null,
-                    "stadium_id": null,
-                    "name": "Celta Vigo",
-                    "nickname": null,
-                    "logo": "/icons/original/missing.png",
-                    "president": null,
-                    "coach": null,
-                    "history": null,
-                    "logo_file_name": null,
-                    "logo_content_type": null,
-                    "logo_file_size": null,
-                    "logo_updated_at": null
-                },
-                "team_away": {
-                    "id": 20,
-                    "city_id": null,
-                    "stadium_id": null,
-                    "name": "Leganes",
-                    "nickname": null,
-                    "logo": "/icons/original/missing.png",
-                    "president": null,
-                    "coach": null,
-                    "history": null,
-                    "logo_file_name": null,
-                    "logo_content_type": null,
-                    "logo_file_size": null,
-                    "logo_updated_at": null
+                    "tournament_id": 2,
+                    "tournament_group_id": 1,
+                    "team_home_id": 2,
+                    "team_away_id": 1,
+                    "start_date": null,
+                    "end_date": null,
+                    "score_home": 15,
+                    "score_away": 6,
+                    "status": "deferred",
+                    "referee_id": 3,
+                    "schema_team_home": "{\"players\": \"Player 1\"}",
+                    "schema_team_away": "{\"players\": \"Player 2\"}",
+                    "mvp": null,
+                    "outstanding": null,
+                    "broadcast_on": null,
+                    "round": null,
+                    "team_home": {
+                        "id": 2,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "New York Yankees",
+                        "nickname": "NY",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    },
+                    "team_away": {
+                        "id": 1,
+                        "city_id": 1,
+                        "stadium_id": 1,
+                        "name": "Tigres de Detroit",
+                        "nickname": "TD",
+                        "logo": "/icons/original/missing.png",
+                        "president": null,
+                        "coach": null,
+                        "history": null,
+                        "logo_file_name": null,
+                        "logo_content_type": null,
+                        "logo_file_size": null,
+                        "logo_updated_at": null,
+                        "stadium": {
+                            "id": 1,
+                            "city_id": 1,
+                            "name": "Estadio Universitario",
+                            "capacity": 300000,
+                            "description": "Estadio Universitario de Caracas"
+                        }
+                    }
                 }
-            }
+            ]
         },
         {
-            "game": {
-                "id": 20,
-                "tournament_id": 8,
-                "tournament_group_id": null,
-                "team_home_id": 15,
-                "team_away_id": 16,
-                "start_date": "2017-08-19T20:00:00.000Z",
-                "end_date": null,
-                "score_home": 2,
-                "score_away": 1,
-                "status": "finished",
-                "referee_id": null,
-                "schema_team_home": null,
-                "schema_team_away": null,
-                "mvp": null,
-                "outstanding": true,
-                "broadcast_on": null,
-                "round": 1,
-                "team_home": {
-                    "id": 15,
-                    "city_id": null,
-                    "stadium_id": null,
-                    "name": "Deportivo",
-                    "nickname": null,
-                    "logo": "/icons/original/missing.png",
-                    "president": null,
-                    "coach": null,
-                    "history": null,
-                    "logo_file_name": null,
-                    "logo_content_type": null,
-                    "logo_file_size": null,
-                    "logo_updated_at": null
-                },
-                "team_away": {
-                    "id": 16,
-                    "city_id": null,
-                    "stadium_id": null,
-                    "name": "Eibar",
-                    "nickname": null,
-                    "logo": "/icons/original/missing.png",
-                    "president": null,
-                    "coach": null,
-                    "history": null,
-                    "logo_file_name": null,
-                    "logo_content_type": null,
-                    "logo_file_size": null,
-                    "logo_updated_at": null
-                }
-            }
-        }
-    ],
-    "last_date": {
-        "id": 545,
-        "tournament_id": 8,
-        "tournament_group_id": null,
-        "team_home_id": 35,
-        "team_away_id": 43,
-        "start_date": "2017-11-18T18:00:00.000Z",
-        "end_date": null,
-        "score_home": 0,
-        "score_away": 0,
-        "status": "pending",
-        "referee_id": null,
-        "schema_team_home": null,
-        "schema_team_away": null,
-        "mvp": null,
-        "outstanding": true,
-        "broadcast_on": null,
-        "round": 1,
-        "team_home": {
-            "id": 35,
-            "city_id": null,
-            "stadium_id": null,
-            "name": "Monterrey",
-            "nickname": null,
-            "logo": "/icons/original/missing.png",
-            "president": null,
-            "coach": null,
-            "history": null,
-            "logo_file_name": null,
-            "logo_content_type": null,
-            "logo_file_size": null,
-            "logo_updated_at": null
+            "id": 2,
+            "tournament_id": 1,
+            "name": "Liga Nacional",
+            "description": "Liga Nacional",
+            "tournament_group_id": null,
+            "tournament_phase_id": 2,
+            "games": []
         },
-        "team_away": {
-            "id": 43,
-            "city_id": null,
-            "stadium_id": null,
-            "name": "Tigres UANL",
-            "nickname": null,
-            "logo": "/icons/original/missing.png",
-            "president": null,
-            "coach": null,
-            "history": null,
-            "logo_file_name": null,
-            "logo_content_type": null,
-            "logo_file_size": null,
-            "logo_updated_at": null
+        {
+            "id": 3,
+            "tournament_id": 1,
+            "name": "Central",
+            "description": "Grupo A",
+            "tournament_group_id": 1,
+            "tournament_phase_id": 1,
+            "games": []
+        },
+        {
+            "id": 4,
+            "tournament_id": 1,
+            "name": "East",
+            "description": "Grupo B",
+            "tournament_group_id": 1,
+            "tournament_phase_id": 1,
+            "games": []
+        },
+        {
+            "id": 5,
+            "tournament_id": 1,
+            "name": "West",
+            "description": "Grupo C",
+            "tournament_group_id": 1,
+            "tournament_phase_id": 1,
+            "games": []
+        },
+        {
+            "id": 6,
+            "tournament_id": 1,
+            "name": "Central",
+            "description": "Grupo A",
+            "tournament_group_id": 2,
+            "tournament_phase_id": 1,
+            "games": []
+        },
+        {
+            "id": 7,
+            "tournament_id": 1,
+            "name": "East",
+            "description": "Grupo B",
+            "tournament_group_id": 2,
+            "tournament_phase_id": 1,
+            "games": []
+        },
+        {
+            "id": 8,
+            "tournament_id": 1,
+            "name": "West",
+            "description": "Grupo C",
+            "tournament_group_id": 2,
+            "tournament_phase_id": 1,
+            "games": []
         }
-    }
+    ]
 }
 ]';
 
