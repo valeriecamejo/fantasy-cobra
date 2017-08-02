@@ -79,4 +79,4 @@ Route::get('/reglas', 'HomeController@rules');
 Route::get('/puntos', 'HomeController@score');
 
 //Web Hook
-Route::get('/stats', 'StatController@updateStats');
+Route::get('/stats/{statsWebHook}', 'StatController@updateStats');

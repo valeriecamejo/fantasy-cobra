@@ -10,13 +10,11 @@ use GuzzleHttp\Exception\RequestException;
 class StatsApi {
 
 //Base url
-  static $base_url = 'https://api.detrasdelhome.com/v1/';
-
+  static $base_url       = 'https://api.detrasdelhome.com/v1/'
   static $endpoint_login = 'sign_in';
-
-  static $params = ['access-token' => null,
-                    'uid'          => null,
-                    'client'       => null];
+  static $params         = ['access-token' => null,
+                            'uid'          => null,
+                            'client'       => null];
 
 //Creating a Client
   static $clientHttp = null;
@@ -32,30 +30,55 @@ class StatsApi {
 
   static function login () {
 
-    //if (self::$clientHttp == null) {
-      $response = self::clientHttp()->post(self::$base_url . self::$endpoint_login,[
-                         'json' => ['email'    => 'jedkaryd@gmail.com',
-                                    'password' => '123stats']
-                         ]);
-
-      $params = ['access-token' => $response->getHeader('access-token')[0],
-                 'uid'          => $response->getHeader('client')[0],
-                 'client'       => $response->getHeader('uid')[0]];
-
-      self::$params = $params;
-    //}
-  // echo $response->getStatusCode(). "\n";
-  // echo $response->getReasonPhrase(). "\n";
-  // echo $params['access-token']. "\n";
-  // echo $params['uid']. "\n";
-  // echo $params['client']. "\n";
-
-    return $params;
+    //echo "\ntry login...";
+    $response = self::clientHttp()->post(self::$base_url . self::$endpoint_login,[
+                       'json' => ['email'    => 'jedkaryd@gmail.com',
+                                  'password' => '123stats']
+                       ]);
+    return self::prepareParams($response);;
   }
 
-  static function service ($service_url, $params) {
+  static function prepareParams($response) {
+    $params = [ 'access-token' => $response->getHeader('access-token')[0],
+                'uid'          => $response->getHeader('uid')[0],
+                'client'       => $response->getHeader('client')[0]];
 
-    $resp = self::clientHttp()->get(self::$base_url . $service_url, self::$params);
+   // print_r($params);
+    return self::$params = $params;
+  }
+
+  static function get($resource) {
+
+    $resp = self::service($resource);
+  //  echo "\nStatusCode = {$resp->getStatusCode()}";
+    if ($resp->getStatusCode() == 401 ) {
+      echo "\nUnauthorized";
+      self::login();
+
+      $resp = self::service($resource);
+    } elseif ($res->getStatusCode() < 300) {
+      self::prepareParams($resp);
+    }
+
+    return $resp->getBody();
+  }
+
+  static function service ($service_url) {
+
+    $resp = null;
+
+    try{
+      $resp = self::clientHttp()->get(self::$base_url . $service_url, [
+      'headers' => self::$params
+      ]);
+    } catch (RequestException $e) {
+        echo Psr7\str($e->getRequest());
+        if ($e->hasResponse()) {
+            echo Psr7\str($e->getResponse());
+            $resp = $e->getResponse();
+        }
+    }
+
 
     return $resp;
   }
