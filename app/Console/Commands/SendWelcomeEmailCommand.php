@@ -56,6 +56,6 @@ class SendWelcomeEmailCommand extends Command
 
 
      // $game = GamesApi::saveUpdateGames($star_date, $end_date);
-     TeamsApi::saveUpdateTeams();
+     PlayersApi::saveUpdatePlayers();
     }
 }

@@ -5,6 +5,7 @@ namespace App\StatsApi;
 use DB;
 use App\Game;
 use DateTime;
+use App\Tournament;
 
 
 class GamesApi extends StatsApi {
@@ -95,6 +96,7 @@ public static function saveUpdateGames () {
       }
     }
   }
+// }
 }
 
 
