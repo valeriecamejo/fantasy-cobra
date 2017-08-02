@@ -22,7 +22,8 @@ public function __construct()
 
 public function updateStats ( $statsWebHook ) {
 
-  PlayerStatsApi::saveUpdatePlayerStatsApi( $statsWebHook );
+	$route = 'webHook';
+  PlayerStatsApi::saveUpdatePlayerStatsApi( $route, $statsWebHook );
 }
 
 }

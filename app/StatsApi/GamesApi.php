@@ -31,7 +31,7 @@ public static function saveUpdateGames ($star_date, $end_date) {
         $contador          = 0;
         $start_date        = new DateTime($gameStat->game->{"start_date"});
         $end_date          = new DateTime($gameStat->game->{"end_date"});
-        $updated_at          = new DateTime($updated);
+        $updated_at        = new DateTime($updated);
         foreach($games as $game) {
           if ( $gameStat->game->{"id"} === $game->legacy_id ) { // && ($game->legacy_stat_request < $updated_at){
             
