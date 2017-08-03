@@ -15,80 +15,71 @@ class PlayersApi extends StatsApi {
 * @return void
 ********************************************/
 
-public static function saveUpdatePlayers () {
+  public static function saveUpdatePlayers () {
 
-  //TO DO
-  //****************************************
-  //Sustituir '$update_at' por el del API
-  //Sustituir championship_id
-  //Solicitar para la consulta:
-  //   -Status del player
-  //****************************************
+    //TO DO
+    //****************************************
+    //Sustituir '$update_at' por el del API
+    //Solicitar para la consulta:
+    //   -Status del player
+    //****************************************
 
-/**************************************************************
-//CODIGO PARA SOLICITAR LOS TOURNAMENT_GROUP POR TOURNAMENT_ID
-//
-// $tournaments = tournament::where('is_active', true)->get();
-//
-  // foreach($tournaments as $tournament) {
+  $tournaments = tournament::where('is_active', true)->get();
 
-    // $tournament_legacy_id = $tournament['legacy_id'];
-    // $service = 'tournaments/$tournament_legacy_id/players';
-    // $params  = StatsApi::login();
-    // jsonApi  = StatsApi::service($service, $params);
-    // $stats   = json_decode($jsonApi);
-*///***********************************************************
+    foreach($tournaments as $tournament) {
 
-  $championship_id = 1;
-  $updated_at      = '2017-07-12 15:58:03';
+      $tournament_legacy_id = $tournament['legacy_id'];
+      $service              = 'tournaments/'. $tournament_legacy_id. '/players';
+      $jsonApi              = StatsApi::get($service);
+      $stats                = json_decode($jsonApi);
+      $updated_at           = '2017-07-12 15:58:03';
+      $players              = DB::table('players')->get();
+      $playerStatsApis      = json_decode(self::$allPlayers);
 
-  $players     = DB::table('players')->get();
-  $playerStatsApis = json_decode(self::$allPlayers);
-
-  if (is_array($playerStatsApis) || is_object($playerStatsApis)) {
+      if (is_array($playerStatsApis) || is_object($playerStatsApis)) {
 
 
-    foreach( $playerStatsApis[0]->tournament_teams as $playerStatsApi ) {
-      foreach( $playerStatsApi->player_tournament_teams as $playerStat ) {
+        foreach( $playerStatsApis[0]->tournament_teams as $playerStatsApi ) {
+          foreach( $playerStatsApi->player_tournament_teams as $playerStat ) {
 
-      $position = Position::select('name')->where('legacy_id', $playerStat->player->{"position_id"})->get();
-      $contador = 0;
-
-      foreach( $players as $player ) {
-          if ( $player->legacy_id == $playerStat->player->{"id"} ) { //&& ($player->legacy_stat_request < $updated_at) ) {
-            $contador = 1;
             $position = Position::select('name')->where('legacy_id', $playerStat->player->{"position_id"})->get();
+            $contador = 0;
 
-            DB::table('players')
-            ->where( 'legacy_id', $playerStat->player->{"id"} )
-            ->update([
-             'team_id'             => $playerStat->player->{"team_id"},
-             'championship_id'     => $playerStatsApis[0]->championship_id,
-             'name'                => $playerStat->player->{"name"},
-             'last_name'           => $playerStat->player->{"last_name"},
-             'position'            => $position[0]->name,
-             'legacy_stat_request' => $updated_at
-             ]);
+            foreach( $players as $player ) {
+              if ( $player->legacy_id == $playerStat->player->{"id"} ) { //&& ($player->legacy_stat_request < $updated_at) ) {
+                  $contador = 1;
+                  $position = Position::select('name')->where('legacy_id', $playerStat->player->{"position_id"})->get();
+
+                  DB::table('players')
+                  ->where( 'legacy_id', $playerStat->player->{"id"} )
+                  ->update([
+                   'team_id'             => $playerStat->player->{"team_id"},
+                   'championship_id'     => $playerStatsApis[0]->championship_id,
+                   'name'                => $playerStat->player->{"name"},
+                   'last_name'           => $playerStat->player->{"last_name"},
+                   'position'            => $position[0]->name,
+                   'legacy_stat_request' => $updated_at
+                   ]);
+                }
+            }
+              if ($contador == 0) {
+
+                $player                      =  new Player();
+                $player->team_id             =  $playerStat->player->{"team_id"};
+                $player->championship_id     =  $playerStatsApis[0]->championship_id;
+                $player->legacy_id           =  $playerStat->player->{"id"};
+                $player->name                =  $playerStat->player->{"name"};
+                $player->last_name           =  $playerStat->player->{"last_name"};
+                $player->points              =  0;
+                $player->position            =  $position[0]->name;
+                $player->status              =  1;
+                $player->legacy_stat_request =  $updated_at;
+                $player->save();
+              }
           }
-        }
-        if ($contador == 0) {
-
-          $player                      =  new Player();
-          $player->team_id             =  $playerStat->player->{"team_id"};
-          $player->championship_id     =  $playerStatsApis[0]->championship_id;
-          $player->legacy_id           =  $playerStat->player->{"id"};
-          $player->name                =  $playerStat->player->{"name"};
-          $player->last_name           =  $playerStat->player->{"last_name"};
-          $player->points              =  0;
-          $player->position            =  $position[0]->name;
-          $player->status              =  1;
-          $player->legacy_stat_request =  $updated_at;
-          $player->save();
         }
       }
     }
-  }
-  // }
   }
 
   static $allPlayers = '[
