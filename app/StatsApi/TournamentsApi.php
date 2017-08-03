@@ -51,6 +51,7 @@ class TournamentsApi extends StatsApi {
                        'name'                => $tournamentStat->name,
                        'start_date'          => $start_date,
                        'end_date'            => $end_date,
+                       'is_active'          => $tournamentStat->is_active,
                        'status_api'          => $tournamentStat->is_active,
                        'legacy_stat_request' => $updated_at
                        ]);
@@ -64,6 +65,7 @@ class TournamentsApi extends StatsApi {
             $tournament->name                =  $tournamentStat->name;
             $tournament->start_date          =  $start_date;
             $tournament->end_date            =  $end_date;
+            $tournament->is_active          =  $tournamentStat->is_active;
             $tournament->status_api          =  $tournamentStat->is_active;
             $tournament->legacy_stat_request =  $updated_at;
             $tournament->save();
