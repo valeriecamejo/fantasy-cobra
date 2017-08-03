@@ -20,6 +20,7 @@ class CreatePositionsTable extends Migration
             $table->foreign('sport_id')->references('id')->on('sports')->onDelete('cascade');
             $table->string('name');
             $table->string('description');
+            $table->boolean('is_active')->default(true);
             $table->dateTimeTz('legacy_stat_request')->nullable();
             $table->timestamps();
         });

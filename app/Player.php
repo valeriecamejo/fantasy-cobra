@@ -58,12 +58,12 @@ class Player extends Model
     $team_date = Carbon::createFromFormat('Y-m-d H:i', $date)->format('Y-m-d');
 
     $player = Player::select('players.*','teams.short_nickname as name_team', 'players.id as player_id',
-      DB::raw('if(players.team_id = games.team_id_home, games.team_id_away, games.team_id_home) as opo'),
+      DB::raw('if(players.team_id = games.team_home_id, games.team_away_id, games.team_home_id) as opo'),
       DB::raw('(select teams.short_nickname from teams where teams.id = opo) as name_opponent'))
       ->join('teams', 'teams.id', '=', 'players.team_id')
       ->join('games', function($games) {
-        $games->on('games.team_id_home', '=', 'teams.id');
-        $games->orOn('games.team_id_away', '=', 'teams.id');
+        $games->on('games.team_home_id', '=', 'teams.id');
+        $games->orOn('games.team_away_id', '=', 'teams.id');
       })
       ->where('players.championship_id', '=', $championship)
       ->where(DB::raw('DATE_FORMAT(games.start_date, "%Y-%m-%d")'), '=', $team_date)
@@ -77,12 +77,12 @@ class Player extends Model
   public static function find_data($id) {
 
     $player = Player::select('players.*','teams.short_nickname as name_team',
-      DB::raw('if(players.team_id = games.team_id_home, games.team_id_away, games.team_id_home) as opo'),
+      DB::raw('if(players.team_id = games.team_home_id, games.team_away_id, games.team_home_id) as opo'),
       DB::raw('(select teams.short_nickname from teams where teams.id = opo) as name_opponent'))
       ->join('teams', 'teams.id', '=', 'players.team_id')
       ->join('games', function($games) {
-        $games->on('games.team_id_home', '=', 'teams.id');
-        $games->orOn('games.team_id_away', '=', 'teams.id');
+        $games->on('games.team_home_id', '=', 'teams.id');
+        $games->orOn('games.team_away_id', '=', 'teams.id');
       })
       ->where('players.id', '=', $id)
       ->first();
@@ -95,12 +95,12 @@ class Player extends Model
     $date       = $date_team;
 
     $player = Player::select('players.*','teams.short_nickname as name_team',
-      DB::raw('if(players.team_id = games.team_id_home, games.team_id_away, games.team_id_home) as opo'),
+      DB::raw('if(players.team_id = games.team_home_id, games.team_away_id, games.team_home_id) as opo'),
       DB::raw('(select teams.short_nickname from teams where teams.id = opo) as name_opponent'))
       ->join('teams', 'teams.id', '=', 'players.team_id')
       ->join('games', function($games) {
-        $games->on('games.team_id_home', '=', 'teams.id');
-        $games->orOn('games.team_id_away', '=', 'teams.id');
+        $games->on('games.team_home_id', '=', 'teams.id');
+        $games->orOn('games.team_away_id', '=', 'teams.id');
       })
       ->where('players.championship_id', '=', $championship)
       ->where(DB::raw('DATE_FORMAT(games.start_date, "%Y-%m-%d")'), '=', $date)
@@ -115,24 +115,24 @@ class Player extends Model
     $date       = $date_team;
 
     $player = Player::select('players.*','teams.short_nickname as name_team',
-      DB::raw('if(players.team_id = games.team_id_home, games.team_id_away, games.team_id_home) as opo'),
+      DB::raw('if(players.team_id = games.team_home_id, games.team_away_id, games.team_home_id) as opo'),
       DB::raw('(select teams.short_nickname from teams where teams.id = opo) as name_opponent'))
       ->join('teams', 'teams.id', '=', 'players.team_id')
       ->join('games', function($games) {
-        $games->on('games.team_id_home', '=', 'teams.id');
-        $games->orOn('games.team_id_away', '=', 'teams.id');
+        $games->on('games.team_home_id', '=', 'teams.id');
+        $games->orOn('games.team_away_id', '=', 'teams.id');
       })
       ->where('players.championship_id', '=', $championship)
       ->where(DB::raw('DATE_FORMAT(games.start_date, "%Y-%m-%d")'), '=', $date)
       ->where('players.position', '=', $position);
 
     $player_union = Player::select('players.*','teams.short_nickname as name_team',
-      DB::raw('if(players.team_id = games.team_id_home, games.team_id_away, games.team_id_home) as opo'),
+      DB::raw('if(players.team_id = games.team_home_id, games.team_away_id, games.team_home_id) as opo'),
       DB::raw('(select teams.short_nickname from teams where teams.id = opo) as name_opponent'))
       ->join('teams', 'teams.id', '=', 'players.team_id')
       ->join('games', function($games) {
-        $games->on('games.team_id_home', '=', 'teams.id');
-        $games->orOn('games.team_id_away', '=', 'teams.id');
+        $games->on('games.team_home_id', '=', 'teams.id');
+        $games->orOn('games.team_away_id', '=', 'teams.id');
       })
       ->where('players.championship_id', '=', $championship)
       ->where(DB::raw('DATE_FORMAT(games.start_date, "%Y-%m-%d")'), '=', $date)

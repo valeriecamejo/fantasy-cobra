@@ -24,19 +24,18 @@ class SportsApi extends StatsApi {
 * @return void
 **************************************************/
 
-    public static function saveUpdateSports () {
+  public static function saveUpdateSports () {
 
 //***********************************************************
 //Sustituir el legacy_stat_request por el updated_at del API
 //***********************************************************
 
-/**************************************************************
-//CODIGO PARA LA SOLICITUD DEL SERVICIO SPORT AL API
-// $service = 'sports';
-// $params  = StatsApi::login();
-// jsonApi  = StatsApi::service($service, $params);
-// $stats   = json_decode($jsonApi);
-*///***********************************************************
+//*****************************************
+//Solicitud de Servicio al API
+    $service    = 'sports';
+    $jsonApi    = StatsApi::get($service);
+    $stats      = json_decode($jsonApi);
+//*****************************************
 
     $updated_at = '2017-07-12 15:58:03';
     $sports     = DB::table('sports')->get();
@@ -58,42 +57,19 @@ class SportsApi extends StatsApi {
                      'description'         => $sportStat->description,
                      'legacy_stat_request' => $updated_at
                      ]);
+          }
         }
-      }
-      if ($contador == 0) {
+        if ($contador == 0) {
 
-        $sport                      =  new Sport();
-        $sport->legacy_id           =  $sportStat->id;
-        $sport->name                =  $sportStat->name;
-        $sport->description         =  $sportStat->description;
-        $sport->legacy_stat_request =  $updated_at;
-        $sport->save();
+          $sport                      =  new Sport();
+          $sport->legacy_id           =  $sportStat->id;
+          $sport->name                =  $sportStat->name;
+          $sport->description         =  $sportStat->description;
+          $sport->legacy_stat_request =  $updated_at;
+          $sport->save();
+        }
       }
     }
   }
-}
-
-
-static $allSports = '[
-    {
-        "id": 1,
-        "name": "Baseball",
-        "description": "Baseball",
-        "icon_updated_at": null,
-        "icon_file_size": null,
-        "icon_content_type": null,
-        "icon_file_name": null
-    },
-    {
-        "id": 2,
-        "name": "Futbol",
-        "description": "correr detras de un balon",
-        "icon_updated_at": null,
-        "icon_file_size": null,
-        "icon_content_type": null,
-        "icon_file_name": null
-    }
-]';
-
 }
 

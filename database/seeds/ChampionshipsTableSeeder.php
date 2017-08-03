@@ -19,6 +19,7 @@ class ChampionshipsTableSeeder extends Seeder
                                                    'name'         => 'MLB',
                                                    'description'  => 'Ligas de béisbol profesional',
                                                    'is_active'    => true,
+                                                   'status_api'    => true,
                                                    'avatar'       => 'images/BolaMLB.png'
                                                    ),
                                              array(
@@ -27,6 +28,7 @@ class ChampionshipsTableSeeder extends Seeder
                                                    'name'         => 'LVBP',
                                                    'description'  => 'Liga Venezolana de Béisbol Profesional',
                                                    'is_active'    => false,
+                                                   'status_api'    => true,
                                                    'avatar'       => 'images/BolaLVBP.png'
                                                    )
                                              ));

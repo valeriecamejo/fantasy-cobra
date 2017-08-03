@@ -16,12 +16,12 @@ class CreateTournamentsTable extends Migration
         Schema::create('tournaments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('legacy_id');
-            $table->integer('championship_id')->unsigned();
-            $table->foreign('championship_id')->references('id')->on('championships')->onDelete('cascade');
+            $table->integer('championship_id');
             $table->string('name');
             $table->dateTimeTz('start_date');
             $table->dateTimeTz('end_date');
-            $table->boolean('is_active');
+            $table->boolean('is_active')->default(true);
+            $table->boolean('status_api');
             $table->dateTimeTz('legacy_stat_request')->nullable();
             $table->timestamps();
         });

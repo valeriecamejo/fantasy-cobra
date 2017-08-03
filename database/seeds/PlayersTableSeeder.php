@@ -157,8 +157,8 @@ class PlayersTableSeeder extends Seeder
                                              'status'             =>  1,
                                              ),
 
-                                       array( 
-                                             'team_id'            =>  2,
+                                       array(
+                                             'team_id'            =>  1,
                                              'championship_id'    =>  1,
                                              'legacy_id'          =>  14,
                                              'name'               => 'Matt',
@@ -169,7 +169,7 @@ class PlayersTableSeeder extends Seeder
                                              'status'             =>  1,
                                              ),
                                        array(
-                                             'team_id'            =>  2,
+                                             'team_id'            =>  1,
                                              'championship_id'    =>  1,
                                              'legacy_id'          =>  15,
                                              'name'               => 'Michael',
@@ -180,7 +180,7 @@ class PlayersTableSeeder extends Seeder
                                              'status'             =>  1,
                                              ),
                                        array(
-                                             'team_id'            =>  2,
+                                             'team_id'            =>  1,
                                              'championship_id'    =>  1,
                                              'legacy_id'          =>  16,
                                              'name'               => 'Daniel',
@@ -191,7 +191,7 @@ class PlayersTableSeeder extends Seeder
                                              'status'             =>  1,
                                              ),
                                        array(
-                                             'team_id'            =>  2,
+                                             'team_id'            =>  1,
                                              'championship_id'    =>  1,
                                              'legacy_id'          =>  17,
                                              'name'               => 'Justin',
@@ -202,7 +202,7 @@ class PlayersTableSeeder extends Seeder
                                              'status'             =>  1,
                                              ),
                                        array(
-                                             'team_id'            =>  2,
+                                             'team_id'            =>  1,
                                              'championship_id'    =>  1,
                                              'legacy_id'          =>  18,
                                              'name'               => 'Alex',
@@ -213,7 +213,7 @@ class PlayersTableSeeder extends Seeder
                                              'status'             =>  1,
                                              ),
                                        array(
-                                             'team_id'            =>  2,
+                                             'team_id'            =>  1,
                                              'championship_id'    =>  1,
                                              'legacy_id'          =>  19,
                                              'name'               => 'James',
@@ -224,7 +224,7 @@ class PlayersTableSeeder extends Seeder
                                              'status'             =>  1,
                                              ),
                                        array(
-                                             'team_id'            =>  2,
+                                             'team_id'            =>  1,
                                              'championship_id'    =>  1,
                                              'legacy_id'          =>  20,
                                              'name'               => 'Miguel',
@@ -235,7 +235,7 @@ class PlayersTableSeeder extends Seeder
                                              'status'             =>  1,
                                              ),
                                        array(
-                                             'team_id'            =>  2,
+                                             'team_id'            =>  1,
                                              'championship_id'    =>  1,
                                              'legacy_id'          =>  21,
                                              'name'               => 'Ian',
@@ -246,7 +246,7 @@ class PlayersTableSeeder extends Seeder
                                              'status'             =>  1,
                                              ),
                                        array(
-                                             'team_id'            =>  2,
+                                             'team_id'            =>  1,
                                              'championship_id'    =>  1,
                                              'legacy_id'          =>  22,
                                              'name'               => 'Nick',
@@ -257,7 +257,7 @@ class PlayersTableSeeder extends Seeder
                                              'status'             =>  1,
                                              ),
                                        array(
-                                             'team_id'            =>  2,
+                                             'team_id'            =>  1,
                                              'championship_id'    =>  1,
                                              'legacy_id'          =>  23,
                                              'name'               => 'José',
@@ -268,7 +268,7 @@ class PlayersTableSeeder extends Seeder
                                              'status'             =>  1,
                                              ),
                                        array(
-                                             'team_id'            =>  2,
+                                             'team_id'            =>  1,
                                              'championship_id'    =>  1,
                                              'legacy_id'          =>  24,
                                              'name'               => 'Tyler',
@@ -279,7 +279,7 @@ class PlayersTableSeeder extends Seeder
                                              'status'             =>  1,
                                              ),
                                        array(
-                                             'team_id'            =>  2,
+                                             'team_id'            =>  1,
                                              'championship_id'    =>  1,
                                              'legacy_id'          =>  25,
                                              'name'               => 'JaCoby',
@@ -290,7 +290,7 @@ class PlayersTableSeeder extends Seeder
                                              'status'             =>  1,
                                              ),
                                        array(
-                                             'team_id'            =>  2,
+                                             'team_id'            =>  1,
                                              'championship_id'    =>  1,
                                              'legacy_id'          =>  26,
                                              'name'               => 'Mikie',

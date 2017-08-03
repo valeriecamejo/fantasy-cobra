@@ -70,7 +70,7 @@ class StatsApi {
       $resp = self::clientHttp()->get(self::$base_url . $service_url, [
       'headers' => self::$params
       ]);
-// print_r($resp);
+ // print_r($resp);
       // self::prepareParams($resp);
     } catch (RequestException $e) {
         echo Psr7\str($e->getRequest());

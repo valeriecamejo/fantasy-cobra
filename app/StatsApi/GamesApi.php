@@ -31,16 +31,15 @@ class GamesApi extends StatsApi {
       $tournament_legacy_id = $tournament['legacy_id'];
       $service = 'tournaments/'. $tournament_legacy_id . '/games';
       $jsonApi  = StatsApi::get($service);
-      $gameStatsApis = array();
-      $gameStatsApis = json_encode($jsonApi);
+      $gameStatsApis = json_decode($jsonApi);
+// print_r($gameStatsApis);
 
- 
       $updated  = date("Y-m-d H:i:s e");
       $games     = DB::table('games')->where('tournament_id', $tournament_id)->get();
 
       if (is_array($gameStatsApis) || is_object($gameStatsApis)) {
 
-        foreach($gameStatsApis[0]->tournament_groups as $gameStatsApi) {
+        foreach($gameStatsApis->tournament_groups as $gameStatsApi) {
 
           foreach($gameStatsApi->games as $gameStat) {
             $contador          = 0;
@@ -57,8 +56,8 @@ class GamesApi extends StatsApi {
               ->update([
                'tournament_id'       => $gameStat->tournament_id,
                'tournament_group_id' => $gameStat->tournament_group_id,
-               'team_id_home'        => $gameStat->team_home->{"id"},
-               'team_id_away'        => $gameStat->team_away->{"id"},
+               'team_home_id'        => $gameStat->team_home->{"id"},
+               'team_away_id'        => $gameStat->team_away->{"id"},
                'start_date'          => $start_date,
                'end_date'            => $end_date,
                'score_home'          => $gameStat->score_home,
@@ -77,8 +76,8 @@ class GamesApi extends StatsApi {
               $game->legacy_id           = $gameStat->id;
               $game->tournament_id       = $gameStat->tournament_id;
               $game->tournament_group_id = $gameStat->tournament_group_id;
-              $game->team_id_home        = $gameStat->team_home->{"id"};
-              $game->team_id_away        = $gameStat->team_away->{"id"};
+              $game->team_home_id        = $gameStat->team_home->{"id"};
+              $game->team_away_id        = $gameStat->team_away->{"id"};
               $game->start_date          = $start_date;
               $game->end_date            = $end_date;
               $game->score_home          = $gameStat->score_home;

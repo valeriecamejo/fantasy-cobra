@@ -54,12 +54,12 @@ class SendWelcomeEmailCommand extends Command
       $statsWebHook = null;
 
       $service = 'sports';
-      //$params  = StatsApi::login();
       // $jsonApi  = StatsApi::get($service);
 
-      // echo $jsonApi;
-      PositionsApi::saveUpdatePositions();
-     // $game = GamesApi::saveUpdateGames($star_date, $end_date);
-     //PlayersApi::saveUpdatePlayers();
+      // TournamentsApi::saveUpdateTournaments();
+      // TournamentGroupsApi::saveUpdateTournamentGroups();
+     // SportsApi::saveUpdateSports();
+      // GamesApi::saveUpdateGames();
+      TournamentGroupsApi::saveUpdateTournamentGroups();
     }
 }

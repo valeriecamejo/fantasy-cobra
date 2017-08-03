@@ -17,8 +17,8 @@ class CreateGamesTable extends Migration
             $table->increments('id');
             $table->integer('legacy_id');
             $table->integer('tournament_id');
-            $table->integer('team_id_home')->nullable();
-            $table->integer('team_id_away')->nullable();
+            $table->integer('team_home_id')->nullable();
+            $table->integer('team_away_id')->nullable();
             $table->integer('tournament_group_id')->nullable();
             $table->dateTimeTz('start_date')->nullable();
             $table->dateTimeTz('end_date')->nullable();

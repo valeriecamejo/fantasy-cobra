@@ -19,12 +19,14 @@ class ChampionshipsApi extends StatsApi {
   //Sustituir el legacy_stat_request por el updated_at del API
   //***********************************************************
 
-  $service = 'championships';
-  $jsonApi  = StatsApi::get($service);
-  $championshipStats   = json_decode($jsonApi);
-
-      $updated_at        = '2017-07-12 15:58:03';
-      $championships     = DB::table('championships')->get();
+//*************************************************
+//Solicitud de Servicio al API
+    $service           = 'championships';
+    $jsonApi           = StatsApi::get($service);
+    $championshipStats = json_decode($jsonApi);
+//*************************************************
+    $updated_at        = '2017-07-12 15:58:03';
+    $championships     = DB::table('championships')->get();
 
       if (is_array($championshipStats) || is_object($championshipStats)) {
         foreach($championshipStats as $championshipStat) {
@@ -40,7 +42,7 @@ class ChampionshipsApi extends StatsApi {
                  'sport_id'            => $championshipStat->sport_id,
                  'name'                => $championshipStat->name,
                  'description'         => $championshipStat->description,
-                 'is_active'           => $championshipStat->is_active,
+                 'status_api'          => $championshipStat->is_active,
                  'legacy_stat_request' => $updated_at
                  ]);
           }
@@ -52,7 +54,7 @@ class ChampionshipsApi extends StatsApi {
             $championship->sport_id            =  $championshipStat->sport_id;
             $championship->name                =  $championshipStat->name;
             $championship->description         =  $championshipStat->description;
-            $championship->is_active           =  $championshipStat->is_active;
+            $championship->status_api          =  $championshipStat->is_active;
             $championship->legacy_stat_request =  $updated_at;
             $championship->save();
             echo $championship;
@@ -60,5 +62,4 @@ class ChampionshipsApi extends StatsApi {
       }
     }
   }
-
 }
