@@ -34,12 +34,12 @@ class SportsApi extends StatsApi {
 //Solicitud de Servicio al API
     $service    = 'sports';
     $jsonApi    = StatsApi::get($service);
-    $stats      = json_decode($jsonApi);
+    $sportStats = json_decode($jsonApi);
 //*****************************************
 
     $updated_at = '2017-07-12 15:58:03';
     $sports     = DB::table('sports')->get();
-    $sportStats = json_decode(self::$allSports);
+    // $sportStats = json_decode(self::$allSports);
 
     if (is_array($sportStats) || is_object($sportStats)) {
       foreach($sportStats as $sportStat) {

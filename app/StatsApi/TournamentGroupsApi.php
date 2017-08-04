@@ -18,16 +18,18 @@ class TournamentGroupsApi extends StatsApi {
 
   public static function saveUpdateTournamentGroups () {
 
-//***********************************************************
+//*******************************************************************
 //Sustituir el legacy_stat_request por el updated_at del API
-//***********************************************************
+//AL tener la data real en el Api, se debe consultar por tournaments
+//*******************************************************************
 
   $tournaments = DB::table('tournaments')->get();
 
-    // foreach($tournaments as $tournament) {
+    foreach($tournaments as $tournament) {
 
-      // $tournament_legacy_id = $tournament['legacy_id'];
-      $service = 'tournaments/1/groups';
+      $tournament_legacy_id = $tournament->legacy_id;
+
+      $service = 'tournaments/'. $tournament_legacy_id .'/groups';
       $jsonApi  = StatsApi::get($service);
       $tournamentGroupStats   = json_decode($jsonApi);
       $updated_at          = '2017-07-12 15:58:03';
@@ -67,6 +69,6 @@ class TournamentGroupsApi extends StatsApi {
           }
         }
       }
-    // }
+    }
   }
 }

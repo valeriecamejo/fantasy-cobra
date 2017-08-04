@@ -32,14 +32,12 @@ class ChampionshipsApi extends StatsApi {
         foreach($championshipStats as $championshipStat) {
           $contador = 0;
           foreach($championships as $championship) {
-
             if ($championship->legacy_id === $championshipStat->id) { // ($championship->legacy_stat_request < $updated_at) ) {
               $contador = 1;
 
               DB::table('championships')
               ->where('legacy_id', $championshipStat->id)
               ->update([
-                 'sport_id'            => $championshipStat->sport_id,
                  'name'                => $championshipStat->name,
                  'description'         => $championshipStat->description,
                  'status_api'          => $championshipStat->is_active,

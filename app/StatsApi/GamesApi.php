@@ -20,22 +20,19 @@ class GamesApi extends StatsApi {
 
   //***********************************************************
   //Sustituir el legacy_stat_request por el updated_at del API
-  //Sustituir el tournament_id en la consulta del $games
   //***********************************************************
 
-  $tournaments = tournament::where('is_active', true)->get();
+    $tournaments = DB::table('tournaments')->get();
 
     foreach($tournaments as $tournament) {
 
-      $tournament_id = $tournament['id'];
-      $tournament_legacy_id = $tournament['legacy_id'];
-      $service = 'tournaments/'. $tournament_legacy_id . '/games';
-      $jsonApi  = StatsApi::get($service);
-      $gameStatsApis = json_decode($jsonApi);
-// print_r($gameStatsApis);
-
-      $updated  = date("Y-m-d H:i:s e");
-      $games     = DB::table('games')->where('tournament_id', $tournament_id)->get();
+      $tournament_legacy_id = $tournament->legacy_id;
+      $tournament_id        = $tournament->id;
+      $service              = 'tournaments/'. $tournament_legacy_id. '/games';
+      $jsonApi              = StatsApi::get($service);
+      $gameStatsApis        = json_decode($jsonApi);
+      $updated              = date("Y-m-d H:i:s e");
+      $games                = DB::table('games')->get();
 
       if (is_array($gameStatsApis) || is_object($gameStatsApis)) {
 
@@ -88,13 +85,10 @@ class GamesApi extends StatsApi {
               $game->mvp                 = $gameStat->mvp;
               $game->legacy_stat_request = $updated_at;
               $game->save();
-
-              return $game;
             }
           }
         }
       }
     }
   }
-
 }
