@@ -20,21 +20,22 @@ class PositionsApi extends StatsApi {
 //Sustituir el legacy_stat_request por el updated_at del API
 //***********************************************************
 
-  $sports = sport::where('is_active', true)->get();
+  $sports = DB::table('sports')->get();
 
     foreach($sports as $sport) {
 
-      $sport_legacy_id = $sport['legacy_id'];
-      $service         = 'sports/' . $sport_legacy_id . '/positions';
-      $jsonApi         = StatsApi::get($service);
-      $positionStats   = json_encode($jsonApi);
+      $sport_legacy_id = $sport->legacy_id;
+      $sport_id = $sport->id;
+      $service         = 'sports/'. $sport_legacy_id .'/positions';
+ echo     $jsonApi         = StatsApi::get($service);
+      $positionStats   = json_decode($jsonApi);
       $updated_at      = '2017-07-12 15:58:03';
       $positions       = DB::table('positions')->get();
-      // $positionStats = json_decode(self::$allPositions);
 
       if (is_array($positionStats) || is_object($positionStats)) {
-        foreach($positionStats[0]->positions as $positionStat) {
-          echo $positionStat->id. "\n";
+
+        foreach($positionStats->positions as $positionStat) {
+
           $contador = 0;
           foreach($positions as $position) {
 
@@ -44,7 +45,7 @@ class PositionsApi extends StatsApi {
               DB::table('positions')
               ->where('legacy_id', $positionStat->id)
               ->update([
-                       'sport_id'            => $positionStat->sport_id,
+                       'sport_id'            => $sport_id,
                        'name'                => $positionStat->name,
                        'description'         => $positionStat->description,
                        'legacy_stat_request' => $updated_at
@@ -55,7 +56,7 @@ class PositionsApi extends StatsApi {
 
             $position                      =  new Position();
             $position->legacy_id           =  $positionStat->id;
-            $position->sport_id            =  $positionStat->sport_id;
+            $position->sport_id            =  $sport_id;
             $position->name                =  $positionStat->name;
             $position->description         =  $positionStat->description;
             $position->legacy_stat_request =  $updated_at;
@@ -65,51 +66,4 @@ class PositionsApi extends StatsApi {
       }
     }
   }
-
-
-static $allPositions = '[
-    {
-    "id": 1,
-    "name": "Baseball",
-    "description": "Baseball",
-    "icon_updated_at": null,
-    "icon_file_size": null,
-    "icon_content_type": null,
-    "icon_file_name": null,
-    "structure_template": "{\"out\": 0, \"ball\": 0, \"annotation\": 0, \"strike\": 0}",
-    "positions": [
-        {
-            "id": 1,
-            "sport_id": 1,
-            "name": "PA",
-            "description": "Cuerpo de pitcheo"
-        },
-        {
-            "id": 2,
-            "sport_id": 1,
-            "name": "C",
-            "description": "Catcher"
-        },
-        {
-            "id": 3,
-            "sport_id": 1,
-            "name": "1B",
-            "description": "1 Base"
-        },
-        {
-            "id": 4,
-            "sport_id": 1,
-            "name": "2B",
-            "description": "2 Base"
-        },
-        {
-            "id": 5,
-            "sport_id": 1,
-            "name": "3B",
-            "description": "3 Base"
-        }
-    ]
-}
-]';
-
 }

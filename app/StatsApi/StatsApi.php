@@ -39,9 +39,9 @@ class StatsApi {
   }
 
   static function prepareParams($response) {
-    $params = [ 'access-token' => $response->getHeader('access-token')[0],
-                'uid'          => $response->getHeader('uid')[0],
-                'client'       => $response->getHeader('client')[0]];
+    $params = [ 'access-token' => $response->getHeader('access-token'),
+                'uid'          => $response->getHeader('uid'),
+                'client'       => $response->getHeader('client')];
 
     return self::$params = $params;
   }
@@ -70,8 +70,8 @@ class StatsApi {
       $resp = self::clientHttp()->get(self::$base_url . $service_url, [
       'headers' => self::$params
       ]);
- // print_r($resp);
-      // self::prepareParams($resp);
+
+      self::prepareParams($resp);
     } catch (RequestException $e) {
         echo Psr7\str($e->getRequest());
         if ($e->hasResponse()) {
