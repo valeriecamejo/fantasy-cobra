@@ -58,8 +58,10 @@ class SendWelcomeEmailCommand extends Command
 
       // TournamentsApi::saveUpdateTournaments();
       // TournamentGroupsApi::saveUpdateTournamentGroups();
-     // SportsApi::saveUpdateSports();
+      // SportsApi::saveUpdateSports();
       // GamesApi::saveUpdateGames();
+      // PositionsApi::saveUpdatePositions();
+      // TeamsApi::saveUpdateTeams();
       // ChampionshipsApi::saveUpdateChampionships();
       PlayersApi::saveUpdatePlayers();
     }

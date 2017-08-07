@@ -25,9 +25,9 @@ class PositionsApi extends StatsApi {
     foreach($sports as $sport) {
 
       $sport_legacy_id = $sport->legacy_id;
-      $sport_id = $sport->id;
+      $sport_id        = $sport->id;
       $service         = 'sports/'. $sport_legacy_id .'/positions';
- echo     $jsonApi         = StatsApi::get($service);
+      $jsonApi         = StatsApi::get($service);
       $positionStats   = json_decode($jsonApi);
       $updated_at      = '2017-07-12 15:58:03';
       $positions       = DB::table('positions')->get();

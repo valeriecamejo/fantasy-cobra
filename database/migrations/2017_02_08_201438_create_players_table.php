@@ -15,10 +15,8 @@ class CreatePlayersTable extends Migration
     {
         Schema::create('players', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('team_id')->unsigned();
-            $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
-            $table->integer('championship_id')->unsigned();
-            $table->foreign('championship_id')->references('id')->on('championships')->onDelete('cascade');
+            $table->integer('team_id');
+            $table->integer('championship_id');
             $table->string('name');
             $table->string('last_name');
             $table->string('position');
