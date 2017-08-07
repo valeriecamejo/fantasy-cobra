@@ -24,7 +24,6 @@ public static function saveUpdatePlayerStatsApi ( $route, $statsWebHook ) {
   //$championships = championship::where('is_active', 1)->get();
 
   // foreach($championships as $championship) {
-  //   echo $championship['legacy_id'];
 
   // if ( $route == 'cronJob' ) {
 

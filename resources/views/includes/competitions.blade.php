@@ -55,6 +55,14 @@
       </tr>
       </thead>
       <tbody id="table-all-no-mobile">
+      @if(isset($list_competitions) && count($list_competitions) == 0)
+      <tr>
+        <td style="text-align: center;" colspan="9">
+          <h5>No tienes equipos creados</h5>
+          <h4>Te invitamos a que disfrutes de la plataforma.</h4>
+        </td>
+      </tr>
+      @else
       @foreach ($list_competitions as $competition)
         <tr>
           <td class="tdimg1">
@@ -127,6 +135,7 @@
           </td>
         </tr>
       @endforeach
+      @endif
       </tbody>
     </table>
   </div>

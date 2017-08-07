@@ -16,21 +16,21 @@ use App\StatsApi\ChampionshipsApi;
 use App\StatsApi\TournamentsApi;
 use App\StatsApi\TournamentGroupsApi;
 
-class SendWelcomeEmailCommand extends Command
+class TaskSchedulingCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'send:welcome';
+    protected $signature = 'task:scheduling';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Send a welcome email to all new users who joined yesterday.';
+    protected $description = 'Task scheduling for service Api.';
 
     /**
      * Create a new command instance.
@@ -54,7 +54,6 @@ class SendWelcomeEmailCommand extends Command
       $statsWebHook = null;
 
       $service = 'sports';
-      // $jsonApi  = StatsApi::get($service);
 
       // TournamentsApi::saveUpdateTournaments();
       // TournamentGroupsApi::saveUpdateTournamentGroups();
@@ -63,6 +62,7 @@ class SendWelcomeEmailCommand extends Command
       // PositionsApi::saveUpdatePositions();
       // TeamsApi::saveUpdateTeams();
       // ChampionshipsApi::saveUpdateChampionships();
-      PlayersApi::saveUpdatePlayers();
+      // PlayersApi::saveUpdatePlayers();
+      // PlayerStatsApi::saveUpdatePlayerStatsApi();
     }
 }

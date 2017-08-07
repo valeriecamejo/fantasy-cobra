@@ -74,7 +74,7 @@ class PlayersApi extends StatsApi {
                 $player->status              =  1;
                 $player->legacy_stat_request =  $updated_at;
                 $player->save();
-              } 
+              }
             }
           }
         }

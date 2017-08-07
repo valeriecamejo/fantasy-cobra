@@ -17,6 +17,7 @@ class CreateSportsTable extends Migration
             $table->increments('id');
             $table->integer('legacy_id');
             $table->string('name');
+            $table->string('name_api');
             $table->string('description')->nullable();
             $table->boolean('approved')->default(true);
             $table->boolean('is_active')->default(true);

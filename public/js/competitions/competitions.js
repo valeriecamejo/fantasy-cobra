@@ -43,11 +43,14 @@ function filter_competitions(sport, filter_type, competitions) {
   }
 
   $.each(competitions, function(index, element) {
+     console.log(element.type_competition, filter_type);
+     console.log(element.name_sport, sport);
     if ((element.name_sport == sport) && (filter_type == 'all')) {
             list_competitions.push(element);
           } else {
     if ((element.name_sport == sport) && (element.type_competition == filter_type )) {
       list_competitions.push(element);
+      console.log(list_competitions);
     } else {
       if ((element.name_sport == sport) && (element.type_play == filter_type )) {
         list_competitions.push(element);
