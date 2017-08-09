@@ -35,7 +35,7 @@
                {!! Form::checkbox('remember', 1, 'remember') !!}<a>Recordar Correo</a>
          	</div>
          	<div class="modal-footer">
-            	<button type="submit" class="btn btn-default btn-primary4" onclick="document.getElementById('bloquea').style.display='block'">INICIAR</button>
+            	<button type="submit" class="btn btn-default btn-primary4">INICIAR</button>
          	</div>
       	</div>
       {!! Form::close() !!}

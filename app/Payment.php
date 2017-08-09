@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Lib\Ddh\UtilityDate;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class Payment extends Model
 {
@@ -34,7 +35,6 @@ class Payment extends Model
 
   $payment                   = new Payment;
   $payment->user_id          = Auth::user()->id;
-  $payment->amount           = $input['amount'];
   $payment->transaction_type = 'retiro';
   $payment->balance_before   = Auth::user()->bettor->balance;
   $payment->account_number   = $input['number_account'];
@@ -43,10 +43,31 @@ class Payment extends Model
   $payment->approved         = false;
   $payment->account_type     = $input['type_account'];
 
-    if ($payment->save()) {
+  $verify_mount = Payment::verify_mount($input['amount']);
+    if ($verify_mount) {
+      $payment->amount         = $input['amount'];
+      $payment->save();
       return $payment;
+    } else {
+      return false;
     }
 
   }
 
+/********************************************
+* verify_mount: validation for balance
+* @param mount
+* @return bool
+********************************************/
+  public static function verify_mount($mount_withdraw) {
+
+   $min_withdraw = \App\Lib\Ddh\SettingVariables::getSettings('min_withdraw');
+   $user_balance = floatval(Auth::user()->bettor->balance);
+
+    if( (floatval($mount_withdraw) < floatval($min_withdraw)) || (floatval($mount_withdraw) > floatval($user_balance)) ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }
