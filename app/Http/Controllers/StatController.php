@@ -20,12 +20,10 @@ public function __construct()
 	$this->middleware('auth');
 }
 
-public function updateStats (  ) {
+public function updateStats ( $statsWebHook ) {
 
-
-  return "HOLA";
-	// $route = 'webHook';
- //  PlayerStatsApi::saveUpdatePlayerStatsApi( $route, $statsWebHook );
+	$route = 'webHook';
+  PlayerStatsApi::saveUpdatePlayerStatsApi( $route, $statsWebHook );
 }
 
 }

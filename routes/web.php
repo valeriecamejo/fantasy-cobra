@@ -80,32 +80,33 @@ Route::get('/puntos', 'HomeController@score');
 
 //Web Hook
  // Route::get('/stats/{statsWebHook}', 'StatController@updateStats');
- //Route::post('/stats', 'StatController@updateStats');
+ // Route::post('/stats', 'StatController@updateStats');
 
 
-Route::get('/redirect', function () {
+// Route::get('/redirect', function () {
 
-    $query = http_build_query([
-        'client_id' => '2',
-        'redirect_uri' => 'http://localhost:8000/stats',
-        'response_type' => 'code',
-        'scope' => ''
-    ]);
+//     $query = http_build_query([
+//         'client_id' => '2',
+//         'redirect_uri' => 'http://localhost:8000',
+//         'response_type' => 'code',
+//         'scope' => '*'
+//     ]);
 
-    return redirect('http://server.local/oauth/authorize?'.$query);
-});
+//     return redirect('http://localhost:8000/oauth/authorize?'.$query);
+// });
 
-Route::get('/stats', function (Illuminate\Http\Request $request) {
-    $http = new \GuzzleHttp\Client;
+// Route::get('/callback', function (Illuminate\Http\Request $request) {
+//     $http = new \GuzzleHttp\Client;
 
-    $response = $http->post('http://localhost:8000/oauth/token', [
-        'form_params' => [
-            'client_id' => '2',
-            'client_secret' => 'oZvpAyEVBvlh4JLQnNWj8CF6m2VdRh3xhlCRyoRS',
-            'grant_type' => 'authorization_code',
-            'redirect_uri' => 'http://localhost:8000/stats',
-            'code' => $request->code,
-        ],
-    ]);
-    return json_decode((string) $response->getBody(), true);
-});
+//     $response = $http->post('http://localhost:8000/oauth/token', [
+//         'form_params' => [
+//             'client_id' => '2',
+//             'client_secret' => 'bGefpqEyg36N7J8ovhofffHv0w65ADN5GAXj4QFh',
+//             'grant_type' => 'authorization_code',
+//             'redirect_uri' => 'http://localhost:8000',
+//             'code' => $request->code,
+//         ],
+//     ]);
+//     return json_decode((string) $response->getBody(), true);
+// });
+
