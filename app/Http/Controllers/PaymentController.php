@@ -31,12 +31,14 @@ class PaymentController extends Controller {
 
     $withdrawal = Payment::withdrawal($request->all());
 
-    if ($withdrawal) {
+    if ($withdrawal[0] == true) {
 
       Session::flash('message', 'Solicitud Registrada Exitosamente.');
       Session::flash('class', 'success');
+    } elseif ($withdrawal[0] == false) {
+        Session::flash('message', $withdrawal[1]);
+        Session::flash('class', 'danger');
     } else {
-
       Session::flash('message', 'Debe completar todos los datos.');
       Session::flash('class', 'danger');
     }

@@ -43,23 +43,25 @@ class Payment extends Model
   $payment->approved         = false;
   $payment->account_type     = $input['type_account'];
 
-  $verify_mount = Payment::verify_mount($input['amount']);
-    if ($verify_mount) {
+  $verify_amount = Payment::verify_amount($input['amount']);
+    if ($verify_amount) {
       $payment->amount         = $input['amount'];
       $payment->save();
       return $payment;
     } else {
-      return false;
+      return [
+               false,
+               "Verifique el monto minimo a retirar y su balance"
+             ];
     }
-
   }
 
 /********************************************
-* verify_mount: validation for balance
+* verify_amount: validation for balance
 * @param mount
 * @return bool
 ********************************************/
-  public static function verify_mount($mount_withdraw) {
+  public static function verify_amount($mount_withdraw) {
 
    $min_withdraw = \App\Lib\Ddh\SettingVariables::getSettings('min_withdraw');
    $user_balance = floatval(Auth::user()->bettor->balance);
