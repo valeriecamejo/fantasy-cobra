@@ -35,46 +35,46 @@ public static function saveUpdatePlayerStatsApi ( $route, $statsWebHook ) {
   //   $stats   = json_decode($statsWebHook);
   // }
 
-	$index         = null;
-	$updated       = '2017-07-12 15:58:03';
-	$pointsForTeam = 0;
+	// $index         = null;
+	// $updated       = '2017-07-12 15:58:03';
+	// $pointsForTeam = 0;
 
-  $updated_at    = '2017-07-12 15:58:03';
-  $points        = Stats_player::where('calculated', '1')->get();
-  $stats         = json_decode(self::$statsApi);
+ //  $updated_at    = '2017-07-12 15:58:03';
+ //  $points        = Stats_player::where('calculated', '1')->get();
+ //  $stats         = json_decode(self::$statsApi);
 
-  if (is_array($stats) || is_object($stats)) {
+ //  if (is_array($stats) || is_object($stats)) {
 
-    foreach($stats[0]->tournament_phases as $tournament_phase) {
+ //    foreach($stats[0]->tournament_phases as $tournament_phase) {
 
-      foreach($tournament_phase->tournament_groups as $tournament_group) {
+ //      foreach($tournament_phase->tournament_groups as $tournament_group) {
 
-        foreach($tournament_group->player_stats as $player_stat) {
+ //        foreach($tournament_group->player_stats as $player_stat) {
 
-          $player = Player::where('legacy_id', $player_stat->player_id)->first();
+ //          $player = Player::where('legacy_id', $player_stat->player_id)->first();
 
-          foreach ($points as $point => $valuePoint) {
+ //          foreach ($points as $point => $valuePoint) {
 
-            if ( $player_stat->stat_id == $valuePoint['legacy_id'] ) {
-              $stat_points = $player_stat->quantity * $valuePoint['points'];
-              $total_points = $player['points'] + $stat_points;
-              $date = new DateTime($player_stat->time);
+ //            if ( $player_stat->stat_id == $valuePoint['legacy_id'] ) {
+ //              $stat_points = $player_stat->quantity * $valuePoint['points'];
+ //              $total_points = $player['points'] + $stat_points;
+ //              $date = new DateTime($player_stat->time);
 
-              Player::where('legacy_id', $player_stat->player_id)
-              ->update([
-                       'points'              => $total_points,
-                       'legacy_stat_request' => $date
-                       ]);
+ //              Player::where('legacy_id', $player_stat->player_id)
+ //              ->update([
+ //                       'points'              => $total_points,
+ //                       'legacy_stat_request' => $date
+ //                       ]);
 
-              Team_user_players::where('legacy_id', $player_stat->player_id)
-              ->update([
-                       'points' => $total_points
-                       ]);
-            }
-          }
-        }
-      }
-    }
+ //              Team_user_players::where('legacy_id', $player_stat->player_id)
+ //              ->update([
+ //                       'points' => $total_points
+ //                       ]);
+ //            }
+ //          }
+ //        }
+ //      }
+ //    }
   }
 
     PlayerStatsApi::pointsForTeam();
