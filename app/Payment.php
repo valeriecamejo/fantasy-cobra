@@ -7,6 +7,7 @@ use App\Lib\Ddh\UtilityDate;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 
 class Payment extends Model
 {
@@ -41,13 +42,19 @@ class Payment extends Model
   $payment->bank             = $input['bank'];
   $payment->status           = 'pendiente';
   $payment->approved         = false;
+  $payment->transfer_date    = Carbon::now()->toDateString();
   $payment->account_type     = $input['type_account'];
 
   $verify_amount = Payment::verify_amount($input['amount']);
     if ($verify_amount) {
       $payment->amount         = $input['amount'];
       $payment->save();
-      return $payment;
+      $new_balance = (Auth::user()->bettor->balance - $input['amount']);
+      return [
+              true,
+              $payment,
+              $new_balance
+      ];
     } else {
       return [
                false,

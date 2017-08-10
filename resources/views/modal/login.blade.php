@@ -27,9 +27,9 @@
                   {!! Form::password('password', array('class'=>'form-control', 'placeholder'=>'Escriba su contraseña','aria-describedby'=>'sizing-addon2')) !!}
                </div>
          	</div>
-         	<div class="modal-body Right2 centerres">
+         	<!-- <div class="modal-body Right2 centerres">
             	<a onclick="forgot_password()">¿Olvidaste tu contraseña?</a>
-         	</div>
+         	</div> -->
          	<div class="modal-body Right3 centerres">
             	<!-- <a href="#">Crear cuenta nueva</a> -->
                {!! Form::checkbox('remember', 1, 'remember') !!}<a>Recordar Correo</a>

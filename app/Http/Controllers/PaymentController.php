@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Payment;
+use App\Bettor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\WithdrawalRequest;
@@ -32,7 +33,7 @@ class PaymentController extends Controller {
     $withdrawal = Payment::withdrawal($request->all());
 
     if ($withdrawal[0] == true) {
-
+      Bettor::discountBalanceBettor($withdrawal[2]);
       Session::flash('message', 'Solicitud Registrada Exitosamente.');
       Session::flash('class', 'success');
     } elseif ($withdrawal[0] == false) {

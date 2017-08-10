@@ -63,6 +63,6 @@ class TaskSchedulingCommand extends Command
       // TeamsApi::saveUpdateTeams();
       // ChampionshipsApi::saveUpdateChampionships();
       // PlayersApi::saveUpdatePlayers();
-      // PlayerStatsApi::saveUpdatePlayerStatsApi();
+      // PlayerStatsApi::saveUpdatePlayerStatsApi($route, $statsWebHook);
     }
 }

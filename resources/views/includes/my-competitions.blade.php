@@ -1,4 +1,5 @@
 {!! Html::script('js/competitions/competitions.js') !!}
+{!! Html::script('js/competitions/show_competition.js') !!}
 {!! Html::script('js/vuejs/competition/competition_details.js') !!}
 
   <div class="container-fluid Filtros">
@@ -118,10 +119,17 @@
             </span>
             @endif
           </td>
-          <td class="tdentrar2">
+          <!-- <td class="tdentrar2">
             <a>
               <div class="BtnEntrar2">ENTRAR</div>
             </a>
+          </td -->>
+           <td class="tdentrar2">
+            @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
+              <div class="BtnEntrar2" onclick="showCompetition({{$competition->id}})">ENTRAR</div>
+            @else
+              <div class="BtnEntrar2" href=".login" data-toggle="modal">ENTRAR</div>
+            @endif
           </td>
         </tr>
         @endforeach

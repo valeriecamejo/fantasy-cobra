@@ -94,7 +94,7 @@
                           <div class="BtnEntrar31">VER</div>
                         </a>
                         <a v-if="moment().format('YYYY-MM-DD hh:mm') < moment(team.date).format('YYYY-MM-DD hh:mm')" @click="team_modal( team.id , team.name, teams )">
-                          <div class="BtnEntrar31 noedit">EDITAR</div>
+                          <div class="BtnEntrar31 edit">EDITAR</div>
                         </a>
                       </div>
               <!--   <input type="hidden" class="form-compe2" name="lineup_id" value="@{{ team.id }}">

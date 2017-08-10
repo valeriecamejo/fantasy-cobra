@@ -38,4 +38,13 @@ class Bettor extends Model
         return $this->belongsTo('App\User');
   }
 
+
+  public static function discountBalanceBettor ($new_balance) {
+
+    DB::table('bettors')
+              ->where('user_id', Auth::user()->id)
+              ->update([
+                 'balance' => $new_balance
+                 ]);
+  }
 }

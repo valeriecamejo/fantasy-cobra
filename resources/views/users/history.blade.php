@@ -132,30 +132,30 @@
               <tbody>
                 @foreach ($transactions as $transaction)
                 <tr>
-                  @if($transactions->transaction_type == 1)
+                  @if($transaction->transaction_type == 1)
                   <td><img src="{{ URL::asset('images/ico/depositoico.png') }}"/></td>
                   <td id="tdcomp2">Depósito</td>
-                  @elseif($transactions->transaction_type == 0)
+                  @elseif($transaction->transaction_type == 0)
                   <td><img src="{{ URL::asset('images/ico/retiroico.png') }}"/></td>
                   <td id="tdcomp2"><span id="retirored">Retiro</span></td>
                   @endif
-                  <td class="tbldp">{{ $transactions->bank }}</td>
-                  <td class="tbldp">{{ date("d-m-Y", strtotime($transactions->date)) }}</td>
-                  <td class="tbldp">{{date("g a",strtotime("$transactions->date"))}}</td>
-                  <td class="tbldp">{{ number_format($transactions->amount,2,",",".") }} Bs.</td>
+                  <td class="tbldp">{{ $transaction->bank }}</td>
+                  <td class="tbldp">{{ date("d-m-Y", strtotime($transaction->transfer_date)) }}</td>
+                  <td class="tbldp">{{ date("g a", strtotime("$transaction->transfer_date"))}}</td>
+                  <td class="tbldp">{{ number_format($transaction->amount,2,",",".") }} Bs.</td>
                   <td class="tbldp">
-                    @if($transactions->paid == 0)
-                    {{ number_format(($transactions->before_balance - $transactions->amount),2,",",".") }}
-                    @elseif($transactions->paid == 1)
-                    {{ number_format(($transactions->before_balance + $transactions->amount),2,",",".") }}
+                    @if($transaction->transaction_type == "retiro")
+                    {{ number_format(($transaction->balance_before - $transaction->amount),2,",",".") }}
+                    @elseif($transaction->transaction_type == "deposito")
+                    {{ number_format(($transaction->balance_before + $transaction->amount),2,",",".") }}
                     @endif
                   </td>
                   <td class="tbldp">
-                    @if($transactions->point_type == "PAYPAL")
+                    @if($transaction->point_type == "PAYPAL")
                     <img src="{{ URL::asset('images/ico/paypal_ico.png') }}"/>
-                    @elseif($transactions->point_type == "TRANSFER")
+                    @elseif($transaction->point_type == "TRANSFER")
                     <img src="{{ URL::asset('images/ico/transfer_ico.png') }}"/>
-                    @elseif($transactions->point_type == "CARD")
+                    @elseif($transaction->point_type == "CARD")
                     <img src="{{ URL::asset('images/ico/credit_ico.png') }}"/>
                     @endif
                   </td>
@@ -288,17 +288,17 @@
           @foreach ($transactions as $transaction)
           <li class="tmovli">
             <div class="divico">
-              @if($transaction->paid == 1 and $transaction->approved_pay == 1)
+              @if($transaction->approved == 1)
               <img class="Star" src="{{ URL::asset('images/ico/depositoico2.png') }}"/>
-              @elseif($transaction->paid == 0 and $transaction->approved_pay == 1)
+              @elseif($transaction->approved == 1)
               <img class="Star" src="{{ URL::asset('images/ico/retiroico2.png') }}"/>
               @endif
             </div>
             <h4 class="h4tmovil" style="width: 73% !important;">
               <a href="">
-                @if($transaction->paid == 1 AND $transaction->approved_pay == 1)
+                @if($transaction->approved == 1)
                 Depósito /
-                @elseif($transaction->paid == 0 AND $transaction->approved_pay == 1)
+                @elseif($transaction->approved == 1)
                 Retiro /
                 @endif
                 <i>{{ $transaction->bank }}</i>
@@ -318,7 +318,7 @@
               <div class="div1">
                 <p><span>Fecha</span>
                   @php
-                  $date = strtotime($transaction->date)
+                  $date = strtotime($transaction->transfer_date)
                   @endphp
 
                   {{ UtilityDate::dateAbbrevSpanish(getdate($date)) }}
@@ -327,7 +327,7 @@
                 <div class="tmovtabico">
                   <!--<img class="Garanico" src="images/ico/lock.png"/>-->
                 </div>
-                <p><span>Hora</span>{{date("g a",strtotime("$date"))}}</p>
+                <p><span>Hora</span>{{ date("g a",strtotime("$date")) }}</p>
               </div>
 
               <div class="div1">
@@ -337,10 +337,10 @@
                 </div>
                 <p>
                   <span>Balance</span>
-                  @if($transaction->paid == 0 and $transaction->approved_pay == 1)
-                  {{ number_format(($transaction->before_balance - $transaction->amount),2,",",".") }}
-                  @elseif($transaction->paid == 1 and $transaction->approved_pay == 1)
-                  {{ number_format(($transaction->before_balance + $transaction->amount),2,",",".") }}
+                  @if($transaction->approved == 1)
+                  {{ number_format(($transaction->balance_before - $transaction->amount),2,",",".") }}
+                  @elseif($transaction->approved == 1)
+                  {{ number_format(($transaction->balance_before + $transaction->amount),2,",",".") }}
                   @endif
                 </p>
               </div>
