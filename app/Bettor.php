@@ -11,24 +11,24 @@ class Bettor extends Model
 {
 	protected $table = 'bettors';
 	protected $fillable = [
-	    'user_id',
-        'city_id',
-        'refer_id',
-        'date_last_connect',
-        'balance',
-        'question',
-        'answer',
-        'code_referred',
-        'photo', 'url_own',
-        'url_promotional',
-        'referred_friends',
-        'referred_friends_pay',
-        'amount_deposited',
-        'amount_won',
-        'amount_referred_friends',
-        'bono',
-        'not_removable'
-  ];
+                         'user_id',
+                         'city_id',
+                         'refer_id',
+                         'date_last_connect',
+                         'balance',
+                         'question',
+                         'answer',
+                         'code_referred',
+                         'photo', 'url_own',
+                         'url_promotional',
+                         'referred_friends',
+                         'referred_friends_pay',
+                         'amount_deposited',
+                         'amount_won',
+                         'amount_referred_friends',
+                         'bono',
+                         'not_removable'
+                        ];
 
     /**
      * user the relationship with User
@@ -38,4 +38,13 @@ class Bettor extends Model
         return $this->belongsTo('App\User');
   }
 
+
+  public static function discountBalanceBettor ($new_balance) {
+
+    DB::table('bettors')
+              ->where('user_id', Auth::user()->id)
+              ->update([
+                 'balance' => $new_balance
+                 ]);
+  }
 }

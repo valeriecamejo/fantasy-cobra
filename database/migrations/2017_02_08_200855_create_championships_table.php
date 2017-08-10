@@ -15,10 +15,14 @@ class CreateChampionshipsTable extends Migration
     {
         Schema::create('championships', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('legacy_id');
             $table->integer('sport_id')->unsigned();
             $table->foreign('sport_id')->references('id')->on('sports')->onDelete('cascade');
             $table->string('name');
             $table->string('description')->nullable();
+            $table->boolean('is_active')->default(false);
+            $table->boolean('status_api')->default(false);
+            $table->dateTimeTz('legacy_stat_request')->nullable();
             $table->timestamps();
         });
     }

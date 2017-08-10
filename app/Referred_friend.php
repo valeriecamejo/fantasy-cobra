@@ -8,6 +8,10 @@ class Referred_friend extends Model
 {
   protected $table = 'referred_friends';
   protected $fillable = [
-  'user_id', 'email', 'status', 'bonus', 'date'
-  ];
+                         'user_id',
+                         'email',
+                         'status',
+                         'bonus',
+                         'date'
+                        ];
 }

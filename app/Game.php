@@ -10,8 +10,20 @@ class Game extends Model
 {
 	protected $table = 'games';
 	protected $fillable = [
-  'tournament_id', 'tournament_group_id', 'team_id_home', 'team_id_away', 'start_date', 'end_date', 'score_home', 'score_away', 'status', 'schema_team_home', 'schema_team_away', 'mvp'
-  ];
+                         'legacy_id',
+                         'tournament_id',
+                         'tournament_group_id',
+                         'team_home_id',
+                         'team_away_id',
+                         'start_date',
+                         'end_date',
+                         'score_home',
+                         'score_away',
+                         'status',
+                         'schema_team_home',
+                         'schema_team_away',
+                         'mvp'
+                        ];
 
   /**
    * date_games Array with non-repeated calendar dates

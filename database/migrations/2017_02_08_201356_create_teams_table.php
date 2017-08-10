@@ -15,15 +15,16 @@ class CreateTeamsTable extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('stadium_id')->unsigned();
-            $table->foreign('stadium_id')->references('id')->on('stadiums')->onDelete('cascade');
+            $table->integer('legacy_id');
+            $table->integer('stadium_id')->nullable();
             $table->string('name');
-            $table->string('nickname');
+            $table->string('nickname')->nullable();
             $table->string('short_nickname')->nullable();
             $table->string('logo')->nullable();
-            $table->string('president');
-            $table->string('coach');
+            $table->string('president')->nullable();
+            $table->string('coach')->nullable();
             $table->string('history')->nullable();
+            $table->dateTimeTz('legacy_stat_request')->nullable();
             $table->timestamps();
         });
     }

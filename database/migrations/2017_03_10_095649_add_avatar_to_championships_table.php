@@ -14,7 +14,7 @@ class AddAvatarToChampionshipsTable extends Migration
     public function up()
     {
         Schema::table('championships', function (Blueprint $table) {
-            $table->string('avatar')->after('description');
+            $table->string('avatar')->after('description')->nullable();
         });
     }
 

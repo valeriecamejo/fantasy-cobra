@@ -37,8 +37,8 @@ class CreatePromotionsTable extends Migration
             $table->string('affiliate_rate')->nullable();
             $table->string('affiliate_deposit')->nullable();
             $table->string('affiliate_quantity')->nullable();
-            $table->dateTime('start_date')->nullable();
-            $table->dateTime('end_date')->nullable();
+            $table->dateTimeTz('start_date')->nullable();
+            $table->dateTimeTz('end_date')->nullable();
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ class AlterUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dateTime('date_last_connect')->after('dni');
+            $table->dateTimeTz('date_last_connect')->after('dni');
             $table->string('ip')->after('date_last_connect');
         });
     }

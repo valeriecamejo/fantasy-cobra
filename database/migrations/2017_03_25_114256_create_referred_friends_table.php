@@ -20,7 +20,7 @@ class CreateReferredFriendsTable extends Migration
             $table->string('email');
             $table->string('status')->default(0);
             $table->float('bonus')->default(0);
-            $table->dateTime('date');
+            $table->dateTimeTz('date');
             $table->timestamps();
         });
     }

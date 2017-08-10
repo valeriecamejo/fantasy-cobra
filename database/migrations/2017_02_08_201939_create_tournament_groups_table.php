@@ -15,10 +15,12 @@ class CreateTournamentGroupsTable extends Migration
     {
         Schema::create('tournament_groups', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('legacy_id');
             $table->integer('tournament_id')->unsigned();
             $table->foreign('tournament_id')->references('id')->on('tournaments')->onDelete('cascade');
             $table->string('name');
             $table->string('description')->nullable();
+            $table->dateTimeTz('legacy_stat_request')->nullable();
             $table->timestamps();
         });
     }

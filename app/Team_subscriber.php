@@ -9,8 +9,19 @@ class Team_subscriber extends Model
 {
   protected $table = 'team_subscribers';
   protected $fillable = [
-    'sport_id', 'competition_id', 'team_id', 'team_user_id', 'amount', 'points', 'date', 'balance_before', 'balance_after', 'bonus', 'balance', 'is_winner'
-  ];
+                         'sport_id',
+                         'competition_id',
+                         'team_id',
+                         'team_user_id',
+                         'amount',
+                         'points',
+                         'date',
+                         'balance_before',
+                         'balance_after',
+                         'bonus',
+                         'balance',
+                         'is_winner'
+                        ];
 
   /**
    * inscription_team inscription team user in competition

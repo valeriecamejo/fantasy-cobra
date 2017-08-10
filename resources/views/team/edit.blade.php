@@ -11,8 +11,8 @@
     </div>
 
 <!--- Form -->
-
-    {!!  Form::open(array('url' => '', 'method' => 'post')) !!}
+    <form class="form-horizontal" method="POST" action="{{ URL::action('TeamUserController@save_team_edited') }}">
+      {{ csrf_field() }}
 
     <div class="modal-bodycompe">
       <div class="boxcompe">
@@ -27,35 +27,38 @@
           <div>
             <!-- Nav tabs -->
             <div id="tabs1">
-              <tabs>
                 <ul class="nav nav-tabs entirewidth" role="tablist">
-
-                  <tab role="presentation" class="active">
-                    <a href="#PAD" id="PA" aria-controls="home" role="tab" data-toggle="tab">PA</a>
-                  </tab>
-                  <tab role="presentation">
-                    <a href="#CD" id="C" aria-controls="profile" role="tab" data-toggle="tab">C</a>
-                  </tab>
-                  <tab role="presentation">
-                    <a href="#1BD" id="1B" aria-controls="messages" role="tab" data-toggle="tab">1B</a>
-                  </tab>
-                  <tab role="presentation">
-                    <a href="#2BD" id="2B" aria-controls="settings" role="tab" data-toggle="tab">2B</a>
-                  </tab>
-                  <tab role="presentation">
-                    <a href="#3BD" id="3B" aria-controls="settings" role="tab" data-toggle="tab">3B</a>
-                  </tab>
-                  <tab role="presentation">
-                    <a href="#SSD" id="SS" aria-controls="settings" role="tab" data-toggle="tab">SS</a>
-                  </tab>
-                  <tab role="presentation">
-                    <a href="#OFD" id="OF" aria-controls="settings" role="tab" data-toggle="tab">OF</a>
-                  </tab>
-                  <tab role="presentation">
-                    <a href="#BATSD" id="BATS" aria-controls="settings" role="tab" data-toggle="tab">BATS</a>
-                  </tab>
+                  <li role="presentation" class="active">
+                    <a href="#" aria-controls="home" role="tab" data-toggle="tab" @click="players=allPlayers.PA">PA</a>
+                  </li>
+                  <li role="presentation">
+                    <a href="#" aria-controls="profile" role="tab" data-toggle="tab" @click="players=allPlayers.C">C</a>
+                  </li>
+                  <li v-if="team_data.type_play == 'REGULAR'" role="presentation">
+                    <a href="#" aria-controls="messages" role="tab" data-toggle="tab" @click="players=allPlayers['1B']">1B</a>
+                  </li>
+                  <li v-if="team_data.type_play == 'TURBO'" role="presentation">
+                    <a href="#" aria-controls="messages" role="tab" data-toggle="tab" @click="showPlayers(['2B', 'SS'])">MI</a>
+                  </li>
+                  <li v-if="team_data.type_play == 'REGULAR'" role="presentation">
+                    <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['2B']">2B</a>
+                  </li>
+                  <li v-if="team_data.type_play == 'TURBO'" role="presentation">
+                    <a href="#" aria-controls="messages" role="tab" data-toggle="tab" @click="showPlayers(['1B', '3B'])">CI</a>
+                  </li>
+                  <li v-if="team_data.type_play == 'REGULAR'" role="presentation">
+                    <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['3B']">3B</a>
+                  </li>
+                  <li role="presentation">
+                    <a v-if="team_data.type_play == 'REGULAR'" href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['SS']">SS</a>
+                  </li>
+                  <li role="presentation">
+                    <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['OF']">OF</a>
+                  </li>
+                  <li role="presentation">
+                    <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="showPlayers('BATS')">BAT</a>
+                  </li>
                 </ul>
-              </tabs>
             </div>
 
             <table class="table table-striped2 table-hover2 tablelineup theadhead">
@@ -74,15 +77,9 @@
             </table>
             <!-- Tab panes -->
             <div id="players-availables" class="tab-content tab-contentnull scrollcreate createcontent">
-              <div role="tabpanel" class="tab-pane active fade in" id="PAD">
+              <div role="tabpanel" class="tab-pane active fade in">
 
-                <div
-                  is="players"
-                  v-for="(player, index) in players.PA"
-                  :player="player"
-                  :position="position"
-                >
-                </div>
+                <list-players :players="players"></list-players>
 
               </div>
               <div role="tabpanel" class="tab-pane fade" id="CD" >
@@ -126,7 +123,8 @@
           <div class="Usuariolineup" style="text-align:center;text-indent: 0;">EQUIPO</div>
           <div id="th2">
             <p id="salariorestante">Salario Restante:</p>
-            <input id="salaryrest" :value="team_data.remaining_salary" name="salaryrest"  class="inputsalario" type="text" readonly>
+            <input id="salaryrest" :value="team_data.remaining_salary" name="remaining_salary"  class="inputsalario" type="text" readonly>
+            <input id="team_data" :value="JSON.stringify(team_data)" name="team_data" type="hidden">
 
           </div>
           <table class="table table-striped2 table-hover2 tablelineup theadhead">
@@ -149,6 +147,7 @@
                 <div is="my-players"
                   v-for="(myPlayer, index) in myPlayers"
                   :my-player="myPlayer"
+                  :count-position="countPosition"
                   :index="index"
                   v-on:remove="myPlayers.splice(index, 1)">
                 </div>
@@ -185,16 +184,20 @@
       <div id="th22" class="wid50">
         <a href="/usuario/mis-equipos" class="btn btn-primary2 btn-return btn-lg">Regresar</a>
         <!--<button type="submit" class="btn btn-primarycan btn-lg" name="cancellineup" onclick="">Limpiar</button>-->
+        <input type="hidden" :value="JSON.stringify(myPlayers)" name="myPlayers">
+        <div  v-if="team_data.type_play == 'TURBO' && myPlayers.length == 5 || team_data.type_play == 'REGULAR' && myPlayers.length == 9">
+          <button type='submit' class='btn btn-primary2 btn-lg' name='createlineup'>Guardar Lineup</button>
+        </div>
         <div id="button_create"></div>
       </div>
     </div>
-    {!! Form::close() !!}
+    </form>
     <!-- cierre contcrear -->
 
     <!--    Crear Lineup  Movil     -->
     {!!  Form::open(array('url' => 'usuario/crear-equipo', 'method' => 'post')) !!}
     <div class="restab visible-xs" style="margin-top:30px; margin-bottom: 60px;">
-      <div class="linemovbut">
+      <div  class="linemovbut">
         <button type="submit" class="btn btn-default btn-primary4" name="createlineup" onclick="">CREAR LINEUP</button>
         <button type="submit" class="btn btn-default btn-primary4" name="returnhome" onclick="">REGRESAR</button>
       </div>
@@ -377,23 +380,6 @@
 
 <!-- Templates for Components -->
 
-
-<!-- Template of all players -->
-<template id="players">
-  <tr>
-    <td id='pos'>@{{ player.position }}</td>
-    <td id='jug'>@{{ player.name }} @{{ player.last_name }}<span id='teamcol'>
-    <td id='opo'>@{{ player.name_opponent }} vs <span id='teamcol'>@{{ player.name_team }}</span></td>
-    <td id='salario'>@{{ player.salary }}</td>
-    <td>
-      <a @click=addPlayer(player)>
-      <img src='/images/ico/mas.png' alt='mas' class='mashov'>
-      </a>
-    </td>
-  </tr>
-</template>
-<!-- End Template of all players -->
-
 <!-- Template of my players -->
 <template id="my-players">
   <tr>
@@ -402,7 +388,7 @@
     <td id='opo'>@{{ myPlayer.name_opponent }} vs <span id='teamcol'>@{{ myPlayer.name_team }}</span></td>
     <td id='salario'>@{{ myPlayer.salary }}</td>
     <td>
-      <a @click="$emit('remove')">
+      <a @click="$emit('remove'), decSalary(myPlayer)">
       <img src='/images/ico/menos.png' alt='menos' class='mashov'>
       </a>
     </td>
@@ -410,19 +396,30 @@
 </template>
 <!-- End Template of my players -->
 
+<!-- Template of players -->
+<template id="list-players">
+<tbody>
+  <tr v-for="player in players">
+    <td id='pos'>@{{ player.position }}</td>
+    <td id='jug'>@{{ player.name }} @{{ player.last_name }}<span id='teamcol'>
+    <td id='opo'>@{{ player.name_opponent }} vs <span id='teamcol'>@{{ player.name_team }}</span></td>
+    <td id='salario'>@{{ player.salary }}</td>
+    <td>
+      <a @click=addPlayer(player)>
+        <img src='/images/ico/mas.png' alt='mas' class='mashov'>
+      </a>
+    </td>
+  </tr>
+</tbody>
+</template>
+<!-- End Template of players -->
+
 <!-- End Templates for Components -->
 
 
 {!! Form::close() !!}
 
 <!-- End Form -->
-
-<!--  {!! Html::script('js/players/journey.js') !!}
-  {!! Html::script('js/teams/edit_team.js') !!}
-  {!! Html::script('js/validate/validate_players.js') !!}
-  {!! Html::script('js/teams/list.js') !!}
-  {!! Html::script('js/players/team_user.js') !!}
--->
 
 {!! Html::script('js/vuejs/teams/edit_team.js') !!}
 @stop

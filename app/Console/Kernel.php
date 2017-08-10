@@ -13,7 +13,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+      Commands\TaskSchedulingCommand::class,
+      Commands\DailyTasksCommand::class,
+      Commands\PlayersPointsCommand::class
     ];
 
     /**
@@ -24,8 +26,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+
+      // $schedule->command('task:scheduling')
+      //          ->dailyAt('15:50');
+
+      $schedule->command('task:update')
+               ->dailyAt('03:00');
     }
 
     /**
@@ -35,6 +41,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        require base_path('routes/console.php');
+      require base_path('routes/console.php');
     }
-}
+  }
+

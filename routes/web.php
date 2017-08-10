@@ -60,6 +60,8 @@ Route::get('usuario/inscribir-equipo/competicion/{id}', 'CompetitionController@e
 Route::get('competition-details', 'CompetitionController@competitionDetailsOfCookie');
 Route::get('usuario/retirar-dinero', 'PaymentController@show_withdrawals');
 Route::post('usuario/retirar-dinero', 'PaymentController@withdrawal');
+Route::post('usuario/guardar-equipo', 'TeamUserController@save_team_edited');
+
 
 //Players routes
 Route::get('player/position/{position}', 'PlayerController@byPosition');
@@ -75,3 +77,36 @@ Route::get('/politicas-de-privacidad', 'HomeController@politics_privacy');
 Route::get('/como-jugar', 'HomeController@how_to_play');
 Route::get('/reglas', 'HomeController@rules');
 Route::get('/puntos', 'HomeController@score');
+
+//Web Hook
+ // Route::get('/stats/{statsWebHook}', 'StatController@updateStats');
+ // Route::post('/stats', 'StatController@updateStats');
+
+
+// Route::get('/redirect', function () {
+
+//     $query = http_build_query([
+//         'client_id' => '2',
+//         'redirect_uri' => 'http://localhost:8000',
+//         'response_type' => 'code',
+//         'scope' => '*'
+//     ]);
+
+//     return redirect('http://localhost:8000/oauth/authorize?'.$query);
+// });
+
+// Route::get('/callback', function (Illuminate\Http\Request $request) {
+//     $http = new \GuzzleHttp\Client;
+
+//     $response = $http->post('http://localhost:8000/oauth/token', [
+//         'form_params' => [
+//             'client_id' => '2',
+//             'client_secret' => 'bGefpqEyg36N7J8ovhofffHv0w65ADN5GAXj4QFh',
+//             'grant_type' => 'authorization_code',
+//             'redirect_uri' => 'http://localhost:8000',
+//             'code' => $request->code,
+//         ],
+//     ]);
+//     return json_decode((string) $response->getBody(), true);
+// });
+

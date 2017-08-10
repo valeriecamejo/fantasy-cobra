@@ -21,7 +21,7 @@ class CreateTeamUsersTable extends Migration
       $table->integer('championship_id')->unsigned();
       $table->foreign('championship_id')->references('id')->on('championships')->onDelete('cascade');
       $table->string('name');
-      $table->dateTime('date_inscription');
+      $table->dateTimeTz('date_inscription');
       $table->string('type_journal');
       $table->string('type_play');
       $table->float('remaining_salary');

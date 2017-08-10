@@ -35,7 +35,7 @@ class WithdrawalRequest extends FormRequest
     'number_account' => 'required|min:11|regex:/[0-9a-zA-Z]/',
     'type_account'   => 'required',
     'bank'           => 'required',
-    'email'          => 'required',
+    'email'          => 'required|email',
     ];
   }
 
@@ -51,13 +51,14 @@ class WithdrawalRequest extends FormRequest
     'phone.max'               => 'El teléfono no debe ser mayor de 13 dígitos.',
     'phone.numeric'           => 'El teléfono solo puede contener números.',
     'amount.required'         => 'Campo requerido',
-    'amount.numeric'          => 'La cédula solo puede contener números.',
+    'amount.numeric'          => 'La cantidad a retirar solo puede contener números.',
     'number_account.required' => 'Campo requerido',
     'number_account.numeric'  => 'El numero de cuenta solo puede contener números.',
     'number_account.min'      => 'El numero de cuenta debe contener minimo 11 caracteres.',
     'number_account.required' => 'Campo requerido',
     'bank.required'           => 'Campo requerido',
-    'email.required'          => 'Campo requerido'
+    'email.required'          => 'Campo requerido',
+    'email.email'             => 'Verifique el email'
 
     ];
   }

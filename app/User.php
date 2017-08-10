@@ -3,6 +3,7 @@
 namespace App;
 
 use Carbon\Carbon;
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
@@ -13,29 +14,26 @@ use Illuminate\Support\Facades\Validator;
 use App\Referred_friend;
 use Mail;
 
-
-
 class User extends Authenticatable
 {
-  use Notifiable;
-
+  use HasApiTokens, Notifiable;
 
   protected $fillable = [
-    'id',
-    'user_type_id',
-    'name',
-    'last_name',
-    'username',
-    'password',
-    'phone',
-    'status',
-    'email',
-    'sex',
-    'dni',
-    'date_last_connect',
-    'ip',
-    'remember_token'
-  ];
+                         'id',
+                         'user_type_id',
+                         'name',
+                         'last_name',
+                         'username',
+                         'password',
+                         'phone',
+                         'status',
+                         'email',
+                         'sex',
+                         'dni',
+                         'date_last_connect',
+                         'ip',
+                         'remember_token'
+                      ];
 
   const STATUS_ACTIVE   = 'ACTIVE';
   const STATUS_INACTIVE = 'INACTIVE';

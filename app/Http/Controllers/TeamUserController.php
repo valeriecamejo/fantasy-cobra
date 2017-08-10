@@ -7,6 +7,8 @@ use App\Bettor;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Team_user;
+use App\Team_Turbo_user;
+use App\Team_user_players;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -91,9 +93,13 @@ class TeamUserController extends Controller {
     $players = Player::players($_GET['championship'],$_GET['type_play'],$_GET['date_team'],$_GET['type_journal']);
     echo json_encode($players);
   }
-  /**
-   * save_team save team user
-   */
+
+  /*********************************************
+ * save_team: save team user.
+ * @param void
+ * @return $message
+   *********************************************/
+
   public function save_team() {
     $competition        = \Request::cookie('competition');
     $type_inscription   = \Request::cookie('enroll');
@@ -155,8 +161,42 @@ class TeamUserController extends Controller {
                                 'update_team' => $update_team,
                                 'players'     => $players
                                 );
-
     echo json_encode($team_information);
+  }
+
+  /***************************************************
+   * save_team_edited: save user edited team
+   * @param  void
+   * @return $team_information
+   ***************************************************/
+
+  public function save_team_edited(Request $request) {
+
+    $myPlayers = json_decode($request['myPlayers']);
+    $team_data = json_decode($request['team_data']);
+
+    if ($team_data->type_play == 'REGULAR') {
+      $validate_positions     = Team_user::validate_positions($myPlayers);
+    } elseif ($team_data->type_play == 'TURBO') {
+      $validate_positions     = Team_Turbo_user::validate_positions($myPlayers);
+    }
+
+    $validate_remaining_salary = Team_user::validate_remaining_salary($myPlayers);
+    $validate_date             = Team_user::validate_date($team_data->team_date);
+
+    if ( ($validate_positions && $validate_remaining_salary && $validate_date) == false ) {
+      $save_team_edited = Team_user_players::save_team_edited($myPlayers, $team_data->team_id, $team_data->type_play);
+
+      if ($save_team_edited == true) {
+        Session::flash('message', 'Equipo modificado con exito.');
+        Session::flash('class', 'success');
+        return Redirect::to('usuario/mis-equipos');
+      } else {
+        Session::flash('message', 'Error al modificar equipo.');
+        Session::flash('class', 'danger');
+        return Redirect::to('usuario/mis-equipos');
+      }
+    }
 
   }
 

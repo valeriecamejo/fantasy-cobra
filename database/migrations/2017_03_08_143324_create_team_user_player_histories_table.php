@@ -28,7 +28,7 @@ class CreateTeamUserPlayerHistoriesTable extends Migration
             $table->string('position');
             $table->integer('salary');
             $table->float('points')->default(0);
-            $table->dateTime('journey');
+            $table->dateTimeTz('journey');
             $table->timestamps();
         });
     }

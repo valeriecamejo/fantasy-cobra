@@ -8,14 +8,14 @@ class Affiliate extends Model
 {
   protected $table = 'affiliates';
   protected $fillable = [
-    'user_id',
-    'city_id',
-    'promotional_cod',
-    'promotional_url',
-    'balance', 'rate',
-    'referred_friends',
-    'referred_friends_pay'
-  ];
+                         'user_id',
+                         'city_id',
+                         'promotional_cod',
+                         'promotional_url',
+                         'balance', 'rate',
+                         'referred_friends',
+                         'referred_friends_pay'
+                        ];
 
   /**
    * user the relationship with User

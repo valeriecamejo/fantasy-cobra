@@ -8,8 +8,11 @@ class Prize extends Model
 {
 	protected $table = 'prizes';
 	protected $fillable = [
-  'description', 'active', 'type', 'total_people'
-  ];
+                         'description',
+                         'active',
+                         'type',
+                         'total_people'
+                        ];
 
   public static function prize_min_user($min_user){
 

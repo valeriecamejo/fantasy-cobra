@@ -8,8 +8,12 @@ class Championship extends Model
 {
 	protected $table = 'championships';
 	protected $fillable = [
-  'sport_id', 'name', 'description'
-  ];
+                         'legacy_id',
+                         'sport_id',
+                         'name',
+                         'description',
+                         'avatar'
+                        ];
 
   public static function verify_championship($sport, $championship) {
 

@@ -14,7 +14,7 @@ class AlterBettorsTable extends Migration
     public function up()
     {
         Schema::table('bettors', function (Blueprint $table) {
-            $table->dateTime('birthday')->after('balance')->nullable();
+            $table->dateTimeTz('birthday')->after('balance')->nullable();
         });
     }
 

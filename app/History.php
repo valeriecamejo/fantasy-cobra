@@ -49,11 +49,11 @@ class History extends Model {
 
     $won_competitions = DB::table('competitions')
                       ->select('competitions.prize_id', 'team_subscribers.amount', 'team_subscribers.balance_before', 'competitions.name', 'competitions.date as competition_date', 'team_subscribers.date', 'competitions.championship_id', 'championships.avatar')
-                      ->join('team_subscribers', 'team_subscribers.competition_id', '=', 'competition_id')
+                      ->join('team_subscribers', 'team_subscribers.competition_id', '=', 'competitions.id')
                       ->join('team_users', 'team_users.id', '=', 'team_subscribers.team_user_id')
                       ->join('championships', 'championships.id', '=', 'team_users.championship_id')
+                      ->where('team_users.user_id', '=', Auth::user()->id)
                       ->where('team_subscribers.is_winner', '=', 1)
-                      ->where('team_subscribers.team_user_id', '=', Auth::user()->id)
                       ->orderBy('competitions.date', 'desc')
                       ->get();
 
@@ -72,7 +72,6 @@ class History extends Model {
                   ->join('bettors', 'bettors.user_id', '=', 'payments.user_id')
                   ->join('users', 'users.id', '=', 'payments.user_id')
                   ->where('users.id', '=', Auth::user()->id)
-                  ->where('payments.approved', '=', true)
                   ->orderBy('payments.created_at', 'desc')
                   ->get();
 
