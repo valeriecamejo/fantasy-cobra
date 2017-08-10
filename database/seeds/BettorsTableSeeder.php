@@ -12,7 +12,7 @@ class BettorsTableSeeder extends Seeder
     $faker = Faker::create();
 
     DB::table('bettors')->insert(array (
-                                        'user_id'                 =>  2,
+                                        'user_id'                 =>  1,
                                         'city_id'                 =>  1,
                                         'balance'                 =>  10000,
                                         'url_own'                 => 'www.url_own.com',
