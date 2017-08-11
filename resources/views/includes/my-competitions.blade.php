@@ -123,7 +123,7 @@
             <a>
               <div class="BtnEntrar2">ENTRAR</div>
             </a>
-          </td -->>
+          </td -->
            <td class="tdentrar2">
             @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
               <div class="BtnEntrar2" onclick="showCompetition({{$competition->id}})">ENTRAR</div>
