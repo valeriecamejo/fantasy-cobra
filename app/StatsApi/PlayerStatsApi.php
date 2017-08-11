@@ -6,7 +6,6 @@ use DB;
 use DateTimeZone;
 use DateTime;
 use App\Player;
-use App\Stats_player;
 use App\Championship;
 use App\Team_subscriber;
 use App\Team_user_players;
