@@ -6,7 +6,6 @@ Use DB;
 use DateTimeZone;
 use DateTime;
 Use App\Player;
-Use App\Stats_player;
 use Illuminate\Console\Command;
 
 class PlayersPointsCommand extends Command
@@ -36,7 +35,7 @@ class PlayersPointsCommand extends Command
     {
       parent::__construct();
 
-      $this->points = Stats_player::where('calculated', '1')->get();
+      // $this->points = Player_stats::where('calculated', '1')->get();
     }
 
     /**
