@@ -3213,6 +3213,10 @@ table.Tablaref tr th:last-child {
   margin-bottom: 0;
 }
 
+.modal-bodyregis2 .input-group .form-control[disabled] {
+ background: #fff;
+}
+
 .Top3 {
     margin-top: 20px;
     padding-top: 30px;
