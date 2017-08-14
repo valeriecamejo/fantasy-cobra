@@ -1405,6 +1405,7 @@ ul.nostyle i {
   padding-top: 3%;
   font-weight: 900;
   letter-spacing: 0.5px;
+  cursor:pointer;
 /*  margin-right: -12px;*/
 }
 
@@ -5130,6 +5131,7 @@ table.TablePrem.table-striped3 td {
   .btab3 tr {
     font-size: 7pt;
   }
+
 }
 
 @media (max-width: 1045px) {
@@ -5139,9 +5141,6 @@ table.TablePrem.table-striped3 td {
 }
 
 @media (max-width: 1015px) {
-  .BtnEntrar2 {
-    padding-top: 7%;
-  }
   .tdentr2 {
     width: 140px;
   }
@@ -5186,7 +5185,7 @@ table.TablePrem.table-striped3 td {
     height: 27px;
     background-color: #607d23;
     color: #f0f0f0;
-    padding-top: 10%;
+    padding-top: 7%;
     font-weight: 900;
     letter-spacing: 0.5px;
     margin-right: 0px;

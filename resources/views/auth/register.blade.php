@@ -94,7 +94,7 @@
             </div>
             <div class="input-group InicioSes3">
               <input type="text" style="width: 20%;" class="form-control" placeholder="Cod. País" aria-describedby="sizing-addon2" name="cod_country" maxlength="5" value="{{Input::old('cod_country')}}">
-              <input type="text" style="width: 60%;" class="form-control" placeholder="Nro. Teléfono" aria-describedby="sizing-addon2" name="phone" maxlength="15" value="{{Input::old('phone')}}">
+              <input type="text" style="width: 60%;" class="form-control" placeholder="Nro. Teléfono" aria-describedby="sizing-addon2" name="phone" maxlength="10" value="{{Input::old('phone')}}">
               @if($errors->has('phone'))
                 <span class="incompleto">×</span>
                 @foreach($errors->get('phone') as $error)

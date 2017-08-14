@@ -121,7 +121,7 @@
                   <p>Teléfono</p>
                 </div>
                 <div class="input-group InicioSes5">
-                  <input type="text" id="phone" name="phone" value="{{Auth::user()->phone}}" class="form-control3 control2" placeholder="02128583928" aria-describedby="sizing-addon2">
+                  <input type="text" id="phone" name="phone" value="{{Auth::user()->phone}}" class="form-control3 control2" placeholder="Escriba su número telefónico" aria-describedby="sizing-addon2">
                   @if($errors->has('phone'))
                     <span class="incompleto">×</span>
                     @foreach($errors->get('phone') as $error)
@@ -136,7 +136,7 @@
                   <p>Cédula</p>
                 </div>
                 <div class="input-group InicioSes5">
-                  <input type="text" name="dni" value="{{Auth::user()->dni}}" class="form-control3 control2" placeholder="19505385" aria-describedby="sizing-addon2">
+                  <input type="text" name="dni" value="{{Auth::user()->dni}}" class="form-control3 control2" placeholder="Escriba su número de identificación" aria-describedby="sizing-addon2">
                   @if($errors->has('dni'))
                     <span class="incompleto">×</span>
                     @foreach($errors->get('dni') as $error)
