@@ -197,7 +197,6 @@ date_default_timezone_set('Etc/GMT+4');
     {!! Html::script('js/main.js') !!}
 
     @yield('javascript')
-
     </body>
 </html>
 

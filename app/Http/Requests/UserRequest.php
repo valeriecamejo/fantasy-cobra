@@ -39,7 +39,7 @@ class UserRequest extends FormRequest
       'dni'             => 'required|numeric|min:999999|max:999999999|unique:users,dni',
       'email'           => 'required|email|max:255|unique:users,email',
       'username'        => 'required|max:255|alpha_num|unique:users,username',
-      'phone'           => 'required|numeric|min:999999999',
+      'phone'           => 'required|numeric|min:000999999',
       'cod_country'     => 'required|numeric|min:0001|max:0999',
       'password'        => 'required|min:6|confirmed',
       'terms_politics'  => 'required',

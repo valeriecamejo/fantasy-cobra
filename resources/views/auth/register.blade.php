@@ -93,7 +93,7 @@
               <p>Teléfono</p>
             </div>
             <div class="input-group InicioSes3">
-              <input type="text" style="width: 15%" class="form-control" placeholder="00" aria-describedby="sizing-addon2" name="cod_country" maxlength="4" value="{{Input::old('cod_country')}}">
+              <input type="text" style="width: 15%" class="form-control" placeholder="00" aria-describedby="sizing-addon2" name="cod_country" maxlength="3" value="{{Input::old('cod_country')}}">
 
               <input style="width: 7%" aria-describedby="sizing-addon2" class="form-control" placeholder="-" aria-describedby="sizing-addon2" disabled="true">
 
