@@ -39,8 +39,8 @@ class UserRequest extends FormRequest
       'dni'             => 'required|numeric|min:999999|max:999999999|unique:users,dni',
       'email'           => 'required|email|max:255|unique:users,email',
       'username'        => 'required|max:255|alpha_num|unique:users,username',
-      'cod_country'     => 'required|numeric|max:99999',
-      'phone'           => 'required|numeric|max:999999999',
+      'phone'           => 'required|numeric|min:000999999',
+      'cod_country'     => 'required|numeric|min:0001|max:0999',
       'password'        => 'required|min:6|confirmed',
       'terms_politics'  => 'required',
       'adult'           => 'required'
@@ -49,13 +49,15 @@ class UserRequest extends FormRequest
   public function messages()
   {
     return [
-      'dni.max'         => 'La cédula no debe ser mayor de 9 dígitos',
-      'dni.min'         => 'La cédula no debe ser menor de 6 dígitos.',
-      'dni.numeric'     => 'La cédula solo puede contener números.',
-      'phone.max'       => 'El teléfono no debe ser mayor de 13 dígitos.',
-      'phone.min'       => 'El teléfono no debe ser menor de 11 dígitos.',
-      'phone.numeric'   => 'El teléfono solo puede contener números.',
-      'cod_country.max' => 'El código de país no debe ser mayor de 5 dígitos y solo puede contener números.',
+      'dni.max'              => 'La cédula no debe ser mayor de 9 dígitos',
+      'dni.min'              => 'La cédula no debe ser menor de 6 dígitos.',
+      'dni.numeric'          => 'La cédula solo puede contener números.',
+      'phone.min'            => 'El número de teléfono debe contener 7 dígitos.',
+      'phone.numeric'        => 'El número de teléfono solo puede contener números.',
+      'cod_country.min'      => 'El código de país debe ser de 4 dígitos y solo puede contener números.',
+      'cod_country.max'      => 'El código de país debe ser de 4 dígitos y solo puede contener números.',
+      'cod_country.numeric'  => 'El código de país solo puede contener números.',
+      'cod_country.required' => 'El código de país es requerido.',
     ];
   }
 }

@@ -1,6 +1,7 @@
 {!! Html::script('js/competitions/competitions.js') !!}
 {!! Html::script('js/competitions/show_competition.js') !!}
 
+<div class="btab3 hidden-xs">
 <div class="container-fluid Filtros">
   <div class="BlockFil col-sm-6">
     <h4>Elige tu liga</h4>
@@ -141,6 +142,7 @@
   </div>
 </div>
 
+
 <!-- -------------------------------- FOOTER -------------------------------- -->
 <div class="divtabfoot">
   <div class="divtabfooty">
@@ -156,6 +158,7 @@
     <p class="Legend">Competición Privada</p>
   </div>
 </div>
+</div> <!-- cierre btab3 -->
 
 @include('modal/competition')
 

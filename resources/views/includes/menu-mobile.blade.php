@@ -8,7 +8,7 @@
               <li id="userbar"><img src="{{ URL::asset('images/ico/usericonmenu.png') }}" alt="">username</li>
             </a>
             <a href=".cajero" data-toggle="modal">
-              <li id="userbalance"><img src="{{ URL::asset('images/ico/menucoin.png') }}" alt="">Balance:  Bs.</li>
+              <li id="userbalance"><img src="{{ URL::asset('images/ico/menucoin.png') }}" alt="">Balance: {{ Auth::user()->bettor->balance }} Bs.</li>
               <li id="userbonus"><img src="{{ URL::asset('images/ico/mas2.png') }}" alt="">Bono:  Bs.</li>
             </a>
           </ul>

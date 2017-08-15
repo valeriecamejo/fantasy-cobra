@@ -2,6 +2,7 @@
 {!! Html::script('js/competitions/show_competition.js') !!}
 {!! Html::script('js/vuejs/competition/competition_details.js') !!}
 
+<div class="btab3 hidden-xs">
   <div class="container-fluid Filtros">
     <div class="BlockFil col-sm-6">
       <h4>Elige tu liga</h4>
@@ -119,11 +120,6 @@
             </span>
             @endif
           </td>
-          <!-- <td class="tdentrar2">
-            <a>
-              <div class="BtnEntrar2">ENTRAR</div>
-            </a>
-          </td -->
            <td class="tdentrar2">
             @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
               <div class="BtnEntrar2" onclick="showCompetition({{$competition->id}})">ENTRAR</div>
@@ -154,3 +150,4 @@
   </div>
 </div>
 </div>
+</div> <!-- cierre btab3 -->

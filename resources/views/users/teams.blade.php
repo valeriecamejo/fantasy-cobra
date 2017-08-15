@@ -6,6 +6,7 @@
 {!! Html::script('js/moment/locale/es.js') !!}
 
 <div id="app">
+<div class="btab3 hidden-xs">
   <div class="container-fluid" id="page-content-wrapper">
     <h3 class="Titulo1">MIS EQUIPOS</h3>
 
@@ -130,7 +131,7 @@
         <br>
       @include('includes/footer-mobile')
   </div>
-
+</div>
 {!! Html::script('js/vuejs/teams/user_teams.js') !!}
 
 @stop

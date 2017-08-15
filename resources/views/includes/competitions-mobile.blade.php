@@ -173,7 +173,7 @@
 </div>
 
   <!-- -------------------------------- FOOTER -------------------------------- -->
-  <div class="divtabfoot2">
+<!--   <div class="divtabfoot2">
     <div class="divtabfooty2">
       <div class="indivfooty">
         <img src="https://www.fantasycobra.com.ve/images/ico/star.png" class="Star" alt="">
@@ -192,4 +192,4 @@
         <p class="Legend">Competición Privada</p>
       </div>
     </div>
-  </div>
+  </div> -->

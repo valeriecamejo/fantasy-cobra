@@ -93,12 +93,18 @@
               <p>Teléfono</p>
             </div>
             <div class="input-group InicioSes3">
-              <input type="text" style="width: 20%;" class="form-control" placeholder="Cod. País" aria-describedby="sizing-addon2" name="cod_country" maxlength="5" value="{{Input::old('cod_country')}}">
-              <input type="text" style="width: 60%;" class="form-control" placeholder="Nro. Teléfono" aria-describedby="sizing-addon2" name="phone" maxlength="15" value="{{Input::old('phone')}}">
-              @if($errors->has('phone'))
+              <input type="text" style="width: 15%" class="form-control" placeholder="00" aria-describedby="sizing-addon2" name="cod_country" maxlength="3" value="{{Input::old('cod_country')}}">
+
+              <input style="width: 7%" aria-describedby="sizing-addon2" class="form-control" placeholder="-" aria-describedby="sizing-addon2" disabled="true">
+
+              <input type="text" style="width: 58%" class="form-control" placeholder="##########" aria-describedby="sizing-addon2" name="phone" maxlength="10" value="{{Input::old('phone')}}">
+              @if($errors->has('phone') || $errors->has('cod_country'))
                 <span class="incompleto">×</span>
                 @foreach($errors->get('phone') as $error)
                   <span class="messageerror2">{{ $error }}</span>
+                @endforeach
+                 @foreach($errors->get('cod_country') as $error)
+                  <br><span class="messageerror2">{{ $error }}</span>
                 @endforeach
               @endif
             </div>
