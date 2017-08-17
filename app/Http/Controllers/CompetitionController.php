@@ -61,9 +61,7 @@ class CompetitionController extends Controller {
 
     $competition     = Competition::save_competition($request->all());
 
-    if ($competition){
-      Session::flash('message', 'Competición creada con exitosamente.');
-      Session::flash('class', 'success');
+    if ($competition) {
       return Redirect::to('/usuario/crear-equipo/'.$competition->type_play)
         ->cookie('competition', $competition, 20)
         ->cookie('enroll', 'competition', 20);

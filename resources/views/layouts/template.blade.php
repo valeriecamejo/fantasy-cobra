@@ -10,7 +10,7 @@ date_default_timezone_set('Etc/GMT+4');
   <meta charset="utf-8">
   <meta name="author" content="Soluciones DDH C.A.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="{!! URL::asset('images.favicon.ico') !!}">
+  <link rel="icon" href="{!! URL::asset('/images/favicon.ico') !!}">
   <title>Fantasy Cobra</title>
 
   <!--core CSS-->

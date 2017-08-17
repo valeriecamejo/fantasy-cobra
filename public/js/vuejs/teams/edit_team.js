@@ -110,6 +110,7 @@ var vm = new Vue ({
     players:       '',
     countOF:        0,
     myPlayers: JSON.parse(sessionStorage.getItem("element.players")),
+    currentMyPlayers : JSON.parse(sessionStorage.getItem("element.players")),
     team_data: JSON.parse(sessionStorage.getItem("team"))
   },
   mounted() {

@@ -63,20 +63,14 @@ public static function saveUpdatePlayerStatsApi ( $route, $statsWebHook ) {
                        'points'              => $total_points,
                        'legacy_stat_request' => $date
                        ]);
-
-              Team_user_players::where('legacy_id', $player_stat->player_id)
-              ->update([
-                       'points' => $total_points
-                       ]);
             }
           }
         }
       }
     }
   }
-
+    PlayerStatsApi::updateTeamPoints();
     PlayerStatsApi::pointsForTeam();
-  // }
 }
 
 }
@@ -101,6 +95,21 @@ public static function saveUpdatePlayerStatsApi ( $route, $statsWebHook ) {
                ]);
     }
 
+  }
+
+/********************************************************
+* updateTeamPoints: Save team points
+* @param
+* @return void
+********************************************************/
+
+  public static function updateTeamPoints() {
+
+    DB::table('team_user_players')
+    ->join('players', 'players.id', '=', 'team_user_players.player_id')
+    ->update([
+              'team_user_players.points' => DB::raw('players.points')
+             ]);
   }
 }
 

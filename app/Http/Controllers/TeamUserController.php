@@ -114,7 +114,7 @@ class TeamUserController extends Controller {
     }
     if ($team) {
       $team_subscriber      = Team_subscriber::inscription_team($team);
-      Session::flash('message', 'Equipo creado con exito.');
+      Session::flash('message', 'Competición creada exitosamente.');
       Session::flash('class', 'success');
       return Redirect::to('usuario/mis-equipos');
     } else {
@@ -172,32 +172,39 @@ class TeamUserController extends Controller {
 
   public function save_team_edited(Request $request) {
 
+    $currentMyPlayers = json_decode($request['currentMyPlayers']);
     $myPlayers = json_decode($request['myPlayers']);
     $team_data = json_decode($request['team_data']);
 
-    if ($team_data->type_play == 'REGULAR') {
-      $validate_positions     = Team_user::validate_positions($myPlayers);
-    } elseif ($team_data->type_play == 'TURBO') {
-      $validate_positions     = Team_Turbo_user::validate_positions($myPlayers);
-    }
+    // if ($currentMyPlayers == $myPlayers) {
+    //   Session::flash('message', 'No se realizaron modificaciones en su equipo.');
+    //   Session::flash('class', 'success');
+    //   return Redirect::to('usuario/mis-equipos');
+    // } else {
 
-    $validate_remaining_salary = Team_user::validate_remaining_salary($myPlayers);
-    $validate_date             = Team_user::validate_date($team_data->team_date);
-
-    if ( ($validate_positions && $validate_remaining_salary && $validate_date) == false ) {
-      $save_team_edited = Team_user_players::save_team_edited($myPlayers, $team_data->team_id, $team_data->type_play);
-
-      if ($save_team_edited == true) {
-        Session::flash('message', 'Equipo modificado con exito.');
-        Session::flash('class', 'success');
-        return Redirect::to('usuario/mis-equipos');
-      } else {
-        Session::flash('message', 'Error al modificar equipo.');
-        Session::flash('class', 'danger');
-        return Redirect::to('usuario/mis-equipos');
+      if ($team_data->type_play == 'REGULAR') {
+        $validate_positions     = Team_user::validate_positions($myPlayers);
+      } elseif ($team_data->type_play == 'TURBO') {
+        $validate_positions     = Team_Turbo_user::validate_positions($myPlayers);
       }
-    }
 
+      $validate_remaining_salary = Team_user::validate_remaining_salary($myPlayers);
+      $validate_date             = Team_user::validate_date($team_data->team_date);
+
+      if ( ($validate_positions && $validate_remaining_salary && $validate_date) == false ) {
+        $save_team_edited = Team_user_players::save_team_edited($myPlayers, $team_data->team_id, $team_data->type_play);
+
+        if ($save_team_edited == true) {
+          Session::flash('message', 'Equipo modificado con exito.');
+          Session::flash('class', 'success');
+          return Redirect::to('usuario/mis-equipos');
+        } else {
+          Session::flash('message', 'Error al modificar equipo.');
+          Session::flash('class', 'danger');
+          return Redirect::to('usuario/mis-equipos');
+        }
+      }
+    // }
   }
 
 }

@@ -80,22 +80,27 @@ class Team_user_players extends Model {
 
   public static function save_team_edited($players, $team_user_id, $type_play) {
 
-    foreach ($players as $player) {
-      $ret = DB::table('team_user_players')
-        ->where('team_user_id', $team_user_id)
-        ->where('position',     $player->position)
-        ->update([
-                 'legacy_id'      => 1,
-                 'player_id'      => $player->player_id,
-                 'name'           => $player->name,
-                 'last_name'      => $player->last_name,
-                 'name_team'      => $player->name_team,
-                 'name_opponent'  => $player->name_opponent,
-                 'salary'         => $player->salary,
-          ]);
-      }
+      DB::table('team_user_players')
+      ->where('team_user_id', '=', $team_user_id)
+      ->delete();
 
-    return $ret;
+    foreach ($players as $player) {
+
+      $team_user_player                =  new Team_user_players();
+      $team_user_player->player_id     =  $player->player_id;
+      $team_user_player->team_user_id  =  $team_user_id;
+      $team_user_player->name          =  $player->name;
+      $team_user_player->last_name     =  $player->last_name;
+      $team_user_player->name_team     =  $player->name_team;
+      $team_user_player->name_opponent =  $player->name_opponent;
+      $team_user_player->position      =  $player->position;
+      $team_user_player->salary        =  $player->salary;
+      $team_user_player->points        = 0;
+      $team_user_player->save();
+
+    }
+
+    return $team_user_player;
   }
 
 }
