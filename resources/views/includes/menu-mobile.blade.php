@@ -29,7 +29,7 @@
             <a href="perfil" onclick="document.getElementById('bloquea').style.display='block'">
               <li id="userbar"><img src="{{ URL::asset('images/ico/usericonmenu.png') }}" alt="">username</li>
             </a>
-            <a href="cajero">
+            <a href="{!! URL::action('PaymentController@show_withdrawals') !!}">
               <li id="userbalance"><img src="{{ URL::asset('images/ico/menucoin.png') }}" alt="">Balance:  Bs.</li>
             </a>
           </ul>
@@ -44,31 +44,31 @@
       <li id="userlogin">
         <a href=".login" data-toggle="modal"><p>Ingrese</p></a>
       </li>
-      <li onclick="document.getElementById('bloquea').style.display='block'">
+      <li>
         {!! Html::link('/', 'Lobby') !!}
       </li>
-      <li onclick="action(3,1)">
-        <a>Equipos</a>
+      <li>
+        <a href=".login" data-toggle="modal">Equipos</>
       </li>
-      <li onclick="login(4)">
-        <a>Competiciones</a>
+      <li>
+        <a href=".login" data-toggle="modal">Competiciones</a>
+      </li>
+      <li>
+          <a href=".login" data-toggle="modal">Promociones</a>
       </li>
     @endif
 
-    <li id="promotionsM" onclick="document.getElementById('bloquea').style.display='block'">
-      <a href="{!! URL::action('PromotionController@list_promotions') !!}">Promociones</a>
-    </li>
     @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
 
       <li id="menuside"><a href="#">Cajero</a>
         <ul>
-          <li onclick="document.getElementById('bloquea').style.display='block'">
-            {!! Html::link('usuario/transferencia', 'Transferencia') !!}
+          <li>
+            {!! Html::link('usuario/retirar-dinero', 'Transferencia') !!}
           </li>
           <!--<li onclick="document.getElementById('bloquea').style.display='block'">
             {!! Html::link('usuario/cajero', 'Tarjeta de Crédito') !!}
           </li>-->
-          <li onclick="document.getElementById('bloquea').style.display='block'">
+          <li>
             <a href="cajero">Cobra</a>
           </li>
         </ul>
@@ -79,6 +79,9 @@
     </li>
     @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
 
+      <li id="promotionsM" onclick="document.getElementById('bloquea').style.display='block'">
+        <a href="{!! URL::action('PromotionController@list_promotions') !!}">Promociones</a>
+      </li>
       <li id="referirM" onclick="document.getElementById('bloquea').style.display='block'">
         {!! Html::link('usuario/referir-amigo', 'Referir Amigo') !!}
       </li>

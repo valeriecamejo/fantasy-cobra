@@ -55,5 +55,4 @@ class HomeController extends Controller
   public function how_to_play () {
     return view('footer.how_to_play');
   }
-
 }
