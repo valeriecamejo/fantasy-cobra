@@ -129,9 +129,15 @@
           </td>
           <td class="tdentrar2">
             @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
-              <div class="BtnEntrar2" onclick="showCompetition({{$competition->id}})">ENTRAR</div>
+              {{--<div class="BtnEntrar2" onclick="showCompetition({{$competition->id}})">ENTRAR</div>--}}
+              <button type="button" class="btn btn-primary" onclick="showCompetition({{$competition->id}})" aria-label="Left Align">
+                <span class="glyphicon glyphicon-edit glyphicon-edit-competitions" aria-hidden="true"></span>
+              </button>
             @else
-              <div class="BtnEntrar2" href=".login" data-toggle="modal">ENTRAR</div>
+              {{--<div class="BtnEntrar2" href=".login" data-toggle="modal">ENTRAR</div>--}}
+              <button type="button" class="btn btn-primary" href=".login" data-toggle="modal" aria-label="Left Align">
+                <span class="glyphicon glyphicon-edit glyphicon-edit-competitions" aria-hidden="true"></span>
+              </button>
             @endif
           </td>
         </tr>

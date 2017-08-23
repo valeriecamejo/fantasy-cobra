@@ -118,7 +118,9 @@
 
         <div class="lineup">
            <div class="Usuariolineup" style="text-align:center;text-indent: 0;">EQUIPO
-            <button v-if="team_data.type_play == 'TURBO' && myPlayers.length == 5 || team_data.type_play == 'REGULAR' && myPlayers.length == 9" type='submit' class='btn btn-primary2 btn-lg' name='createlineup'>Guardar Lineup</button>
+            <button v-if="team_data.type_play == 'TURBO' && myPlayers.length == 5 || team_data.type_play == 'REGULAR' && myPlayers.length == 9" type='submit' title="Guardar Equipo" class='btn btn-warning btn-sm pull-right' name='createlineup'>
+              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            </button>
             <button v-else type='submit' class='btn btn-primary21 btn-lg' disabled>Guardar Lineup</button>
           </div>
 
@@ -140,41 +142,17 @@
             </thead>
           </table>
           <!-- Peloteros Seleccionados -->
-          <div class="tableequipoheightmax">
-
-                <tr id="playerPA" >
-
-
-                <div is="my-players"
+          <table class="table table-striped2 table-hover2 tablelineup tableequipoheight">
+            <tbody id="playersTeam" class="tableequipoheightmax">
+              <tr is="my-players"
                   v-for="(myPlayer, index) in myPlayers"
                   :my-player="myPlayer"
                   :count-position="countPosition"
                   :index="index"
                   v-on:remove="myPlayers.splice(index, 1)">
-                </div>
-                </tr>
-                <tr id="playerC">
-                </tr>
-                <tr id="player1B">
-                </tr>
-                <tr id="playerMI">
-                </tr>
-                <tr id="playerCI">
-                </tr>
-                <tr id="player2B">
-                </tr>
-                <tr id="player3B">
-                </tr>
-                <tr id="playerSS">
-                </tr>
-                <tr id="playerOF">
-                </tr>
-                <tr id="playerOF1">
-                </tr>
-                <tr id="playerOF2">
-                </tr>
-
-          </div>
+              </tr>
+            </tbody>
+          </table>
           <div id="thth2">
             <p style="color:white;text-align:center;width:100%;font-weight:normal;font-size: 10pt;margin: 13px 0px;"><i>JUGADORES QUE CONFORMARÁN TU EQUIPO</i></p>
           </div>
@@ -185,9 +163,6 @@
         <!--<button type="submit" class="btn btn-primarycan btn-lg" name="cancellineup" onclick="">Limpiar</button>-->
         <input type="hidden" :value="JSON.stringify(myPlayers)" name="myPlayers">
         <input type="hidden" :value="JSON.stringify(currentMyPlayers)" name="currentMyPlayers">
-        <div  v-if="team_data.type_play == 'TURBO' && myPlayers.length == 5 || team_data.type_play == 'REGULAR' && myPlayers.length == 9">
-          <button type='submit' class='btn btn-primary2 btn-lg' name='createlineup'>Guardar Lineup</button>
-        </div>
         <div id="button_create"></div>
       </div>
     </div>
@@ -382,20 +357,19 @@
 
 <!-- Template of my players -->
 <template id="my-players">
-  <table class="table table-striped2 table-hover2 tablelineup tableequipoheight">
-    <tbody id="playersTeam">
-      <td id='pos'>@{{ myPlayer.position }}</td>
-      <td id='jug'>@{{ myPlayer.name }} @{{ myPlayer.last_name }}<span id='teamcol'></span></td>
-      <td id='opo'>@{{ myPlayer.name_opponent }} vs <span id='teamcol'>@{{ myPlayer.name_team }}</span></td>
-      <td id='salario'>@{{ myPlayer.salary }}</td>
-      <td>
-        <a @click="$emit('remove'), decSalary(myPlayer)">
-        <img src='/images/ico/menos.png' alt='menos' class='mashov'>
-        </a>
-      </td>
-    </tbody>
-  </table>
+  <tr>
+    <td id='pos'>@{{ myPlayer.position }}</td>
+    <td id='jug'>@{{ myPlayer.name }} @{{ myPlayer.last_name }}<span id='teamcol'></span></td>
+    <td id='opo'>@{{ myPlayer.name_opponent }} vs <span id='teamcol'>@{{ myPlayer.name_team }}</span></td>
+    <td id='salario'>@{{ myPlayer.salary }}</td>
+    <td>
+      <a @click="$emit('remove'), decSalary(myPlayer)">
+      <img src='/images/ico/menos.png' alt='menos' class='mashov'>
+      </a>
+    </td>
+  </tr>
 </template>
+
 <!-- End Template of my players -->
 
 <!-- Template of players -->

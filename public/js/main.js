@@ -76,4 +76,12 @@ jQuery(function(){
   $('.tdrest').width(iwidth);
   $('.tabentrar').width(jwidth);
 
+
+
 });
+
+var configs = JSON.parse(document.getElementById('configs').innerHTML)
+
+setTimeout(function() {
+    window.location = '/logout';
+}, configs.session_lifetime * 60 * 1000)

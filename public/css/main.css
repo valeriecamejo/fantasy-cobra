@@ -37,6 +37,10 @@ body {
   }
 }*/
 
+button.btn > span.glyphicon-edit-competitions {
+  font-size: 20px;
+}
+
 @media (max-width: 1200px) {
   body {
     margin-right:-5%;
@@ -123,6 +127,8 @@ hr {
   border-width: 0;
   border-bottom-width: 3px;
   border-radius: 3px;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 .btn.btn-primary {
   background: #45aed6;
@@ -1051,7 +1057,7 @@ ul.nostyle i {
 @media (max-width: 767px) {
   #footer {
     height: 110px;
-    bottom: inherit;
+    /*bottom: inherit;*/
   }
 }
 
@@ -5583,7 +5589,7 @@ img.mashov {
     width: 100%;
     text-align: center;
     background-color: #0c0c0c;
-    height: 56px;
+    /*height: 56px;*/
     margin-bottom: -7px;
     border-top: 2px solid #eec133;
 }
