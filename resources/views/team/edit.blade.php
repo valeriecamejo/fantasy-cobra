@@ -142,17 +142,19 @@
             </thead>
           </table>
           <!-- Peloteros Seleccionados -->
-          <table class="table table-striped2 table-hover2 tablelineup tableequipoheight">
-            <tbody id="playersTeam" class="tableequipoheightmax">
-              <tr is="my-players"
-                  v-for="(myPlayer, index) in myPlayers"
-                  :my-player="myPlayer"
-                  :count-position="countPosition"
-                  :index="index"
-                  v-on:remove="myPlayers.splice(index, 1)">
-              </tr>
-            </tbody>
-          </table>
+          <div class="tableequipoheightmax">
+            <table class="table table-striped2 table-hover2 tablelineup tableequipoheight">
+              <tbody id="playersTeam" class="tableequipoheightmax">
+                <tr is="my-players"
+                    v-for="(myPlayer, index) in myPlayers"
+                    :my-player="myPlayer"
+                    :count-position="countPosition"
+                    :index="index"
+                    v-on:remove="myPlayers.splice(index, 1)">
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <div id="thth2">
             <p style="color:white;text-align:center;width:100%;font-weight:normal;font-size: 10pt;margin: 13px 0px;"><i>JUGADORES QUE CONFORMARÁN TU EQUIPO</i></p>
           </div>

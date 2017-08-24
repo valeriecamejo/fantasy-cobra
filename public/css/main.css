@@ -5582,16 +5582,14 @@ img.mashov {
 }
 
 #thth2 {
-    font-weight: 700;
-    font-size: 1.1em;
-    /*display: -webkit-inline-box;
-    display: -moz-inline-box;*/
-    width: 100%;
-    text-align: center;
-    background-color: #0c0c0c;
-    /*height: 56px;*/
-    margin-bottom: -7px;
-    border-top: 2px solid #eec133;
+  font-weight: 700;
+  font-size: 1.1em;
+  width: 100%;
+  text-align: center;
+  background-color: #0c0c0c;
+  height: 56px;
+  margin-bottom: -7px;
+  border-top: 2px solid #eec133;
 }
 
 .btn.btn-primarycan {

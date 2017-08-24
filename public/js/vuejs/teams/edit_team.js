@@ -109,6 +109,25 @@ var vm = new Vue ({
     allPlayers:    '',
     players:       '',
     countOF:        0,
+    arrayMyPlayers: [],
+    turboTeam:      {
+                    'PA': '',
+                    'C' : '',
+                    'MI': '',
+                    'CI': '',
+                    'OF': ''
+                  },
+    regularTeam:    {
+                    'PA':  '',
+                    'C' :  '',
+                    '1B':  '',
+                    '2B':  '',
+                    '3B':  '',
+                    'SS':  '',
+                    'OF1': '',
+                    'OF2': '',
+                    'OF3': ''
+                  },
     myPlayers: JSON.parse(sessionStorage.getItem("element.players")),
     currentMyPlayers : JSON.parse(sessionStorage.getItem("element.players")),
     team_data: JSON.parse(sessionStorage.getItem("team"))
@@ -118,8 +137,12 @@ var vm = new Vue ({
       {}).then((response) => {
         this.allPlayers = response.data;
         this.players = this.allPlayers.PA;
-        if (vm.myPlayers == 'Array[5]') {
-          console.log('Hay 5 arrays')
+        if (vm.myPlayers.length == 5) {
+          console.log('EL equipo es Turbo');
+          this.orderTeam(vm.turboTeam, vm.myPlayers, 'TURBO')
+        } else if (vm.myPlayers.length == 9) {
+          console.log('EL equipo es Regular');
+          this.orderTeam(vm.regularTeam, vm.myPlayers, 'REGULAR')
         }
       });
     },
@@ -145,6 +168,33 @@ var vm = new Vue ({
           }
           return vm.players = vm.show
         });
+      },
+
+      orderTeam: function (team, myPlayers, type_play) {
+
+          $.each(myPlayers, function( index, value ) {
+
+            if (type_play == 'REGULAR') {
+              if (value['position'] == 'OF') {
+                if (team['OF1'] == '') {
+                  team['OF1'] = value
+                } else if (team['OF2'] == '') {
+                  team['OF2'] = value
+                } else {
+                  team['OF3'] = value
+                }
+
+            } else {
+              team[value['position']] = value
+            }
+            }
+
+            if (type_play == 'TURBO') {
+
+                team[value['position']] = value
+            }
+          });
+          vm.myPlayers = team
       }
     }
   });
