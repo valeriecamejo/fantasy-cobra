@@ -301,8 +301,8 @@
                 @elseif($transaction->approved == 1)
                 Retiro /
                 @endif
-                <i>{{ $transaction->bank }}</i>
               </a>
+              <i>{{ $transaction->bank }}</i>
             </h4>
             <div style="width: 10%; float: left;">
               @if($transaction->point_type == "PAYPAL")
@@ -313,7 +313,7 @@
               <img src="{{ URL::asset('images/ico/credit_ico.png') }}"/>
               @endif
             </div>
-            <div class="tmovilimg"><img src="{{ URL::asset('images/ico/white-space.png') }}"/></div>
+            {{--<div class="tmovilimg"><img src="{{ URL::asset('images/ico/white-space.png') }}"/></div>--}}
             <div class="tmovdatos">
               <div class="div1">
                 <p><span>Fecha</span>
@@ -325,7 +325,7 @@
                   {{ date("d-m", $date) }}
                 </p>
                 <div class="tmovtabico">
-                  <!--<img class="Garanico" src="images/ico/lock.png"/>-->
+                  {{--<img class="Garanico" src="images/ico/lock.png"/>--}}
                 </div>
                 <p><span>Hora</span>{{ date("g a",strtotime("$date")) }}</p>
               </div>
