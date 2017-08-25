@@ -176,7 +176,7 @@
     <div class="restab visible-xs" style="margin-top:30px; margin-bottom: 60px;">
       <div  class="linemovbut">
         <button type="submit" class="btn btn-default btn-primary4" name="createlineup" onclick="">CREAR LINEUP</button>
-        <button type="submit" class="btn btn-default btn-primary4" name="returnhome" onclick="">REGRESAR</button>
+        <a href="/usuario/mis-equipos" type="submit" class="btn btn-default btn-primary4" name="returnhome">REGRESAR</a>
       </div>
       <ul class="nav nav-tabs nav-tabsnull" role="tablist">
         <li role="presentation" class="active BtnLineup10 respli"><a href="#jugcrear" aria-controls="team" role="tab" data-toggle="tab">Jugadores</a></li>
