@@ -129,7 +129,7 @@
         <br>
         <br>
         <br>
-      {{--@include('includes/footer-mobile')--}}
+      <!-- {{--@include('includes/footer-mobile')--}} -->
   </div>
 </div>
 {!! Html::script('js/vuejs/teams/user_teams.js') !!}

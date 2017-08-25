@@ -355,7 +355,7 @@
 </div><br>
   <!---------------------------------------- End Mobile ------------------------------------------>
 
-@include('includes/footer-mobile')
+<!-- @include('includes/footer-mobile') -->
 </div>
 </div>
 

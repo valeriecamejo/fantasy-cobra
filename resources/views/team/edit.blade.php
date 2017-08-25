@@ -121,7 +121,7 @@
             <button v-if="team_data.type_play == 'TURBO' && myPlayers.length == 5 || team_data.type_play == 'REGULAR' && myPlayers.length == 9" type='submit' title="Guardar Equipo" class='btn btn-warning btn-sm pull-right' name='createlineup'>
               <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
             </button>
-            <button v-else type='submit' class='btn btn-primary21 btn-lg' disabled>Guardar Lineup</button>
+            <button v-else type='submit' class='btn btn-default btn-sm active pull-right disabled'><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
           </div>
 
           <div id="th2">

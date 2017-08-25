@@ -91,6 +91,6 @@
   <!-- -------------------------------- BOTONES -------------------------------- -->
     @include('includes.competitions')
     @include('includes.competitions-mobile')
-    @include('includes/footer-mobile')
+    <!-- @include('includes/footer-mobile') -->
   </div>
 @stop

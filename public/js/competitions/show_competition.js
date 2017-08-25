@@ -62,7 +62,6 @@ function addData(competition_data) {
       competition.date_now = moment().format('YYYY-MM-DD HH');
       competition.date_competition = moment(competition.date).format('YYYY-MM-DD HH');
       competitions_app.competition_details = competition;
-      console.info(competitions_app);
 
       competition_enrolled        =   "<tr>"+
         "<td><b>Inscritos: </b>"+competition.enrolled+"/"+competition.user_max+"</td>"+

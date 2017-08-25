@@ -138,7 +138,6 @@
         </tbody>
       </table>
     </div>
-  </div>
 
 <!-- -------------------------------- FOOTER -------------------------------- -->
 <div class="divtabfoot">
@@ -155,5 +154,5 @@
     <p class="Legend">Competición Privada</p>
   </div>
 </div>
-</div>
 </div> <!-- cierre btab3 -->
+
