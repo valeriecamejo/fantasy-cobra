@@ -3,7 +3,6 @@
 @section ('content')
   <div id="page-content-wrapper">
     <!--  /Content-wrapper -->
-    <div class="container-fluid">
       @if(isset($promotion_list) && count($promotion_list)!= "null")
         <div class="container contaslide nopadrightres" style="margin-bottom:50px">
           <div id="myCarousel" class="carousel slide hidden-xs" data-ride="carousel">

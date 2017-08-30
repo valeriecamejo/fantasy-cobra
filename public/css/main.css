@@ -8172,17 +8172,20 @@ body {
   }
 }
 
-@media (min-width: 400px) {
+@media (min-width: 475px) {
   .next {
     display: none;
   }
 }
 
 @media (max-width: 399px) {
-  .next2 {
+  .Sal1 {
     display: none;
   }
-  .Sal1 {
+}
+
+@media (max-width: 474px) {
+  .next2 {
     display: none;
   }
 }
