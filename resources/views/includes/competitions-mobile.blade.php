@@ -1,7 +1,8 @@
 {!! Html::script('js/competitions/competitions.js') !!}
 {!! Html::script('js/competitions/show_competition.js') !!}
+{!! Html::script('js/vuejs/competition/competition_details.js') !!}
 
-<div class="restab visible-xs">
+<div class="restab visible-xs hidden-lg hidden-md">
     <div class="btab3">
         <div class="container-fluid Filtros">
             <div class="BlockFil col-xs-12">
@@ -38,7 +39,7 @@
         </div>
 
     <!-- Tab panes -->
-        <div class="tab-content tab-contentnull tab-contenthome">
+        <div class="tab-content tab-contentnull tab-contenthome" id="table-all-mobile">
 
             <div role="tabpanel" class="tab-pane fade in active bordyel noscroll" id="competiciones">
                 <div class="tablemovil">
@@ -82,19 +83,27 @@
                                         <p><span>Inscritos</span>{!! $competition->enrolled !!}/{!! $competition->user_max !!}</p>
                                         <div class="tmovtabico">
                                             @if($competition->pot == 1)
-                                                <img class="Aumenico" src="images/ico/aumento.png"/>
+                                                <img class="Aumenico" src="/images/ico/aumento.png"/>
                                             @else
-                                                <img class="Garanico" src="images/ico/garantizado.png"/>
+                                                <img class="Garanico" src="/images/ico/garantizado.png"/>
                                             @endif
                                         </div>
                                         <p><span>Premio</span>{!! $competition->cost_guaranteed !!} Bs.</p>
                                     </div>
                                 </div>
                                 <div class="next">
-                                    <a href=""><img class="Aumenico" src="images/ico/next.png"/></a>
+                                    @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
+                                        <a onclick="showCompetition({{$competition->id}})" aria-label="Left Align"><img class="Aumenico" src="/images/ico/next.png"/></a>
+                                    @else
+                                        <a href=".login" data-toggle="modal"><img class="Aumenico" src="/images/ico/next.png"/></a>
+                                    @endif
                                 </div>
                                 <div class="next2">
-                                    <a href=""><img class="next21" src="images/ico/next2.png"/></a>
+                                    @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
+                                        <a onclick="showCompetition({{$competition->id}})" aria-label="Left Align"><img class="next21" src="/images/ico/next2.png"/></a>
+                                    @else
+                                        <a href=".login" data-toggle="modal"><img class="next21" src="/images/ico/next2.png"/></a>
+                                    @endif
                                 </div>
                             </li>
                         </ul>
@@ -105,19 +114,19 @@
         </div> <!-- restab cierre -->
         <div class="divtabfoot2">
             <div class="divtabfooty2">
-                <div class="indivfooty"><img class="Star" src="images/ico/star.png"/>
+                <div class="indivfooty"><img class="Star" src="/images/ico/star.png"/>
                     <p class="Legend">Competición Destacada</p>
                 </div>
                 <div class="indivfooty">
-                    <img class="Aumenico" src="images/ico/aumento.png"/>
+                    <img class="Aumenico" src="/images/ico/aumento.png"/>
                     <p class="Legend">Aumento de Premio</p>
                 </div>
                 <div class="indivfooty">
-                    <img class="Garanico" src="images/ico/garantizado.png"/>
+                    <img class="Garanico" src="/images/ico/garantizado.png"/>
                     <p class="Legend">Premio Garantizado</p>
                 </div>
                 <div class="indivfooty">
-                    <img class="Garanico" src="images/ico/lock.png"/>
+                    <img class="Garanico" src="/images/ico/lock.png"/>
                     <p class="Legend">Competición Privada</p>
                 </div>
             </div>

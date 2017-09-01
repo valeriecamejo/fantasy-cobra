@@ -56,6 +56,7 @@ function addData(competition_data) {
   $(competition_data).each(function(index, element) {
     //---------------------------- Competition
     $(element.competition).each(function (i, competition) {
+
       competition_name            = competition.name;
       cost_guaranteed_g           = competition.cost_guaranteed;
 
@@ -124,7 +125,7 @@ function addData(competition_data) {
 
   });
 
-  $("#competition_name").append(competition_name);
+  // $("#competition_name").append(competition_name);
   $("#mobile_competition_enrolled").append(competition_enrolled);
   $("#mobile_competition_entry_cost").append(competition_entry_cost);
   $("#mobile_competition_cost_guaranteed").append(competition_cost_guaranteed);

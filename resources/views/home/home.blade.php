@@ -84,12 +84,17 @@
           </a>
         </div>
       @endif
+
     </div>
+
     <!-- -------------------------------- MODALES -------------------------------- -->
   @include('modal/competition')
   <!-- -------------------------------- BOTONES -------------------------------- -->
-    @include('includes.competitions')
-    @include('includes.competitions-mobile')
-    <!-- @include('includes/footer-mobile') -->
+      @include('includes.competitions')
+      @include('includes.competitions-mobile')
+      {{--@include('includes.footer-mobile')--}}
   </div>
+
 @stop
+
+

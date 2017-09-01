@@ -24,7 +24,6 @@ class Team_user_players extends Model {
   public static function save_player($player_obj, $team_id, $type_play) {
 
     $player                   = new Team_user_players();
-    $player->legacy_id        =  $player_obj['legacy_id'];
     $player->player_id        =  $player_obj['id'];
     $player->team_user_id     =  $team_id;
     $player->name             =  $player_obj['name'];

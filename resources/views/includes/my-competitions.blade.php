@@ -2,7 +2,7 @@
 {!! Html::script('js/competitions/show_competition.js') !!}
 {!! Html::script('js/vuejs/competition/competition_details.js') !!}
 
-<div class="btab3">
+<div class="btab3 hidden-xs">
   <div class="row Filtros">
     <div class="BlockFil col-xs-12 col-sm-6">
       <h4>Elige tu liga</h4>
@@ -155,4 +155,4 @@
   </div>
 </div>
 </div> <!-- cierre btab3 -->
-
+</div>

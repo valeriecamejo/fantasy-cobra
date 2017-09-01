@@ -17,6 +17,7 @@ function filter_competitions(sport, filter_type, competitions) {
   window.sport = sport;
   window.filter_type = filter_type;
   var tpl = '';
+  var tpl_mobile = '';
   var list_competitions = [];
 
   if ((sport == 'all') && (filter_type == 'all')) {
@@ -43,14 +44,11 @@ function filter_competitions(sport, filter_type, competitions) {
   }
 
   $.each(competitions, function(index, element) {
-     console.log(element.type_competition, filter_type);
-     console.log(element.name_sport, sport);
     if ((element.name_sport == sport) && (filter_type == 'all')) {
             list_competitions.push(element);
           } else {
     if ((element.name_sport == sport) && (element.type_competition == filter_type )) {
       list_competitions.push(element);
-      console.log(list_competitions);
     } else {
       if ((element.name_sport == sport) && (element.type_play == filter_type )) {
         list_competitions.push(element);
@@ -66,8 +64,10 @@ function filter_competitions(sport, filter_type, competitions) {
   });
 
   tpl = competitions_template(list_competitions);
+  tpl_mobile = competitions_template_mobile(list_competitions);
 
   $("#table-all-no-mobile").append(tpl);
+  $("#table-all-mobile").append(tpl_mobile);
 }
 
 /**********************************
@@ -123,7 +123,7 @@ function competitions_template(competitions) {
     + " Bs."
     + "</td>"
     + "<td class='tdfecha2 notdpad'>"
-    var date = moment(element.date).format("DD-MM");
+    var date = moment(element.date).format("DD-MM")
     + "</td>"
     + "<td class='tdhora2 notdpad'>";
     tpl = tpl + date
@@ -148,4 +148,101 @@ function competitions_template(competitions) {
     + "</tr>"
   });
   return tpl;
+}
+
+
+/**********************************
+ * competitions_template_mobile.
+ * @param competitions
+ * @return tpl_mobile
+ ***********************************/
+function competitions_template_mobile(competitions) {
+    var date = '';
+    var today = '';
+    var hour = '';
+    var protocol = location.protocol;
+    var URLdomain = window.location.host;
+    var url = protocol + "//" + URLdomain;
+    var tpl_mobile = '';
+    $("#table-all-mobile").empty();
+
+    tpl_mobile = tpl_mobile
+    + "<div role='tabpanel' class='tab-pane fade in active bordyel noscroll' id='competiciones'>"
+    + "<div class='tablemovil'>"
+
+    if (competitions.length == 0) {
+        tpl_mobile = tpl_mobile
+            + "<div class='col-xs-12 col-xs-offset-1'>"
+            + "<tr>"
+            + "<td colspan='9'>"
+            + "<h5>No tienes equipos creados</h5>"
+            + "<h4>Te invitamos a que disfrutes de la plataforma.</h4>"
+            + "</td>"
+            + "</tr>"
+            + "</div>";
+    } else {
+        $.each(competitions, function (index, element) {
+            tpl_mobile = tpl_mobile
+            + "<ul>"
+            + "<li class='tmovli'>"
+            + "<div class='divico'><img class='Star' src='images/ico/star.png'/></div>"
+            + "<h4 class='h4tmovil'><a href=''>"
+            + element.name
+            + "</a></h4>"
+            + "<div class='tmovilimg '>"
+            + "<img src='" + url + "/" + element.avatar + "' class='tabimgtablet'>"
+            + "</div>"
+            + "<div class='tmovdatos'>"
+            + "<div class='div1'>";
+            var hour = moment(element.date).format('HH:mm');
+            var date = moment(element.date).format("DD-MM");
+            tpl_mobile = tpl_mobile
+            + "<p>"
+            + date
+            + " "
+            + hour
+            + "</p>"
+            + "<div class='tmovtabico'>"
+
+                if (element.type == 'PRIVATE') {
+                    tpl_mobile = tpl_mobile
+                    + "<img class='Garanico' src='images/ico/lock.png'/>";
+                }
+
+            tpl_mobile = tpl_mobile
+            + "</div>"
+            + "<p><span>Entrada</span>"
+            + element.entry_cost
+            + "</p></div>"
+
+            + "<div class='div1'>"
+            + "<p><span>Inscritos</span>"
+            + element.enrolled
+            + "/"
+            + element.user_max
+            + "</p>"
+            + "<div class='tmovtabico'>"
+
+                if (element.pot == 1) {
+                    tpl_mobile = tpl_mobile
+                    + "<img class='Aumenico' src='images/ico/aumento.png'/>";
+                } else {
+                    tpl_mobile = tpl_mobile
+                    + "<img class='Garanico' src='images/ico/garantizado.png'/>";
+                }
+
+            tpl_mobile = tpl_mobile
+            + "</div>"
+            + "<p><span>Premio</span>"
+            + element.cost_guaranteed
+            + "Bs.</p>"
+            + "</div>"
+            + "</div>"
+            + "</li>"
+            + "</ul>";
+        });
+    }
+            tpl_mobile = tpl_mobile
+            + "</div>";
+    return tpl_mobile;
 }

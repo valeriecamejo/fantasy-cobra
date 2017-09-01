@@ -62,7 +62,7 @@
         <div id="app">
           <template v-if="competition_details.date_competition >= competition_details.date_now && competition_details.enrolled < competition_details.user_max">
             <div class="divBtn1">
-              <a :href="'/usuario/crear-equipo/competicion/'+ competition_details.id" class="btn btn-default btn-primary4">CREAR EQUIPO</a>
+              <a :href="'/usuario/crear-equipo/competicion/'+ competition_details.id" class="btn btn-default btn-primary4">CREAR EQUIPO</a>--}}
             </div>
            <!-- <div class="divBtn2">
               <a :href="'usuario/inscribir-equipo/competicion/'+ competition_details.id" class="btn btn-default btn-primary4">INSCRIBIR EQUIPO</a>

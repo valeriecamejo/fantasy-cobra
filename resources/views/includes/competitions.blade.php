@@ -1,69 +1,6 @@
 {!! Html::script('js/competitions/competitions.js') !!}
 {!! Html::script('js/competitions/show_competition.js') !!}
 
-{{--<div class="row hidden-xs">--}}
-  {{--<div class="col-sm-1"></div>--}}
-  {{--<div class="col-sm-2">Competición</div>--}}
-  {{--<div class="col-sm-1">Inscritos</div>--}}
-  {{--<div class="col-sm-1">Entrada</div>--}}
-  {{--<div class="col-sm-1">Premio</div>--}}
-  {{--<div class="col-sm-2">Fecha</div>--}}
-  {{--<div class="col-sm-2">Hora</div>--}}
-  {{--<div class="col-sm-1">Restante</div>--}}
-  {{--<div class="col-sm-1"></div>--}}
-{{--</div>--}}
-{{--@foreach ($list_competitions as $competition)--}}
-  {{--<div class="row">--}}
-    {{--<div class="col-sm-1">--}}
-      {{--{!! Html::image($competition->avatar,'',array('class' => 'tabimgtablet')) !!}--}}
-      {{--@if($competition->is_important == 1)--}}
-        {{--{!! Html::image('images/ico/star.png','',array('class' => 'Startd')) !!}--}}
-      {{--@endif--}}
-    {{--</div>--}}
-    {{--<div class="col-sm-2 col-xs-12">{!! $competition->name !!}</div>--}}
-    {{--<div class="col-sm-1 col-xs-6">{!! $competition->enrolled !!}/{!! $competition->user_max !!}</div>--}}
-    {{--<div class="col-sm-1">@if($competition->free == 0)--}}
-        {{--<span>--}}
-          {{--{!! Html::image('images/ico/multiple.png','',array('class' => 'multiple')) !!}--}}
-        {{--</span>--}}
-      {{--@endif--}}
-      {{--{!! $competition->entry_cost !!}--}}
-    {{--</div>--}}
-    {{--<div class="col-sm-1">--}}
-      {{--<span>--}}
-        {{--@if($competition->pot == 1)--}}
-          {{--{!! Html::image('images/ico/aumento.png','',array('class' => 'tdAumenico')) !!}--}}
-        {{--@else--}}
-          {{--{!! Html::image('images/ico/garantizado.png','',array('class' => 'tdGaranico')) !!}--}}
-        {{--@endif--}}
-      {{--</span>--}}
-      {{--{!! $competition->cost_guaranteed !!}--}}
-    {{--</div>--}}
-    {{--<div class="col-sm-2 col-xs-push-9">--}}
-      {{--@php--}}
-        {{--$date = strtotime($competition->date)--}}
-      {{--@endphp--}}
-      {{--{{ UtilityDate::dateAbbrevSpanish(getdate($date)) }}--}}
-      {{--{{ date("d-m", $date) }}--}}
-    {{--</div>--}}
-    {{--<div class="col-sm-2 hidden-xs">{{ date("h:i a", $date) }}</div>--}}
-    {{--<div class="col-sm-1 hidden-xs">--}}
-      {{--@php--}}
-        {{--$date  = new DateTime($competition->date);--}}
-        {{--$today = new DateTime("now");--}}
-      {{--@endphp--}}
-      {{--@if($competition->date == $today)--}}
-        {{--<span id="{{$competition->id}}" style="font-weight: bold;">00:00:00</span>--}}
-      {{--@else--}}
-        {{--<span id="{{$competition->id}}" style="font-weight: bold;">--}}
-                {{--{{ $today->diff($date)->format('%R%a días') }}--}}
-              {{--</span>--}}
-      {{--@endif--}}
-    {{--</div>--}}
-    {{--<div class="col-sm-1"></div>--}}
-  {{--</div>--}}
-{{--@endforeach--}}
-
 <div class="btab3 hidden-xs">
 <div class="container-fluid Filtros">
   <div class="BlockFil col-sm-6">
@@ -210,7 +147,6 @@
     </table>
   </div>
 </div>
-
 
 <!-- -------------------------------- FOOTER -------------------------------- -->
 <div class="divtabfoot">

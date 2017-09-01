@@ -10,11 +10,12 @@
   <!-- -------------------------------- MODALES -------------------------------- -->
   @include('modal/competition')
   @include('includes.my-competitions')
-  @include('includes.competitions-mobile')
   @include('includes.my-competitions-mobile')
-  @include('includes/footer-mobile')
+
 
   </div>
       <!--  /Content-wrapper -->
 </div>
+{{--@include('includes.footer-mobile')--}}
 @stop
+
