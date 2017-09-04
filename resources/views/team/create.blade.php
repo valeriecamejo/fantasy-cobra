@@ -1,19 +1,19 @@
+
 @extends ('layouts.template')
 
 @section ('content')
+
+<div id="create">
   <div class="container-fluid Ingresoprin" id="page-content-wrapper">
     <div class="Enunciado2">
       <h3 class="Titulo1">CREAR NUEVO EQUIPO</h3>
       <h4 style="color:#e9e9e9;font-weight: 300;margin-top: -18px;font-size: 13pt;">Equipo para el día: {{date("d-m-Y", strtotime($date))}}<span style="color:#eec133;"></span></h4>
     </div>
 
-    {!!  Form::open(array('url' => 'usuario/crear-equipo', 'method' => 'post')) !!}
+<!--- Form -->
+    <form class="form-horizontal" method="POST" action="{{ URL::action('TeamUserController@save_team_edited') }}">
+      {{ csrf_field() }}
 
-    <input type='hidden' name="sport" id="sport" value="{{$sport}}">
-    <input type='hidden' name="championship" id="championship" value="{{$championship}}">
-    <input type='hidden' name="type_journal" id="type_journal" value="{{$type_journal}}">
-    <input type="hidden" name="type_play"  value="{{$type}}" id="type_play">
-    <input type='hidden' name="date_team" id="date_team" value="{{date("Y-m-d", strtotime($date))}}">
     <div class="modal-bodycompe">
       <div class="boxcompe">
         <p>Tipo de juego:  {{$type}} </p>
@@ -35,7 +35,54 @@
           </div> -->
           <div>
             <!-- Nav tabs -->
-            <div id="tabs"></div>
+            <div id="tabs">
+              {{--<div id="tabs1">--}}
+                <ul class="nav nav-tabs entirewidth" role="tablist">
+                  <li role="presentation" class="active">
+                    <a href="#" aria-controls="home" role="tab" data-toggle="tab" @click="players=allPlayers.PA">PA</a>
+                  </li>
+                  <li role="presentation">
+                    <a href="#" aria-controls="profile" role="tab" data-toggle="tab" @click="players=allPlayers.C">C</a>
+                  </li>
+                  @if($type == "REGULAR")
+                  <li role="presentation">
+                    <a href="#" aria-controls="messages" role="tab" data-toggle="tab" @click="players=allPlayers['1B']">1B</a>
+                  </li>
+                  @endif
+                  @if($type == "TURBO")
+                  <li role="presentation">
+                    <a href="#" aria-controls="messages" role="tab" data-toggle="tab" @click="showPlayers(['2B', 'SS'])">MI</a>
+                  </li>
+                  @endif
+                  @if($type == "REGULAR")
+                  <li role="presentation">
+                    <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['2B']">2B</a>
+                  </li>
+                  @endif
+                  @if($type == "TURBO")
+                  <li role="presentation">
+                    <a href="#" aria-controls="messages" role="tab" data-toggle="tab" @click="showPlayers(['1B', '3B'])">CI</a>
+                  </li>
+                  @endif
+                  @if($type == "REGULAR")
+                  <li role="presentation">
+                    <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['3B']">3B</a>
+                  </li>
+                  @endif
+                  @if($type == "REGULAR")
+                  <li role="presentation">
+                    <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['SS']">SS</a>
+                  </li>
+                  @endif
+                  <li role="presentation">
+                    <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="players=allPlayers['OF']">OF</a>
+                  </li>
+                  <li role="presentation">
+                    <a href="#" aria-controls="settings" role="tab" data-toggle="tab" @click="showPlayers('BATS')">BAT</a>
+                  </li>
+                </ul>
+              {{--</div>--}}
+            </div>
 
             <table class="table table-striped2 table-hover2 tablelineup theadhead">
               <thead>
@@ -51,7 +98,7 @@
             <!-- Tab panes -->
             <div class="tab-content tab-contentnull scrollcreate createcontent">
               <div role="tabpanel" class="tab-pane active fade in" id="PAD">
-
+                <list-players :players="players"></list-players>
               </div>
               <div role="tabpanel" class="tab-pane fade" id="CD">
 
@@ -91,10 +138,22 @@
       <div class="CuerpoLineup cuerpoheight margrespL2">
 
         <div class="lineup">
-          <div class="Usuariolineup" style="text-align:center;text-indent: 0;">EQUIPO</div>
+          <div class="Usuariolineup" style="text-align:center;text-indent: 0;">EQUIPO
+            @if($type == "TURBO")
+            <button v-if="myPlayers.length == 5" type='submit' title="Guardar Equipo" class='btn btn-warning btn-sm pull-right' name='createlineup'>
+              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            </button>
+            @elseif($type == "REGULAR")
+            <button v-if="myPlayers.length == 9" type='submit' title="Guardar Equipo" class='btn btn-warning btn-sm pull-right' name='createlineup'>
+              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            </button>
+            @endif
+            <button v-else type='submit' class='btn btn-default btn-sm active pull-right disabled'><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+          </div>
           <div id="th2">
             <p id="salariorestante">Salario Restante:</p>
-            <input id="salaryrest" name="salaryrest"  class="inputsalario" type="text" readonly>
+            <input id="salaryrest" :value="remaining_salary" name="remaining_salary"  class="inputsalario" type="text" readonly>
+
 
           </div>
           <table class="table table-striped2 table-hover2 tablelineup theadhead">
@@ -112,6 +171,13 @@
           <div class="tableequipoheightmax">
             <table class="table table-striped2 table-hover2 tablelineup tableequipoheight">
               <tbody>
+              <tr is="my-players"
+                  v-for="(myPlayer, index) in myPlayers"
+                  :my-player="myPlayer"
+                  :count-position="countPosition"
+                  :index="index"
+                  v-on:remove="myPlayers.splice(index, 1)">
+              </tr>
               <tr id="playerPA">
               </tr>
               <tr id="playerC">
@@ -143,41 +209,94 @@
         </div>
       </div>
       <div id="th22" class="wid50">
-        <a href="/lobby" class="btn btn-primary2 btn-return btn-lg">Regresar</a>
+        <a href="/usuario/mis-equipos" class="btn btn-primary2 btn-return btn-lg">Regresar</a>
         <!--<button type="submit" class="btn btn-primarycan btn-lg" name="cancellineup" onclick="">Limpiar</button>-->
+        <input type="hidden" :value="JSON.stringify(myPlayers)" name="myPlayers">
+        <input type="hidden" :value="JSON.stringify(currentMyPlayers)" name="currentMyPlayers">
         <div id="button_create"></div>
       </div>
     </div>
-    {!! Form::close() !!}
+    </form>
   <!-- cierre contcrear -->
 
     <!--    Crear Lineup  Movil     -->
-    {!!  Form::open(array('url' => 'usuario/crear-equipo', 'method' => 'post')) !!}
+    <form class="form-horizontal" method="POST" action="{{ URL::action('TeamUserController@save_team_edited') }}">
+      {{ csrf_field() }}
+
+    <input type='hidden' name="salaryrest" id="salaryrest" :value="remaining_salary">
+    <input type='hidden' name="myPlayers" :value="myPlayers">
+
     <div class="restab visible-xs" style="margin-top:30px; margin-bottom: 60px;">
       <div class="linemovbut">
-        <button type="submit" class="btn btn-default btn-primary4" name="createlineup" onclick="">CREAR LINEUP</button>
-        <a href="/usuario/mis-equipos" type="submit" class="btn btn-default btn-primary4" name="returnhome">REGRESAR</a>
+        @if($type == "TURBO")
+          <button v-if="myPlayers.length == 5" type='submit' title="Guardar Equipo" class='btn btn-warning btn-sm pull-right' name='createlineup'>
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+          </button>
+        @elseif($type == "REGULAR")
+          <button v-if="myPlayers.length == 9" type='submit' title="Guardar Equipo" class='btn btn-warning btn-sm pull-right' name='createlineup'>
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+          </button>
+        @endif
+        <button v-else type='submit' class='btn btn-default btn-sm active pull-right disabled'><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+        <a href="/lobby" type="submit" class="btn btn-default btn-primary4" name="returnhome">REGRESAR</a>
+        <input type="hidden" :value="JSON.stringify(myPlayers)" name="myPlayers">
+        <input type="hidden" :value="JSON.stringify(currentMyPlayers)" name="currentMyPlayers">
       </div>
       <ul class="nav nav-tabs nav-tabsnull" role="tablist">
         <li role="presentation" class="active BtnLineup10 respli"><a href="#jugcrear" aria-controls="team" role="tab" data-toggle="tab">Jugadores</a></li>
         <li role="presentation" class="respli"><a href="#equipcrear" aria-controls="equipcrear" role="tab" data-toggle="tab" id="elemento">Equipo</a></li>
-        <li role="presentation" class="respli"><a class="Salario" href="#" aria-controls="equipcrear" role="tab" data-toggle="tab"><span class="Sal1">Balance: </span><span id="salaryrestlabel">100000</span></a></li>
-        <input id="salaryrestM" name="salaryrest" value="20000" class="inputsalario" type="hidden">
       </ul>
       <!-- Tab panes -->
       <div class="tab-content tab-contentnull tab-contenthome tab-linecreate">
         <div role="tabpanel" class="tab-pane fade in active bordyel noscroll" id="jugcrear">
           <!-- Nav tabs -->
+
           <ul class="nav nav-tabs entirewidth" role="tablist">
-            <li role="presentation" class="active"><a href="#PAPM" id="PAM" aria-controls="team" role="tab" data-toggle="tab">PA</a></li>
-            <li role="presentation"><a href="#CATCHER" aria-controls="C" id="CM" role="tab" data-toggle="tab">C</a></li>
-            <li role="presentation"><a href="#1B2" aria-controls="1B" id="1BM" role="tab" data-toggle="tab">1B</a></li>
-            <li role="presentation"><a href="#2B2" aria-controls="2B" id="2BM" role="tab" data-toggle="tab">2B</a></li>
-            <li role="presentation"><a href="#3B2" aria-controls="3B" id="3BM" role="tab" data-toggle="tab">3B</a></li>
-            <li role="presentation"><a href="#SS2" aria-controls="SS" id="SSM" role="tab" data-toggle="tab">SS</a></li>
-            <li role="presentation"><a href="#OF2" aria-controls="OF" id="OFM" role="tab" data-toggle="tab">OF</a></li>
-            <li role="presentation"><a href="#BATS2" aria-controls="BATS" id="BATSM" role="tab" data-toggle="tab">BATS</a></li>
+            <li role="presentation" class="active">
+              <a href="#PAPM" id="PAM" aria-controls="team" role="tab" data-toggle="tab" @click="players=allPlayers.PA">PA</a>
+            </li>
+            <li role="presentation">
+              <a href="#CATCHER" aria-controls="C" id="CM" role="tab" data-toggle="tab" @click="players=allPlayers.C">C</a>
+            </li>
+            @if($type == "REGULAR")
+            <li role="presentation">
+              <a href="#1B2" aria-controls="1B" id="1BM" role="tab" data-toggle="tab" @click="players=allPlayers['1B']">1B</a>
+            </li>
+            @endif
+            @if($type == "TURBO")
+            <li role="presentation">
+              <a href="#" aria-controls="messages" role="tab" data-toggle="tab" @click="showPlayers(['2B', 'SS'])">MI</a>
+            </li>
+            @endif
+            @if($type == "REGULAR")
+            <li role="presentation">
+              <a href="#2B2" aria-controls="2B" id="2BM" role="tab" data-toggle="tab" @click="players=allPlayers['2B']">2B</a>
+            </li>
+            @endif
+            @if($type == "TURBO")
+            <li role="presentation">
+              <a href="#" aria-controls="messages" role="tab" data-toggle="tab" @click="showPlayers(['1B', '3B'])">CI</a>
+            </li>
+            @endif
+            @if($type == "REGULAR")
+            <li role="presentation">
+              <a href="#3B2" aria-controls="3B" id="3BM" role="tab" data-toggle="tab" @click="players=allPlayers['3B']">3B</a>
+            </li>
+            @endif
+            @if($type == "REGULAR")
+            <li role="presentation">
+              <a href="#SS2" aria-controls="SS" id="SSM" role="tab" data-toggle="tab" @click="players=allPlayers['SS']">SS</a>
+            </li>
+            @endif
+            <li role="presentation">
+              <a href="#OF2" aria-controls="OF" id="OFM" role="tab" data-toggle="tab" @click="players=allPlayers['OF']">OF</a>
+            </li>
+            <li role="presentation">
+              <a href="#" aria-controls="settings" id="BATS2" role="tab" data-toggle="tab" @click="showPlayers('BATS')">BAT</a>
+            </li>
           </ul>
+
+
           <table class="table table-striped2 table-hover2 tablelineup theadhead">
             <thead>
             <tr>
@@ -190,35 +309,35 @@
           </table>
           <div class="tab-content tab-contentnull scrollcreate">
             <div role="tabpanel" class="tab-pane active fade in" id="PAPM">
-
+              <list-players :players="players"></list-players>
             </div>
 
             <div role="tabpanel" class="tab-pane active fade" id="CATCHER">
-
+              <list-players :players="players"></list-players>
             </div>
 
             <div role="tabpanel" class="tab-pane active fade" id="1B2">
-
+              <list-players :players="players"></list-players>
             </div>
 
             <div role="tabpanel" class="tab-pane active fade" id="2B2">
-
+              <list-players :players="players"></list-players>
             </div>
 
             <div role="tabpanel" class="tab-pane active fade" id="3B2">
-
+              <list-players :players="players"></list-players>
             </div>
 
             <div role="tabpanel" class="tab-pane active fade" id="SS2">
-
+              <list-players :players="players"></list-players>
             </div>
 
             <div role="tabpanel" class="tab-pane active fade" id="OF2">
-
+              <list-players :players="players"></list-players>
             </div>
 
             <div role="tabpanel" class="tab-pane active fade" id="BATS2">
-
+              <list-players :players="players"></list-players>
             </div>
           </div>
         </div>
@@ -238,91 +357,13 @@
             </table>
             <div class="tableequipoheightmax">
               <div class="table table-striped2 table-hover2 tablelineup tableequipoheight">
-                <div id="playerPAM">
-                  <div class="litableup">
-                    <div class="divpos">PA</div>
-                    <div class="litabblock">
-                      <p class="divjug"><span id="teamcol">name/</span> name2</p>
-                      <p class="divopo">team vs <span id="teamcol">opo</span></p>
-                    </div>
-                    <div class="divsala">1000</div>
-                    <div class="divmashov">
-                      <a href="#" onclick="deletePlayer('id');">
-                        {!! Html::image('images/ico/menos.png','menos', array('class'=>'mashov')) !!}
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div id="playerCM">
-                  <div class="litableup">
-                    <div class="divpos">C</div>
-                    <div class="litabblock">
-                      <p class="divjug">name</p>
-                      <p class="divopo">opo vs <span id="teamcol">team</span></p>
-                    </div>
-                    <div class="divsala">1000</div>
-                    <div class="divmashov">
-                      <a href="#" onclick="deletePlayer('id');">
-                        {!! Html::image('images/ico/menos.png','menos', array('class'=>'mashov')) !!}
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div id="player1BM">
-                  <div class="litableup">
-                    <div class="divpos">1B</div>
-                    <div class="litabblock"></div>
-                    <div class="divsala"></div>
-                    <div class="divmashov"></div>
-                  </div>
-                </div>
-                <div id="player2BM">
-                  <div class="litableup">
-                    <div class="divpos">2B</div>
-                    <div class="litabblock"></div>
-                    <div class="divsala"></div>
-                    <div class="divmashov"></div>
-                  </div>
-                </div>
-                <div id="player3BM">
-                  <div class="litableup">
-                    <div class="divpos">3B</div>
-                    <div class="litabblock"></div>
-                    <div class="divsala"></div>
-                    <div class="divmashov"></div>
-                  </div>
-                </div>
-                <div id="playerSSM">
-                  <div class="litableup">
-                    <div class="divpos">SS</div>
-                    <div class="litabblock"></div>
-                    <div class="divsala"></div>
-                    <div class="divmashov"></div>
-                  </div>
-                </div>
-                <div id="playerOF1M">
-                  <div class="litableup">
-                    <div class="divpos">OF</div>
-                    <div class="litabblock"></div>
-                    <div class="divsala"></div>
-                    <div class="divmashov"></div>
-                  </div>
-                </div>
-                <div id="playerOF2M">
-                  <div class="litableup">
-                    <div class="divpos">OF</div>
-                    <div class="litabblock"></div>
-                    <div class="divsala"></div>
-                    <div class="divmashov"></div>
-                  </div>
-                </div>
-                <div id="playerOF3M">
-                  <div class="litableup">
-                    <div class="divpos">OF</div>
-                    <div class="litabblock"></div>
-                    <div class="divsala"></div>
-                    <div class="divmashov"></div>
-                  </div>
+
+                <div is="my-players"
+                     v-for="(myPlayer, index) in myPlayers"
+                     :my-player="myPlayer"
+                     :count-position="countPosition"
+                     :index="index"
+                     v-on:remove="myPlayers.splice(index, 1)">
                 </div>
               </div>
             </div>
@@ -332,8 +373,53 @@
       <!-- restab cierre -->
     </div>
   </div>
-  {!! Form::close() !!}
+  </div>
 
-  {!! Html::script('js/teams/create_team.js') !!}
+  <!-- Templates for Components -->
+
+  <!-- Template of players -->
+  <template id="list-players">
+    <table class="table table-striped2 table-hover2 tablelineup">
+      <tbody>
+      <tr v-for="player in players">
+        <td id='pos'>@{{ player.position }}</td>
+        <td id='jug'>@{{ player.name }} @{{ player.last_name }}</td>
+        <td id='opo'>@{{ player.name_opponent }} vs <span id='teamcol'>@{{ player.name_team }}</span></td>
+        <td id='salario'>@{{ player.salary }}</td>
+        <td>
+          <a @click=addPlayer(player)>
+          <img class='mashov' src='/images/ico/mas.png' alt='mas'>
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </template>
+  <!-- End Template of players -->
+
+
+  <!-- Template of my players -->
+  <template id="my-players">
+    <tr>
+      <td id='pos'>@{{ myPlayer.position }}</td>
+      <td id='jug'>@{{ myPlayer.name }} @{{ myPlayer.last_name }}<span id='teamcol'></span></td>
+      <td id='opo'>@{{ myPlayer.name_opponent }} vs <span id='teamcol'>@{{ myPlayer.name_team }}</span></td>
+      <td id='salario'>@{{ myPlayer.salary }}</td>
+      <td>
+        <a @click="$emit('remove'), decSalary(myPlayer)">
+        <img src='/images/ico/menos.png' alt='menos' class='mashov'>
+        </a>
+      </td>
+    </tr>
+  </template>
+
+  <!-- End Template of my players -->
+
+
+  <!-- End Templates for Components -->
+
+  </form>
+
+  {!! Html::script('js/vuejs/teams/create_team.js') !!}
 
 @stop

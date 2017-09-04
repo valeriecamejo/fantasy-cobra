@@ -107,6 +107,7 @@ class TeamUserController extends Controller {
       $competition->save();
       $cookie = cookie('competition', $competition, 20);
     }
+
     if (Input::get('type_play') == 'TURBO') {
       $team                 = Team_user::save_team_turbo(Input::all());
     } elseif (Input::get('type_play') == 'REGULAR') {
@@ -176,11 +177,15 @@ class TeamUserController extends Controller {
     $myPlayers = json_decode($request['myPlayers']);
     $team_data = json_decode($request['team_data']);
 
-    // if ($currentMyPlayers == $myPlayers) {
-    //   Session::flash('message', 'No se realizaron modificaciones en su equipo.');
-    //   Session::flash('class', 'success');
-    //   return Redirect::to('usuario/mis-equipos');
-    // } else {
+     if ($currentMyPlayers == $myPlayers) {
+       Session::flash('message', 'No se realizaron modificaciones en su equipo.');
+       Session::flash('class', 'success');
+       return Redirect::to('usuario/mis-equipos');
+     } elseif ($currentMyPlayers == '') {
+       Session::flash('message', 'Competición creada exitosamente');
+       Session::flash('class', 'success');
+       return Redirect::to('usuario/mis-equipos');
+     } else {
 
       if ($team_data->type_play == 'REGULAR') {
         $validate_positions     = Team_user::validate_positions($myPlayers);
@@ -204,7 +209,7 @@ class TeamUserController extends Controller {
           return Redirect::to('usuario/mis-equipos');
         }
       }
-    // }
+     }
   }
 
 }
