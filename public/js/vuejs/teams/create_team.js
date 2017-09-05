@@ -1,4 +1,3 @@
-window.type;
 
 Vue.component('players', {
     template: '#players',
@@ -33,11 +32,11 @@ Vue.component('list-players', {
             if (vm.countPosition.length != 0) {
                 alert("La posición ya fue seleccionada");
             } else {
-                if ( ((vm.team_data.type_play == 'TURBO') && (vm.myPlayers.length) < 5) ||
-                    ((vm.team_data.type_play == 'REGULAR') && (vm.myPlayers.length) < 9) )  {
+                if ( ((window.type_play == 'TURBO') && (vm.myPlayers.length) < 5) ||
+                    ((window.type_play == 'REGULAR') && (vm.myPlayers.length) < 9) )  {
                     if (vm.remaining_salary >= player.salary ) {
                         vm.remaining_salary = vm.remaining_salary - player.salary
-                        if (vm.team_data.type_play == 'TURBO') {
+                        if (window.type_play == 'TURBO') {
                             if (player['position'] == '2B' || player['position'] == 'SS') {
                                 player['position'] = 'MI'
                                 vm.myPlayers.push(player)
@@ -50,9 +49,11 @@ Vue.component('list-players', {
                                 }
                             }
                         }
-                        if (vm.team_data.type_play == 'REGULAR') {
+                        if (window.type_play == 'REGULAR') {
                             vm.myPlayers.push(player)
                         }
+                    } else {
+                        alert("No dispone de un salario suficiente");
                     }
                 } else {
                     alert("Se han seleccionado todos los jugadores");
@@ -64,7 +65,7 @@ Vue.component('list-players', {
             if (vm.myPlayers.length == 0) {
                 return 0
             } else {
-                if (vm.team_data.type_play == 'REGULAR') {
+                if (window.type_play == 'REGULAR') {
                     if (position == 'OF') {
                         vm.countOF = vm.myPlayers.filter(function(element) {
                             return element.position == position
@@ -82,7 +83,7 @@ Vue.component('list-players', {
                         });
                     }
                 } else {
-                    if (vm.team_data.type_play == 'TURBO') {
+                    if (window.type_play == 'TURBO') {
                         if ( (position == '2B') || (position == 'SS') ) {
                             vm.countPosition = vm.myPlayers.filter(function(element) {
                                 return element.position == 'MI'
@@ -116,11 +117,11 @@ var vm = new Vue ({
         countOF:        0,
         myPlayers:     [],
         currentMyPlayers: '',
-        remaining_salary: 50000,
-        team_data: JSON.parse(sessionStorage.getItem("team"))
+        remaining_salary: 5000,
+        // team_data: JSON.parse(sessionStorage.getItem("team"))
     },
     mounted() {
-        axios.get('/player/journey/' + this.team_data.championship_id + '/' + this.team_data.team_date,
+        axios.get('/player/journey/' + window.championship_id + '/' + window.team_date,
             {}).then((response) => {
             this.allPlayers = response.data;
             vm.players = this.allPlayers.PA;

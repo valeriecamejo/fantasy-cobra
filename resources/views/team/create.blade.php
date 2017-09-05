@@ -1,9 +1,14 @@
-
+<script>
+    window.type_play       = '{{$type}}';
+    window.championship_id = '{{$championship}}';
+    window.team_date       = '{{$date}}';
+</script>
 @extends ('layouts.template')
 
 @section ('content')
 
 <div id="create">
+
   <div class="container-fluid Ingresoprin" id="page-content-wrapper">
     <div class="Enunciado2">
       <h3 class="Titulo1">CREAR NUEVO EQUIPO</h3>
@@ -373,7 +378,7 @@
       <!-- restab cierre -->
     </div>
   </div>
-  </div>
+</div>
 
   <!-- Templates for Components -->
 
@@ -412,9 +417,7 @@
       </td>
     </tr>
   </template>
-
   <!-- End Template of my players -->
-
 
   <!-- End Templates for Components -->
 

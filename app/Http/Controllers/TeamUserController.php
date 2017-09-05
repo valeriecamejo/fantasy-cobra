@@ -79,12 +79,13 @@ class TeamUserController extends Controller {
         return Redirect::to('lobby');
       }
     }
+    $date = Carbon::createFromFormat('Y-m-d H:i:s', $competition->date)->format('Y-m-d H:i');
     return view('team.create')
     ->with('type', $type)
     ->with('type_journal', $competition->type_journal)
     ->with('championship', $competition->championship_id)
     ->with('sport', $competition->sport_id)
-    ->with('date', $competition->date);
+    ->with('date', $date);
   }
   /**
    * players return player list from crate team
