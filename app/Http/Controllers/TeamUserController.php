@@ -121,7 +121,6 @@ class TeamUserController extends Controller {
       var_dump('hola');
       Session::flash('message', 'Competición creada exitosamente.');
       Session::flash('class', 'success');
-      // return Redirect::to('usuario/mis-equipos');
     } else {
       Session::flash('message', 'Error al crear el equipo.');
       Session::flash('class', 'danger');

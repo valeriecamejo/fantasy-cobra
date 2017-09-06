@@ -245,7 +245,7 @@ public static function save_team_turbo($competition, $myPlayers, $remaining_sala
 
       foreach ($myPlayers as $myPlayer) {
 
-        $pa_obj               = Player::find_data($myPlayer->position);
+        $pa_obj               = Player::find_data($myPlayer->id);
         $save_position        = Team_user_players::save_player($pa_obj, $team->id, $team->type_play);
         if (!$save_position) {
           return false;
