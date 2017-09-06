@@ -53,6 +53,7 @@ class TeamUserController extends Controller {
 
     $competition                = \Request::cookie('competition');
     $type_inscription           = \Request::cookie('enroll');
+
     if ($type_inscription == 'lobby') {
       $validate_enroll    = Competition::validate_enroll($competition->id);
       if ($validate_enroll == false) {
@@ -118,7 +119,6 @@ class TeamUserController extends Controller {
     }
     if ($team) {
       $team_subscriber      = Team_subscriber::inscription_team($team);
-      var_dump('hola');
       Session::flash('message', 'Competición creada exitosamente.');
       Session::flash('class', 'success');
     } else {
@@ -177,6 +177,7 @@ class TeamUserController extends Controller {
    ***************************************************/
 
   public function save_team_edited(Request $request) {
+
     $remaining_salary = $request->remaining_salary;
     $currentMyPlayers = json_decode($request['currentMyPlayers']);
     $myPlayers = json_decode($request['myPlayers']);
@@ -189,8 +190,8 @@ class TeamUserController extends Controller {
      } elseif ($currentMyPlayers == '') {
         $competition        = \Request::cookie('competition');
         $type_inscription   = \Request::cookie('enroll');
-        if ($type_inscription == 'competition') {
-          $competition->save();
+
+        if ($type_inscription == 'lobby') {
           $cookie = cookie('competition', $competition, 20);
           TeamUserController::save_team($competition, $myPlayers, $remaining_salary);
           return Redirect::to('/usuario/mis-equipos');
@@ -213,11 +214,11 @@ class TeamUserController extends Controller {
         if ($save_team_edited == true) {
           Session::flash('message', 'Equipo modificado con exito.');
           Session::flash('class', 'success');
-          return Redirect::to('usuario/mis-equipos');
+          return Redirect::to('/usuario/mis-equipos');
         } else {
           Session::flash('message', 'Error al modificar equipo.');
           Session::flash('class', 'danger');
-          return Redirect::to('usuario/mis-equipos');
+          return Redirect::to('/usuario/mis-equipos');
         }
       }
      }
