@@ -63,7 +63,10 @@ function addData(competition_data) {
       competition.date_now = moment().format('YYYY-MM-DD HH');
       competition.date_competition = moment(competition.date).format('YYYY-MM-DD HH');
       competitions_app.competition_details = competition;
-
+      if (competition.date_competition >= competition.date_now && competition.enrolled < competition.user_max) {
+          button_create = "<div class='divBtn1'>"
+                        + "<a href='/usuario/crear-equipo/competicion/ " + competition.id + " ' class='btn btn-default btn-primary4'>CREAR EQUIPO</a>"
+      }
       competition_enrolled        =   "<tr>"+
         "<td><b>Inscritos: </b>"+competition.enrolled+"/"+competition.user_max+"</td>"+
         "</tr>";
@@ -125,7 +128,7 @@ function addData(competition_data) {
 
   });
 
-  // $("#competition_name").append(competition_name);
+  $("#competition_name").append(competition_name);
   $("#mobile_competition_enrolled").append(competition_enrolled);
   $("#mobile_competition_entry_cost").append(competition_entry_cost);
   $("#mobile_competition_cost_guaranteed").append(competition_cost_guaranteed);
@@ -134,8 +137,6 @@ function addData(competition_data) {
   $("#competition_participants").append(competition_participants);
   $("#competition_prizes").append(competition_prizes);
   $("#button_create").append(button_create);
-
-
 
   $("#info_competition").modal("show");
 

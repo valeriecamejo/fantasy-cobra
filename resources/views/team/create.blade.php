@@ -242,7 +242,7 @@
             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
           </button>
         @endif
-        <button v-else type='submit' class='btn btn-default btn-sm active pull-right disabled'><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+        <button v-else type='submit' class='btn btn-default btn-sm active pull-center disabled'><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
         <a href="/lobby" type="submit" class="btn btn-default btn-primary4" name="returnhome">REGRESAR</a>
         <input type="hidden" :value="JSON.stringify(myPlayers)" name="myPlayers">
         <input type="hidden" :value="JSON.stringify(currentMyPlayers)" name="currentMyPlayers">
@@ -307,6 +307,7 @@
             <tr>
               <th id="pos">POS</th>
               <th id="jug">JUGADOR</th>
+              <th id="opo">OPO</th>
               <th id="salario">SALARIO</th>
               <th id="masmas"></th>
             </tr>
@@ -354,23 +355,26 @@
               <tr>
                 <th id="pos">POS</th>
                 <th id="jug">JUGADOR</th>
-                <!--<th id="opo">OPO</th>-->
+                <th id="opo">OPO</th>
                 <th id="salario">SALARIO</th>
                 <th id="masmas"></th>
               </tr>
               </thead>
             </table>
             <div class="tableequipoheightmax">
-              <div class="table table-striped2 table-hover2 tablelineup tableequipoheight">
+              <table class="table table-striped2 table-hover2 tablelineup tableequipoheight">
+                <tbody>
+                <tr is="my-players"
+                    v-for="(myPlayer, index) in myPlayers"
+                    :my-player="myPlayer"
+                    :count-position="countPosition"
+                    :index="index"
+                    v-on:remove="myPlayers.splice(index, 1)">
+                </tr>
 
-                <div is="my-players"
-                     v-for="(myPlayer, index) in myPlayers"
-                     :my-player="myPlayer"
-                     :count-position="countPosition"
-                     :index="index"
-                     v-on:remove="myPlayers.splice(index, 1)">
-                </div>
-              </div>
+                </tbody>
+              </table>
+
             </div>
           </div>
         </div>
@@ -391,7 +395,7 @@
         <td id='jug'>@{{ player.name }} @{{ player.last_name }}</td>
         <td id='opo'>@{{ player.name_opponent }} vs <span id='teamcol'>@{{ player.name_team }}</span></td>
         <td id='salario'>@{{ player.salary }}</td>
-        <td>
+        <td id="masmas">
           <a @click=addPlayer(player)>
           <img class='mashov' src='/images/ico/mas.png' alt='mas'>
           </a>
@@ -410,7 +414,7 @@
       <td id='jug'>@{{ myPlayer.name }} @{{ myPlayer.last_name }}<span id='teamcol'></span></td>
       <td id='opo'>@{{ myPlayer.name_opponent }} vs <span id='teamcol'>@{{ myPlayer.name_team }}</span></td>
       <td id='salario'>@{{ myPlayer.salary }}</td>
-      <td>
+      <td id="masmas">
         <a @click="$emit('remove'), decSalary(myPlayer)">
         <img src='/images/ico/menos.png' alt='menos' class='mashov'>
         </a>

@@ -127,12 +127,6 @@ var vm = new Vue ({
             'OF2': {},
             'OF3': {}
         }],
-        prueba: [
-            {"name": 'Valerie'},
-            {"name": 'Carol'},
-            {"name": 'Mariana'},
-            {"name": 'Sabrina'}
-        ],
         myPlayers: JSON.parse(sessionStorage.getItem("element.players")),
         currentMyPlayers : JSON.parse(sessionStorage.getItem("element.players")),
         team_data: JSON.parse(sessionStorage.getItem("team"))
@@ -140,13 +134,8 @@ var vm = new Vue ({
     mounted() {
         axios.get('/player/journey/' + this.team_data.championship_id + '/' + this.team_data.team_date,
             {}).then((response) => {
-            this.allPlayers = response.data;
-            vm.players = this.allPlayers.PA;
-        // if (vm.myPlayers.length == 5) {
-        //     this.orderTeam(vm.turboTeam, vm.myPlayers, "TURBO")
-        // } else if (vm.myPlayers.length == 9) {
-        //     this.orderTeam(vm.regularTeam, vm.myPlayers, "REGULAR")
-        // }
+            this.allPlayers = response.data
+            vm.players = this.allPlayers.PA
     });
     },
     methods: {

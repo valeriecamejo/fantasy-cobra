@@ -117,8 +117,7 @@ var vm = new Vue ({
         countOF:        0,
         myPlayers:     [],
         currentMyPlayers: '',
-        remaining_salary: 5000,
-        // team_data: JSON.parse(sessionStorage.getItem("team"))
+        remaining_salary: 50000
     },
     mounted() {
         axios.get('/player/journey/' + window.championship_id + '/' + window.team_date,

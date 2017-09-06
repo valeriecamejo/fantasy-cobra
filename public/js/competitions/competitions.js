@@ -118,14 +118,12 @@ function competitions_template(competitions) {
     var hour = moment(element.date).format('HH:mm');
     var days_left =   date_competition.diff(today_competition, 'days');
     var minutes_left = date_competition.diff(today_competition, 'seconds');
+    var date = moment(element.date).format("DD-MM")
     minutes_left = date_competition.startOf('day').seconds(minutes_left).format("HH:mm:ss");
     tpl = tpl + element.cost_guaranteed
     + " Bs."
     + "</td>"
-    + "<td class='tdfecha2 notdpad'>"
-    var date = moment(element.date).format("DD-MM")
-    + "</td>"
-    + "<td class='tdhora2 notdpad'>";
+    + "<td class='tdfecha2 notdpad'>";
     tpl = tpl + date
     + "</td>"
     + "<td class='tdhora2 notdpad'>" + hour
@@ -143,12 +141,22 @@ function competitions_template(competitions) {
     tpl = tpl        + "</span>"
     + "</td>"
     + "<td class='tdentrar2'>"
-    + "<div class='BtnEntrar2'>ENTRAR</div>"
-    + "</td>"
+    if (window.login == true) {
+      tpl = tpl + "<button type='button' class='btn btn-primary' onclick='showCompetition(" + element.id + ")' aria-label='Left Align'>"
+      + "<span class='glyphicon glyphicon-edit glyphicon-edit-competitions' aria-hidden='true'></span>"
+      + "</button>";
+    } else {
+      tpl = tpl + "<button type='button' class='btn btn-primary' href='.login' data-toggle='modal' aria-label='Left Align'>"
+      + "<span class='glyphicon glyphicon-edit glyphicon-edit-competitions' aria-hidden='true'></span>"
+      + "</button>";
+    }
+    tpl = tpl + "</td>"
+
     + "</tr>"
   });
   return tpl;
 }
+
 
 
 /**********************************

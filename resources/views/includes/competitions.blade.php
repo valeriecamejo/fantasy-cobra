@@ -1,5 +1,16 @@
+@if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
+  <script>
+      window.login = true
+  </script>
+@else
+  <script>
+      window.login = false
+  </script>
+@endif
+
 {!! Html::script('js/competitions/competitions.js') !!}
 {!! Html::script('js/competitions/show_competition.js') !!}
+
 
 <div class="btab3 hidden-xs">
 <div class="container-fluid Filtros">
@@ -53,6 +64,7 @@
         <th class="tabhora">  Hora     </th>
         <th class="tdrest">   Restante   </th>
         <th class="tabentrar">       </th>
+        <th></th>
       </tr>
       </thead>
       <tbody id="table-all-no-mobile">

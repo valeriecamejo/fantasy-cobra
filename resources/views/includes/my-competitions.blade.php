@@ -1,3 +1,13 @@
+@if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
+  <script>
+      window.login = true
+  </script>
+@else
+  <script>
+      window.login = false
+  </script>
+@endif
+
 {!! Html::script('js/competitions/competitions.js') !!}
 {!! Html::script('js/competitions/show_competition.js') !!}
 {!! Html::script('js/vuejs/competition/competition_details.js') !!}
@@ -54,6 +64,7 @@
             <th class="tabhora">  Hora     </th>
             <th class="tdrest">   Restante   </th>
             <th class="tabentrar">       </th>
+            <th >       </th>
           </tr>
         </thead>
         <tbody id="table-all-no-mobile">
@@ -133,6 +144,7 @@
                </button>
             @endif
           </td>
+          <td></td>
         </tr>
         @endforeach
         </tbody>

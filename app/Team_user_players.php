@@ -24,12 +24,12 @@ class Team_user_players extends Model {
   public static function save_player($player_obj, $team_id, $type_play) {
 
     $player                   = new Team_user_players();
-    $player->player_id        =  $player_obj['id'];
+    $player->player_id        =  $player_obj->id;
     $player->team_user_id     =  $team_id;
-    $player->name             =  $player_obj['name'];
-    $player->last_name        =  $player_obj['last_name'];
-    $player->name_team        =  $player_obj['name_team'];
-    $player->name_opponent    =  $player_obj['name_opponent'];
+    $player->name             =  $player_obj->name;
+    $player->last_name        =  $player_obj->last_name;
+    $player->name_team        =  $player_obj->name_team;
+    $player->name_opponent    =  $player_obj->name_opponent;
 
     if ($type_play == 'TURBO') {
 

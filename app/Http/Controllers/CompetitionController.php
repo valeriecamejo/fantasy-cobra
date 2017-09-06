@@ -42,6 +42,7 @@ class CompetitionController extends Controller {
   public function new_competition($sport, $championship) {
 
     $games    = Game::date_games($sport, $championship);
+
     if($games) {
       return view('competition.create')
         ->with('sport', $sport)
