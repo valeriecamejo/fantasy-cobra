@@ -107,10 +107,6 @@ class TeamUserController extends Controller {
 
     $competition        = \Request::cookie('competition');
     $type_inscription   = \Request::cookie('enroll');
-    if ($type_inscription == 'competition') {
-      $competition->save();
-      $cookie = cookie('competition', $competition, 20);
-    }
 
     if ($competition->type_play == 'TURBO') {
       $team                 = Team_user::save_team_turbo($competition, $myPlayers, $remaining_salary);
@@ -118,6 +114,10 @@ class TeamUserController extends Controller {
       $team                 = Team_user::save_team_regular($competition, $myPlayers, $remaining_salary);
     }
     if ($team) {
+      if ($type_inscription == 'competition') {
+        $competition->save();
+        $cookie = cookie('competition', $competition, 20);
+      }
       $team_subscriber      = Team_subscriber::inscription_team($team);
       Session::flash('message', 'Competición creada exitosamente.');
       Session::flash('class', 'success');
@@ -196,7 +196,6 @@ class TeamUserController extends Controller {
           TeamUserController::save_team($competition, $myPlayers, $remaining_salary);
           return Redirect::to('/usuario/mis-equipos');
         } elseif ($type_inscription == 'competition') {
-            $competition->save();
             $cookie = cookie('competition', $competition, 20);
             TeamUserController::save_team($competition, $myPlayers, $remaining_salary);
             return Redirect::to('/usuario/mis-equipos');
