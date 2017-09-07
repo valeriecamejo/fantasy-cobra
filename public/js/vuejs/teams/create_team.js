@@ -16,7 +16,7 @@ Vue.component('my-players', {
     props: ['myPlayer'],
     methods: {
         decSalary: function (player) {
-            vm.team_data.remaining_salary = vm.team_data.remaining_salary + player.salary;
+            vm.remaining_salary = vm.remaining_salary + player.salary;
         }
     }
 });
@@ -32,11 +32,11 @@ Vue.component('list-players', {
             if (vm.countPosition.length != 0) {
                 alert("La posición ya fue seleccionada");
             } else {
-                if ( ((vm.team_data.type_play == 'TURBO') && (vm.myPlayers.length) < 5) ||
-                    ((vm.team_data.type_play == 'REGULAR') && (vm.myPlayers.length) < 9) )  {
-                    if (vm.team_data.remaining_salary >= player.salary ) {
-                        vm.team_data.remaining_salary = vm.team_data.remaining_salary - player.salary
-                        if (vm.team_data.type_play == 'TURBO') {
+                if ( ((window.type_play == 'TURBO') && (vm.myPlayers.length) < 5) ||
+                    ((window.type_play == 'REGULAR') && (vm.myPlayers.length) < 9) )  {
+                    if (vm.remaining_salary >= player.salary ) {
+                        vm.remaining_salary = vm.remaining_salary - player.salary
+                        if (window.type_play == 'TURBO') {
                             if (player['position'] == '2B' || player['position'] == 'SS') {
                                 player['position'] = 'MI'
                                 vm.myPlayers.push(player)
@@ -49,9 +49,11 @@ Vue.component('list-players', {
                                 }
                             }
                         }
-                        if (vm.team_data.type_play == 'REGULAR') {
+                        if (window.type_play == 'REGULAR') {
                             vm.myPlayers.push(player)
                         }
+                    } else {
+                        alert("No dispone de un salario suficiente");
                     }
                 } else {
                     alert("Se han seleccionado todos los jugadores");
@@ -60,38 +62,42 @@ Vue.component('list-players', {
         },
         existPosition: function (position, player_id) {
 
-            if (vm.team_data.type_play == 'REGULAR') {
-                if (position == 'OF') {
-                    vm.countOF = vm.myPlayers.filter(function(element) {
-                        return element.position == position
-                    });
-                    if (vm.countOF.length < 3) {
-                        vm.countPosition = vm.myPlayers.filter(function(element) {
-                            return element.player_id == player_id
-                        });
-                    } else {
-                        vm.countPosition = vm.countOF
-                    }
-                } else {
-                    vm.countPosition = vm.myPlayers.filter(function(element) {
-                        return element.position == position
-                    });
-                }
+            if (vm.myPlayers.length == 0) {
+                return 0
             } else {
-                if (vm.team_data.type_play == 'TURBO') {
-                    if ( (position == '2B') || (position == 'SS') ) {
-                        vm.countPosition = vm.myPlayers.filter(function(element) {
-                            return element.position == 'MI'
+                if (window.type_play == 'REGULAR') {
+                    if (position == 'OF') {
+                        vm.countOF = vm.myPlayers.filter(function(element) {
+                            return element.position == position
                         });
-                    } else {
-                        if ( (position == '1B') || (position == '3B') ) {
+                        if (vm.countOF.length < 3) {
                             vm.countPosition = vm.myPlayers.filter(function(element) {
-                                return element.position == 'CI'
+                                return element.player_id == player_id
                             });
                         } else {
+                            vm.countPosition = vm.countOF
+                        }
+                    } else {
+                        vm.countPosition = vm.myPlayers.filter(function(element) {
+                            return element.position == position
+                        });
+                    }
+                } else {
+                    if (window.type_play == 'TURBO') {
+                        if ( (position == '2B') || (position == 'SS') ) {
                             vm.countPosition = vm.myPlayers.filter(function(element) {
-                                return element.position == position
+                                return element.position == 'MI'
                             });
+                        } else {
+                            if ( (position == '1B') || (position == '3B') ) {
+                                vm.countPosition = vm.myPlayers.filter(function(element) {
+                                    return element.position == 'CI'
+                                });
+                            } else {
+                                vm.countPosition = vm.myPlayers.filter(function(element) {
+                                    return element.position == position
+                                });
+                            }
                         }
                     }
                 }
@@ -101,7 +107,7 @@ Vue.component('list-players', {
 })
 
 var vm = new Vue ({
-    el: "#edit",
+    el: "#create",
     data: {
         countPosition: '',
         index:         '',
@@ -109,33 +115,15 @@ var vm = new Vue ({
         allPlayers:    '',
         players:       '',
         countOF:        0,
-        turboTeam:      {
-            'PA': '',
-            'C' : '',
-            'MI': '',
-            'CI': '',
-            'OF': ''
-        },
-        regularTeam:    [{
-            'PA':  {},
-            'C' :  {},
-            '1B':  {},
-            '2B':  {},
-            '3B':  {},
-            'SS':  {},
-            'OF1': {},
-            'OF2': {},
-            'OF3': {}
-        }],
-        myPlayers: JSON.parse(sessionStorage.getItem("element.players")),
-        currentMyPlayers : JSON.parse(sessionStorage.getItem("element.players")),
-        team_data: JSON.parse(sessionStorage.getItem("team"))
+        myPlayers:     [],
+        currentMyPlayers: '',
+        remaining_salary: 50000
     },
     mounted() {
-        axios.get('/player/journey/' + this.team_data.championship_id + '/' + this.team_data.team_date,
+        axios.get('/player/journey/' + window.championship_id + '/' + window.team_date,
             {}).then((response) => {
-            this.allPlayers = response.data
-            vm.players = this.allPlayers.PA
+            this.allPlayers = response.data;
+            vm.players = this.allPlayers.PA;
     });
     },
     methods: {

@@ -1,5 +1,16 @@
+@if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
+  <script>
+      window.login = true
+  </script>
+@else
+  <script>
+      window.login = false
+  </script>
+@endif
+
 {!! Html::script('js/competitions/competitions.js') !!}
 {!! Html::script('js/competitions/show_competition.js') !!}
+
 
 <div class="btab3 hidden-xs">
 <div class="container-fluid Filtros">
@@ -53,6 +64,7 @@
         <th class="tabhora">  Hora     </th>
         <th class="tdrest">   Restante   </th>
         <th class="tabentrar">       </th>
+        <th></th>
       </tr>
       </thead>
       <tbody id="table-all-no-mobile">
@@ -129,9 +141,15 @@
           </td>
           <td class="tdentrar2">
             @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
-              <div class="BtnEntrar2" onclick="showCompetition({{$competition->id}})">ENTRAR</div>
+              {{--<div class="BtnEntrar2" onclick="showCompetition({{$competition->id}})">ENTRAR</div>--}}
+              <button type="button" class="btn btn-primary" onclick="showCompetition({{$competition->id}})" aria-label="Left Align">
+                <span class="glyphicon glyphicon-edit glyphicon-edit-competitions" aria-hidden="true"></span>
+              </button>
             @else
-              <div class="BtnEntrar2" href=".login" data-toggle="modal">ENTRAR</div>
+              {{--<div class="BtnEntrar2" href=".login" data-toggle="modal">ENTRAR</div>--}}
+              <button type="button" class="btn btn-primary" href=".login" data-toggle="modal" aria-label="Left Align">
+                <span class="glyphicon glyphicon-edit glyphicon-edit-competitions" aria-hidden="true"></span>
+              </button>
             @endif
           </td>
         </tr>
@@ -141,7 +159,6 @@
     </table>
   </div>
 </div>
-
 
 <!-- -------------------------------- FOOTER -------------------------------- -->
 <div class="divtabfoot">

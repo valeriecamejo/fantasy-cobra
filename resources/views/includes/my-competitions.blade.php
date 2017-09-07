@@ -1,36 +1,46 @@
+@if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
+  <script>
+      window.login = true
+  </script>
+@else
+  <script>
+      window.login = false
+  </script>
+@endif
+
 {!! Html::script('js/competitions/competitions.js') !!}
 {!! Html::script('js/competitions/show_competition.js') !!}
 {!! Html::script('js/vuejs/competition/competition_details.js') !!}
 
 <div class="btab3 hidden-xs">
-  <div class="container-fluid Filtros">
-    <div class="BlockFil col-sm-6">
+  <div class="row Filtros">
+    <div class="BlockFil col-xs-12 col-sm-6">
       <h4>Elige tu liga</h4>
       <ul class="ContFil btn-group">
-        <li role="presentation" class="btn btn-default active">
+        <li role="presentation" class="btn btn-default active btn-sm">
           <a href="#competiciones" onclick="filter_competitions('all',window.filter_type,{{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab">Todos</a>
         </li>
-        <li role="presentation" class="btn btn-default">
+        <li role="presentation" class="btn btn-default btn-sm">
           <a href="#competiciones" onclick="filter_competitions('baseball',window.filter_type,{{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab">Béisbol</a>
         </li>
-        <li role="presentation" class="btn btn-default">
+        <li role="presentation" class="btn btn-default btn-sm">
           <a href="#competiciones" onclick="filter_competitions('football',window.filter_type,{{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab">Fútbol</a>
         </li>
       </ul>
     </div>
-    <div class="BlockFil2 col-sm-6">
+    <div class="BlockFil2 col-xs-12 col-sm-6">
       <h4>Elige tu tipo de competencia</h4>
       <ul class="ContFil btn-group">
-        <li role="presentation" class="btn btn-default active">
+        <li role="presentation" class="btn btn-default active btn-sm">
           <a href="#competiciones" onclick="filter_competitions(window.sport,'all',{{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab">Todos</a>
         </li>
-        <li role="presentation" class="btn btn-default">
+        <li role="presentation" class="btn btn-default btn-sm">
           <a href="#competiciones" onclick="filter_competitions(window.sport,'H2H', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab">H2H</a>
         </li>
-        <li role="presentation" class="btn btn-default">
+        <li role="presentation" class="btn btn-default btn-sm">
           <a href="#competiciones" onclick="filter_competitions(window.sport,'TURBO', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab">Turbo</a>
         </li>
-        <li role="presentation" class="btn btn-default">
+        <li role="presentation" class="btn btn-default btn-sm">
           <a href="#competiciones" onclick="filter_competitions(window.sport,'FREE', {{$list_competitions}})" aria-controls="home" role="tab" data-toggle="tab">Gratis</a>
         </li>
       </ul>
@@ -38,7 +48,7 @@
   </div>
 
   <!-- Tab panes -->
-  <div class="tab-content tab-contentnull tab-contenthome">
+  <div class="row tab-content tab-contentnull tab-contenthome">
     <div role="tabpanel" class="tab-pane fade in active bordyel" id="competiciones">
       <table class="table table-hover table-responsive" id="tabledesk">
         <!-- Abre tabla -->
@@ -54,6 +64,7 @@
             <th class="tabhora">  Hora     </th>
             <th class="tdrest">   Restante   </th>
             <th class="tabentrar">       </th>
+            <th >       </th>
           </tr>
         </thead>
         <tbody id="table-all-no-mobile">
@@ -122,17 +133,23 @@
           </td>
            <td class="tdentrar2">
             @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
-              <div class="BtnEntrar2" onclick="showCompetition({{$competition->id}})">ENTRAR</div>
+              {{--<div class="BtnEntrar2" onclick="showCompetition({{$competition->id}})">ENTRAR</div>--}}
+               <button type="button" class="btn btn-primary" onclick="showCompetition({{$competition->id}})" aria-label="Left Align">
+                 <span class="glyphicon glyphicon-edit glyphicon-edit-competitions" aria-hidden="true"></span>
+               </button>
             @else
-              <div class="BtnEntrar2" href=".login" data-toggle="modal">ENTRAR</div>
+              {{--<div class="BtnEntrar2" href=".login" data-toggle="modal">ENTRAR</div>--}}
+               <button type="button" class="btn btn-primary" href=".login" data-toggle="modal" aria-label="Left Align">
+                 <span class="glyphicon glyphicon-edit glyphicon-edit-competitions" aria-hidden="true"></span>
+               </button>
             @endif
           </td>
+          <td></td>
         </tr>
         @endforeach
         </tbody>
       </table>
     </div>
-  </div>
 
 <!-- -------------------------------- FOOTER -------------------------------- -->
 <div class="divtabfoot">
@@ -149,5 +166,5 @@
     <p class="Legend">Competición Privada</p>
   </div>
 </div>
-</div>
 </div> <!-- cierre btab3 -->
+</div>

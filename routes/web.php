@@ -62,7 +62,6 @@ Route::get('usuario/retirar-dinero', 'PaymentController@show_withdrawals');
 Route::post('usuario/retirar-dinero', 'PaymentController@withdrawal');
 Route::post('usuario/guardar-equipo', 'TeamUserController@save_team_edited');
 
-
 //Players routes
 Route::get('player/position/{position}', 'PlayerController@byPosition');
 Route::get('player/journey/{championship}/{date}', 'PlayerController@byjourney');

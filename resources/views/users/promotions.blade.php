@@ -100,7 +100,7 @@
          <span style="color:#84761A;font-size:30px">No hay promociones activas</span>
        @endif
        <!--CONTENIDO-->
-       @include('includes/footer-mobile')
+       <!-- @include('includes/footer-mobile') -->
      </div>
    </div>
 

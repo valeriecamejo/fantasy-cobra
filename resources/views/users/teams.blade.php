@@ -6,36 +6,36 @@
 {!! Html::script('js/moment/locale/es.js') !!}
 
 <div id="app">
-<div class="btab3 hidden-xs">
+<div class="btab3">
   <div class="container-fluid" id="page-content-wrapper">
     <h3 class="Titulo1">MIS EQUIPOS</h3>
 
-  <div class="container-fluid Filtros">
-    <div class="BlockFil col-sm-6">
+  <div class="row Filtros">
+    <div class="BlockFil col-xs-12 col-sm-6">
       <ul class="ContFil btn-group">
-        <li role="presentation" class="btn btn-default active">
+        <li role="presentation" class="btn btn-default active btn-sm">
           <a href="#sport" @click="filter_teams('all', filter_type_val, $event)" aria-controls="home" role="tab" data-toggle="tab">Todos</a>
         </li>
-        <li role="presentation" class="btn btn-default">
+        <li role="presentation" class="btn btn-default btn-sm">
           <a href="#sport" @click="filter_teams('baseball', filter_type_val, $event)" aria-controls="home" role="tab" data-toggle="tab">Béisbol</a>
         </li>
-        <li role="presentation" class="btn btn-default">
+        <li role="presentation" class="btn btn-default btn-sm">
           <a href="#sport" @click="filter_teams('football', filter_type_val, $event)" aria-controls="home" role="tab" data-toggle="tab">Fútbol</a>
         </li>
       </ul>
     </div>
-    <div class="BlockFil2 col-sm-6">
+    <div class="BlockFil2 col-xs-12 col-sm-6">
       <ul class="ContFil btn-group">
-        <li role="presentation" class="btn btn-default active">
+        <li role="presentation" class="btn btn-default active btn-sm">
           <a href="#sport" @click="filter_teams(filter_sport_val,'all', $event)" aria-controls="home" role="tab" data-toggle="tab">Todos</a>
         </li>
-        <li role="presentation" class="btn btn-default">
+        <li role="presentation" class="btn btn-default btn-sm">
           <a href="#sport" @click="filter_teams(filter_sport_val,'today_teams', $event)" aria-controls="home" role="tab" data-toggle="tab">Hoy</a>
         </li>
-        <li role="presentation" class="btn btn-default">
+        <li role="presentation" class="btn btn-default btn-sm">
           <a href="#sport" @click="filter_teams(filter_sport_val,'previous_teams', $event)" aria-controls="home" role="tab" data-toggle="tab">Anteriores</a>
         </li>
-        <li role="presentation" class="btn btn-default">
+        <li role="presentation" class="btn btn-default btn-sm">
           <a href="#sport" @click="filter_teams(filter_sport_val,'future_teams', $event)" aria-controls="home" role="tab" data-toggle="tab">Futuros</a>
         </li>
       </ul>
@@ -81,8 +81,11 @@
                     <span v-if="moment().format('YYYY-MM-DD hh:mm') > moment(team.date).format('YYYY-MM-DD hh:mm')">
                       <div class="contbtnbdg">
                         <a @click="team_modal( team.id , team.name, teams )">
-                          <div class="BtnEntrar31">VER</div>
+                          <button type="button" class="btn btn-primary btn-sm pull-left" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                          </button>
                         </a>
+
                    <!--       <div class="BtnEntrar31 noedit">EDITAR</div>
                         </a> -->
                       </div>
@@ -92,10 +95,14 @@
                       <span v-else>
                       <div class="contbtnbdg">
                         <a @click="team_modal( team.id , team.name, teams )">
-                          <div class="BtnEntrar31">VER</div>
+                          <button type="button" class="btn btn-primary btn-sm pull-left" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                          </button>
                         </a>
                         <a v-if="moment().format('YYYY-MM-DD hh:mm') < moment(team.date).format('YYYY-MM-DD hh:mm')" @click="team_modal( team.id , team.name, teams )">
-                          <div class="BtnEntrar31 edit">EDITAR</div>
+                          <button type="button" class="btn btn-primary btn-sm pull-left" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                          </button>
                         </a>
                       </div>
               <!--   <input type="hidden" class="form-compe2" name="lineup_id" value="@{{ team.id }}">
@@ -116,20 +123,13 @@
 
 
           <!-- restab cierre -->
-          <div class="divtabfoot3">
-            <div class="divtabfooty3">
-              <div class="smallcircle"></div>
-              <p class="Legend">Editar Equipo</p>
-              <div class="smallcircle2"></div>
-              <p class="Legend">Inscribir Equipo</p>
-            </div>
-          </div>
+
         </div>
       </div>
         <br>
         <br>
         <br>
-      @include('includes/footer-mobile')
+      <!-- {{--@include('includes/footer-mobile')--}} -->
   </div>
 </div>
 {!! Html::script('js/vuejs/teams/user_teams.js') !!}

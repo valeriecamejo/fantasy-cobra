@@ -50,8 +50,10 @@ class TeamUserController extends Controller {
    * @param string $type
    */
   public function new_team($type) {
+
     $competition                = \Request::cookie('competition');
     $type_inscription           = \Request::cookie('enroll');
+
     if ($type_inscription == 'lobby') {
       $validate_enroll    = Competition::validate_enroll($competition->id);
       if ($validate_enroll == false) {
@@ -79,12 +81,13 @@ class TeamUserController extends Controller {
         return Redirect::to('lobby');
       }
     }
+    $date = Carbon::createFromFormat('Y-m-d H:i:s', $competition->date)->format('Y-m-d H:i');
     return view('team.create')
     ->with('type', $type)
     ->with('type_journal', $competition->type_journal)
     ->with('championship', $competition->championship_id)
     ->with('sport', $competition->sport_id)
-    ->with('date', $competition->date);
+    ->with('date', $date);
   }
   /**
    * players return player list from crate team
@@ -100,28 +103,31 @@ class TeamUserController extends Controller {
  * @return $message
    *********************************************/
 
-  public function save_team() {
+  public function save_team($competition, $myPlayers, $remaining_salary) {
+
     $competition        = \Request::cookie('competition');
     $type_inscription   = \Request::cookie('enroll');
     if ($type_inscription == 'competition') {
       $competition->save();
       $cookie = cookie('competition', $competition, 20);
     }
-    if (Input::get('type_play') == 'TURBO') {
-      $team                 = Team_user::save_team_turbo(Input::all());
-    } elseif (Input::get('type_play') == 'REGULAR') {
-      $team                 = Team_user::save_team_regular(Input::all());
+
+    if ($competition->type_play == 'TURBO') {
+      $team                 = Team_user::save_team_turbo($competition, $myPlayers, $remaining_salary);
+    } elseif ($competition->type_play == 'REGULAR') {
+      $team                 = Team_user::save_team_regular($competition, $myPlayers, $remaining_salary);
     }
     if ($team) {
       $team_subscriber      = Team_subscriber::inscription_team($team);
-      Session::flash('message', 'Equipo creado con exito.');
+      Session::flash('message', 'Competición creada exitosamente.');
       Session::flash('class', 'success');
-      return Redirect::to('usuario/mis-equipos');
     } else {
       Session::flash('message', 'Error al crear el equipo.');
       Session::flash('class', 'danger');
       return redirect()->back();
     }
+
+    var_dump("saveteam");
   }
   /***************************************************
    * team_data: Check the information of competitions
@@ -172,32 +178,55 @@ class TeamUserController extends Controller {
 
   public function save_team_edited(Request $request) {
 
+    $remaining_salary = $request->remaining_salary;
+    $currentMyPlayers = json_decode($request['currentMyPlayers']);
     $myPlayers = json_decode($request['myPlayers']);
     $team_data = json_decode($request['team_data']);
 
-    if ($team_data->type_play == 'REGULAR') {
-      $validate_positions     = Team_user::validate_positions($myPlayers);
-    } elseif ($team_data->type_play == 'TURBO') {
-      $validate_positions     = Team_Turbo_user::validate_positions($myPlayers);
-    }
+     if ($currentMyPlayers == $myPlayers) {
+       Session::flash('message', 'No se realizaron modificaciones en su equipo.');
+       Session::flash('class', 'success');
+       return Redirect::to('usuario/mis-equipos');
+     } elseif ($currentMyPlayers == '') {
+        $competition        = \Request::cookie('competition');
+        $type_inscription   = \Request::cookie('enroll');
 
-    $validate_remaining_salary = Team_user::validate_remaining_salary($myPlayers);
-    $validate_date             = Team_user::validate_date($team_data->team_date);
+        if ($type_inscription == 'lobby') {
+          $cookie = cookie('competition', $competition, 20);
+          TeamUserController::save_team($competition, $myPlayers, $remaining_salary);
+          return Redirect::to('/usuario/mis-equipos');
+        } elseif ($type_inscription == 'competition') {
+            $competition->save();
+            $cookie = cookie('competition', $competition, 20);
+            TeamUserController::save_team($competition, $myPlayers, $remaining_salary);
+            return Redirect::to('/usuario/mis-equipos');
+          }
 
-    if ( ($validate_positions && $validate_remaining_salary && $validate_date) == false ) {
-      $save_team_edited = Team_user_players::save_team_edited($myPlayers, $team_data->team_id, $team_data->type_play);
+     } else {
 
-      if ($save_team_edited == true) {
-        Session::flash('message', 'Equipo modificado con exito.');
-        Session::flash('class', 'success');
-        return Redirect::to('usuario/mis-equipos');
-      } else {
-        Session::flash('message', 'Error al modificar equipo.');
-        Session::flash('class', 'danger');
-        return Redirect::to('usuario/mis-equipos');
+      if ($team_data->type_play == 'REGULAR') {
+        $validate_positions     = Team_user::validate_positions($myPlayers);
+      } elseif ($team_data->type_play == 'TURBO') {
+        $validate_positions     = Team_Turbo_user::validate_positions($myPlayers);
       }
-    }
 
+      $validate_remaining_salary = Team_user::validate_remaining_salary($myPlayers);
+      $validate_date             = Team_user::validate_date($team_data->team_date);
+
+      if ( ($validate_positions && $validate_remaining_salary && $validate_date) == false ) {
+        $save_team_edited = Team_user_players::save_team_edited($myPlayers, $team_data->team_id, $team_data->type_play);
+
+        if ($save_team_edited == true) {
+          Session::flash('message', 'Equipo modificado con exito.');
+          Session::flash('class', 'success');
+          return Redirect::to('/usuario/mis-equipos');
+        } else {
+          Session::flash('message', 'Error al modificar equipo.');
+          Session::flash('class', 'danger');
+          return Redirect::to('/usuario/mis-equipos');
+        }
+      }
+     }
   }
 
 }

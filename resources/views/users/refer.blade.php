@@ -280,7 +280,7 @@
           </div>
         </div>
       </div><br>
-      @include('includes/footer-mobile')
+      <!-- @include('includes/footer-mobile') -->
     </div>
   </div>
 </div>

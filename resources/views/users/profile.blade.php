@@ -70,7 +70,7 @@
                   <p>Contraseña anterior</p>
                 </div>
                 <div class="input-group InicioSes5">
-                  <input onkeypress="action_password_perfil()" id="password_perfil" type="password" name="old_password" class="form-control3 control2" placeholder="Escriba su contraseña" aria-describedby="sizing-addon2">
+                  <input onkeypress="action_password_perfil('')" id="password_perfil" type="password" name="old_password" class="form-control3 control2" placeholder="Escriba su contraseña" aria-describedby="sizing-addon2">
                   @if($errors->has('password'))
                     <span class="incompleto">×</span>
                     @foreach($errors->get('password') as $error)
@@ -87,7 +87,7 @@
                   <p>Contraseña Nueva</p>
                 </div>
                 <div class="input-group InicioSes5">
-                  <input onkeypress="action_password_perfil()" id="password_perfil" type="password" name="password" class="form-control3 control2" placeholder="Escriba una contraseña nueva" aria-describedby="sizing-addon2">
+                  <input onkeypress="action_password_perfil('new')" id="password_perfil_new" type="password" name="password" class="form-control3 control2" placeholder="Escriba una contraseña nueva" aria-describedby="sizing-addon2">
                   @if($errors->has('password'))
                     <span class="incompleto">×</span>
                     @foreach($errors->get('password') as $error)
@@ -95,7 +95,7 @@
                     @endforeach
                   @endif
                 </div>
-                <div class="Edit" id="password_perfil_action">
+                <div class="Edit" id="password_perfil_action_new">
                 </div>
               </div>
 
@@ -104,7 +104,7 @@
                   <p>Confirmar Contraseña</p>
                 </div>
                 <div class="input-group InicioSes5">
-                  <input onkeypress="action_password_perfil()" id="password_perfil" type="password" name="password_confirmation" value="{{Input::old('password_confirmation')}}" class="form-control3 control2" placeholder="Confirme su contraseña" aria-describedby="sizing-addon2">
+                  <input onkeypress="action_password_perfil('confirm')" id="password_perfil_confirm" type="password" name="password_confirmation" value="{{Input::old('password_confirmation')}}" class="form-control3 control2" placeholder="Confirme su contraseña" aria-describedby="sizing-addon2">
                   @if($errors->has('password'))
                     <span class="incompleto">×</span>
                     @foreach($errors->get('password') as $error)
@@ -112,7 +112,7 @@
                     @endforeach
                   @endif
                 </div>
-                <div class="Edit" id="password_perfil_action">
+                <div class="Edit" id="password_perfil_action_confirm">
                 </div>
               </div>
 
@@ -158,7 +158,7 @@
         </div>
       </div>
     </div><br>
-    @include('includes/footer-mobile')
+    <!-- @include('includes/footer-mobile') -->
   </div>
   </div>
   {!! Html::script('js/masJavaScript/phone.js') !!}

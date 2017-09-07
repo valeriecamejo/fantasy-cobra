@@ -3,7 +3,6 @@
 @section ('content')
   <div id="page-content-wrapper">
     <!--  /Content-wrapper -->
-    <div class="container-fluid">
       @if(isset($promotion_list) && count($promotion_list)!= "null")
         <div class="container contaslide nopadrightres" style="margin-bottom:50px">
           <div id="myCarousel" class="carousel slide hidden-xs" data-ride="carousel">
@@ -38,13 +37,23 @@
               </div>
             </div>
           </div>
-          <div class="visible-xs sliderres">
-            <ul class="rslides" id="slider1">
-              <li><a href=""><img src="images/Promo/promo-1.jpg" alt=""></a></li>
-              <li><a href=""><img src="images/Promo/promo-2.jpg" alt=""></a></li>
-              <li><a href=""><img src="images/Promo/promo-3.jpg" alt=""></a></li>
-              <li><a href=""><img src="images/Promo/promo-4.jpg" alt=""></a></li>
-            </ul>
+
+          <div id="myCarousel" class="visible-xs sliderres rslides" data-interval="3000" data-ride="carousel">
+            <!-- Carousel items -->
+            <div class="carousel-inner">
+              <div class="item active">
+                <img src="images/Promo/promo-1.jpg" alt="First Slide">
+              </div>
+              <div class="item">
+                <img src="images/Promo/promo-2.jpg" alt="Second Slide">
+              </div>
+              <div class="item">
+                <img src="images/Promo/promo-3.jpg" alt="Second Slide">
+              </div>
+              <div class="item">
+                <img src="images/Promo/promo-4.jpg" alt="Third Slide">
+              </div>
+            {{--</div>--}}
           </div>
         </div>
         <!-- Promos -->
@@ -75,12 +84,17 @@
           </a>
         </div>
       @endif
+
     </div>
+
     <!-- -------------------------------- MODALES -------------------------------- -->
   @include('modal/competition')
   <!-- -------------------------------- BOTONES -------------------------------- -->
-    @include('includes.competitions')
-    @include('includes.competitions-mobile')
-    @include('includes/footer-mobile')
+      @include('includes.competitions')
+      @include('includes.competitions-mobile')
+      {{--@include('includes.footer-mobile')--}}
   </div>
+
 @stop
+
+
