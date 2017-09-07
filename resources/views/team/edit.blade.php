@@ -192,7 +192,7 @@
         <li role="presentation" class="respli"><a href="#equipcrear" aria-controls="equipcrear" role="tab" data-toggle="tab" id="elemento">Equipo</a></li>
         <li role="presentation" class="respli">
           <a class="Salario" href="#" aria-controls="equipcrear" role="tab" data-toggle="tab">
-            <span class="Sal1">Balance: </span>
+            <!-- <span class="Sal1">Balance: </span> -->
             <span id="salaryrestlabel" :value="team_data.remaining_salary" name="remaining_salary"></span>
           </a>
         </li>
@@ -287,23 +287,24 @@
                 <tr>
                   <th id="pos">POS</th>
                   <th id="jug">JUGADOR</th>
-                  <!--<th id="opo">OPO</th>-->
+                  <th id="opo">OPO</th>
                   <th id="salario">SALARIO</th>
                   <th id="masmas"></th>
                 </tr>
               </thead>
             </table>
             <div class="tableequipoheightmax">
-              <div class="table table-striped2 table-hover2 tablelineup tableequipoheight">
-
-                  <div is="my-players"
+              <table class="table table-striped2 table-hover2 tablelineup tableequipoheight">
+                <tbody>
+                  <tr is="my-players"
                        v-for="(myPlayer, index) in myPlayers"
                        :my-player="myPlayer"
                        :count-position="countPosition"
                        :index="index"
                        v-on:remove="myPlayers.splice(index, 1)">
-                  </div>
-              </div>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

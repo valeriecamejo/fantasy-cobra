@@ -228,17 +228,17 @@
     <form class="form-horizontal" method="POST" action="{{ URL::action('TeamUserController@save_team_edited') }}">
       {{ csrf_field() }}
 
-    <input type='hidden' name="salaryrest" id="salaryrest" :value="remaining_salary">
+    <input type='hidden' name="remaining_salary" id="remaining_salary" :value="remaining_salary">
     <input type='hidden' name="myPlayers" :value="myPlayers">
 
     <div class="restab visible-xs" style="margin-top:30px; margin-bottom: 60px;">
       <div class="linemovbut">
         @if($type == "TURBO")
-          <button v-if="myPlayers.length == 5" type='submit' title="Guardar Equipo" class='btn btn-warning btn-sm pull-right' name='createlineup'>
+          <button v-if="myPlayers.length == 5" type='submit' title="Guardar Equipo" class='btn btn-warning btn-sm pull-center' name='createlineup'>
             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
           </button>
         @elseif($type == "REGULAR")
-          <button v-if="myPlayers.length == 9" type='submit' title="Guardar Equipo" class='btn btn-warning btn-sm pull-right' name='createlineup'>
+          <button v-if="myPlayers.length == 9" type='submit' title="Guardar Equipo" class='btn btn-warning btn-sm pull-center' name='createlineup'>
             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
           </button>
         @endif
@@ -250,6 +250,7 @@
       <ul class="nav nav-tabs nav-tabsnull" role="tablist">
         <li role="presentation" class="active BtnLineup10 respli"><a href="#jugcrear" aria-controls="team" role="tab" data-toggle="tab">Jugadores</a></li>
         <li role="presentation" class="respli"><a href="#equipcrear" aria-controls="equipcrear" role="tab" data-toggle="tab" id="elemento">Equipo</a></li>
+
       </ul>
       <!-- Tab panes -->
       <div class="tab-content tab-contentnull tab-contenthome tab-linecreate">
