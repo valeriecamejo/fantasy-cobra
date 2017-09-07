@@ -195,7 +195,12 @@ class TeamUserController extends Controller {
           $cookie = cookie('competition', $competition, 20);
           TeamUserController::save_team($competition, $myPlayers, $remaining_salary);
           return Redirect::to('/usuario/mis-equipos');
-        }
+        } elseif ($type_inscription == 'competition') {
+            $competition->save();
+            $cookie = cookie('competition', $competition, 20);
+            TeamUserController::save_team($competition, $myPlayers, $remaining_salary);
+            return Redirect::to('/usuario/mis-equipos');
+          }
 
      } else {
 
