@@ -143,23 +143,12 @@
       <div class="CuerpoLineup cuerpoheight margrespL2">
 
         <div class="lineup">
-          <div class="Usuariolineup" style="text-align:center;text-indent: 0;">EQUIPO
-            @if($type == "TURBO")
-            <button v-if="myPlayers.length == 5" type='submit' title="Guardar Equipo" class='btn btn-warning btn-sm pull-right' name='createlineup'>
-              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-            </button>
-            @elseif($type == "REGULAR")
-            <button v-if="myPlayers.length == 9" type='submit' title="Guardar Equipo" class='btn btn-warning btn-sm pull-right' name='createlineup'>
-              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-            </button>
-            @endif
-            <button v-else type='submit' class='btn btn-default btn-sm active pull-right disabled'><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+          <div class="Usuariolineup" style="text-align:center;text-indent: 0;">
+            MI EQUIPO
           </div>
           <div id="th2">
             <p id="salariorestante">Salario Restante:</p>
             <input id="salaryrest" :value="remaining_salary" name="remaining_salary"  class="inputsalario" type="text" readonly>
-
-
           </div>
           <table class="table table-striped2 table-hover2 tablelineup theadhead">
             <thead>
@@ -214,6 +203,12 @@
         </div>
       </div>
       <div id="th22" class="wid50">
+        @if($type == "TURBO")
+          <input v-if="myPlayers.length == 5" type="submit" value="Confirmar" class="btn btn-primary2 btn-lg">
+        @elseif($type == "REGULAR")
+          <input v-if="myPlayers.length == 9" type="submit" value="Confirmar" class="btn btn-primary2 btn-lg">
+        @endif
+        <input v-else type="submit" value="Confirmar" class="btn btn-primary2 btn-lg disabled">
         <a href="/usuario/mis-equipos" class="btn btn-primary2 btn-return btn-lg">Regresar</a>
         <!--<button type="submit" class="btn btn-primarycan btn-lg" name="cancellineup" onclick="">Limpiar</button>-->
         <input type="hidden" :value="JSON.stringify(myPlayers)" name="myPlayers">
@@ -234,15 +229,10 @@
     <div class="restab visible-xs" style="margin-top:30px; margin-bottom: 60px;">
       <div class="linemovbut">
         @if($type == "TURBO")
-          <button v-if="myPlayers.length == 5" type='submit' title="Guardar Equipo" class='btn btn-warning btn-sm pull-center' name='createlineup'>
-            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-          </button>
+            <input v-if="myPlayers.length == 5" type="submit" class="btn btn-default btn-primary4" value="Confirmar">
         @elseif($type == "REGULAR")
-          <button v-if="myPlayers.length == 9" type='submit' title="Guardar Equipo" class='btn btn-warning btn-sm pull-center' name='createlineup'>
-            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-          </button>
+          <input v-if="myPlayers.length == 9" type="submit" class="btn btn-default btn-primary4" value="Confirmar">
         @endif
-        <button v-else type='submit' class='btn btn-default btn-sm active pull-center disabled'><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
         <a href="/lobby" type="submit" class="btn btn-default btn-primary4" name="returnhome">REGRESAR</a>
         <input type="hidden" :value="JSON.stringify(myPlayers)" name="myPlayers">
         <input type="hidden" :value="JSON.stringify(currentMyPlayers)" name="currentMyPlayers">

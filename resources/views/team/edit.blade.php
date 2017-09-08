@@ -119,10 +119,6 @@
 
         <div class="lineup">
            <div class="Usuariolineup" style="text-align:center;text-indent: 0;">EQUIPO
-            <button v-if="team_data.type_play == 'TURBO' && myPlayers.length == 5 || team_data.type_play == 'REGULAR' && myPlayers.length == 9" type='submit' title="Guardar Equipo" class='btn btn-warning btn-sm pull-right' name='createlineup'>
-              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-            </button>
-            <button v-else type='submit' class='btn btn-default btn-sm active pull-right disabled'><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
           </div>
 
           <div id="th2">
@@ -162,6 +158,7 @@
         </div>
       </div>
       <div id="th22" class="wid50">
+          <input v-if="team_data.type_play == 'TURBO' && myPlayers.length == 5 || team_data.type_play == 'REGULAR' && myPlayers.length == 9" type="submit" value="MODIFICAR" class="btn btn-primary2 btn-lg">
         <a href="/usuario/mis-equipos" class="btn btn-primary2 btn-return btn-lg">Regresar</a>
         <!--<button type="submit" class="btn btn-primarycan btn-lg" name="cancellineup" onclick="">Limpiar</button>-->
         <input type="hidden" :value="JSON.stringify(myPlayers)" name="myPlayers">
@@ -177,10 +174,11 @@
       {{ csrf_field() }}
     <div class="restab visible-xs" style="margin-top:30px; margin-bottom: 60px;">
       <div  class="linemovbut">
-        <button v-if="team_data.type_play == 'TURBO' && myPlayers.length == 5 || team_data.type_play == 'REGULAR' && myPlayers.length == 9" type='submit' title="Guardar Equipo" class='btn btn-warning btn-sm pull-center' name='createlineup'>
-          <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-        </button>
-        <button v-else type='submit' class='btn btn-default btn-sm active pull-center disabled'><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+        <input v-if="team_data.type_play == 'TURBO' && myPlayers.length == 5 || team_data.type_play == 'REGULAR' && myPlayers.length == 9" type="submit" class="btn btn-default btn-primary4" value="MODIFICAR">
+        {{--<button v-if="team_data.type_play == 'TURBO' && myPlayers.length == 5 || team_data.type_play == 'REGULAR' && myPlayers.length == 9" type='submit' title="Guardar Equipo" class='btn btn-warning btn-sm pull-center' name='createlineup'>--}}
+          {{--<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>--}}
+        {{--</button>--}}
+        {{--<button v-else type='submit' class='btn btn-default btn-sm active pull-center disabled'><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>--}}
         <a href="/usuario/mis-equipos" type="submit" class="btn btn-default btn-primary4" name="returnhome">REGRESAR</a>
         <input type="hidden" :value="JSON.stringify(myPlayers)" name="myPlayers">
         <input type="hidden" :value="JSON.stringify(currentMyPlayers)" name="currentMyPlayers">

@@ -19,7 +19,7 @@
       <li id="teamsM" onclick="action(3,0)">
           <a href="/usuario/mis-equipos">Equipos</a>
       </li>
-      <li id="competitionsM" onclick="document.getElementById('bloquea').style.display='block'">
+      <li id="competitionsM" >
         {!! Html::link('usuario/mis-competiciones', 'Competiciones') !!}
       </li>
       @elseif(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==2 && Auth::user()::STATUS_ACTIVE)
