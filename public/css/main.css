@@ -1716,6 +1716,10 @@ ul.nostyle i {
   padding: 8px 16px;
 }
 
+.btn.btn-primary2.btn-lg.disabled {
+  background: #ABA8A7 !important;
+}
+
 /*TO DO estilo para boton momentaneo de CREAR LINEUP*/
 .btn.btn-primary21 {
   color: #fff;

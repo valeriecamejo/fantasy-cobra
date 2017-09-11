@@ -158,7 +158,8 @@
         </div>
       </div>
       <div id="th22" class="wid50">
-          <input v-if="team_data.type_play == 'TURBO' && myPlayers.length == 5 || team_data.type_play == 'REGULAR' && myPlayers.length == 9" type="submit" value="MODIFICAR" class="btn btn-primary2 btn-lg">
+        <input v-if="team_data.type_play == 'TURBO' && myPlayers.length == 5 || team_data.type_play == 'REGULAR' && myPlayers.length == 9" type="submit" value="Modificar" class="btn btn-primary2 btn-lg">
+        <input v-else type="submit" value="Modificar" class="btn btn-primary2 btn-lg disabled">
         <a href="/usuario/mis-equipos" class="btn btn-primary2 btn-return btn-lg">Regresar</a>
         <!--<button type="submit" class="btn btn-primarycan btn-lg" name="cancellineup" onclick="">Limpiar</button>-->
         <input type="hidden" :value="JSON.stringify(myPlayers)" name="myPlayers">

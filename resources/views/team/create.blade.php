@@ -229,9 +229,9 @@
     <div class="restab visible-xs" style="margin-top:30px; margin-bottom: 60px;">
       <div class="linemovbut">
         @if($type == "TURBO")
-            <input v-if="myPlayers.length == 5" type="submit" class="btn btn-default btn-primary4" value="Confirmar">
+            <input v-if="myPlayers.length == 5" type="submit" class="btn btn-default btn-primary4" value="CONFIRMAR">
         @elseif($type == "REGULAR")
-          <input v-if="myPlayers.length == 9" type="submit" class="btn btn-default btn-primary4" value="Confirmar">
+          <input v-if="myPlayers.length == 9" type="submit" class="btn btn-default btn-primary4" value="CONFIRMAR">
         @endif
         <a href="/lobby" type="submit" class="btn btn-default btn-primary4" name="returnhome">REGRESAR</a>
         <input type="hidden" :value="JSON.stringify(myPlayers)" name="myPlayers">
