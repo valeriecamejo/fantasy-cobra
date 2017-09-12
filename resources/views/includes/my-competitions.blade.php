@@ -64,7 +64,6 @@
             <th class="tabhora">  Hora     </th>
             <th class="tdrest">   Restante   </th>
             <th class="tabentrar">       </th>
-            <th >       </th>
           </tr>
         </thead>
         <tbody id="table-all-no-mobile">
@@ -132,19 +131,12 @@
             @endif
           </td>
            <td class="tdentrar2">
-            @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
-              {{--<div class="BtnEntrar2" onclick="showCompetition({{$competition->id}})">ENTRAR</div>--}}
-               <button type="button" class="btn btn-primary" onclick="showCompetition({{$competition->id}})" aria-label="Left Align">
-                 <span class="glyphicon glyphicon-edit glyphicon-edit-competitions" aria-hidden="true"></span>
-               </button>
-            @else
-              {{--<div class="BtnEntrar2" href=".login" data-toggle="modal">ENTRAR</div>--}}
-               <button type="button" class="btn btn-primary" href=".login" data-toggle="modal" aria-label="Left Align">
-                 <span class="glyphicon glyphicon-edit glyphicon-edit-competitions" aria-hidden="true"></span>
-               </button>
-            @endif
+             @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
+               <div class="BtnEntrar2" onclick="showCompetition({{$competition->id}})">ENTRAR</div>
+             @else
+               <div class="BtnEntrar2" href=".login" data-toggle="modal">ENTRAR</div>
+             @endif
           </td>
-          <td></td>
         </tr>
         @endforeach
         </tbody>

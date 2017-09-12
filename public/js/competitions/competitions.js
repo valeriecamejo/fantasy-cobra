@@ -142,16 +142,11 @@ function competitions_template(competitions) {
     + "</td>"
     + "<td class='tdentrar2'>"
     if (window.login == true) {
-      tpl = tpl + "<button type='button' class='btn btn-primary' onclick='showCompetition(" + element.id + ")' aria-label='Left Align'>"
-      + "<span class='glyphicon glyphicon-edit glyphicon-edit-competitions' aria-hidden='true'></span>"
-      + "</button>";
+      tpl = tpl + "<div class='BtnEntrar2' onclick='showCompetition(" + element.id + ")'>ENTRAR</div>";
     } else {
-      tpl = tpl + "<button type='button' class='btn btn-primary' href='.login' data-toggle='modal' aria-label='Left Align'>"
-      + "<span class='glyphicon glyphicon-edit glyphicon-edit-competitions' aria-hidden='true'></span>"
-      + "</button>";
+      tpl = tpl + "<div class='BtnEntrar2' href='.login' data-toggle='modal'>ENTRAR</div>";
     }
     tpl = tpl + "</td>"
-
     + "</tr>"
   });
   return tpl;

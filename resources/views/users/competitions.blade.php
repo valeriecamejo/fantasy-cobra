@@ -7,7 +7,7 @@
       <!--  /Content-wrapper -->
       <h3 class="Titulo1">MIS COMPETICIONES</h3>
 
-  <!-- -------------------------------- MODALES -------------------------------- -->
+  <!---------------------------------- MODALES ---------------------------------->
   @include('modal/competition')
   @include('includes.my-competitions')
   @include('includes.my-competitions-mobile')
