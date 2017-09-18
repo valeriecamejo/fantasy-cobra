@@ -2,7 +2,7 @@
 
 @section ('content')
 
-{!! Html::script('js/teams/team_modal.js') !!}
+
 {!! Html::script('js/moment/locale/es.js') !!}
 
 <div id="app">
@@ -86,14 +86,14 @@
                         </a>
                         {{--<button type='submit' class="BtnEntrar3" style="border-style:none;">INSCRIBIR</button>--}}
                       </div>
-                      <input type="hidden" class="form-compe2" name="lineup_id" value="@{{ team.id }}">
+                      <input type="hidden" class="form-compe2" name="lineup_id" :value="team.id">
                       </span>
                       <span v-else>
                       <div class="contbtnbdg">
                         <a @click="team_modal( team.id , team.name, teams )">
                           <div class="BtnEntrar31 noedit">Ver</div>
                         </a>
-                        <input type="hidden" class="form-compe2" name="lineup_id" value="@{{ team.id }}">
+                        <input type="hidden" class="form-compe2" name="lineup_id" :value="team.id">
                         {{--<button type='submit' class="BtnEntrar3 noedit" style="border-style:none;">INSCRIBIR</button>--}}
                       </div>
                     </span>
@@ -121,5 +121,5 @@
   </div>
 </div>
 {!! Html::script('js/vuejs/teams/user_teams.js') !!}
-
+{!! Html::script('js/teams/team_modal.js') !!}
 @stop

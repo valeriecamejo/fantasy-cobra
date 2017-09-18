@@ -188,7 +188,7 @@ function competitions_template_mobile(competitions) {
             tpl_mobile = tpl_mobile
             + "<ul>"
             + "<li class='tmovli'>"
-            + "<div class='divico'><img class='Star' src='images/ico/star.png'/></div>"
+            + "<div class='divico'><img class='Star' src='/images/ico/star.png'/></div>"
             + "<h4 class='h4tmovil'><a href=''>"
             + element.name
             + "</a></h4>"
@@ -209,7 +209,7 @@ function competitions_template_mobile(competitions) {
 
                 if (element.type == 'PRIVATE') {
                     tpl_mobile = tpl_mobile
-                    + "<img class='Garanico' src='images/ico/lock.png'/>";
+                    + "<img class='Garanico' src='/images/ico/lock.png'/>";
                 }
 
             tpl_mobile = tpl_mobile
@@ -228,10 +228,10 @@ function competitions_template_mobile(competitions) {
 
                 if (element.pot == 1) {
                     tpl_mobile = tpl_mobile
-                    + "<img class='Aumenico' src='images/ico/aumento.png'/>";
+                    + "<img class='Aumenico' src='/images/ico/aumento.png'/>";
                 } else {
                     tpl_mobile = tpl_mobile
-                    + "<img class='Garanico' src='images/ico/garantizado.png'/>";
+                    + "<img class='Garanico' src='/images/ico/garantizado.png'/>";
                 }
 
             tpl_mobile = tpl_mobile
