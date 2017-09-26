@@ -38,12 +38,10 @@ Vue.component('list-players', {
                         vm.team_data.remaining_salary = vm.team_data.remaining_salary - player.salary
                         if (vm.team_data.type_play == 'TURBO') {
                             if (player['position'] == '2B' || player['position'] == 'SS') {
-                                player['position'] = 'MI'
-                                vm.myPlayers[0][player.position] = player
+                                vm.myPlayers[0]['MI'] = player
                             } else {
                                 if (player['position'] == '1B' || player['position'] =='3B') {
-                                    player['position'] = 'CI'
-                                    vm.myPlayers[0][player.position] = player
+                                    vm.myPlayers[0]['CI'] = player
                                 } else {
                                     vm.myPlayers[0][player.position] = player
                                 }
