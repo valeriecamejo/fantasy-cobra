@@ -142,13 +142,13 @@
           <div class="tableequipoheightmax">
             <table class="table table-striped2 table-hover2 tablelineup tableequipoheight">
               <tbody id="playersTeam" class="tableequipoheightmax">
-                <tr is="my-players"
-                    v-for="(myPlayer, index) in myPlayers"
-                    :my-player="myPlayer"
-                    :count-position="countPosition"
-                    :index="index"
-                    v-on:remove="myPlayers.splice(index, 1)">
-                </tr>
+              <tr is="my-players"
+                  v-for="(myPlayer, position) in myPlayers[0]"
+                  :my-player="myPlayer"
+                  :count-position="countPosition"
+                  :position="position"
+                  v-on:remove="myPlayers[0][position] = null">
+              </tr>
               </tbody>
             </table>
           </div>
@@ -158,7 +158,7 @@
         </div>
       </div>
       <div id="th22" class="wid50">
-        <input v-if="team_data.type_play == 'TURBO' && myPlayers.length == 5 || team_data.type_play == 'REGULAR' && myPlayers.length == 9" type="submit" value="Modificar" class="btn btn-primary2 btn-lg">
+        <input v-if="team_data.type_play == 'TURBO' && countTeam == 5 || team_data.type_play == 'REGULAR' && countTeam == 9" type="submit" value="Modificar" class="btn btn-primary2 btn-lg">
         <input v-else type="submit" value="Modificar" class="btn btn-primary2 btn-lg disabled">
         <a href="/usuario/mis-equipos" class="btn btn-primary2 btn-return btn-lg">Regresar</a>
         <!--<button type="submit" class="btn btn-primarycan btn-lg" name="cancellineup" onclick="">Limpiar</button>-->
@@ -175,11 +175,7 @@
       {{ csrf_field() }}
     <div class="restab visible-xs" style="margin-top:30px; margin-bottom: 60px;">
       <div  class="linemovbut">
-        <input v-if="team_data.type_play == 'TURBO' && myPlayers.length == 5 || team_data.type_play == 'REGULAR' && myPlayers.length == 9" type="submit" class="btn btn-default btn-primary4" value="MODIFICAR">
-        {{--<button v-if="team_data.type_play == 'TURBO' && myPlayers.length == 5 || team_data.type_play == 'REGULAR' && myPlayers.length == 9" type='submit' title="Guardar Equipo" class='btn btn-warning btn-sm pull-center' name='createlineup'>--}}
-          {{--<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>--}}
-        {{--</button>--}}
-        {{--<button v-else type='submit' class='btn btn-default btn-sm active pull-center disabled'><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>--}}
+        <input v-if="team_data.type_play == 'TURBO' && countTeam == 5 || team_data.type_play == 'REGULAR' && countTeam == 9" type="submit" class="btn btn-default btn-primary4" value="MODIFICAR">
         <a href="/usuario/mis-equipos" type="submit" class="btn btn-default btn-primary4" name="returnhome">REGRESAR</a>
         <input type="hidden" :value="JSON.stringify(myPlayers)" name="myPlayers">
         <input type="hidden" :value="JSON.stringify(currentMyPlayers)" name="currentMyPlayers">
@@ -295,13 +291,13 @@
             <div class="tableequipoheightmax">
               <table class="table table-striped2 table-hover2 tablelineup tableequipoheight">
                 <tbody>
-                  <tr is="my-players"
-                       v-for="(myPlayer, index) in myPlayers"
-                       :my-player="myPlayer"
-                       :count-position="countPosition"
-                       :index="index"
-                       v-on:remove="myPlayers.splice(index, 1)">
-                  </tr>
+                <tr is="my-players"
+                    v-for="(myPlayer, position) in myPlayers[0]"
+                    :my-player="myPlayer"
+                    :count-position="countPosition"
+                    :position="position"
+                    v-on:remove="myPlayers[0][position] = null">
+                </tr>
                 </tbody>
               </table>
             </div>
@@ -319,12 +315,12 @@
 <!-- Template of my players -->
 <template id="my-players">
   <tr>
-    <td id='pos'>@{{ myPlayer.position }}</td>
-    <td id='jug'>@{{ myPlayer.name }} @{{ myPlayer.last_name }}<span id='teamcol'></span></td>
-    <td id='opo'>@{{ myPlayer.name_opponent }} vs <span id='teamcol'>@{{ myPlayer.name_team }}</span></td>
-    <td id='salario'>@{{ myPlayer.salary }}</td>
+    <td id='pos'>@{{ position }}</td>
+    <td id='jug'>@{{ myPlayer == null ? '' : myPlayer.name }} @{{ myPlayer == null ? '' : myPlayer.last_name }}<span id='teamcol'></span></td>
+    <td id='opo'>@{{ myPlayer == null ? '' : myPlayer.name_opponent }} vs <span id='teamcol'>@{{ myPlayer == null ? '' : myPlayer.name_team }}</span></td>
+    <td id='salario'>@{{ myPlayer == null ? '' : myPlayer.salary }}</td>
     <td>
-      <a @click="$emit('remove'), decSalary(myPlayer)">
+      <a v-if="myPlayer != null" @click="$emit('remove'), decSalary(myPlayer.salary)">
       <img src='/images/ico/menos.png' alt='menos' class='mashov'>
       </a>
     </td>

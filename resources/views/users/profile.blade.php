@@ -3,7 +3,6 @@
 @section ('content')
   {!! Html::script('js/jquery.prettyPhoto.js') !!}
   {!! Html::script('js/jquery.prettyPhoto.js') !!}
-  {!! Html::script('js/masJavaScript/mask.js') !!}
 
   <div class="container-fluid Ingresoprin" id="page-content-wrapper">
     <!-- Mensajes de Error -->
@@ -161,5 +160,4 @@
     <!-- @include('includes/footer-mobile') -->
   </div>
   </div>
-  {!! Html::script('js/masJavaScript/phone.js') !!}
 @stop

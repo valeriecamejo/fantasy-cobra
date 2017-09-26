@@ -83,7 +83,7 @@ class Team_user_players extends Model {
       ->where('team_user_id', '=', $team_user_id)
       ->delete();
 
-    foreach ($players as $player) {
+    foreach ($players[0] as $player) {
 
       $team_user_player                =  new Team_user_players();
       $team_user_player->player_id     =  $player->player_id;

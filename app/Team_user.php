@@ -40,12 +40,12 @@ class Team_user extends Model {
  **************************************************/
 
   static function validate_positions ($players) {
-
+//var_dump($players[0]);exit();
     $tmpPositions = array();
     $errors       = array();
 
     if (is_array($players) || is_object($players)) {
-      foreach ($players as $player) {
+      foreach ($players[0] as $player) {
         $tmpPositions[$player->position][] = $player;
       }
 
@@ -72,7 +72,7 @@ class Team_user extends Model {
     $errors           = array();
 
     if (is_array($players) || is_object($players)) {
-      foreach ($players as $player) {
+      foreach ($players[0] as $player) {
         $suma = $suma + $player->salary;
       }
     }
@@ -216,7 +216,7 @@ public static function save_team_turbo($competition, $myPlayers, $remaining_sala
 
   if ($team->save()){
 
-    foreach ($myPlayers as $myPlayer) {
+    foreach ($myPlayers[0] as $myPlayer) {
       $pa_obj               = Player::find_data($myPlayer->id);
       $save_position        = Team_user_players::save_player($pa_obj, $team->id, $team->type_play);
       if (!$save_position) {
@@ -243,7 +243,7 @@ public static function save_team_turbo($competition, $myPlayers, $remaining_sala
     if ($team->save()){
 
 
-      foreach ($myPlayers as $myPlayer) {
+      foreach ($myPlayers[0] as $myPlayer) {
 
         $pa_obj               = Player::find_data($myPlayer->id);
         $save_position        = Team_user_players::save_player($pa_obj, $team->id, $team->type_play);

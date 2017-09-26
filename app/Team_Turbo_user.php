@@ -31,7 +31,7 @@ class Team_Turbo_user extends Team_user {
 
     if (is_array($players) || is_object($players)) {
 
-      foreach ($players as $player) {
+      foreach ($players[0] as $player) {
         if ( ($player->position == '2B') || ($player->position == 'SS') ) {
           $tmpPositions['MI'][] = $player;
         } else {

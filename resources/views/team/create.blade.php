@@ -166,11 +166,11 @@
             <table class="table table-striped2 table-hover2 tablelineup tableequipoheight">
               <tbody>
               <tr is="my-players"
-                  v-for="(myPlayer, index) in myPlayers"
+                  v-for="(myPlayer, position) in myPlayers[0]"
                   :my-player="myPlayer"
                   :count-position="countPosition"
-                  :index="index"
-                  v-on:remove="myPlayers.splice(index, 1)">
+                  :position="position"
+                  v-on:remove="myPlayers[0][position] = null">
               </tr>
               <tr id="playerPA">
               </tr>
@@ -204,9 +204,9 @@
       </div>
       <div id="th22" class="wid50">
         @if($type == "TURBO")
-          <input v-if="myPlayers.length == 5" type="submit" value="Confirmar" class="btn btn-primary2 btn-lg">
+          <input v-if="countTeam == 5" type="submit" value="Confirmar" class="btn btn-primary2 btn-lg">
         @elseif($type == "REGULAR")
-          <input v-if="myPlayers.length == 9" type="submit" value="Confirmar" class="btn btn-primary2 btn-lg">
+          <input v-if="countTeam == 9" type="submit" value="Confirmar" class="btn btn-primary2 btn-lg">
         @endif
         <input v-else type="submit" value="Confirmar" class="btn btn-primary2 btn-lg disabled">
         <a href="/usuario/mis-equipos" class="btn btn-primary2 btn-return btn-lg">Regresar</a>
@@ -229,9 +229,9 @@
     <div class="restab visible-xs" style="margin-top:30px; margin-bottom: 60px;">
       <div class="linemovbut">
         @if($type == "TURBO")
-            <input v-if="myPlayers.length == 5" type="submit" class="btn btn-default btn-primary4" value="CONFIRMAR">
+            <input v-if="countTeam == 5" type="submit" class="btn btn-default btn-primary4" value="CONFIRMAR">
         @elseif($type == "REGULAR")
-          <input v-if="myPlayers.length == 9" type="submit" class="btn btn-default btn-primary4" value="CONFIRMAR">
+          <input v-if="countTeam == 9" type="submit" class="btn btn-default btn-primary4" value="CONFIRMAR">
         @endif
         <a href="/lobby" type="submit" class="btn btn-default btn-primary4" name="returnhome">REGRESAR</a>
         <input type="hidden" :value="JSON.stringify(myPlayers)" name="myPlayers">
@@ -356,13 +356,12 @@
               <table class="table table-striped2 table-hover2 tablelineup tableequipoheight">
                 <tbody>
                 <tr is="my-players"
-                    v-for="(myPlayer, index) in myPlayers"
+                    v-for="(myPlayer, position) in myPlayers[0]"
                     :my-player="myPlayer"
                     :count-position="countPosition"
-                    :index="index"
-                    v-on:remove="myPlayers.splice(index, 1)">
+                    :position="position"
+                    v-on:remove="myPlayers[0][position] = null">
                 </tr>
-
                 </tbody>
               </table>
 
@@ -398,21 +397,22 @@
   <!-- End Template of players -->
 
 
-  <!-- Template of my players -->
-  <template id="my-players">
-    <tr>
-      <td id='pos'>@{{ myPlayer.position }}</td>
-      <td id='jug'>@{{ myPlayer.name }} @{{ myPlayer.last_name }}<span id='teamcol'></span></td>
-      <td id='opo'>@{{ myPlayer.name_opponent }} vs <span id='teamcol'>@{{ myPlayer.name_team }}</span></td>
-      <td id='salario'>@{{ myPlayer.salary }}</td>
-      <td id="masmas">
-        <a @click="$emit('remove'), decSalary(myPlayer)">
-        <img src='/images/ico/menos.png' alt='menos' class='mashov'>
-        </a>
-      </td>
-    </tr>
-  </template>
-  <!-- End Template of my players -->
+<!-- Template of my players -->
+<template id="my-players">
+  <tr>
+    <td id='pos'>@{{ position }}</td>
+    <td id='jug'>@{{ myPlayer == null ? '' : myPlayer.name }} @{{ myPlayer == null ? '' : myPlayer.last_name }}<span id='teamcol'></span></td>
+    <td id='opo'>@{{ myPlayer == null ? '' : myPlayer.name_opponent }} vs <span id='teamcol'>@{{ myPlayer == null ? '' : myPlayer.name_team }}</span></td>
+    <td id='salario'>@{{ myPlayer == null ? '' : myPlayer.salary }}</td>
+    <td>
+      <a v-if="myPlayer != null" @click="$emit('remove'), decSalary(myPlayer.salary)">
+      <img src='/images/ico/menos.png' alt='menos' class='mashov'>
+      </a>
+    </td>
+  </tr>
+</template>
+
+<!-- End Template of my players -->
 
   <!-- End Templates for Components -->
 
