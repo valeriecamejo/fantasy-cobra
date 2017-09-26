@@ -69,8 +69,6 @@ date_default_timezone_set('America/Asuncion');
 
 @yield('content')
 
-<!--TODO agregar el modal de competition
-
         <!-- -------------------------------- MODALES -------------------------------- -->
 @include('modal/awards')
 @include('modal/cashier')

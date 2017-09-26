@@ -398,13 +398,13 @@ function add_rows_lobby(folder_tabs, information, auth){
                             "<td class='tdinscr2 notdpad'>"+
                                  "<span>";
                                         if(competition.type_competition == 0){
-                                            row = row + "<img src='images/ico/no-space.png' class='candado'>";
+                                            row = row + "<img src='/images/ico/no-space.png' class='candado'>";
                                         }
                                         if(competition.type_competition == 1){
-                                            row = row + "<img src='images/ico/lock.png' class='candado'>";
+                                            row = row + "<img src='/images/ico/lock.png' class='candado'>";
                                         }
                                         if(competition.type_competition == 1){
-                                            row = row + "<img src='images/ico/ticket.png' class='candado'>";
+                                            row = row + "<img src='/images/ico/ticket.png' class='candado'>";
                                         }
                                  row = row + "</span>"+
                                  competition.enrolled + "/" + competition.max_user +
@@ -412,7 +412,7 @@ function add_rows_lobby(folder_tabs, information, auth){
                             "<td class='tdentr2 notdpad'>";
                                 if(competition.free == 0){
                                     row = row + "<span>"+
-                                                    "<img src='images/ico/multiple.png' class='multiple'>"+
+                                                    "<img src='/images/ico/multiple.png' class='multiple'>"+
                                                 "</span>";
                                 }
 
@@ -421,12 +421,12 @@ function add_rows_lobby(folder_tabs, information, auth){
                             "<td class='RepColor tdpremio2 notdpad'>";
                                 if(competition.pote == 0){
                                     row = row + "<span>"+
-                                                    "<img src='images/ico/aumento.png' class='tdAumenico'>"+
+                                                    "<img src='/images/ico/aumento.png' class='tdAumenico'>"+
                                                 "</span>";
                                 }
                                 if(competition.pote == 0){
                                     row = row + "<span>"+
-                                                    "<img src='images/ico/garantizado.png' class='tdGaranico'>"+
+                                                    "<img src='/images/ico/garantizado.png' class='tdGaranico'>"+
                                                 "</span>";
                                 }
 
@@ -518,23 +518,23 @@ function add_rows_lobby(folder_tabs, information, auth){
              var row = "<tr>"+
                             "<td class='tdimg1'>";
                                 if(competition.season_format == 11){
-                                    row = row +"<img src='images/BolaMLB.png' class='tabimgtablet' alt='MLB'>";
+                                    row = row +"<img src='/images/BolaMLB.png' class='tabimgtablet' alt='MLB'>";
                                 }
                                 if(competition.season_format == 12){
-                                    row = row +"<img src='images/BolaLVBP.png' class='tabimgtablet' alt='LVBP'>";
+                                    row = row +"<img src='/images/BolaLVBP.png' class='tabimgtablet' alt='LVBP'>";
                                 }
                                  if(competition.season_format == 13){
-                                     row = row +"<img src='images/BolaLIDOM.png' class='tabimgtablet' alt='LIDOM'>";
+                                     row = row +"<img src='/images/BolaLIDOM.png' class='tabimgtablet' alt='LIDOM'>";
                                  }
                                 if(competition.season_format == 27){
-                                    row = row +"<img src='images/BolaLIGA.png' class='tabimgtablet' alt='LaLiga'>";
+                                    row = row +"<img src='/images/BolaLIGA.png' class='tabimgtablet' alt='LaLiga'>";
                                 }
                                 if(competition.season_format == 28){
-                                    row = row +"<img src='images/BolaUCL.png' class='tabimgtablet' alt='UCL'>";
+                                    row = row +"<img src='/images/BolaUCL.png' class='tabimgtablet' alt='UCL'>";
                                 }
                             row = row + "</td>"+
                             "<td class='tdimg2'>"+
-                                "<img src='images/ico/no-space.png' class='Startd' alt='star'>"+
+                                "<img src='/images/ico/no-space.png' class='Startd' alt='star'>"+
                             "</td>"+
                             "<td class='tdcomp2 notdpad' id='tdcomp'>";
                                 if(competition.season_format == 11){
@@ -558,13 +558,13 @@ function add_rows_lobby(folder_tabs, information, auth){
                             "<td class='tdinscr2 notdpad'>"+
                                 "<span>";
                                      if(competition.type_competition == 0){
-                                         row = row + "<img src='images/ico/no-space.png' class='candado'>";
+                                         row = row + "<img src='/images/ico/no-space.png' class='candado'>";
                                      }
                                      if(competition.type_competition == 1){
-                                         row = row + "<img src='images/ico/lock.png' class='candado'>";
+                                         row = row + "<img src='/images/ico/lock.png' class='candado'>";
                                      }
                                      if(competition.type_competition == 2){
-                                         row = row + "<img src='images/ico/ticket.png' class='candado'>";
+                                         row = row + "<img src='/images/ico/ticket.png' class='candado'>";
                                      }
                                 row = row + "</span>"+
                                 competition.enrolled + "/" + competition.max_user +
@@ -572,7 +572,7 @@ function add_rows_lobby(folder_tabs, information, auth){
                             "<td class='tdentr2 notdpad'>";
                                  if(competition.free == 0){
                                      row = row + "<span>"+
-                                                    "<img src='images/ico/multiple.png' class='multiple'>"+
+                                                    "<img src='/images/ico/multiple.png' class='multiple'>"+
                                                  "</span>";
                                  }
                                  row = row + competition.cost_entry.toLocaleString('de-DE') + " Bs."+
@@ -580,12 +580,12 @@ function add_rows_lobby(folder_tabs, information, auth){
                             "<td class='RepColor tdpremio2 notdpad'>";
                                  if(competition.pote == 0){
                                      row = row + "<span>"+
-                                         "<img src='images/ico/aumento.png' class='tdAumenico'>"+
+                                         "<img src='/images/ico/aumento.png' class='tdAumenico'>"+
                                          "</span>";
                                  }
                                  if(competition.pote == 1){
                                      row = row + "<span>"+
-                                                    "<img src='images/ico/garantizado.png' class='tdGaranico'>"+
+                                                    "<img src='/images/ico/garantizado.png' class='tdGaranico'>"+
                                                  "</span>";
                                  }
                                  if(competition.season_format == 11){
@@ -1362,26 +1362,26 @@ function add_rows_lobby_mobile(folder_tabs, information, auth){
             }
                                 row = row + "<li class='tmovli'>" +
                                                 "<div class='divico'>" +
-                                                    "<img src='images/ico/star.png' class='Star'>" +
+                                                    "<img src='/images/ico/star.png' class='Star'>" +
                                                 "</div>" +
                                                 "<h4 class='h4tmovil'>" +
                                                     competition.name +
                                                 "</h4>"+
                                                 "<div class='tmovilimg'>";
                                                     if(competition.season_format == 11){
-                                                        row = row + "<img src='images/BolaMLB.png' alt='MLB'>";
+                                                        row = row + "<img src='/images/BolaMLB.png' alt='MLB'>";
                                                     }
                                                     if(competition.season_format == 12){
-                                                        row = row + "<img src='images/ico/BolaLVBP.png' alt='LVBP'>";
+                                                        row = row + "<img src='/images/ico/BolaLVBP.png' alt='LVBP'>";
                                                     }
                                                     if(competition.season_format == 13){
-                                                        row = row + "<img src='images/ico/BolaLIDOM.png' alt='LIDOM'>";
+                                                        row = row + "<img src='/images/ico/BolaLIDOM.png' alt='LIDOM'>";
                                                     }
                                                     if(competition.season_format == 27){
-                                                        row = row + "<img src='images/ico/BolaLIGA.png' alt='LaLiga'>";
+                                                        row = row + "<img src='/images/ico/BolaLIGA.png' alt='LaLiga'>";
                                                     }
                                                     if(competition.season_format == 28){
-                                                        row = row + "<img src='images/ico/BolaUCL.png' alt='UCL'>";
+                                                        row = row + "<img src='/images/ico/BolaUCL.png' alt='UCL'>";
                                                     }
                                                 row = row + "</div>" +
                                                 "<div class='tmovdatos'>" +
@@ -1392,13 +1392,13 @@ function add_rows_lobby_mobile(folder_tabs, information, auth){
                                                         "</p>" +
                                                         "<div class='tmovtabico'>";
                                                             if(competition.type_competition == 0){
-                                                                row = row + "<img src='images/ico/white-space.png' class='Garanico'>";
+                                                                row = row + "<img src='/images/ico/white-space.png' class='Garanico'>";
                                                             }
                                                             if(competition.type_competition == 1){
-                                                                row = row + "<img src='images/ico/lock.png' class='Garanico'>";
+                                                                row = row + "<img src='/images/ico/lock.png' class='Garanico'>";
                                                             }
                                                             if(competition.type_competition == 2){
-                                                                row = row + "<img src='images/ico/ticket.png' class='Garanico'>";
+                                                                row = row + "<img src='/images/ico/ticket.png' class='Garanico'>";
                                                             }
                                                         row = row + "</div>" +
                                                         "<p>" +
@@ -1413,10 +1413,10 @@ function add_rows_lobby_mobile(folder_tabs, information, auth){
                                                         "</p>" +
                                                         "<div class='tmovtabico'>";
                                                             if(competition.pote == 0){
-                                                                row = row + "<img src='images/ico/aumento.png' class='Aumenico'>";
+                                                                row = row + "<img src='/images/ico/aumento.png' class='Aumenico'>";
                                                             }
                                                             if(competition.pote == 1){
-                                                                row = row + "<img src='images/ico/garantizado.png' class='Garanico'>";
+                                                                row = row + "<img src='/images/ico/garantizado.png' class='Garanico'>";
                                                             }
                                                         row = row + "</div>" +
                                                         "<p>" +
@@ -1426,10 +1426,10 @@ function add_rows_lobby_mobile(folder_tabs, information, auth){
                                                     "</div>" +
                                                 "</div>" +
                                                 "<div class='next'>" +
-                                                    "<img src='images/ico/next.png' class='Aumenico'>" +
+                                                    "<img src='/images/ico/next.png' class='Aumenico'>" +
                                                 "</div>" +
                                                 "<div class='next2'>" +
-                                                    "<img src='images/ico/next2.png' class='next21'>" +
+                                                    "<img src='/images/ico/next2.png' class='next21'>" +
                                                 "</div>" +
                                             "</li>" +
                             "</a>";

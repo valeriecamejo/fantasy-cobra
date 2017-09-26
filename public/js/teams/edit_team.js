@@ -57,7 +57,6 @@ var url_ajax  = protocol + "//" + URLdomain;
     success: function (data) {
 
       var datos = jQuery.parseJSON(data);
-      console.warn(datos);
       tpl_user_players(type_play, datos);
       tpl_players(championship_id, type_play, datos);
 

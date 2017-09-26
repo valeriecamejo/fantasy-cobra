@@ -142,16 +142,11 @@ function competitions_template(competitions) {
     + "</td>"
     + "<td class='tdentrar2'>"
     if (window.login == true) {
-      tpl = tpl + "<button type='button' class='btn btn-primary' onclick='showCompetition(" + element.id + ")' aria-label='Left Align'>"
-      + "<span class='glyphicon glyphicon-edit glyphicon-edit-competitions' aria-hidden='true'></span>"
-      + "</button>";
+      tpl = tpl + "<div class='BtnEntrar2' onclick='showCompetition(" + element.id + ")'>ENTRAR</div>";
     } else {
-      tpl = tpl + "<button type='button' class='btn btn-primary' href='.login' data-toggle='modal' aria-label='Left Align'>"
-      + "<span class='glyphicon glyphicon-edit glyphicon-edit-competitions' aria-hidden='true'></span>"
-      + "</button>";
+      tpl = tpl + "<div class='BtnEntrar2' href='.login' data-toggle='modal'>ENTRAR</div>";
     }
     tpl = tpl + "</td>"
-
     + "</tr>"
   });
   return tpl;
@@ -193,7 +188,7 @@ function competitions_template_mobile(competitions) {
             tpl_mobile = tpl_mobile
             + "<ul>"
             + "<li class='tmovli'>"
-            + "<div class='divico'><img class='Star' src='images/ico/star.png'/></div>"
+            + "<div class='divico'><img class='Star' src='/images/ico/star.png'/></div>"
             + "<h4 class='h4tmovil'><a href=''>"
             + element.name
             + "</a></h4>"
@@ -214,7 +209,7 @@ function competitions_template_mobile(competitions) {
 
                 if (element.type == 'PRIVATE') {
                     tpl_mobile = tpl_mobile
-                    + "<img class='Garanico' src='images/ico/lock.png'/>";
+                    + "<img class='Garanico' src='/images/ico/lock.png'/>";
                 }
 
             tpl_mobile = tpl_mobile
@@ -233,10 +228,10 @@ function competitions_template_mobile(competitions) {
 
                 if (element.pot == 1) {
                     tpl_mobile = tpl_mobile
-                    + "<img class='Aumenico' src='images/ico/aumento.png'/>";
+                    + "<img class='Aumenico' src='/images/ico/aumento.png'/>";
                 } else {
                     tpl_mobile = tpl_mobile
-                    + "<img class='Garanico' src='images/ico/garantizado.png'/>";
+                    + "<img class='Garanico' src='/images/ico/garantizado.png'/>";
                 }
 
             tpl_mobile = tpl_mobile

@@ -56,7 +56,7 @@
             @foreach ($list_competitions as $competition)
               <ul>
                 <li class="tmovli">
-                  <div class="divico"><img class="Star" src="images/ico/star.png"/></div>
+                  <div class="divico"><img class="Star" src="/images/ico/star.png"/></div>
                   <h4 class="h4tmovil"><a href="">{!! $competition->name !!}</a></h4>
                   <div class="tmovilimg">{!! Html::image($competition->avatar,'',array('class' => 'tabimgtablet')) !!}</div>
                   <div class="tmovdatos">

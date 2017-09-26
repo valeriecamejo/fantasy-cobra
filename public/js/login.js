@@ -149,7 +149,6 @@ function login_modal_competition(route, sport, league, competition_id, type_comp
                 async: true,
                 data: {"competition_id": competition_id},
                 success: function (data) {
-                    console.log("login_modal_competition >>"+data);
                     var information = jQuery.parseJSON(data);
                     $(information).each(function (index, element) {
                         if (element.password != $("#password").val()) {

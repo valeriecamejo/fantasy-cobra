@@ -13,20 +13,20 @@
             </a>
           </ul>
       </li>
-      <li id="lobbyM" class="active" onclick="document.getElementById('bloquea').style.display='block'">
+      <li id="lobbyM" class="active">
         {!! Html::link('lobby','Lobby') !!}
       </li>
-      <li id="teamsM" onclick="action(3,0)">
+      <li id="teamsM">
           <a href="/usuario/mis-equipos">Equipos</a>
       </li>
-      <li id="competitionsM" onclick="document.getElementById('bloquea').style.display='block'">
+      <li id="competitionsM" >
         {!! Html::link('usuario/mis-competiciones', 'Competiciones') !!}
       </li>
       @elseif(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==2 && Auth::user()::STATUS_ACTIVE)
 
         <li class="sidebar-brand">
           <ul>
-            <a href="perfil" onclick="document.getElementById('bloquea').style.display='block'">
+            <a href="perfil">
               <li id="userbar"><img src="{{ URL::asset('images/ico/usericonmenu.png') }}" alt="">username</li>
             </a>
             <a href="{!! URL::action('PaymentController@show_withdrawals') !!}">
@@ -34,7 +34,7 @@
             </a>
           </ul>
         </li>
-        <li id="lobbyM" class="active" onclick="document.getElementById('bloquea').style.display='block'">
+        <li id="lobbyM" class="active">
           {!! Html::link('afiliado', 'Home') !!}
         </li>
       @else
@@ -79,16 +79,16 @@
     </li>
     @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id==3 && Auth::user()::STATUS_ACTIVE)
 
-      <li id="promotionsM" onclick="document.getElementById('bloquea').style.display='block'">
+      <li id="promotionsM">
         <a href="{!! URL::action('PromotionController@list_promotions') !!}">Promociones</a>
       </li>
-      <li id="referirM" onclick="document.getElementById('bloquea').style.display='block'">
+      <li id="referirM">
         {!! Html::link('usuario/referir-amigo', 'Referir Amigo') !!}
       </li>
-        <li id="historialM" onclick="document.getElementById('bloquea').style.display='block'">
+        <li id="historialM">
           <a href="{{ URL::action('HistoryController@history') }}">Historial</a>
         </li>
-      <li style="margin-bottom: 150px;" onclick="document.getElementById('bloquea').style.display='block'">
+      <li style="margin-bottom: 150px;">
         {!! Html::link('logout', 'Cerrar Sesión', array('id'=>'Cerrarmenu')) !!}
       </li>
     @endif
