@@ -98,9 +98,9 @@
                       </div>
                     </span>
 
-                    <span class="badge">
-                        @{{ team_count( team.id, teams, cant_inscription ) }} </a>
-                      </span>
+                    {{--<span class="badge">--}}
+                        {{--@{{ team_count( team.id, teams, cant_inscription ) }} </a>--}}
+                    {{--</span>--}}
                   </td>
                   <td></td>
 
