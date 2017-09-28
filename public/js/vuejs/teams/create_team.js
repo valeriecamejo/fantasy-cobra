@@ -77,7 +77,9 @@ Vue.component('list-players', {
                     vm.countPosition = 0
                     $.each(vm.myPlayers[0], function (index, myPlayer) {
                         if (myPlayer != null) {
-                            if ((position == 'OF' && vm.countPositionOf == 3) || (myPlayer.id == player_id) || (myPlayer.position == position)) {
+                            if ((position == 'OF' && vm.countPositionOf == 3) || (myPlayer.player_id == player_id)) {
+                                return vm.countPosition = 1
+                            } else if ((myPlayer.position == position) && (myPlayer.position !== 'OF')) {
                                 return vm.countPosition = 1
                             }
                         }
