@@ -317,7 +317,7 @@
   <tr>
     <td id='pos'>@{{ position }}</td>
     <td id='jug'>@{{ myPlayer == null ? '' : myPlayer.name }} @{{ myPlayer == null ? '' : myPlayer.last_name }}<span id='teamcol'></span></td>
-    <td id='opo'>@{{ myPlayer == null ? '' : myPlayer.name_opponent }} vs <span id='teamcol'>@{{ myPlayer == null ? '' : myPlayer.name_team }}</span></td>
+    <td id='opo'>@{{ myPlayer == null ? '' : myPlayer.name_opponent }} <span v-if="myPlayer != null">vs</span> <span id='teamcol'>@{{ myPlayer == null ? '' : myPlayer.name_team }}</span></td>
     <td id='salario'>@{{ myPlayer == null ? '' : myPlayer.salary }}</td>
     <td>
       <a v-if="myPlayer != null" @click="$emit('remove'), decSalary(myPlayer.salary)">
