@@ -38,9 +38,11 @@ Vue.component('list-players', {
                         vm.team_data.remaining_salary = vm.team_data.remaining_salary - player.salary
                         if (vm.team_data.type_play == 'TURBO') {
                             if (player['position'] == '2B' || player['position'] == 'SS') {
+                                player['position'] = 'MI'
                                 vm.myPlayers[0]['MI'] = player
                             } else {
                                 if (player['position'] == '1B' || player['position'] =='3B') {
+                                    player['position'] = 'CI'
                                     vm.myPlayers[0]['CI'] = player
                                 } else {
                                     vm.myPlayers[0][player.position] = player
@@ -72,7 +74,7 @@ Vue.component('list-players', {
                 vm.countPosition = 0
                 $.each(vm.myPlayers[0], function (index, myPlayer) {
                     if (myPlayer != null) {
-                        if ((position == 'OF' && vm.countPositionOf == 3) || (myPlayer.id == player_id)) {
+                        if ((position == 'OF' && vm.countPositionOf == 3) || (myPlayer.id == player_id) || (myPlayer.position == position)) {
                             return vm.countPosition = 1
                         }
                     }
@@ -82,16 +84,18 @@ Vue.component('list-players', {
                 $.each(vm.myPlayers[0], function (index, myPlayer) {
 
                     if (myPlayer != null) {
+                        if (myPlayer.position == position) {
+                            return vm.countPosition = 1
+                        }
                         if ((position == '2B') || (position == 'SS')) {
                             if (myPlayer.position == 'MI') {
                                 return vm.countPosition = 1
                             }
-                        } else if ((position == '1B') || (position == '3B')) {
+                        }
+                        if ((position == '1B') || (position == '3B')) {
                             if (myPlayer.position == 'CI') {
                                 return vm.countPosition = 1
                             }
-                        } else if (myPlayer.position == position) {
-                            return vm.countPosition = 1
                         }
                     }
                 });
