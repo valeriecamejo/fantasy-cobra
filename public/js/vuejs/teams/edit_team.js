@@ -38,11 +38,9 @@ Vue.component('list-players', {
                         vm.team_data.remaining_salary = vm.team_data.remaining_salary - player.salary
                         if (vm.team_data.type_play == 'TURBO') {
                             if (player['position'] == '2B' || player['position'] == 'SS') {
-                                player['position'] = 'MI'
                                 vm.myPlayers[0]['MI'] = player
                             } else {
                                 if (player['position'] == '1B' || player['position'] =='3B') {
-                                    player['position'] = 'CI'
                                     vm.myPlayers[0]['CI'] = player
                                 } else {
                                     vm.myPlayers[0][player.position] = player
@@ -90,12 +88,12 @@ Vue.component('list-players', {
                             return vm.countPosition = 1
                         }
                         if ((position == '2B') || (position == 'SS')) {
-                            if (myPlayer.position == 'MI') {
+                            if (myPlayer.position == '2B' || myPlayer.position == 'SS' || myPlayer.position == 'MI') {
                                 return vm.countPosition = 1
                             }
                         }
                         if ((position == '1B') || (position == '3B')) {
-                            if (myPlayer.position == 'CI') {
+                            if (myPlayer.position == '1B' || myPlayer.position == '3B' || myPlayer.position == 'CI') {
                                 return vm.countPosition = 1
                             }
                         }
@@ -205,6 +203,10 @@ var vm = new Vue ({
 
                         if (index_team == value.position) {
                             vm.teams[0][index_team] = value
+                        } else if ( (index_team == 'MI' && (value.position == '2B' || value.position == 'SS')) ) {
+                            vm.teams[0]['MI'] = value
+                        } else if ( (index_team == 'CI' && (value.position == '1B' || value.position == '3B')) ) {
+                            vm.teams[0]['CI'] = value
                         }
 
                     });

@@ -39,11 +39,9 @@ Vue.component('list-players', {
                         vm.remaining_salary = vm.remaining_salary - player.salary
                         if (window.type_play == 'TURBO') {
                             if (player['position'] == '2B' || player['position'] == 'SS') {
-                                player['position'] = 'MI'
                                 vm.myPlayers[0]['MI'] = player
                             } else {
                                 if (player['position'] == '1B' || player['position'] =='3B') {
-                                    player['position'] = 'CI'
                                     vm.myPlayers[0]['CI'] = player
                                 } else {
                                     vm.myPlayers[0][player.position] = player
@@ -93,12 +91,12 @@ Vue.component('list-players', {
                                 return vm.countPosition = 1
                             }
                             if ((position == '2B') || (position == 'SS')) {
-                                if (myPlayer.position == 'MI') {
+                                if (myPlayer.position == '2B' || myPlayer.position == 'SS' || myPlayer.position == 'MI') {
                                     return vm.countPosition = 1
                                 }
                             }
                             if ((position == '1B') || (position == '3B')) {
-                                if (myPlayer.position == 'CI') {
+                                if (myPlayer.position == '1B' || myPlayer.position == '3B' || myPlayer.position == 'CI') {
                                     return vm.countPosition = 1
                                 }
                             }
