@@ -24,9 +24,6 @@ class UserController extends Controller {
     return view('home.landing');
   }
 
-   protected function showChangePasswordForm(){
-        return view('auth.changepassword');
-    }
 
   protected function register_successfully() {
 

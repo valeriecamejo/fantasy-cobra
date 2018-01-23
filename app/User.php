@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\Request;
+use App\Http\Requests\UpdateUserProfileRequest;
 use App\Referred_friend;
 use Mail;
 
@@ -171,6 +173,23 @@ class User extends Authenticatable
 
   protected static function update_user_profile($input) {
 
+              
+    $user           = User::find(Auth::user()->id);
+    $save           = false;
+
+    $user->name  = $input['name'];
+    $user->last_name    = $input['last_name'];
+    $user->dni    = $input['dni'];
+    $user->phone  = $input['phone'];
+    $user->save();
+    $save = true;
+    
+
+      return $save;
+  }
+
+    protected static function update_user_password($input) {
+
     $old_password          = $input['old_password'];
     $password              = $input['password'];
     $password_confirmation = $input['password_confirmation'];
@@ -192,19 +211,10 @@ class User extends Authenticatable
 
           if ($validator->passes()) {
             $user->password = Hash::make($input['password']);
-            $user->phone  = $input['phone'];
-            $user->dni    = $input['dni'];
             $user->save();
             $save = true;
           }
         }
-    }
-
-    if( ($old_password == "") && ($password == "") && ($password_confirmation == "")) {
-      $user->phone  = $input['phone'];
-      $user->dni    = $input['dni'];
-      $user->save();
-      $save = true;
     }
 
       return $save;

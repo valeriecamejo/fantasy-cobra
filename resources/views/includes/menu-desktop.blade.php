@@ -64,6 +64,9 @@
           <li>
             <a href="{{ URL::action('UserController@show_user_profile') }}">Perfil Usuario</a>
           </li>
+           <li>
+            <a href="{{ URL::action('Auth\ChangePasswordController@show_change_password_form') }}">Cambiar Contraseña</a>
+          </li>
           <li>
             <a href="{{ URL::action('Auth\LoginController@logout') }}">Cerrar Sesión</a>
           </li>

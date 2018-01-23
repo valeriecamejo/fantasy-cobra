@@ -64,54 +64,50 @@
             </div>
             <form action="{{ url('usuario/perfil-usuario') }}" method="POST" class='form-horizontal'>
               {{ csrf_field() }}
-              <div class="modal-bodyregis ">
+
+              <div class="modal-bodyregis">
                 <div class="boxregis4">
-                  <p>Contraseña anterior</p>
+                  <p>Nombre</p>
                 </div>
                 <div class="input-group InicioSes5">
-                  <input onkeypress="action_password_perfil('')" id="password_perfil" type="password" name="old_password" class="form-control3 control2" placeholder="Escriba su contraseña" aria-describedby="sizing-addon2">
-                  @if($errors->has('password'))
+                  <input type="text" id="name" name="name" value="{{Auth::user()->name}}" class="form-control3 control2" placeholder="Escriba su número telefónico" aria-describedby="sizing-addon2">
+                  @if($errors->has('name'))
                     <span class="incompleto">×</span>
-                    @foreach($errors->get('password') as $error)
+                    @foreach($errors->get('name') as $error)
                       <span class="messageerror2">{{ $error }}</span>
                     @endforeach
                   @endif
-                </div>
-                <div class="Edit" id="password_perfil_action">
                 </div>
               </div>
 
-              <div class="modal-bodyregis ">
+              <div class="modal-bodyregis">
                 <div class="boxregis4">
-                  <p>Contraseña Nueva</p>
+                  <p>Apellido</p>
                 </div>
                 <div class="input-group InicioSes5">
-                  <input onkeypress="action_password_perfil('new')" id="password_perfil_new" type="password" name="password" class="form-control3 control2" placeholder="Escriba una contraseña nueva" aria-describedby="sizing-addon2">
-                  @if($errors->has('password'))
+                  <input type="text" id="last_name" name="last_name" value="{{Auth::user()->last_name}}" class="form-control3 control2" placeholder="Escriba su número telefónico" aria-describedby="sizing-addon2">
+                  @if($errors->has('last_name'))
                     <span class="incompleto">×</span>
-                    @foreach($errors->get('password') as $error)
+                    @foreach($errors->get('last_name') as $error)
                       <span class="messageerror2">{{ $error }}</span>
                     @endforeach
                   @endif
-                </div>
-                <div class="Edit" id="password_perfil_action_new">
                 </div>
               </div>
+              
 
-              <div class="modal-bodyregis ">
+              <div class="modal-bodyregis">
                 <div class="boxregis4">
-                  <p>Confirmar Contraseña</p>
+                  <p>Cédula - DNI</p>
                 </div>
                 <div class="input-group InicioSes5">
-                  <input onkeypress="action_password_perfil('confirm')" id="password_perfil_confirm" type="password" name="password_confirmation" value="{{Input::old('password_confirmation')}}" class="form-control3 control2" placeholder="Confirme su contraseña" aria-describedby="sizing-addon2">
-                  @if($errors->has('password'))
+                  <input type="text" name="dni" value="{{Auth::user()->dni}}" class="form-control3 control2" placeholder="Escriba su número de identificación" aria-describedby="sizing-addon2">
+                  @if($errors->has('dni'))
                     <span class="incompleto">×</span>
-                    @foreach($errors->get('password') as $error)
+                    @foreach($errors->get('dni') as $error)
                       <span class="messageerror2">{{ $error }}</span>
                     @endforeach
                   @endif
-                </div>
-                <div class="Edit" id="password_perfil_action_confirm">
                 </div>
               </div>
 
@@ -124,21 +120,6 @@
                   @if($errors->has('phone'))
                     <span class="incompleto">×</span>
                     @foreach($errors->get('phone') as $error)
-                      <span class="messageerror2">{{ $error }}</span>
-                    @endforeach
-                  @endif
-                </div>
-              </div>
-
-              <div class="modal-bodyregis">
-                <div class="boxregis4">
-                  <p>Cédula</p>
-                </div>
-                <div class="input-group InicioSes5">
-                  <input type="text" name="dni" value="{{Auth::user()->dni}}" class="form-control3 control2" placeholder="Escriba su número de identificación" aria-describedby="sizing-addon2">
-                  @if($errors->has('dni'))
-                    <span class="incompleto">×</span>
-                    @foreach($errors->get('dni') as $error)
                       <span class="messageerror2">{{ $error }}</span>
                     @endforeach
                   @endif
@@ -157,7 +138,6 @@
         </div>
       </div>
     </div><br>
-    <!-- @include('includes/footer-mobile') -->
   </div>
   </div>
 @stop
