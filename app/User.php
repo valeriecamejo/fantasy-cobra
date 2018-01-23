@@ -180,7 +180,8 @@ class User extends Authenticatable
     $user->name  = $input['name'];
     $user->last_name    = $input['last_name'];
     $user->dni    = $input['dni'];
-    $user->phone  = $input['phone'];
+    $user->sex    = (int) $input['sex'];
+    $user->phone  = "+" . $input['cod_country'] . '-' . $input['phone'];
     $user->save();
     $save = true;
     

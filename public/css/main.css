@@ -3340,6 +3340,13 @@ table.Tablaref tr th:last-child {
     height: auto;
 }
 
+.radioButtons{
+    text-align: -webkit-center;
+    display: inline-block;
+    /* width: 100%; */
+    height: auto;
+}
+
 .divbtncont {
   padding-bottom: 20px;
 }
@@ -7277,6 +7284,7 @@ div.incoming-pulse {
  display: block;
  margin-top: 15%;
 }
+
 
 div.incoming-pulse::after {}
 

@@ -95,6 +95,29 @@
                 </div>
               </div>
               
+              <div class="modal-bodyregis">
+                <div class="boxregis4">
+                  <p>Sexo</p>
+                </div>
+                <div class="input-group radioButtons">
+                        <label for="sex0">Hombre 
+                          <input type="radio" id="sex0" name="sex" value="0" class="form-control3 control2"  {{ Auth::user()->sex == 0 ? 'checked="checked"' : '' }} aria-describedby="sizing-addon2"> <br>
+                        </label>
+                        <label for="sex1">Mujer 
+                          <input type="radio" id="sex1" name="sex" value="1" class="form-control3 control2"  {{ Auth::user()->sex == 1 ? 'checked="checked"' : '' }} aria-describedby="sizing-addon2"> <br>
+                        </label>
+                        <label for="sex2">Otro
+                          <input type="radio" id="sex2" name="sex" value="2" class="form-control3 control2"  {{ Auth::user()->sex == 2 ? 'checked="checked"' : '' }} aria-describedby="sizing-addon2"> <br>
+                        </label>
+
+                  @if($errors->has('sex'))
+                    <span class="incompleto">×</span>
+                    @foreach($errors->get('sex') as $error)
+                      <span class="messageerror2">{{ $error }}</span>
+                    @endforeach
+                  @endif
+                </div>
+              </div>
 
               <div class="modal-bodyregis">
                 <div class="boxregis4">
@@ -111,20 +134,46 @@
                 </div>
               </div>
 
-              <div class="modal-bodyregis">
-                <div class="boxregis4">
-                  <p>Teléfono</p>
-                </div>
-                <div class="input-group InicioSes5">
-                  <input type="text" id="phone" name="phone" value="{{Auth::user()->phone}}" class="form-control3 control2" placeholder="Escriba su número telefónico" aria-describedby="sizing-addon2">
-                  @if($errors->has('phone'))
-                    <span class="incompleto">×</span>
-                    @foreach($errors->get('phone') as $error)
-                      <span class="messageerror2">{{ $error }}</span>
-                    @endforeach
-                  @endif
-                </div>
-              </div>
+          <div class="modal-bodyregis">
+            <div class="boxregis4">
+              <p>Teléfono</p>
+            </div>
+            <div class="input-group InicioSes5">
+
+                @php
+                  if (preg_match("/^\+(\d{1,4})-/", Auth::user()->phone,$match) && $match[0]) {
+                    $cod_country = $match[1]; 
+
+                  } else {
+                    $cod_country = Input::old('cod_country');
+                  }
+
+                  if (preg_match("/-(\d{10,13})$/", Auth::user()->phone,$match) && $match[0]) {
+                    $phone = $match[1]; 
+
+                  } else {
+                    $phone = Input::old('phone');
+                  }  
+
+                @endphp
+
+              <input type="text" style="width: 15%" class="form-control" placeholder="00" aria-describedby="sizing-addon2" name="cod_country" maxlength="4" value="{{$cod_country}}" pattern="^(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1|1\d{3})$" required="required">
+
+               <input style="width: 7%" aria-describedby="sizing-addon2" class="form-control" placeholder="-" aria-describedby="sizing-addon2" disabled="true">
+
+              <input type="text" style="width: 58%" class="form-control" placeholder="###########" aria-describedby="sizing-addon2" name="phone" minlength="10" maxlength="13" value="{{$phone}}" required="required">
+              @if($errors->has('phone') || $errors->has('cod_country'))
+                <span class="incompleto">×</span>
+                @foreach($errors->get('phone') as $error)
+                  <span class="messageerror2">{{ $error }}</span>
+                @endforeach
+                 @foreach($errors->get('cod_country') as $error)
+                  <br><span class="messageerror2">{{ $error }}</span>
+                @endforeach
+              @endif
+            </div>
+          </div>
+
           </div>
           <div class="checkschecks">
           </div>
