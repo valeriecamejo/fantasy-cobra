@@ -35,34 +35,38 @@ Route::get('/home', 'HomeController@home');
 
 //*****************************General routes*********************************//
 
-//User routes.
-Route::get('usuario/mis-competiciones', 'CompetitionController@bettor_competitions');
-Route::get('usuario/mis-equipos', 'TeamUserController@bettor_teams');
-Route::get('usuario/historial', 'HistoryController@history');
-Route::get('usuario/perfil-usuario', 'UserController@show_user_profile');
-Route::post('usuario/perfil-usuario', 'UserController@update_user_profile');
-Route::get('usuario/referir-amigo', 'UserController@refer_friends');
-Route::post('usuario/invite_friends', 'UserController@invite_friends');
-Route::get('/usuario/ver-promociones', 'PromotionController@list_promotions');
-Route::get('/usuario/crear-competicion/{sport}/{championship}', 'CompetitionController@new_competition');
-Route::post('/usuario/crear-competicion', 'CompetitionController@save_competition');
-Route::get('usuario/obtener-premios', 'PrizeController@prize_min_user');
-Route::get('/usuario/crear-equipo/{type}', 'TeamUserController@new_team');
-Route::post('/usuario/crear-equipo', 'TeamUserController@save_team');
-Route::get('usuario/obtener-jugadores', 'TeamUserController@players');
-Route::get('usuario/ver-equipos', 'TeamUserController@team_data');
-Route::get('user-teams', 'TeamUserController@teams_by_user');
-Route::get('usuario/competicion', 'CompetitionController@modal_competition');
-Route::post('usuario/editar-equipo', 'TeamUserController@show_team');
-Route::get('usuario/editar-equipo', 'TeamUserController@update_team_players');
-Route::get('usuario/crear-equipo/competicion/{id}', 'CompetitionController@new_team_competition');
-Route::get('usuario/inscribir-equipo/competicion/{id}', 'CompetitionController@enroll_team_competition');
-Route::get('competition-details', 'CompetitionController@competitionDetailsOfCookie');
-Route::get('usuario/retirar-dinero', 'PaymentController@show_withdrawals');
-Route::post('usuario/retirar-dinero', 'PaymentController@withdrawal');
-Route::post('usuario/guardar-equipo', 'TeamUserController@save_team_edited');
-Route::get('usuario/cambiar-password','Auth\ChangePasswordController@show_change_password_form')->name('changePassword');
-Route::post('usuario/cambiar-password','Auth\ChangePasswordController@change_password')->name('changePassword');
+
+Route::group(['middleware' => ['auth']], function () {
+    //User routes.
+	Route::get('usuario/mis-competiciones', 'CompetitionController@bettor_competitions');
+	Route::get('usuario/mis-equipos', 'TeamUserController@bettor_teams');
+	Route::get('usuario/historial', 'HistoryController@history');
+	Route::get('usuario/perfil-usuario', 'UserController@show_user_profile');
+	Route::post('usuario/perfil-usuario', 'UserController@update_user_profile');
+	Route::get('usuario/referir-amigo', 'UserController@refer_friends');
+	Route::post('usuario/invite_friends', 'UserController@invite_friends');
+	Route::get('/usuario/ver-promociones', 'PromotionController@list_promotions');
+	Route::get('/usuario/crear-competicion/{sport}/{championship}', '	CompetitionController@new_competition');
+	Route::post('/usuario/crear-competicion', 'CompetitionController@save_competition');
+	Route::get('usuario/obtener-premios', 'PrizeController@prize_min_user');
+	Route::get('/usuario/crear-equipo/{type}', 'TeamUserController@new_team');
+	Route::post('/usuario/crear-equipo', 'TeamUserController@save_team');
+	Route::get('usuario/obtener-jugadores', 'TeamUserController@players');
+	Route::get('usuario/ver-equipos', 'TeamUserController@team_data');
+	Route::get('user-teams', 'TeamUserController@teams_by_user');
+	Route::get('usuario/competicion', 'CompetitionController@modal_competition');
+	Route::post('usuario/editar-equipo', 'TeamUserController@show_team');
+	Route::get('usuario/editar-equipo', 'TeamUserController@update_team_players');
+	Route::get('usuario/crear-equipo/competicion/{id}', 'CompetitionController@new_team_competition')	;
+	Route::get('usuario/inscribir-equipo/competicion/{id}', '	CompetitionController@enroll_team_competition');
+	Route::get('competition-details', 'CompetitionController@competitionDetailsOfCookie');
+	Route::get('usuario/retirar-dinero', 'PaymentController@show_withdrawals');
+	Route::post('usuario/retirar-dinero', 'PaymentController@withdrawal');
+	Route::post('usuario/guardar-equipo', 'TeamUserController@save_team_edited');
+	Route::get('usuario/cambiar-password','Auth\ChangePasswordController@show_change_password_form')	->name('changePassword');
+	Route::post('usuario/cambiar-password','Auth\ChangePasswordController@change_password')->name('	changePassword');
+});
+
 
 //Players routes
 Route::get('player/position/{position}', 'PlayerController@byPosition');
