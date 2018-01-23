@@ -27,10 +27,10 @@
                   <p>Contraseña anterior</p>
                 </div>
                 <div class="input-group InicioSes5">
-                  <input onkeypress="action_password_perfil('')" id="password_perfil" type="password" name="old_password" class="form-control3 control2" placeholder="Escriba su contraseña" aria-describedby="sizing-addon2">
-                  @if($errors->has('password'))
+                  <input onkeypress="action_password_perfil('')" id="password_perfil" type="password" autocomplete="false"  name="old_password" class="form-control3 control2" placeholder="Escriba su contraseña" value="" aria-describedby="sizing-addon2">
+                  @if($errors->has('old_password'))
                     <span class="incompleto">×</span>
-                    @foreach($errors->get('password') as $error)
+                    @foreach($errors->get('old_password') as $error)
                       <span class="messageerror2">{{ $error }}</span>
                     @endforeach
                   @endif
@@ -43,8 +43,8 @@
                 <div class="boxregis4">
                   <p>Contraseña Nueva</p>
                 </div>
-                <div class="input-group InicioSes5">
-                  <input onkeypress="action_password_perfil('new')" id="password_perfil_new" type="password" name="password" class="form-control3 control2" placeholder="Escriba una contraseña nueva" aria-describedby="sizing-addon2">
+                <div class="input-group InicioSes5" >
+                  <input  id="password_perfil_new" type="password" name="password" class="form-control3 control2" placeholder="Escriba una contraseña nueva" aria-describedby="sizing-addon2" autocomplete="off" >
                   @if($errors->has('password'))
                     <span class="incompleto">×</span>
                     @foreach($errors->get('password') as $error)
@@ -61,10 +61,10 @@
                   <p>Confirmar Contraseña</p>
                 </div>
                 <div class="input-group InicioSes5">
-                  <input onkeypress="action_password_perfil('confirm')" id="password_perfil_confirm" type="password" name="password_confirmation" value="{{Input::old('password_confirmation')}}" class="form-control3 control2" placeholder="Confirme su contraseña" aria-describedby="sizing-addon2">
-                  @if($errors->has('password'))
+                  <input  id="password_perfil_confirm" type="password" autocomplete="off"  name="password_confirmation" value="{{Input::old('password_confirmation')}}" class="form-control3 control2" placeholder="Confirme su contraseña" aria-describedby="sizing-addon2">
+                  @if($errors->has('password_confirmation'))
                     <span class="incompleto">×</span>
-                    @foreach($errors->get('password') as $error)
+                    @foreach($errors->get('password_confirmation') as $error)
                       <span class="messageerror2">{{ $error }}</span>
                     @endforeach
                   @endif
