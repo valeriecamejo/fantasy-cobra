@@ -22,6 +22,17 @@ class PaymentController extends Controller {
     return View('ATM.withdrawals');
   }
 
+  /***************************************************
+* show_wtransfers: View for bank transfer payments
+* @param  void
+* @return view
+*************************************************/
+
+  public function show_transfer() {
+
+    return View('ATM.transfer');
+  }
+
 /**************************************************
 * withdrawals.
 * @param $request

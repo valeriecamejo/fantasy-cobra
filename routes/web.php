@@ -61,6 +61,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('usuario/inscribir-equipo/competicion/{id}', '	CompetitionController@enroll_team_competition');
 	Route::get('competition-details', 'CompetitionController@competitionDetailsOfCookie');
 	Route::get('usuario/retirar-dinero', 'PaymentController@show_withdrawals');
+	Route::get('usuario/depositar-dinero', 'PaymentController@show_transfers');
 	Route::post('usuario/retirar-dinero', 'PaymentController@withdrawal');
 	Route::post('usuario/guardar-equipo', 'TeamUserController@save_team_edited');
 	Route::get('usuario/cambiar-password','Auth\ChangePasswordController@show_change_password_form')	->name('changePassword');
