@@ -34,7 +34,7 @@
           <div class="blocktransinner2">
             <h3 class="Titperf2">Cajero de Depositos</h3>
 
-            <form class="form-horizontal" method="POST" action="{{ URL::action('PaymentController@withdrawal') }}">
+            <form class="form-horizontal" method="POST" action="{{ URL::action('PaymentController@transfer') }}">
               {{ csrf_field() }}
 
             <div class="modal-bodyregis Top3">
@@ -99,7 +99,7 @@
 
             <div class="modal-bodyregis">
               <div class="boxregis">
-                  <p>Cantidad a retirar</p>
+                  <p>Cantidad a depositar</p>
               </div>
               <div class="input-group InicioSes">
               <input type="text" class="form-control" placeholder="Bs. Retirar" aria-describedby="sizing-addon2" name="amount" id="amount" value="{{ old('amount') }}">

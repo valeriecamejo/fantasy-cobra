@@ -64,6 +64,42 @@ class Payment extends Model
   }
 
 /********************************************
+* transfer: Registration of transfers
+              request
+* @param void
+* @return $won_competitions
+********************************************/
+  public static function transfer($input) {
+
+  $payment                   = new Payment;
+  $payment->user_id          = Auth::user()->id;
+  $payment->transaction_type = 'deposito';
+  $payment->balance_before   = Auth::user()->bettor->balance;
+  $payment->account_number   = $input['number_account'];
+  $payment->bank             = $input['bank'];
+  $payment->status           = 'pendiente';
+  $payment->approved         = false;
+  $payment->transfer_date    = Carbon::now()->toDateString();
+  $payment->account_type     = $input['type_account'];
+
+    if (isset($input['amount']) && !empty($input['amount']) && ($input['amount'] > 0) ) {
+      $payment->amount         = $input['amount'];
+      $payment->save();
+      $new_balance = (Auth::user()->bettor->balance + $input['amount']);
+      return [
+              true,
+              $payment,
+              $new_balance
+      ];
+    } else {
+      return [
+               false,
+               "Verifique el monto depositar"
+             ];
+    }
+  }
+
+/********************************************
 * verify_amount: validation for balance
 * @param mount
 * @return bool

@@ -23,7 +23,7 @@ class PaymentController extends Controller {
   }
 
   /***************************************************
-* show_wtransfers: View for bank transfer payments
+* show_transfers: View for bank transfer payments
 * @param  void
 * @return view
 *************************************************/
@@ -55,6 +55,30 @@ class PaymentController extends Controller {
       Session::flash('class', 'danger');
     }
     return redirect()->to('usuario/retirar-dinero');
+  }
+
+  /**************************************************
+* transfers.
+* @param $request
+* @return redirect()->to('usuario/perfil-usuario');
+***************************************************/
+
+  public function transfer(Request $request) {
+
+    $transfer = Payment::transfer($request->all());
+
+    if ($transfer[0] == true) {
+      Bettor::discountBalanceBettor($transfer[2]);
+      Session::flash('message', 'Solicitud Registrada Exitosamente.');
+      Session::flash('class', 'success');
+    } elseif ($transfer[0] == false) {
+        Session::flash('message', $transfer[1]);
+        Session::flash('class', 'danger');
+    } else {
+      Session::flash('message', 'Debe completar todos los datos.');
+      Session::flash('class', 'danger');
+    }
+    return redirect()->to('usuario/depositar-dinero');
   }
 
 }
