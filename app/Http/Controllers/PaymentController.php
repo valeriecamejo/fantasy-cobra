@@ -28,7 +28,7 @@ class PaymentController extends Controller {
 * @return view
 *************************************************/
 
-  public function show_transfer() {
+  public function show_transfers() {
 
     return View('ATM.transfer');
   }

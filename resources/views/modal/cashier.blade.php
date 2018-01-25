@@ -52,7 +52,7 @@
                   <span>Tarjeta Cr&eacute;dito</span>
                 </a>
 
-                <a href="#">
+                <a href="/usuario/depositar-dinero">
                   {!! Html::image('images/ico/transfer.png','',array('alt' => 'transfer')) !!}
                   <span>Transferencia</span>
                 </a>
@@ -61,7 +61,8 @@
                     {!! Html::image('images/ico/credit.png','',array('alt' => 'credit')) !!}
                     <span>Tarjeta Cr&eacute;dito</span>
                 </a>-->
-                <a href="/usuario/retirar-dinero">
+                <h1>Aqui</h1>
+                <a href="#">
                   {!! Html::image('images/ico/transfer.png','',array('alt' => 'transfer')) !!}
                   <span>Transferencia</span>
                 </a>
