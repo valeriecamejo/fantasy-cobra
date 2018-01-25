@@ -32,9 +32,9 @@
       <div class="row blocktrans">
         <div class="boxret">
           <div class="blocktransinner2">
-            <h3 class="Titperf2">Cajero de Depositos</h3>
+            <h3 class="Titperf2">Depósito por Tarjeta de Crédito</h3>
 
-            <form class="form-horizontal" method="POST" action="{{ URL::action('PaymentController@transfer') }}">
+            <form class="form-horizontal" method="POST" action="{{ URL::action('PaymentController@tdc') }}">
               {{ csrf_field() }}
 
             <div class="modal-bodyregis Top3">
@@ -185,21 +185,6 @@
                 @if($errors->has('bank'))
                     <span class="incompleto4">×</span>
                     @foreach($errors->get('bank') as $error)
-                        <span class="messageerror2">{{ $error }}</span>
-                    @endforeach
-                @endif
-              </div>
-            </div>
-
-            <div class="modal-bodyregis">
-              <div class="boxregis">
-                  <p>Nro. de Referencia</p>
-              </div>
-              <div class="input-group InicioSes">
-              <input type="text" class="form-control" placeholder="Nro. de Referencia" aria-describedby="sizing-addon2" name="reference_number" id="reference_number" value="{{ old('reference_number') }}" required>
-                @if($errors->has('reference_number'))
-                    <span class="incompleto4">×</span>
-                    @foreach($errors->get('reference_number') as $error)
                         <span class="messageerror2">{{ $error }}</span>
                     @endforeach
                 @endif

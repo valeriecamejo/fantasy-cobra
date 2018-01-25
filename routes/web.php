@@ -64,6 +64,8 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('usuario/retirar-dinero', 'PaymentController@withdrawal');
 	Route::get('usuario/depositar-dinero', 'PaymentController@show_transfers');
 	Route::post('usuario/depositar-dinero', 'PaymentController@transfer');
+	Route::get('usuario/depositar-tdc', 'PaymentController@show_tdcs');
+	Route::post('usuario/depositar-tdc', 'PaymentController@tdc');
 	Route::post('usuario/guardar-equipo', 'TeamUserController@save_team_edited');
 	Route::get('usuario/cambiar-password','Auth\ChangePasswordController@show_change_password_form')	->name('changePassword');
 	Route::post('usuario/cambiar-password','Auth\ChangePasswordController@change_password')->name('	changePassword');

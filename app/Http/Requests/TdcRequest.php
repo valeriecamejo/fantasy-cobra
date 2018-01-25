@@ -30,7 +30,7 @@ class WithdrawalRequest extends FormRequest
     'name'           => 'required',
     'last_name'      => 'required',
     'dni'            => 'required|min:999999|numeric',
-    'phone'          => 'required|regex:/^[0-9-]{10,14}+$/|max:9999999999999)',
+    'phone'          => 'required|regex:/^[0-9-]{10,14}+$/|max:99999999999999',
     'amount'         => 'required|numeric',
     'number_account' => 'required|min:11|regex:/[0-9a-zA-Z]/',
     'type_account'   => 'required',

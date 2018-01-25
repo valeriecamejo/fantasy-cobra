@@ -47,7 +47,7 @@
             <div class="item active" id="pay-type">
               <!-- Boton Paypal -->
               @if(isset(Auth::user()->user_type_id) && Auth::user()->user_type_id == 3)
-                <a href="#">
+                <a href="{{ url('/usuario/depositar-tdc') }}">
                   {!! Html::image('images/ico/credit.png','',array('alt' => 'credit')) !!}
                   <span>Tarjeta Cr&eacute;dito</span>
                 </a>
