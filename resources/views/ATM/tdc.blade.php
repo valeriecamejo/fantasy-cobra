@@ -39,28 +39,13 @@
 
             <div class="modal-bodyregis Top3">
               <div class="boxregis">
-                  <p>Nombre</p>
+                  <p>Nombre Impreso en la Tarjeta</p>
               </div>
               <div class="input-group InicioSes">
                 <input type="text" class="form-control" placeholder="Escriba su nombre" aria-describedby="sizing-addon2" name="name" value="{{ old('name') }}">
                 @if($errors->has('name'))
                   <span class="incompleto4">×</span>
                   @foreach($errors->get('name') as $error)
-                    <span class="messageerror2">{{ $error }}</span>
-                  @endforeach
-                @endif
-              </div>
-            </div>
-
-            <div class="modal-bodyregis">
-              <div class="boxregis">
-                  <p>Apellido</p>
-              </div>
-              <div class="input-group InicioSes">
-                <input type="text" class="form-control" placeholder="Escriba su apellido" aria-describedby="sizing-addon2" name="last_name" value="{{ old('last_name') }}">
-                @if($errors->has('last_name'))
-                  <span class="incompleto4">×</span>
-                  @foreach($errors->get('last_name') as $error)
                     <span class="messageerror2">{{ $error }}</span>
                   @endforeach
                 @endif
@@ -84,7 +69,7 @@
 
             <div class="modal-bodyregis">
               <div class="boxregis">
-                  <p>Teléfono</p>
+                  <p>Teléfono del Tarjetahabiente</p>
               </div>
               <div class="input-group InicioSes">
               <input type="text" class="form-control" placeholder="Nro. Teléfono" aria-describedby="sizing-addon2" name="phone" id="phone" value="{{ old('phone') }}">
@@ -112,12 +97,40 @@
               </div>
             </div>
 
+            
             <div class="modal-bodyregis">
               <div class="boxregis">
-                  <p>Nro. de cuenta</p>
+                  <p>Tipo de Tarjeta de Crédito</p>
               </div>
               <div class="input-group InicioSes">
-              <input type="text" class="form-control" placeholder="Nro. Cuenta" aria-describedby="sizing-addon2" name="number_account" id="number_account" value="{{ old('number_account') }}">
+                <select class="form-control" name="creditcardtype">
+                  <option value="" selected="selected">Tipo de Tarjeta de Crédito</option>
+                  <option value="American Express">American Express</option>
+                  <option value="Diners Club">Diners Club</option>
+                  <option value="Discover">Discover</option>
+                  <option value="InstaPayment">InstaPayment</option>
+                  <option value="JCB">JCB</option>
+                  <option value="Maestro">Maestro</option>
+                  <option value="Mastercard">Mastercard</option>
+                  <option value="Visa">Visa</option>
+                  <option value="Visa Electron">Visa Electron</option>
+                  
+                </select>
+                @if($errors->has('creditcardtype'))
+                    <span class="incompleto4">×</span>
+                    @foreach($errors->get('creditcardtype') as $error)
+                        <span class="messageerror2">{{ $error }}</span>
+                    @endforeach
+                @endif
+              </div>
+            </div>
+
+            <div class="modal-bodyregis">
+              <div class="boxregis">
+                  <p>Nro. de Tarjeta de Crédito</p>
+              </div>
+              <div class="input-group InicioSes">
+              <input type="text" class="form-control" placeholder="Nro. de Tarjeta de Crédito" aria-describedby="sizing-addon2" name="number_account" id="number_account" value="{{ old('number_account') }}">
                 @if($errors->has('number_account'))
                     <span class="incompleto4">×</span>
                     @foreach($errors->get('number_account') as $error)
@@ -127,69 +140,21 @@
               </div>
             </div>
 
-            <div class="modal-bodyregis">
+             <div class="modal-bodyregis">
               <div class="boxregis">
-                  <p>Tipo de cuenta</p>
+                  <p>Código de Seguridad</p>
               </div>
               <div class="input-group InicioSes">
-                <select class="form-control" name="type_account">
-                    <option value="0" selected="selected">Ahorro</option>
-                    <option value="1">Corriente</option>
-                </select>
-                @if($errors->has('type_account'))
-                  <span class="incompleto4">×</span>
-                  @foreach($errors->get('type_account') as $error)
-                      <span class="messageerror2">{{ $error }}</span>
-                  @endforeach
-                @endif
-              </div>
-            </div>
-
-            <div class="modal-bodyregis">
-              <div class="boxregis">
-                  <p>Banco</p>
-              </div>
-              <div class="input-group InicioSes">
-                <select class="form-control" name="bank">
-                  <option value="" selected="selected">Banco Emisor</option>
-                  <option value="Banco de Venezuela">Banco de Venezuela</option>
-                  <option value="Banesco">Banesco</option>
-                  <option value="BBVA Banco Provincial">BBVA Banco Provincial</option>
-                  <option value="Banco Mercantil">Banco Mercantil</option>
-                  <option value="Banco Occidental de Descuento BOD">Banco Occidental de Descuento BOD</option>
-                  <option value="Bicentenario Banco Universal">Bicentenario Banco Universal</option>
-                  <option value="Banco del Tesoro">Banco del Tesoro</option>
-                  <option value="Bancaribe">Bancaribe</option>
-                  <option value="Banco Exterior">Banco Exterior</option>
-                  <option value="Banco Nacional de Crédito">Banco Nacional de Crédito</option>
-                  <option value="Banco Industrial de Venezuela">Banco Industrial de Venezuela</option>
-                  <option value="Banco Sofitasa">Banco Sofitasa</option>
-                  <option value="Banplus">Banplus</option>
-                  <option value="Banco Plaza">Banco Plaza</option>
-                  <option value="Banco Activo">Banco Activo</option>
-                  <option value="Bancrecer">Bancrecer</option>
-                  <option value="Banco Agrícola de Venezuela">Banco Agrícola de Venezuela</option>
-                  <option value="Banco Del Sur">Banco Del Sur</option>
-                  <option value="100% Banco">100% Banco</option>
-                  <option value="Banco de la Fuerza Armada Nacional Bolivariana">Banco de la Fuerza Armada Nacional Bolivariana</option>
-                  <option value="Citibank">Citibank</option>
-                  <option value="Bancamiga">Bancamiga</option>
-                  <option value="Instituto Municipal de Crédito Popular">Instituto Municipal de Crédito Popular</option>
-                  <option value="Bangente">Bangente</option>
-                  <option value="Mi Banco">Mi Banco</option>
-                  <option value="BANCOEX">BANCOEX</option>
-                  <option value="Novo Banco">Novo Banco</option>
-                  <option value="Banco de Exportación y Comercio">Banco de Exportación y Comercio</option>
-                  <option value="Banco Internacional de Desarrollo">Banco Internacional de Desarrollo</option>
-                </select>
-                @if($errors->has('bank'))
+              <input type="text" class="form-control" placeholder="Código de Seguridad" aria-describedby="sizing-addon2" name="security_code" id="security_code" value="{{ old('security_code') }}">
+                @if($errors->has('security_code'))
                     <span class="incompleto4">×</span>
-                    @foreach($errors->get('bank') as $error)
+                    @foreach($errors->get('security_code') as $error)
                         <span class="messageerror2">{{ $error }}</span>
                     @endforeach
                 @endif
               </div>
             </div>
+
 
             <div class="modal-bodyregis">
               <div class="boxregis">
