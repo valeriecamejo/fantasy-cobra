@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class WithdrawalRequest extends FormRequest
+class TdcRequest extends FormRequest
 {
 
 /**************************************************
@@ -28,13 +28,12 @@ class WithdrawalRequest extends FormRequest
   {
     return [
     'name'           => 'required',
-    'last_name'      => 'required',
     'dni'            => 'required|min:999999|numeric',
-    'phone'          => 'required|regex:/^[0-9-]{10,14}+$/|max:99999999999999',
+    'phone'          => 'required|max:99999999999999|regex:/^[0-9]{10,14}+$/',
+    'security_code'  => 'required|max:9999|regex:/^[0-9]{3,4}+$/',
     'amount'         => 'required|numeric',
-    'number_account' => 'required|min:11|regex:/[0-9a-zA-Z]/',
-    'type_account'   => 'required',
-    'bank'           => 'required',
+    'number_account' => 'required|numeric|max:9999999999999999|regex:/^[0-9]{13,16}+$/',
+    'creditcardtype'   => 'required',
     'email'          => 'required|email',
     ];
   }
@@ -43,7 +42,6 @@ class WithdrawalRequest extends FormRequest
   {
     return [
     'name.required'           => 'Campo requerido',
-    'last_name.required'      => 'Campo requerido',
     'dni.required'            => 'Campo requerido',
     'dni.min'                 => 'La cédula no debe ser menor de 6 dígitos.',
     'dni.numeric'             => 'La cédula solo puede contener números.',
@@ -53,11 +51,14 @@ class WithdrawalRequest extends FormRequest
     'amount.required'         => 'Campo requerido',
     'amount.numeric'          => 'La cantidad a retirar solo puede contener números.',
     'number_account.required' => 'Campo requerido',
-    'number_account.numeric'  => 'El numero de cuenta solo puede contener números.',
-    'number_account.min'      => 'El numero de cuenta debe contener minimo 11 caracteres.',
-    'number_account.required' => 'Campo requerido',
-    'bank.required'           => 'Campo requerido',
+    'number_account.numeric'  => 'El numero de tarjeta solo puede contener números.',
+    'number_account.max'      => 'El numero de tarjeta debe contener maximo 16 digitos',
+    'number_account.regex'    => 'Introduzca un numero de tarjeta valido',
+    'creditcardtype.required'           => 'Campo requerido',
     'email.required'          => 'Campo requerido',
+    'security_code.required'  => 'Campo requerido',
+    'security_code.regex'  => 'Introduzca un codigo numerico valido',
+    'security_code.numeric'  => 'El campo solo puede contener números',
     'email.email'             => 'Verifique el email'
 
     ];

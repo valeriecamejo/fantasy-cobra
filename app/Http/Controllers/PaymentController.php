@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\WithdrawalRequest;
 use App\Http\Requests\TransferRequest;
+use App\Http\Requests\TdcRequest;
 
 class PaymentController extends Controller {
 
@@ -99,7 +100,7 @@ class PaymentController extends Controller {
 * @return redirect()->to('usuario/depositar-tdc');
 ***************************************************/
 
-  public function tdc(Request $request) {
+  public function tdc(TdcRequest $request) {
 
     $tdc = Payment::tdc($request->all());
 

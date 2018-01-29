@@ -21,7 +21,7 @@
       </div>
       @endif
 
-      @if($errors->has('name') ||  $errors->has('surname') || $errors->has('identification') || $errors->has('phone') || $errors->has('amount') || $errors->has('number_account') || $errors->has('type_account') || $errors->has('bank') || $errors->has('email'))
+      @if($errors->has('name') ||  $errors->has('creditcardtype')  || $errors->has('phone') || $errors->has('amount') || $errors->has('number_account') || $errors->has('type_account') || $errors->has('security_code') || $errors->has('email'))
           <div id="danger" class="alert alert-danger">
               <strong>Error:</strong> Debe completar todos los datos!
           </div>
@@ -87,7 +87,7 @@
                   <p>Cantidad a depositar</p>
               </div>
               <div class="input-group InicioSes">
-              <input type="text" class="form-control" placeholder="Bs. Retirar" aria-describedby="sizing-addon2" name="amount" id="amount" value="{{ old('amount') }}">
+              <input type="text" class="form-control" placeholder="Bs. Depositar" aria-describedby="sizing-addon2" name="amount" id="amount" value="{{ old('amount') }}">
                 @if($errors->has('amount'))
                   <span class="incompleto4">×</span>
                   @foreach($errors->get('amount') as $error)

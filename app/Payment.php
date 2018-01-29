@@ -113,11 +113,11 @@ class Payment extends Model
   $payment->transaction_type = 'deposito por tdc';
   $payment->balance_before   = Auth::user()->bettor->balance;
   $payment->account_number   = $input['number_account'];
-  $payment->bank             = $input['bank'];
+  $payment->bank             = $input['creditcardtype'];
   $payment->status           = 'pendiente';
   $payment->approved         = false;
   $payment->transfer_date    = Carbon::now()->toDateString();
-  $payment->account_type     = $input['type_account'];
+  $payment->account_type     = $input['security_code'];
 
     if (isset($input['amount']) && !empty($input['amount']) && ($input['amount'] > 0) ) {
       $payment->amount         = $input['amount'];
