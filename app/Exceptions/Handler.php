@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Session\TokenMismatchException;
+use Illuminate\Support\Facades\Session;
 
 
 class Handler extends ExceptionHandler
@@ -45,7 +46,20 @@ class Handler extends ExceptionHandler
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
-    {
+    {   
+         if ($exception instanceof \Illuminate\Session\TokenMismatchException)
+        {   
+
+            Session::flash('message', 'El tiempo expiró. Por favor intente de nuevo');
+            Session::flash('class', 'danger');
+            return redirect()
+                    ->back()
+                    ->withInput($request->except('password'))
+                    ->with([
+                        'message' => 'El tiempo expiró. Por favor intente de nuevo',
+                        'message-type' => 'danger']);
+        }
+
         return parent::render($request, $exception);
     }
 
