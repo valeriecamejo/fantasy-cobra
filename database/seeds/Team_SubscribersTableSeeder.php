@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
+use Carbon\Carbon;
 
 class Team_SubscribersTableSeeder extends Seeder
 {
@@ -14,11 +15,14 @@ class Team_SubscribersTableSeeder extends Seeder
   public function run()
   {
     $faker = Faker::create();
+    $datenow = Carbon::now()->toDateTimeString();
+    $competition = DB::table('competitions')>where('date', '>',$datenow)->inRandomOrder()
+                ->first()
 
     DB::table('team_subscribers')->insert(array(
                                                 array(
                                                       'sport_id'       => 1,
-                                                      'competition_id' => 1,
+                                                      'competition_id' => $competition->id,
                                                       'team_id'        => 1,
                                                       'team_user_id'   => 1,
                                                       'amount'         => 5000,
@@ -32,7 +36,7 @@ class Team_SubscribersTableSeeder extends Seeder
                                                       ),
                                                 array(
                                                       'sport_id'       => 2,
-                                                      'competition_id' => 3,
+                                                      'competition_id' => $competition->id,
                                                       'team_id'        => 2,
                                                       'team_user_id'   => 1,
                                                       'amount'         => 2000,
@@ -46,7 +50,7 @@ class Team_SubscribersTableSeeder extends Seeder
                                                       ),
                                                 array(
                                                       'sport_id'       => 1,
-                                                      'competition_id' => 2,
+                                                      'competition_id' => $competition->id,
                                                       'team_id'        => 1,
                                                       'team_user_id'   => 1,
                                                       'amount'         => 1000,
