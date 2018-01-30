@@ -10,14 +10,16 @@
                  $count_pub="";
                  $count_pub=0;
                @endphp
+  
                @foreach ($list_promotions as $promotion)
                  @if(isset(Auth::user()->username))
+
                    @if($count_pub == 1)
                      <div class="row col-sm-3 blockpromo">
                       <!--Foto-->
                        <div class="imgpromo2">
-                         <a href = "#" >
-                           {!! Html::image('http://www.fantasycobra.com/venezuela/promotionimg/'.$promotion->photo. 'promocion',array('width'=>'100%','class'=>'promotional-img')) !!}
+                         <a href = "" onClick="newPage('{{$promotion->url}}')">
+                           <img src="{{asset('images/Promo/'.$promotion->photo)}}" alt="Promotion Image" class = "promotional-img"  width="100%">
                          </a>
                        </div>
                       <!--Foto-->
@@ -29,18 +31,17 @@
                          <div class="descriptext">
                           <p>{{ $promotion->description }}</p>
                          </div>
-                         <div class="descripta">
-                          <button type="button" class="btn btn-primary3 btn-lg"><a href="#" style="text-decoration:inherit;">SELECCIONAR</a></button>
-                         </div>
+                        
                        </div>
                        <!--Info-->
                      </div>
                   @else
+
                      <div class="row col-sm-3 blockpromo">
                        <!--Foto-->
                        <div class="imgpromo2">
                          <a href = "" onClick="newPage('{{$promotion->url}}')">
-                           {!! Html::image('http://www.fantasycobra.com/venezuela/promotionimg/'.$promotion->photo,'promocion',array('width'=>'100%','class'=>'promotional-img')) !!}
+                           <img src="{{asset('images/Promo/'.$promotion->photo)}}" alt="Promotion Image" class = "promotional-img"  width="100%">
                          </a>
                        </div>
                        <!--Foto-->
@@ -51,9 +52,6 @@
                          </div>
                          <div class="descriptext">
                            <p>{{ $promotion->description }}</p>
-                         </div>
-                         <div class="descripta">
-                          <button type="button" class="btn btn-primary3 btn-lg" onClick="newPage('{{$promotion->url}}')">SELECCIONAR</button>
                          </div>
                        </div>
                        <!--Info-->
@@ -66,9 +64,9 @@
                      @php
                        $_SESSION['tabshome'] = 9;
                      @endphp
-                       <a href=".bs-example-modal-sm" data-toggle="modal">
-                         {!! Html::image('http://www.fantasycobra.com/venezuela/promotionimg/'.$promotion->photo,'promocion',array('width'=>'100%','class'=>'promotional-img')) !!}
-                       </a>
+                       <a href = "" onClick="newPage('{{$promotion->url}}')">
+                           <img src="{{asset('images/Promo/'.$promotion->photo)}}" alt="Promotion Image" class = "promotional-img"  width="100%">
+                         </a>
                      </div>
                      <!--Foto-->
                      <!--Info-->
@@ -83,11 +81,7 @@
                          @php
                             $_SESSION['tabshome'] = 9;
                          @endphp
-                         <button type="button" class="btn btn-primary3 btn-lg">
-                           <a href=".bs-example-modal-sm" data-toggle="modal">
-                             SELECCIONAR
-                           </a>
-                         </button>
+                        
                        </div>
                      </div>
                      <!--Info-->

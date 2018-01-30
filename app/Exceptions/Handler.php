@@ -5,6 +5,10 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Session\TokenMismatchException;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Database\QueryException;
+
 
 class Handler extends ExceptionHandler
 {
@@ -43,7 +47,33 @@ class Handler extends ExceptionHandler
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
-    {
+    {   
+         if ($exception instanceof \Illuminate\Session\TokenMismatchException)
+        {   
+
+            Session::flash('message', 'El tiempo expiró. Por favor intente de nuevo');
+            Session::flash('class', 'danger');
+            return redirect()
+                    ->back()
+                    ->withInput($request->except('password'))
+                    ->with([
+                        'message' => 'El tiempo expiró. Por favor intente de nuevo',
+                        'message-type' => 'danger']);
+        }
+
+         if ($exception instanceof Illuminate\Database\QueryException)
+        {   
+
+            Session::flash('message', 'Error en la consulta a la base de datos');
+            Session::flash('class', 'danger');
+            return redirect()
+                    ->back()
+                    ->withInput($request->except('password'))
+                    ->with([
+                        'message' => 'Error en la consulta a la base de datos',
+                        'message-type' => 'danger']);
+        }
+
         return parent::render($request, $exception);
     }
 
@@ -59,6 +89,7 @@ class Handler extends ExceptionHandler
         if ($request->expectsJson()) {
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
+
 
         return redirect()->guest('login');
     }

@@ -88,6 +88,9 @@
         <li id="historialM">
           <a href="{{ URL::action('HistoryController@history') }}">Historial</a>
         </li>
+        <li id="cambiarPasswordM">
+          <a href="{{ URL::action('Auth\ChangePasswordController@show_change_password_form') }}">Cambiar Contraseña</a>
+        </li>  
       <li style="margin-bottom: 150px;">
         {!! Html::link('logout', 'Cerrar Sesión', array('id'=>'Cerrarmenu')) !!}
       </li>

@@ -7,6 +7,7 @@ use App\Lib\Ddh\UtilityDate;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Database\QueryException;
 use Carbon\Carbon;
 
 class Payment extends Model
@@ -59,6 +60,79 @@ class Payment extends Model
       return [
                false,
                "Verifique el monto minimo a retirar y su balance"
+             ];
+    }
+  }
+
+/********************************************
+* transfer: Registration of transfers
+              request
+* @param void
+* @return $won_competitions
+********************************************/
+  public static function transfer($input) {
+
+  $payment                   = new Payment;
+  $payment->user_id          = Auth::user()->id;
+  $payment->transaction_type = 'deposito';
+  $payment->balance_before   = Auth::user()->bettor->balance;
+  $payment->account_number   = $input['number_account'];
+  $payment->bank             = $input['bank'];
+  $payment->reference_number = $input['reference_number'];
+  $payment->status           = 'pendiente';
+  $payment->approved         = false;
+  $payment->transfer_date    = Carbon::now()->toDateString();
+  $payment->account_type     = $input['type_account'];
+
+    if (isset($input['amount']) && !empty($input['amount']) && ($input['amount'] > 0) ) {
+      $payment->amount         = $input['amount'];
+      $payment->save();
+      $new_balance = (Auth::user()->bettor->balance + $input['amount']);
+      return [
+              true,
+              $payment,
+              $new_balance
+      ];
+    } else {
+      return [
+               false,
+               "Verifique el monto depositar"
+             ];
+    }
+  }
+
+  /********************************************
+* tdc: Registration of tdcs
+              request
+* @param void
+* @return $won_competitions
+********************************************/
+  public static function tdc($input) {
+
+  $payment                   = new Payment;
+  $payment->user_id          = Auth::user()->id;
+  $payment->transaction_type = 'deposito por tdc';
+  $payment->balance_before   = Auth::user()->bettor->balance;
+  $payment->account_number   = $input['number_account'];
+  $payment->bank             = $input['creditcardtype'];
+  $payment->status           = 'pendiente';
+  $payment->approved         = false;
+  $payment->transfer_date    = Carbon::now()->toDateString();
+  $payment->account_type     = $input['security_code'];
+
+    if (isset($input['amount']) && !empty($input['amount']) && ($input['amount'] > 0) ) {
+      $payment->amount         = $input['amount'];
+      $payment->save();
+      $new_balance = (Auth::user()->bettor->balance + $input['amount']);
+      return [
+              true,
+              $payment,
+              $new_balance
+      ];
+    } else {
+      return [
+               false,
+               "Verifique el monto depositar por tarjeta de crédito"
              ];
     }
   }

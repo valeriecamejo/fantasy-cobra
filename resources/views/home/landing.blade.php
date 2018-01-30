@@ -162,7 +162,7 @@
 
   </div>
     {!! Form::close() !!}
-    @include('includes/footer-mobile')
+    
 </div>
 
 <script>

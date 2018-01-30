@@ -24,6 +24,7 @@ class UserController extends Controller {
     return view('home.landing');
   }
 
+
   protected function register_successfully() {
 
     return View::make('users.register_successfully');

@@ -121,7 +121,7 @@
                 <tr>
                   <th></th>
                   <th>Operación</th>
-                  <th class="tbldp" style="text-align: center;">Banco</th>
+                  <th class="tbldp" style="text-align: center;">Banco / Tarjeta</th>
                   <th class="tbldp" style="text-align: center;">Fecha</th>
                   <th class="tbldp" style="text-align: center;">Hora</th>
                   <th class="tbldp" style="text-align: center;">Cantidad Bs.</th>
@@ -132,10 +132,13 @@
               <tbody>
                 @foreach ($transactions as $transaction)
                 <tr>
-                  @if($transaction->transaction_type == 1)
+                  @if($transaction->transaction_type == 'deposito por tdc')
                   <td><img src="{{ URL::asset('images/ico/depositoico.png') }}"/></td>
-                  <td id="tdcomp2">Depósito</td>
-                  @elseif($transaction->transaction_type == 0)
+                  <td id="tdcomp2">Pago por Tarjeta</td>
+                  @elseif($transaction->transaction_type == 'deposito')
+                  <td><img src="{{ URL::asset('images/ico/depositoico.png') }}"/></td>
+                  <td id="tdcomp2"><span>Depósito</span></td>
+                  @elseif($transaction->transaction_type == 'retiro')
                   <td><img src="{{ URL::asset('images/ico/retiroico.png') }}"/></td>
                   <td id="tdcomp2"><span id="retirored">Retiro</span></td>
                   @endif
@@ -146,6 +149,8 @@
                   <td class="tbldp">
                     @if($transaction->transaction_type == "retiro")
                     {{ number_format(($transaction->balance_before - $transaction->amount),2,",",".") }}
+                    @elseif($transaction->transaction_type == "deposito por tdc")
+                    {{ number_format(($transaction->balance_before + $transaction->amount),2,",",".") }}
                     @elseif($transaction->transaction_type == "deposito")
                     {{ number_format(($transaction->balance_before + $transaction->amount),2,",",".") }}
                     @endif

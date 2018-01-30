@@ -93,11 +93,11 @@
               <p>Teléfono</p>
             </div>
             <div class="input-group InicioSes3">
-              <input type="text" style="width: 15%" class="form-control" placeholder="00" aria-describedby="sizing-addon2" name="cod_country" maxlength="3" value="{{Input::old('cod_country')}}">
+               <input type="text" style="width: 15%" class="form-control" placeholder="00" aria-describedby="sizing-addon2" name="cod_country" maxlength="4" value="{{Input::old('cod_country')}}" pattern="^(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1|1\d{3})$">
 
               <input style="width: 7%" aria-describedby="sizing-addon2" class="form-control" placeholder="-" aria-describedby="sizing-addon2" disabled="true">
 
-              <input type="text" style="width: 58%" class="form-control" placeholder="##########" aria-describedby="sizing-addon2" name="phone" maxlength="10" value="{{Input::old('phone')}}">
+              <input type="text" style="width: 58%" class="form-control" placeholder="##########" aria-describedby="sizing-addon2" name="phone" maxlength="10" value="{{Input::old('phone')}}" required>
               @if($errors->has('phone') || $errors->has('cod_country'))
                 <span class="incompleto">×</span>
                 @foreach($errors->get('phone') as $error)
@@ -150,7 +150,7 @@
 
           <div class="checkschecks">
             <div class="Center4" style="margin-top:25px;">
-              <input type="checkbox" name="terms_politics" checked="checked">
+              <input type="checkbox" name="terms_politics" >
               <p>Acepto los <a href="#">términos</a> y <a href="#">politicas de privacidad.</a></p>
               @if($errors->has('terms_politics'))
                 <span class="incompleto3">×</span>
@@ -158,7 +158,7 @@
             </div>
 
             <div class="Center4">
-              <input type="checkbox" name="adult" checked="checked">
+              <input type="checkbox" name="adult" >
               <p>Confirmo que soy mayor de 18 años.</p>
               @if($errors->has('adult'))
                 <span class="incompleto3">×</span>

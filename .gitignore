@@ -9,3 +9,4 @@ Homestead.yaml
 .env
 /storage/debugbar
 /config/database.php
+*.sublime-*
