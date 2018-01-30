@@ -7,6 +7,7 @@ use App\Lib\Ddh\UtilityDate;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Database\QueryException;
 use Carbon\Carbon;
 
 class Payment extends Model

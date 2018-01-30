@@ -28,11 +28,11 @@ class TransferRequest extends FormRequest
   {
     return [
     'name'           => 'required',
-    'reference_number' => 'required|numeric',
+    'reference_number' => 'required|numeric|max:2147483648',
     'last_name'      => 'required',
     'dni'            => 'required|numeric|min:999999',
     'phone'          => 'required|numeric|max:99999999999999|regex:/^[0-9-]{10,14}+$/',
-    'amount'         => 'required|numeric',
+    'amount'         => 'required|numeric|max:999999999',
     'number_account' => 'required|numeric|min:10000000000',
     'type_account'   => 'required',
     'bank'           => 'required',
@@ -48,6 +48,7 @@ class TransferRequest extends FormRequest
     'dni.required'                => 'Campo requerido',
     'reference_number.required'   => 'Campo requerido',
     'reference_number.numeric'   => 'El número de referencia solo puede contener valores numericos',
+    'reference_number.max'   => 'El número de referencia debe ser menor a 11 digitos',
     'dni.min'                     => 'La cédula no debe ser menor de 6 dígitos.',
     'dni.numeric'                 => 'La cédula solo puede contener números.',
     'phone.required'              => 'Campo requerido',

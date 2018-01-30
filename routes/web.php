@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'HomeController@home');
+Route::get('/', 'HomeController@home')->name('home');
 
 // Authenticate routes
 Route::get('login','HomeController@home');
@@ -46,7 +46,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('usuario/referir-amigo', 'UserController@refer_friends');
 	Route::post('usuario/invite_friends', 'UserController@invite_friends');
 	Route::get('/usuario/ver-promociones', 'PromotionController@list_promotions');
-	Route::get('/usuario/crear-competicion/{sport}/{championship}', '	CompetitionController@new_competition');
+	Route::get('/usuario/crear-competicion/{sport}/{championship}', 'CompetitionController@new_competition');
 	Route::post('/usuario/crear-competicion', 'CompetitionController@save_competition');
 	Route::get('usuario/obtener-premios', 'PrizeController@prize_min_user');
 	Route::get('/usuario/crear-equipo/{type}', 'TeamUserController@new_team');

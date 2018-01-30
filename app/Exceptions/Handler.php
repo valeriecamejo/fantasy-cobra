@@ -7,6 +7,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Session\TokenMismatchException;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Database\QueryException;
 
 
 class Handler extends ExceptionHandler
@@ -57,6 +58,19 @@ class Handler extends ExceptionHandler
                     ->withInput($request->except('password'))
                     ->with([
                         'message' => 'El tiempo expiró. Por favor intente de nuevo',
+                        'message-type' => 'danger']);
+        }
+
+         if ($exception instanceof Illuminate\Database\QueryException)
+        {   
+
+            Session::flash('message', 'Error en la consulta a la base de datos');
+            Session::flash('class', 'danger');
+            return redirect()
+                    ->back()
+                    ->withInput($request->except('password'))
+                    ->with([
+                        'message' => 'Error en la consulta a la base de datos',
                         'message-type' => 'danger']);
         }
 
