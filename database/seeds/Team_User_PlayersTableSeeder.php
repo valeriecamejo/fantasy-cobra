@@ -14,7 +14,7 @@ class Team_User_PlayersTableSeeder extends Seeder
   {
     DB::table('team_user_players')->insert(array(
                                                  array(
-                                                       'legacy_id'          => '1',
+                        
                                                        'player_id'          => '1',
                                                        'team_user_id'       => '1',
                                                        'name'               => 'Michael',
@@ -26,7 +26,7 @@ class Team_User_PlayersTableSeeder extends Seeder
                                                        'points'             => '0',
                                                        ),
                                                  array(
-                                                       'legacy_id'          => '1',
+                        
                                                        'player_id'          => '5',
                                                        'team_user_id'       => '1',
                                                        'name'               => 'Kyle',
@@ -38,7 +38,7 @@ class Team_User_PlayersTableSeeder extends Seeder
                                                        'points'             => '0',
                                                        ),
                                                  array(
-                                                       'legacy_id'          => '1',
+                        
                                                        'player_id'          => '7',
                                                        'team_user_id'       => '1',
                                                        'name'               => 'Greg',
@@ -50,7 +50,7 @@ class Team_User_PlayersTableSeeder extends Seeder
                                                        'points'             => '0',
                                                        ),
                                                  array(
-                                                       'legacy_id'          => '1',
+                        
                                                        'player_id'          => '8',
                                                        'team_user_id'       => '1',
                                                        'name'               => 'Chris',
@@ -62,7 +62,7 @@ class Team_User_PlayersTableSeeder extends Seeder
                                                        'points'             => '0',
                                                        ),
                                                  array(
-                                                       'legacy_id'          => '1',
+                        
                                                        'player_id'          => '9',
                                                        'team_user_id'       => '1',
                                                        'name'               => 'Starlin',
@@ -74,7 +74,7 @@ class Team_User_PlayersTableSeeder extends Seeder
                                                        'points'             => '0',
                                                        ),
                                                  array(
-                                                       'legacy_id'          => '1',
+                        
                                                        'player_id'          => '10',
                                                        'team_user_id'       => '1',
                                                        'name'               => 'Ronald',
@@ -86,7 +86,7 @@ class Team_User_PlayersTableSeeder extends Seeder
                                                        'points'             => '0',
                                                        ),
                                                  array(
-                                                       'legacy_id'          => '1',
+                        
                                                        'player_id'          => '11',
                                                        'team_user_id'       => '1',
                                                        'name'               => 'Jacoby',
@@ -98,7 +98,7 @@ class Team_User_PlayersTableSeeder extends Seeder
                                                        'points'             => '0',
                                                        ),
                                                  array(
-                                                       'legacy_id'          => '1',
+                        
                                                        'player_id'          => '12',
                                                        'team_user_id'       => '1',
                                                        'name'               => 'Brett',
@@ -110,7 +110,7 @@ class Team_User_PlayersTableSeeder extends Seeder
                                                        'points'             => '0',
                                                        ),
                                                  array(
-                                                       'legacy_id'          => '1',
+                        
                                                        'player_id'          => '13',
                                                        'team_user_id'       => '1',
                                                        'name'               => 'Aaron',
