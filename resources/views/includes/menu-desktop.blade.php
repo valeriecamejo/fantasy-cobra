@@ -39,19 +39,33 @@
             {!! Html::image('images/arrowd.png','flecha', array('class'=>'icon-arrow-down')) !!}
           </span>
           <span></span>
-          <span id="userbalance">
-            Balance: {{ Auth::user()->bettor->balance }} Bs.
-          </span>
+          @if(isset(Auth::user()->bettor->balance) && (null !== Auth::user()->bettor->balance))          
+            <span id="userbalance">
+              Balance: {{ Auth::user()->bettor->balance }} Bs.
+            </span>
+          @else
+            <span id="userbalance">
+              Balance: 
+            </span>
+          @endif
         </a>
         <ul class="dropdown-menu" role="menu">
           <a href=".cajero" data-toggle="modal" class="dropdown-toggle">
             <li class="hide-show">
               <b>Balance:</b>
-              {{ Auth::user()->bettor->balance }} Bs.
+              @if(isset(Auth::user()->bettor->balance) && (null !== Auth::user()->bettor->balance))           
+                {{ Auth::user()->bettor->balance }} Bs.
+              @else
+                 
+              @endif      
               <br>
               <span class="icon-money-bag">
                 <b>Bono:</b>
+                @if(isset(Auth::user()->bettor->balance) && (null !== Auth::user()->bettor->bono))
                 {{Auth::user()->bettor->bono }} Bs.
+                @else
+                 
+                @endif
               </span>
             </li>
           </a>

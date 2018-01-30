@@ -17,7 +17,7 @@ class Team_UsersTableSeeder extends Seeder
 
     DB::table('team_users')->insert(array(
                                           array(
-                                                'user_id'          => '2',
+                                                'user_id'          => DB::table('users')->where('user_type_id',3)->value('id'),
                                                 'sport_id'         => '1',
                                                 'championship_id'  => '1',
                                                 'date_inscription' => '2017-03-14 12:30:00',
