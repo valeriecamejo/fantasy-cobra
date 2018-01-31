@@ -34,6 +34,8 @@ class Kernel extends ConsoleKernel
       $schedule->command('task:update')
                ->dailyAt('03:00');
 
+      $schedule->command('games:add')
+               ->monthly();
     }
 
     /**
