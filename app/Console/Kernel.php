@@ -15,7 +15,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
       Commands\TaskSchedulingCommand::class,
       Commands\DailyTasksCommand::class,
-      Commands\PlayersPointsCommand::class
+      Commands\PlayersPointsCommand::class,
+      Commands\AddGamesAndCompetitions::class
     ];
 
     /**
@@ -32,6 +33,7 @@ class Kernel extends ConsoleKernel
 
       $schedule->command('task:update')
                ->dailyAt('03:00');
+
     }
 
     /**

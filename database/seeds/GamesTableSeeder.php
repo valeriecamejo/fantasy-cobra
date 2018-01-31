@@ -97,7 +97,7 @@ class GamesTableSeeder extends Seeder
                                            'status'                => 'status',
                                            'schema_team_home'      => 'Data de prueba',
                                            'schema_team_away'      => 'Data de prueba',
-                                           )
+                                           ),
                                       array(
                                            'legacy_id'             => 7,
                                            'tournament_id'         => 1,

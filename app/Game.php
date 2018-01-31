@@ -5,6 +5,8 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Seeder;
+
 
 class Game extends Model
 {
@@ -50,4 +52,5 @@ class Game extends Model
     $game_date_no_repeat               = array_unique($game_date);
     return $game_date_no_repeat;
   }
+
 }
