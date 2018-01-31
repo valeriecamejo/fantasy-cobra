@@ -13,8 +13,8 @@ class DatabaseSeeder extends Seeder
   {
 
     $this->call(UserTypesTableSeeder::class);
-    // $this->call(AdminTableSeeder::class);
     $this->call(UsersTableSeeder::class);
+    $this->call(AdminTableSeeder::class);
     $this->call(SportsTableSeeder::class);
     $this->call(PrizesTableSeeder::class);
     $this->call(ChampionshipsTableSeeder::class);
@@ -37,5 +37,11 @@ class DatabaseSeeder extends Seeder
     $this->call(GamesTableSeeder::class);
     $this->call(Player_StatsTableSeeder::class);
 
+  }
+
+  static public function updateCompetitionsAndGames(){
+    $this->call(CompetitionsTableSeeder::class);
+    $this->call(GamesTableSeeder::class);
+    $this->call(Team_SubscribersTableSeeder::class);
   }
 }

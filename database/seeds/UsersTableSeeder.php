@@ -16,11 +16,11 @@ class UsersTableSeeder extends Seeder
       DB::table('users')->insert(array (
                                         array(
                                               'user_type_id'      => 3,
-                                              'name'              => "Admin",
-                                              'last_name'         => "Admin",
-                                              'username'          => "Admin",
+                                              'name'              => "User",
+                                              'last_name'         => "Test",
+                                              'username'          => "testuser",
                                               'phone'             => "02128000000",
-                                              'email'             => "valerie.camejo@condoragency.com",
+                                              'email'             => "development@condoragency.com",
                                               'status'            => 'ACTIVE',
                                               'dni'               => "20200200",
                                               'date_last_connect' => Carbon::now()->toDateString(),

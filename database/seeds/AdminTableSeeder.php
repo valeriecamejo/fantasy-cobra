@@ -19,7 +19,7 @@ class AdminTableSeeder extends Seeder
                                       'last_name'         => 'Admin',
                                       'username'          => 'admin',
                                       'phone'             => $faker->phoneNumber,
-                                      'email'             => 'admin@gmail.com',
+                                      'email'             => 'fantasy.admin@condoragency.com',
                                       'status'            => 'ACTIVE',
                                       'dni'               => $faker->randomnumber,
                                       'date_last_connect' => '2017-03-07 12:00:00',

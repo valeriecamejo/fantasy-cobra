@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
+use Carbon\Carbon;
 
 class Team_UsersTableSeeder extends Seeder
 {
@@ -20,7 +21,7 @@ class Team_UsersTableSeeder extends Seeder
                                                 'user_id'          => DB::table('users')->where('user_type_id',3)->value('id'),
                                                 'sport_id'         => '1',
                                                 'championship_id'  => '1',
-                                                'date_inscription' => '2017-03-14 12:30:00',
+                                                'date_inscription' => Carbon::now()->toDateTimeString(),
                                                 'remaining_salary' => '5000',
                                                 'name'             => 'Prueba 1',
                                                 'type_journal'     => '7PM',
